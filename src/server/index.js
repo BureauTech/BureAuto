@@ -21,7 +21,7 @@ const app = express()
 
 // Rota inexistente
     app.use((req, res) => {
-        res.send("Requisição não econtrada.")
+        res.send("Requisição não encontrada.")
     })
 
 const port = process.env.PORT || 3000
