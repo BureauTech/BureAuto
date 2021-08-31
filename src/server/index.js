@@ -12,12 +12,12 @@ const app = express()
     app.use(express.json({limit: "50mb"}))
 
 // Definição dos controllers
-    app.use("/adverts", require("./controller/AdvertsController"))
-    app.use("/bookmarks", require("./controller/BookmarksController"))
-    app.use("/mensagens", require("./controller/MessagesController"))
-    app.use("/readUsers", require("./controller/ReadUsersController"))
-    app.use("/users", require("./controller/UsersController"))
-    app.use("/views", require("./controller/ViewsController"))
+    app.use("/adverts", require("./controllers/AdvertsController"))
+    app.use("/bookmarks", require("./controllers/BookmarksController"))
+    app.use("/mensagens", require("./controllers/MessagesController"))
+    app.use("/readUsers", require("./controllers/ReadUsersController"))
+    app.use("/users", require("./controllers/UsersController"))
+    app.use("/views", require("./controllers/ViewsController"))
 
 // Rota inexistente
     app.use((req, res) => {
