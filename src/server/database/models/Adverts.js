@@ -9,6 +9,10 @@ const advertsShema = new Schema({
         type: String,
         requeided: true
     },
+    teste: {
+        type: Int16Array,
+        
+    },
     fab: {
         type: String,
         requeided: true
