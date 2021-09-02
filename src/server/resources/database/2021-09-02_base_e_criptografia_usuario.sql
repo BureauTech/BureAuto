@@ -26,7 +26,7 @@ create table usuario (
 
 create table anuncio (
     anu_cod varchar not null,
-    anu_usu_cod bigint,
+    anu_usu_cod bigint not null,
     anu_descricao_marca varchar,
     anu_nome_fabricante varchar,
     anu_descricao_modelo varchar,
@@ -51,7 +51,9 @@ create table public.criptografia (
 	cri_usu_cod bigint not null,
 	cri_chave varchar,
 	constraint criptografia_cri_cod_pkey primary key (cri_cod),
-	constraint criptografia_cri_usu_cod_ukey unique (cri_usu_cod)
+	constraint criptografia_cri_usu_cod_ukey unique (cri_usu_cod),
+	constraint criptografia_cri_chave_ukey unique (cri_chave),
+	constraint criptografia_cri_usu_cod_fkey foreign key (cri_usu_cod) references usuario (usu_cod) initially deferred
 );
 
 -- ##################### fim tabelas ######################## --
@@ -65,11 +67,7 @@ returns trigger as $$
 declare
 	chave varchar := crypt(gen_random_uuid()::varchar, gen_salt('bf', 8));
 begin
-	insert into criptografia (cri_usu_cod, cri_chave)
-	values (new.usu_cod, chave)
-	on conflict (cri_usu_cod)
-  	do update set cri_chave = chave;
-	
+	insert into criptografia(cri_usu_cod, cri_chave) values (new.usu_cod, chave);
   	new.usu_nome := encrypt(new.usu_nome::bytea, chave::bytea, 'aes')::varchar;
   	new.usu_documento := encrypt(new.usu_documento::bytea, chave::bytea, 'aes')::varchar;
   	new.usu_apelido := encrypt(new.usu_apelido::bytea, chave::bytea, 'aes')::varchar;
@@ -95,6 +93,10 @@ begin
 	if new.usu_nome not like '\\x%' then
 		new.usu_nome := encrypt(new.usu_nome::bytea, chave::bytea, 'aes')::varchar;
 	end if;
+
+	if new.usu_documento not like '\\x%' then
+  		new.usu_documento := encrypt(new.usu_documento::bytea, chave::bytea, 'aes')::varchar;
+  	end if;
 
 	if new.usu_apelido not like '\\x%' then
   		new.usu_apelido := encrypt(new.usu_apelido::bytea, chave::bytea, 'aes')::varchar;
@@ -123,15 +125,17 @@ before update on usuario
 for each row
 execute procedure criptografar_usuario_existente();
 
-
 create or replace function descriptografar(criptografado varchar, chave_aes varchar)
 returns varchar as $$
 begin
-	if length(chave_aes) != 60 then
+	if chave_aes is null then
 		return 'Desconhecido';
 	else
 		return convert_from(decrypt(criptografado::bytea, chave_aes::bytea, 'aes'), 'utf-8');
 	end if;
+exception
+	when character_not_in_repertoire then
+		return 'Desconhecido';
 end;
 $$ language 'plpgsql';
 
