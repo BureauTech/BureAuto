@@ -10,8 +10,7 @@ const advertsShema = new Schema({
         requeided: true
     },
     teste: {
-        type: Int16Array,
-        
+        type: Int16Array
     },
     fab: {
         type: String,
@@ -43,7 +42,7 @@ const advertsShema = new Schema({
     },
     _stopped_at: {
         type: String,
-        r,equeided: true
+        requeided: true
     },
     _created_at: {
         type: String,
