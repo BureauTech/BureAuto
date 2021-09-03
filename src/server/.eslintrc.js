@@ -8,6 +8,7 @@ module.exports = {
     parserOptions: {
         ecmaVersion: 12
     },
+    ignorePatterns: ["**/*.ejs"],
     rules: {
         "indent": ["error", 4],
         "quotes": ["error", "double"],
