@@ -7,8 +7,8 @@ const UsersService = module.exports = {
             transformHeader: header => header.trim(),
             complete: function(results, file) {
                 console.log(results.data)
-            },
+            }
         })
-    },
+    }
 
 }
