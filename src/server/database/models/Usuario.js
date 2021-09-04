@@ -21,6 +21,9 @@ module.exports = new EntitySchema({
         usu_apelido: {
             type: "varchar"
         },
+        usu_telefone: {
+            type: "varchar"
+        },
         usu_endereco: {
             type: "varchar"
         },

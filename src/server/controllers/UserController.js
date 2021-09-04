@@ -1,16 +1,16 @@
 const router = require("express").Router()
-const fs = require("fs")
+const UserService = require("../services/UserService")
 
 // Mapeado em "/user"
 
-router.get("/", async(req, res) => {
-    return res.send("/users")
-})
-
 router.post("/register", async(req, res) => {
-    const {csv} = req.files
-    fs.unlink(csv.tempFilePath, () => {})
-    res.send("ok")
+    try {
+        const {csvFile} = req.files
+        await UserService.registerUser(csvFile.tempFilePath)
+    } catch (error) {
+        res.status(500).send({success: false})
+    }
+    return res.status(200).send({success: true})
 })
 
 module.exports = router

@@ -20,6 +20,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "nodemailer": "^6.6.3",
+    "papaparse": "^5.3.1",
     "pg": "^8.7.1",
     "secure-random-password": "^0.2.3",
     "typeorm": "^0.2.37"
