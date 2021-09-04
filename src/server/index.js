@@ -24,10 +24,9 @@ app.use("/views", require("./controllers/ViewsController"))
 
 app.get("/test", async(req, res) => {
     const repo = require("./database/Repository")
-    const testRepo = await repo.get(repo.usuario)
-    const result = await testRepo.findOne({relations: ["anuncio"]})
+    const testRepo = await repo.get(repo.criptografia)
+    const result = await testRepo.findOne({relations: ["usuario"]})
     console.log(result)
-    res.send(result)
 })
 
 // Rota inexistente

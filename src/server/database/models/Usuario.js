@@ -41,14 +41,17 @@ module.exports = new EntitySchema({
             joinColumn: {
                 name: "usu_cod",
                 referencedColumnName: "anu_usu_cod"
-            }
+                
+            },
+            inverseSide: "usuario"
         },
         criptografia: {
             type: "one-to-one",
             target: "criptografia",
             joinColumn: {
                 name: "usu_cod",
-                referencedColumnName: "cri_usu_cod"
+                referencedColumnName: "cri_usu_cod",
+                inverseSide: "usuario"
             }
         }
     }
