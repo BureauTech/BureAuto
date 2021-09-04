@@ -1,0 +1,25 @@
+{
+    "eslint.format.enable": true,
+    "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+    },
+    "eslint.validate": ["vue", "html", "javascript"],
+    "eslint.options": {
+    "extensions": [
+        ".js",
+        ".vue",
+    ]
+    },
+    "vetur.format.defaultFormatter.css": "prettier",
+    "vetur.format.defaultFormatter.js": "none",
+    "vetur.format.defaultFormatter.less": "none",
+    "vetur.format.defaultFormatter.postcss": "none",
+    "vetur.format.defaultFormatter.scss": "none",
+    "vetur.format.defaultFormatter.stylus": "none",
+    "vetur.format.defaultFormatter.ts": "none",
+    "vetur.format.defaultFormatter.html": "js-beautify-html",
+    "[vue]": {
+        "editor.defaultFormatter": "octref.vetur"
+    },
+    "files.eol": "\r\n"
+}
