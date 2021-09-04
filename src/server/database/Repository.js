@@ -1,11 +1,12 @@
-const Connection = require("./Connection")
 const Entities = require("./Entities")
+const Connection = require("./Connection")
 
-let repository = Entities
+const repository = Entities
 Object.keys(repository).map(entity => repository[entity] = entity)
 
-repository.get = async (entityName) => {
-  return await (await Connection).getRepository(entityName)
+repository.get = async(entityName) => {
+    const connection = await Connection
+    return await connection.getRepository(entityName)
 }
 
 module.exports = repository
