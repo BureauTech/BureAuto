@@ -2,8 +2,7 @@
 require("dotenv").config()
 const express = require("express")
 const cors = require("cors")
-const Connection = require("./database/Connection")
-const {getMongoManager} = require("typeorm")
+const fileUpload = require("express-fileupload")
 
 // Invocação da aplicação
 const app = express()
@@ -13,13 +12,14 @@ app.use(cors())
 app.use(express.urlencoded({limit: "50mb", extended: true, parameterLimit: 50000}))
 app.use(express.json({limit: "50mb"}))
 
+app.use(fileUpload({useTempFiles: true, tempFileDir: "./resources/temp/"}))
+
 // Definição dos controllers
-app.use("/adverts", require("./controllers/AdvertsController"))
-app.use("/bookmarks", require("./controllers/BookmarksController"))
-app.use("/mensagens", require("./controllers/MessagesController"))
-app.use("/readUsers", require("./controllers/ReadUsersController"))
-app.use("/users", require("./controllers/UsersController"))
-app.use("/views", require("./controllers/ViewsController"))
+app.use("/advert", require("./controllers/AdvertController"))
+app.use("/bookmark", require("./controllers/BookmarkController"))
+app.use("/message", require("./controllers/MessageController"))
+app.use("/user", require("./controllers/UserController"))
+app.use("/view", require("./controllers/ViewController"))
 
 
 app.get("/test", async(req, res) => {
