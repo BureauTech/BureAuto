@@ -4,41 +4,38 @@ module.exports = new EntitySchema({
     name: "anuncio",
     tableName: "anuncio",
     columns: {
-        anuCod: {
-            name: "anu_cod",
+        anu_cod: {
             primary: true,
             type: "varchar",
             generated: true
         },
-        anuUsuCod: {
-            name: "anu_usu_cod",
-            type: "bigint",
+        anu_usu_cod: {
+            type: "bigint"
         },
-        anuDescricaoMarca: {
-            name: "anu_descricao_marca",
+        anu_descricao_marca: {
             type: "varchar"
         },
-        anuNomeFabricante: {
-            name: "anu_nome_fabricante",
+        anu_nome_fabricante: {
             type: "varchar"
         },
-        anuDescricaoModelo: {
-            name: "anu_descricao_modelo",
+        anu_descricao_modelo: {
             type: "varchar"
         },
-        anuValor: {
-            name: "anu_valor",
+        anu_valor: {
             type: "double precision"
         },
-        anuFavoritos: {
-            name: "anu_favoritos",
+        anu_favoritos: {
             type: "integer"
         }
     },
     relations: {
         usuario: {
             type: "many-to-one",
-            target: "usuario"
+            target: "usuario",
+            joinColumn: {
+                name: "anu_usu_cod",
+                referencedColumnName: "usu_cod"
+            }
         }
     }
 })

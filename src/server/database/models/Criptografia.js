@@ -4,14 +4,12 @@ module.exports = new EntitySchema({
     name: "criptografia",
     tableName: "criptografia",
     columns: {
-        criUsuCod: {
-            name: "cri_usu_cod",
+        cri_usu_cod: {
             primary: true,
             type: "bigint",
             generated: true
         },
-        criChave: {
-            name: "cri_chave",
+        cri_chave: {
             type: "varchar"
         }
     },
@@ -21,7 +19,7 @@ module.exports = new EntitySchema({
             target: "usuario",
             joinColumn: {
                 name: "cri_usu_cod",
-                referencedColumnName: "usuCod"
+                referencedColumnName: "usu_cod"
             }
         }
     }
