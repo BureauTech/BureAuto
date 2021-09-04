@@ -7,7 +7,7 @@ module.exports = {
             header: true,
             delimiter: ";",
             transformHeader: header => header.trim(),
-            complete: function(results, file) {
+            complete: function(results) {
                 console.log(results.data)
             }
         })
