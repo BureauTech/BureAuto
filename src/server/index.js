@@ -2,12 +2,6 @@
 require("dotenv").config()
 const express = require("express")
 const cors = require("cors")
-const typeorm = require("typeorm")
-const Entities = require("./database/Entities")
-const Connection = require("./database/Connection")
-
-
-
 
 // Invocação da aplicação
 const app = express()
