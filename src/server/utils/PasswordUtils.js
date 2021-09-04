@@ -1,7 +1,7 @@
 const password = require("secure-random-password")
 
-/* eslint-disable-next-line no-unused-vars */
-const PasswordUtils = module.exports = {
+module.exports = {
+
     randomPassword: function() {
         return password.randomPassword({
             length: 12,
@@ -13,4 +13,5 @@ const PasswordUtils = module.exports = {
             ]
         })
     }
+
 }

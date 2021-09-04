@@ -6,8 +6,7 @@ module.exports = new EntitySchema({
     columns: {
         anu_cod: {
             primary: true,
-            type: "varchar",
-            generated: true
+            type: "varchar"
         },
         anu_usu_cod: {
             type: "bigint"

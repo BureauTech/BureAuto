@@ -1,9 +1,8 @@
 const ejs = require("ejs")
 const nodemailer = require("nodemailer")
 
-/* eslint-disable-next-line no-unused-vars */
-const EmailService = module.exports = {
-    
+module.exports = {
+
     transporter: nodemailer.createTransport({
         service: process.env.EMAIL_SERVICE,
         host: process.env.EMAIL_HOST,

@@ -1,7 +1,6 @@
 const Papa = require("papaparse")
 
-/* eslint-disable-next-line no-unused-vars */
-const UserService = module.exports = {
+module.exports = {
 
     registerUser: function(file) {
         Papa.parse(file, {
