@@ -4,7 +4,7 @@ module.exports = {
     anuncio: require("./models/Anuncio"),
     usuario: require("./models/Usuario"),
 
-    list: function () {
+    list: function() {
         return Object.values(this)
     }
 }
