@@ -5,12 +5,12 @@ const cors = require("cors")
 
 // Invocação da aplicação
 const app = express()
-    
+
 // Definições iniciais do APP
 app.use(cors())
-app.use(express.urlencoded({limit: "50mb", extended: true, parameterLimit: 50000}))
-app.use(express.json({limit: "50mb"}))
-    
+app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
+app.use(express.json({ limit: "50mb" }))
+
 // Definição dos controllers
 app.use("/adverts", require("./controllers/AdvertsController"))
 app.use("/bookmarks", require("./controllers/BookmarksController"))
@@ -20,7 +20,7 @@ app.use("/users", require("./controllers/UsersController"))
 app.use("/views", require("./controllers/ViewsController"))
 
 
-app.get("/test", async(req, res) => {
+app.get("/test", async (req, res) => {
     const repo = require("./database/Repository")
     const testRepo = await repo.get(repo.criptografia)
     console.log(testRepo)
@@ -28,18 +28,15 @@ app.get("/test", async(req, res) => {
     res.send(result)
 })
 
-
-
-
 // Rota inexistente
 app.use((req, res) => {
     res.send("Requisição não encontrada.")
 })
-    
+
 const port = process.env.PORT || 3000
-    
-app.listen(port, function() {
+
+app.listen(port, function () {
     console.log("Running on port", port)
 })
-    
+
 module.exports = app

@@ -14,15 +14,15 @@ module.exports = new EntitySchema({
             name: "cri_chave",
             type: "varchar"
         }
+    },
+    relations: {
+        usuario: {
+            type: "one-to-one",
+            target: "usuario",
+            joinColumn: {
+                name: "cri_usu_cod",
+                referencedColumnName: "usuCod"
+            }
+        }
     }
-    // relations: {
-    //   usuario: {
-    //     type: "one-to-one",
-    //     target: "usuario",
-    //     joinColumn: {
-    //       name: "usu_cod",
-    //       referencedColumnName: "usuCod"
-    //     }
-    //   }
-    // }
 })
