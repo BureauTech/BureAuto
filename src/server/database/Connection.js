@@ -1,23 +1,22 @@
-import mongoose from "mongoose"
+const { Repository } = require("typeorm");
+const typeorm = require("typeorm");
+const Entities = require("./Entities");
 
-const createConnection = (function () {
+let Connection = typeorm.createConnection({
+    type: process.env.TYPE_DB,
+    // url: "postgres://" + process.env.USER_DB + ":" + process.env.PWD_DB + "@" + process.env.HOST_DB + ":" + process.env.PORT_DB + "/" + process.env.DATABASE_DB,
+    host: process.env.HOST_DB,
+    port: process.env.PORT_DB,
+    username: process.env.USER_DB,
+    password: process.env.PWD_DB,
+    database: process.env.DATABASE_DB,
+    entities: Entities.list()
+})
 
-    let _localServidorDB = process.env.LOCAL_SERVIDOR_DB
-    let _portaServidorDB = process.env.PORTA_SERVIDOR_DB
-    let _banco = process.env.PORTA_SERVIDOR_DB
+async function teste() {
+    let repoCripto = await (await Connection).getRepository(Repository.criptografia)
+    let cripto = await repoCripto.find()
+    console.log(cripto)
+}
 
-    let _connection = mongoose.connect(`mongodb://${process.env.LOCAL_SERVIDOR_DB}:${process.env.PORTA_SERVIDOR_DB}/`)
-        .then(() => {
-            console.log("Conexão com ao MongoDB iniciada.")
-        })
-        .catch((err) => {
-            console.log("Falha ao se conectar ao MongoDB.\n Erro: "+err)
-        })
-
-    return {
-        connection: _connection
-    }
-
-})()
-
-export default createConnection
+module.exports = { Connection, teste }

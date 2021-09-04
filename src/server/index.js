@@ -8,9 +8,13 @@ const app = express()
 
 // Definições iniciais do APP
 app.use(cors())
-app.use(express.urlencoded({limit: "50mb", extended: true, parameterLimit: 50000}))
-app.use(express.json({limit: "50mb"}))
+app.use(express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }))
+app.use(express.json({ limit: "50mb" }))
 
+
+const teste = require("./database/Connection")
+
+teste.teste()
 // Definição dos controllers
 app.use("/adverts", require("./controllers/AdvertsController"))
 app.use("/bookmarks", require("./controllers/BookmarksController"))
@@ -26,7 +30,7 @@ app.use((req, res) => {
 
 const port = process.env.PORT || 3000
 
-app.listen(port, function() {
+app.listen(port, function () {
     console.log("Running on port", port)
 })
 
