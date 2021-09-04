@@ -7,7 +7,7 @@
     "eslint.options": {
     "extensions": [
         ".js",
-        ".vue",
+        ".vue"
     ]
     },
     "vetur.format.defaultFormatter.css": "prettier",
