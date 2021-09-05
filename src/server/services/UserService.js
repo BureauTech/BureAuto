@@ -38,6 +38,12 @@ module.exports = {
             }
 
         })
+    },
+
+    resetUserPassword: function(user) {
+        user.senha = PasswordUtils.randomPassword()
+        const template = "templates/FirstAccessTemplate.ejs"
+        EmailService.sendEmail("BureAuto", user.data.email, "BureAuto - Troca de Senha", template, user.data)
     }
 
 }

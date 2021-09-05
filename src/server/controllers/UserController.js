@@ -13,4 +13,14 @@ router.post("/register", async(req, res) => {
     return res.status(200).send({success: true})
 })
 
+router.post("/reset-password", async(req, res) => {
+    try {
+        const {email} = req.body
+        console.log(email)
+    } catch (error) {
+        res.status(500).send({success: false})
+    }
+    return res.status(200).send({success: true})
+})
+
 module.exports = router

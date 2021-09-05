@@ -7,14 +7,16 @@ const Connection = require("../database/Connection")
 router.post("/", async(req, res) => {
     try {
         const {email, password} = req.body
-        const validate = (await (await Connection)
+        const connection = await Connection
+
+        const validate = (await connection
             .query("select validar_acesso_usuario($1, $2) cod", [email, password]))[0]
 
         if (!validate.cod) {
             return res.status(401).send({success: false, error: "incorrect username or password"})
         }
 
-        const user = (await (await Connection)
+        const user = (await connection
             .query("select * from descriptografar_usuario($1)", [validate.cod]))[0]
 
         AuthService.generateToken(user, res)
