@@ -17,7 +17,6 @@ module.exports = {
 
             step: async function(user) {
                 user.data.senha = PasswordUtils.randomPassword()
-
                 const RepositoryUsuario = await Repository.get(Repository.usuario)
                 await RepositoryUsuario.save({
                     usu_nome: user.data.nome,
@@ -30,7 +29,6 @@ module.exports = {
                     usu_senha: user.data.senha,
                     usu_is_temp: true
                 })
-
                 const template = "templates/FirstAccessTemplate.ejs"
                 EmailService.sendEmail("BureAuto", user.data.email, "BureAuto - Primeiro Acesso", template, user.data)
             },

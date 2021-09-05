@@ -19,11 +19,12 @@ app.use(express.urlencoded({limit: "50mb", extended: true, parameterLimit: 50000
 // Definição dos controllers
 app.use("/login", require("./controllers/LoginController"))
 app.use("/logout", require("./controllers/LogoutController"))
-app.use("/advert", require("./controllers/AdvertController"))
 app.use("/bookmark", require("./controllers/BookmarkController"))
 app.use("/message", require("./controllers/MessageController"))
 app.use("/view", require("./controllers/ViewController"))
+
 app.use("/user", authenticate, require("./controllers/UserController"))
+app.use("/advertisement", authenticate, require("./controllers/AdvertisementController"))
 
 // Rota inexistente
 app.use((req, res) => {
