@@ -49,7 +49,7 @@ module.exports = {
             usu_senha: data.senha,
             usu_is_temp: true
         })
-        EmailService.sendEmail("BureAuto", user.usu_email, "BureAuto - Troca de Senha", template, data)
+        EmailService.sendEmail("BureAuto", user.usu_email, "🆘 BureAuto - Troca de Senha", template, data)
     }
 
 }
