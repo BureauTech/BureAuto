@@ -46,4 +46,29 @@ create table mensagem (
 	constraint mensagem_anu_cod_fkey foreign key (men_anu_cod) references anuncio (anu_cod)
 );
 
+drop table anuncio cascade;
+
+create table anuncio (
+    anu_cod varchar not null,
+    anu_usu_cod bigint not null,
+    anu_fab_cod bigint not null,
+    anu_descricao_marca varchar,
+    anu_descricao_modelo varchar,
+    anu_valor double precision,
+    anu_favoritos integer not null default 0,
+    anu_visualizacoes integer not null default 0,
+    anu_ano_modelo integer,
+    anu_ano_fabricacao integer,
+	anu_imagem bytea[],
+	anu_status varchar not null default 'Ativo',
+    constraint anuncio_pkey primary key (anu_cod),
+    constraint anuncio_usu_cod_fkey foreign key (anu_usu_cod) references usuario (usu_cod),
+    constraint anuncio_anu_fab_cod foreign key (anu_fab_cod) references fabricante (fab_cod)
+);
+
+create index fki_fk_usu_cod
+on public.anuncio using btree
+(anu_usu_cod asc nulls last)
+tablespace pg_default;
+
 -- ##################### fim tabelas ######################## --
