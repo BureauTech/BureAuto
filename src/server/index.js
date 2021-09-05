@@ -11,19 +11,19 @@ const app = express()
 
 // Definições iniciais do app
 app.use(cors())
-app.use(express.urlencoded({limit: "50mb", extended: true, parameterLimit: 50000}))
-app.use(express.json({limit: "50mb"}))
 app.use(cookieParser())
-
+app.use(express.json({limit: "50mb"}))
 app.use(fileUpload({useTempFiles: true, tempFileDir: "./resources/temp/"}))
+app.use(express.urlencoded({limit: "50mb", extended: true, parameterLimit: 50000}))
 
 // Definição dos controllers
 app.use("/login", require("./controllers/LoginController"))
+app.use("/logout", require("./controllers/LogoutController"))
 app.use("/advert", require("./controllers/AdvertController"))
 app.use("/bookmark", require("./controllers/BookmarkController"))
 app.use("/message", require("./controllers/MessageController"))
-app.use("/user", authenticate, require("./controllers/UserController"))
 app.use("/view", require("./controllers/ViewController"))
+app.use("/user", authenticate, require("./controllers/UserController"))
 
 // Rota inexistente
 app.use((req, res) => {

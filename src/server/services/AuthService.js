@@ -1,15 +1,16 @@
 const jwt = require("jsonwebtoken")
 const {promisify} = require("util")
-const secret = "$2a$08$6fqTLV8gmMYPw1ovcnHrBebo4M7mR3QDeO8MLoA8DdpWyxVWIgdP2"
-const expiresIn = 1800
 
-module.exports = {
-    
+const AuthService = module.exports = {
+
+    expiresIn: 1800,
+    cookieName: "jwtoken",
+    secretKey: "$2a$08$6fqTLV8gmMYPw1ovcnHrBebo4M7mR3QDeO8MLoA8DdpWyxVWIgdP2",
+
     authenticate: async function(req, res, next) {
         try {
             const token = req.cookies.jwtoken
-            const decoded = await promisify(jwt.verify)(token, secret)
-            req.user = decoded
+            req.user = await promisify(jwt.verify)(token, AuthService.secretKey)
             return next()
         } catch (error) {
             return res.status(401).send({sucess: false, error: "Token invalid"})
@@ -17,8 +18,8 @@ module.exports = {
     },
 
     generateToken: function(user, res) {
-        const token = jwt.sign(user, secret, {expiresIn: expiresIn})
-        res.cookie("jwtoken", token, {httpOnly: true, maxAge: expiresIn * 1000})
+        const token = jwt.sign(user, AuthService.secretKey, {expiresIn: AuthService.expiresIn})
+        res.cookie(AuthService.cookieName, token, {httpOnly: true, maxAge: AuthService.expiresIn * 1000})
     }
 
 }
