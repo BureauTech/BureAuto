@@ -1,28 +1,27 @@
 const router = require("express").Router()
-const AuthService = require("../services/AuthService")
 const Connection = require("../database/Connection")
-
-// Mapeado em "/login"
+const UserService = require("../services/UserService")
 
 router.post("/", async(req, res) => {
     try {
-        const {email, password} = req.body
+        const {email} = req.body
         const connection = await Connection
 
         const validate = (await connection
-            .query("select validar_acesso_usuario($1, $2) cod", [email, password]))[0]
+            .query("select get_user_cod_by_email($1) cod", [email]))[0]
 
-        if (!validate.cod) {
-            return res.status(401).send({success: false, error: "incorrect username or password"})
+        if(!validate.cod) {
+            return res.status(401).send({success: false, error: "email not found"})
         }
 
         const user = (await connection
             .query("select * from descriptografar_usuario($1)", [validate.cod]))[0]
 
-        AuthService.generateToken(user, res)
+        await UserService.resetUserPassword(user)
         return res.status(200).send({success: true})
 
     } catch (error) {
+        console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
     }
 })

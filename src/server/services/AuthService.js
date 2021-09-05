@@ -13,7 +13,7 @@ const AuthService = module.exports = {
             req.user = await promisify(jwt.verify)(token, AuthService.secretKey)
             return next()
         } catch (error) {
-            return res.status(401).send({sucess: false, error: "Token invalid"})
+            return res.status(401).send({sucess: false, error: "authentication failed"})
         }
     },
 

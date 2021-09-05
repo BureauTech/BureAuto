@@ -19,6 +19,8 @@ app.use(express.urlencoded({limit: "50mb", extended: true, parameterLimit: 50000
 // Definição dos controllers
 app.use("/login", require("./controllers/LoginController"))
 app.use("/logout", require("./controllers/LogoutController"))
+app.use("/reset-password", require("./controllers/ResetPasswordController"))
+
 app.use("/bookmark", require("./controllers/BookmarkController"))
 app.use("/message", require("./controllers/MessageController"))
 app.use("/view", require("./controllers/ViewController"))

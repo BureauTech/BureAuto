@@ -40,10 +40,16 @@ module.exports = {
         })
     },
 
-    resetUserPassword: function(user) {
-        user.senha = PasswordUtils.randomPassword()
+    resetUserPassword: async function(user) {
         const template = "templates/FirstAccessTemplate.ejs"
-        EmailService.sendEmail("BureAuto", user.data.email, "BureAuto - Troca de Senha", template, user.data)
+        const data = {nome: user.usu_nome, senha: PasswordUtils.randomPassword()}
+        const RepositoryUsuario = await Repository.get(Repository.usuario)
+        await RepositoryUsuario.save({
+            usu_cod: user.usu_cod,
+            usu_senha: data.senha,
+            usu_is_temp: true
+        })
+        EmailService.sendEmail("BureAuto", user.usu_email, "BureAuto - Troca de Senha", template, data)
     }
 
 }

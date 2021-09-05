@@ -8,7 +8,7 @@ router.post("/register", async(req, res) => {
         const {csvFile} = req.files
         await AdvertisementService.registerAdvertisement(csvFile.tempFilePath)
     } catch (error) {
-        res.status(500).send({success: false})
+        res.status(500).send({success: false, error: "an error occurred while processing the request"})
     }
     return res.status(200).send({success: true})
 })
