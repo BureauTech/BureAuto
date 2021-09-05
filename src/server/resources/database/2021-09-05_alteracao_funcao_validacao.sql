@@ -89,3 +89,46 @@ begin
     end loop;
 end;
 $$ language 'plpgsql';
+
+create or replace function atualizar_usuario()
+returns trigger as $$
+declare
+	chave varchar := (select cri_chave from criptografia where cri_usu_cod = new.usu_cod);
+begin
+	if new.usu_nome not like '\\x%' then
+		new.usu_nome := encrypt(new.usu_nome::bytea, chave::bytea, 'aes')::varchar;
+	end if;
+
+	if new.usu_documento not like '\\x%' then
+  		new.usu_documento := encrypt(new.usu_documento::bytea, chave::bytea, 'aes')::varchar;
+  	end if;
+
+	if new.usu_apelido not like '\\x%' then
+  		new.usu_apelido := encrypt(new.usu_apelido::bytea, chave::bytea, 'aes')::varchar;
+  	end if;
+  
+  	if new.usu_telefone not like '\\x%' then
+  		new.usu_telefone := encrypt(new.usu_telefone::bytea, chave::bytea, 'aes')::varchar;
+  	end if;
+
+  	if new.usu_endereco not like '\\x%' then
+  		new.usu_endereco := encrypt(new.usu_endereco::bytea, chave::bytea, 'aes')::varchar;
+  	end if;
+  
+  	if new.usu_email not like '\\x%' then
+  		new.usu_email := encrypt(new.usu_email::bytea, chave::bytea, 'aes')::varchar;
+  	end if;
+  
+  	if new.usu_senha not like '\\x%' then
+		new.usu_senha := sha256((new.usu_senha || chave)::bytea)::varchar;
+	end if;
+
+	return new;
+end;
+$$ language plpgsql;
+
+
+alter table usuario alter column usu_is_temp set default true;
+alter table anuncio alter column anu_favoritos set default 0;
+alter table anuncio alter column anu_visualizacoes set default 0;
+alter table anuncio alter column anu_status set default 'Ativo';
