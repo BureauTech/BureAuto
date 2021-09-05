@@ -41,7 +41,7 @@ module.exports = {
     },
 
     resetUserPassword: async function(user) {
-        const template = "templates/FirstAccessTemplate.ejs"
+        const template = "templates/ResetPasswordEmailTemplate.ejs"
         const data = {nome: user.usu_nome, senha: PasswordUtils.randomPassword()}
         const RepositoryUsuario = await Repository.get(Repository.usuario)
         await RepositoryUsuario.save({
