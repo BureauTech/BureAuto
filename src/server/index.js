@@ -3,6 +3,8 @@ require("dotenv").config()
 const express = require("express")
 const cors = require("cors")
 const fileUpload = require("express-fileupload")
+const {authenticate} = require("./services/AuthService")
+const cookieParser = require("cookie-parser")
 
 // Invocação da aplicação
 const app = express()
@@ -11,6 +13,7 @@ const app = express()
 app.use(cors())
 app.use(express.urlencoded({limit: "50mb", extended: true, parameterLimit: 50000}))
 app.use(express.json({limit: "50mb"}))
+app.use(cookieParser())
 
 app.use(fileUpload({useTempFiles: true, tempFileDir: "./resources/temp/"}))
 
@@ -19,7 +22,7 @@ app.use("/login", require("./controllers/LoginController"))
 app.use("/advert", require("./controllers/AdvertController"))
 app.use("/bookmark", require("./controllers/BookmarkController"))
 app.use("/message", require("./controllers/MessageController"))
-app.use("/user", require("./controllers/UserController"))
+app.use("/user", authenticate, require("./controllers/UserController"))
 app.use("/view", require("./controllers/ViewController"))
 
 // Rota inexistente
