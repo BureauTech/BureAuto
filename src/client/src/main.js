@@ -7,7 +7,7 @@ import axios from "./axios"
 
 const startApp = async function() {
     try {
-        const response = await axios.get("/authenticate")
+        const response = await axios.get("/auth")
         if (response) {
             await store.dispatch("setAuth", true)
         }
