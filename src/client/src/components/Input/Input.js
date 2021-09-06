@@ -6,10 +6,5 @@ export default {
             default: ""
         },
         value: String
-    },
-    methods: {
-        teste: function(e) {
-            console.log(e)
-        }
     }
 }

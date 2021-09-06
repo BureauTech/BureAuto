@@ -25,9 +25,11 @@ export default {
     methods: {
         login: async function() {
             this.loading = true
-            console.log(config.SERVER_URL)
-            console.log(this.loginForm)
-            const response = await axios.post(`${config.SERVER_URL}/login`)
+            const response = await axios.post(`${config.SERVER_URL}/login`, this.loginForm, {withCredentials: true, headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            }})
+            console.log(response)
             setTimeout(() => {
                 this.loading = false
             }, 2000)
