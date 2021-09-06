@@ -10,7 +10,7 @@ const cookieParser = require("cookie-parser")
 const app = express()
 
 // Definições iniciais do app
-app.use(cors())
+app.use(cors({credentials: true, origin: "http://localhost:3001"}))
 app.use(cookieParser())
 app.use(express.json({limit: "50mb"}))
 app.use(fileUpload({useTempFiles: true, tempFileDir: "./resources/temp/"}))
