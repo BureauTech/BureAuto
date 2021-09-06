@@ -112,7 +112,7 @@ create table message (
     mes_text varchar not null,
     constraint message_mes_cod_pkey primary key (mes_cod),
     constraint message_use_cod_fkey foreign key (mes_use_cod) references "user" (use_cod),
-	constraint message_anu_cod_fkey foreign key (mes_cha_cod) references chat (cha_cod)
+	constraint message_cha_cod_fkey foreign key (mes_cha_cod) references chat (cha_cod)
 );
 
 -- ##################### ends tabels ######################## --
