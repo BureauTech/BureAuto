@@ -42,7 +42,7 @@
         justify="center"
       >
         <router-link
-          to="/forgot-password"
+          to="/esqueci-a-senha"
           class="text-decoration-none"
         >
           <p class="text-h6 bahama--text">Esqueci minha senha</p>

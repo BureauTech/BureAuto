@@ -4,7 +4,7 @@ import Button from "@/components/Button/Button.vue"
 import rulesUtils from "@/utils/rulesUtils"
 
 export default {
-    name: "Login",
+    name: "ForgotPassword",
     components: {
         Card,
         Input,
@@ -17,7 +17,7 @@ export default {
     },
     methods: {
         teste: function() {
-            console.log("Cliquei no login")
+            console.log("cliquei no enviar")
         }
     }
 }

@@ -10,7 +10,7 @@ const routes = [{
     name: "Login",
     component: Login
 }, {
-    path: "/forgot-password",
+    path: "/esqueci-a-senha",
     name: "ForgotPassword",
     component: ForgotPassword
 }]
