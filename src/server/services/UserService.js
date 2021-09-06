@@ -33,7 +33,7 @@ module.exports = {
                 EmailService.sendEmail("BureAuto", user.data.email, "BureAuto - Primeiro Acesso", template, user.data)
             },
 
-            complete: function() {
+            complete: async function() {
                 fs.unlink(filePath, () => {})
             }
 

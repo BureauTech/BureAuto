@@ -25,7 +25,7 @@ module.exports = {
                 })
             },
 
-            complete: function() {
+            complete: async function() {
                 fs.unlink(filePath, () => {})
             }
 
