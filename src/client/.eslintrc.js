@@ -39,6 +39,7 @@ module.exports = {
         "require-atomic-updates": "off",
         "no-duplicate-imports": "error",
         "no-confusing-arrow": "error",
-        "prefer-const": "error"
+        "prefer-const": "error",
+        "vue/comment-directive": 0
     }
 }
