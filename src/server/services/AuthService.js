@@ -5,7 +5,7 @@ const AuthService = module.exports = {
 
     expiresIn: 1800,
     cookieName: "jwtoken",
-    secretKey: "$2a$08$6fqTLV8gmMYPw1ovcnHrBebo4M7mR3QDeO8MLoA8DdpWyxVWIgdP2",
+    secretKey: "$2a$10$VXQnRiZbWyDaPcTHxi7V/egucIrqjoYFTMzSQ98bFJC7a6LMW5q/.",
 
     authenticate: async function(req, res, next) {
         try {

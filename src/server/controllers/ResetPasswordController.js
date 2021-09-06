@@ -17,7 +17,7 @@ router.post("/", async(req, res) => {
         }
 
         const user = (await connection
-            .query("select * from descriptografar_usuario($1)", [validate.cod]))[0]
+            .query("select * from decrypt_user($1)", [validate.cod]))[0]
 
         await UserService.resetUserPassword(user)
         return res.status(200).send({success: true})

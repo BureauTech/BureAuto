@@ -1,9 +1,9 @@
 const router = require("express").Router()
 
-// Mapeado em "/views"
+// Mapeado em "/favorite"
 
 router.get("/", async(req, res) => {
-    return res.send("/views")
+    return res.send("/favorites")
 })
 
 module.exports = router
