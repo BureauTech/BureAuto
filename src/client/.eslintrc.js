@@ -14,7 +14,6 @@ module.exports = {
         "indent": ["error", 4],
         "quotes": ["error", "double"],
         "semi": ["error", "never"],
-        "linebreak-style": ["error", "windows"],
         "comma-dangle": ["error", "never"],
         "comma-spacing": ["error", {"before": false, "after": true}],
         "comma-style": ["error", "last"],
