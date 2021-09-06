@@ -5,6 +5,9 @@
     :rules="propsRules"
     :placeholder="placeholder"
     color="bahama"
+    @change="teste"
+    v-bind:value="value"
+    v-on:input="$emit('input', $event.target.value)"
   />
 </template>
 

@@ -28,12 +28,14 @@
         <Input
           placeholder="exemplo@bureau.com"
           :propsRules="[rules.required, rules.email]"
+          v-model="loginForm.email"
         />
       </v-row>
       <v-row no-gutters>
         <Input
           placeholder="Senha"
           :propsRules="[rules.required]"
+          v-model="loginForm.password"
         />
       </v-row>
       <v-row
@@ -41,7 +43,10 @@
         justify="center"
         class="mb-6 mt-0"
       >
-        <Button buttonText="Login" @click="login" />
+        <Button
+          buttonText="Login"
+          @click="login"
+        />
       </v-row>
       <v-row
         no-gutters
