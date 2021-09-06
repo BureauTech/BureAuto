@@ -14,9 +14,9 @@
           class="mx-auto my-12 rounded-xl"
           align="center"
           justify="center"
+          :loading="loading"
         >
           <slot></slot>
-
         </v-card>
       </v-col>
     </v-row>

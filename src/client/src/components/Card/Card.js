@@ -1,3 +1,6 @@
 export default {
-    name: "Card"
+    name: "Card",
+    props: {
+        loading: false
+    }
 }

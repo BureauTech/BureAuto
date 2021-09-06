@@ -12,12 +12,17 @@ export default {
     },
     data: function() {
         return {
-            rules: rulesUtils
+            rules: rulesUtils,
+            loading: false
         }
     },
     methods: {
-        teste: function() {
-            console.log("Cliquei no login")
+        login: function() {
+            this.loading = true
+
+            setTimeout(() => {
+                this.loading = false
+            }, 2000)
         }
     }
 }

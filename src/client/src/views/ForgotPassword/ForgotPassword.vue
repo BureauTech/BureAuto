@@ -1,5 +1,12 @@
 <template>
-  <Card>
+  <Card :loading="loading">
+    <template slot="progress">
+      <v-progress-linear
+        color="deep-purple"
+        height="10"
+        indeterminate
+      ></v-progress-linear>
+    </template>
     <v-col cols="11">
       <v-row
         align="center"
@@ -7,7 +14,7 @@
         no-gutters
       >
         <v-img
-          src="../../../../../doc/img/bureauto_sem_fundo.png"
+          src="../../assets/bureauto_sem_fundo.png"
           alt="Logo da bureAuto"
           max-height="200"
           max-width="200"
@@ -28,7 +35,7 @@
         justify="center"
         class="mb-6 mt-0"
       >
-        <Button buttonText="Enviar" @click="teste" />
+        <Button buttonText="Enviar" @click="login" />
       </v-row>
       <v-row
         no-gutters
