@@ -1,25 +1,25 @@
 const EntitySchema = require("typeorm").EntitySchema
 
 module.exports = new EntitySchema({
-    name: "criptografia",
-    tableName: "criptografia",
+    name: "Cryptography",
+    tableName: "cryptography",
     columns: {
-        cri_usu_cod: {
+        cry_use_cod: {
             primary: true,
             type: "bigint",
             generated: true
         },
-        cri_chave: {
+        cry_key: {
             type: "varchar"
         }
     },
     relations: {
-        usuario: {
+        User: {
             type: "one-to-one",
-            target: "usuario",
+            target: "user",
             joinColumn: {
-                name: "cri_usu_cod",
-                referencedColumnName: "usu_cod"
+                name: "cry_use_cod",
+                referencedColumnName: "use_cod"
             }
         }
     }

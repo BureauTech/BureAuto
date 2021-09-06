@@ -1,60 +1,60 @@
 const EntitySchema = require("typeorm").EntitySchema
 
 module.exports = new EntitySchema({
-    name: "usuario",
-    tableName: "usuario",
+    name: "User",
+    tableName: "user",
     columns: {
-        usu_cod: {
+        use_cod: {
             primary: true,
             type: "bigint",
             generated: true
         },
-        usu_nome: {
+        use_name: {
             type: "varchar"
         },
-        usu_is_cpf: {
+        use_is_cpf_document: {
             type: "boolean"
         },
-        usu_documento: {
+        use_document: {
             type: "varchar"
         },
-        usu_apelido: {
+        use_username: {
             type: "varchar"
         },
-        usu_telefone: {
+        use_phone: {
             type: "varchar"
         },
-        usu_endereco: {
+        use_address: {
             type: "varchar"
         },
-        usu_email: {
+        use_email: {
             type: "varchar"
         },
-        usu_senha: {
-            type: "varchar"
-        },
-        usu_is_temp: {
+        use_is_temp_password: {
             type: "boolean"
+        },
+        use_password: {
+            type: "varchar"
         }
     },
     relations: {
-        anuncio: {
+        Advertisement: {
             type: "one-to-many",
-            target: "anuncio",
+            target: "advertisement",
             joinColumn: {
-                name: "usu_cod",
-                referencedColumnName: "anu_usu_cod"
+                name: "use_cod",
+                referencedColumnName: "anu_use_cod"
                 
             },
-            inverseSide: "usuario"
+            inverseSide: "User"
         },
-        criptografia: {
+        Cryptography: {
             type: "one-to-one",
-            target: "criptografia",
+            target: "cryptography",
             joinColumn: {
-                name: "usu_cod",
-                referencedColumnName: "cri_usu_cod",
-                inverseSide: "usuario"
+                name: "use_cod",
+                referencedColumnName: "cry_use_cod",
+                inverseSide: "user"
             }
         }
     }

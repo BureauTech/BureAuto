@@ -17,23 +17,23 @@ module.exports = {
 
             step: async function(user) {
                 user.data.senha = PasswordUtils.randomPassword()
-                const RepositoryUsuario = await Repository.get(Repository.usuario)
-                await RepositoryUsuario.save({
-                    usu_nome: user.data.nome,
-                    usu_is_cpf: true,
-                    usu_documento: user.data.cpf,
-                    usu_apelido: user.data.apelido,
-                    usu_telefone: user.data.telefone,
-                    usu_endereco: user.data.endereco,
-                    usu_email: user.data.email,
-                    usu_senha: user.data.senha,
-                    usu_is_temp: true
+                const RepositoryUser = await Repository.get(Repository.User)
+                await RepositoryUser.save({
+                    use_name: user.data.nome,
+                    use_is_cpf_document: true,
+                    use_document: user.data.cpf,
+                    use_username: user.data.apelido,
+                    use_phone: user.data.telefone,
+                    use_address: user.data.endereco,
+                    use_email: user.data.email,
+                    use_password: user.data.senha,
+                    use_is_temp_password: true
                 })
                 const template = "templates/FirstAccessTemplate.ejs"
                 EmailService.sendEmail("BureAuto", user.data.email, "BureAuto - Primeiro Acesso", template, user.data)
             },
 
-            complete: function() {
+            complete: async function() {
                 fs.unlink(filePath, () => {})
             }
 
@@ -42,14 +42,14 @@ module.exports = {
 
     resetUserPassword: async function(user) {
         const template = "templates/ResetPasswordEmailTemplate.ejs"
-        const data = {nome: user.usu_nome, senha: PasswordUtils.randomPassword()}
-        const RepositoryUsuario = await Repository.get(Repository.usuario)
-        await RepositoryUsuario.save({
-            usu_cod: user.usu_cod,
-            usu_senha: data.senha,
-            usu_is_temp: true
+        const data = {nome: user.use_name, senha: PasswordUtils.randomPassword()}
+        const RepositoryUser = await Repository.get(Repository.User)
+        await RepositoryUser.save({
+            use_cod: user.use_cod,
+            use_password: data.senha,
+            use_is_temp_password: true
         })
-        EmailService.sendEmail("BureAuto", user.usu_email, "🆘 BureAuto - Troca de Senha", template, data)
+        EmailService.sendEmail("BureAuto", user.use_email, "🆘 BureAuto - Troca de Senha", template, data)
     }
 
 }
