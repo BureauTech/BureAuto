@@ -20,7 +20,6 @@ module.exports = {
         "array-bracket-newline": ["error", "never"],
         "array-bracket-spacing": ["error", "never"],
         "array-element-newline": ["error", "never"],
-        "func-call-spacing": ["error", "never"],
         "func-style": ["error", "expression"],
         "brace-style": ["warn", "1tbs", {"allowSingleLine": false}],
         "function-call-argument-newline": ["error", "never"],

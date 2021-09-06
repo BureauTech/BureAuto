@@ -27,6 +27,7 @@ app.use("/view", require("./controllers/ViewController"))
 
 app.use("/user", authenticate, require("./controllers/UserController"))
 app.use("/advertisement", authenticate, require("./controllers/AdvertisementController"))
+app.get("/authenticate", authenticate, (req, res) => res.send("ok"))
 
 // Rota inexistente
 app.use((req, res) => {

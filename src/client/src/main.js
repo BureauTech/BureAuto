@@ -2,12 +2,26 @@ import Vue from "vue"
 import App from "./App.vue"
 import router from "./router"
 import vuetify from "./plugins/vuetify"
-require("dotenv").config()
+import store from "./store"
+import axios from "./axios"
 
-Vue.config.productionTip = false
+const startApp = async function() {
+    try {
+        const response = await axios.get("/authenticate")
+        if (response) {
+            await store.dispatch("setAuth", true)
+        }
+    } catch (error) {
+        console.log(error)
+    }
 
-new Vue({
-    router,
-    vuetify,
-    render: h => h(App)
-}).$mount("#app")
+    Vue.config.productionTip = false
+    
+    new Vue({
+        router,
+        vuetify,
+        store,
+        render: h => h(App)
+    }).$mount("#app")
+}
+startApp()
