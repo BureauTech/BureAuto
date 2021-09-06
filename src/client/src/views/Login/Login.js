@@ -24,9 +24,9 @@ export default {
     methods: {
         login: async function() {
             this.loading = true
-
             try {
                 const response = await axios.post("/login", this.loginForm)
+                console.log(response)
             } catch (error) {
                 console.log(error)
             } finally {
