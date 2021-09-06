@@ -6,7 +6,7 @@ const EmailService = require("../services/EmailService")
 
 module.exports = {
 
-    registerUser: function(filePath) {
+    registerUser: async function(filePath) {
         const file = fs.readFileSync(filePath, "utf8")
 
         Papa.parse(file, {
