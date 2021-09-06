@@ -13,7 +13,7 @@ router.post("/", async(req, res) => {
             .query("select validar_acesso_usuario($1, $2) cod", [email, password]))[0]
 
         if (!validate.cod) {
-            return res.status(401).send({success: false, error: "incorrect username or password"})
+            return res.status(200).send({success: false, error: "incorrect username or password"})
         }
 
         const user = (await connection

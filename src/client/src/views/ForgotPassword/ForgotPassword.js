@@ -2,6 +2,7 @@ import Card from "@/components/Card/Card.vue"
 import Input from "@/components/Input/Input.vue"
 import Button from "@/components/Button/Button.vue"
 import rulesUtils from "@/utils/rulesUtils"
+import axios from "@/axios"
 
 export default {
     name: "ForgotPassword",
@@ -12,12 +13,18 @@ export default {
     },
     data: function() {
         return {
-            rules: rulesUtils
+            rules: rulesUtils,
+            loading: false,
+            formResetPassword: {
+                email: undefined
+            }
         }
     },
     methods: {
-        teste: function() {
-            console.log("cliquei no enviar")
+        resetPassword: async function() {
+            this.loading = true
+            await axios.post("/reset-password", this.formResetPassword)
+            this.loading = false
         }
     }
 }

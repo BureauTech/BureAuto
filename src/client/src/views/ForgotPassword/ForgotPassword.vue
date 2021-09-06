@@ -21,21 +21,22 @@
         />
       </v-row>
       <v-row no-gutters>
-        <p class="text-h4 bahama--text">Acesso</p>
+        <p class="text-h4 bahama--text">Redefinir senha</p>
       </v-row>
       <v-row no-gutters>
-        <p class="text-h5 bahama--text">Insira seu e-mail</p>
+        <p class="text-h5 bahama--text">Enviaremos um email com sua nova senha</p>
       </v-row>
       <v-row no-gutters>
         <Input placeholder="exemplo@bureau.com"
-          :propsRules="[rules.required, rules.email]" />
+          :propsRules="[rules.required, rules.email]"
+          v-model="formResetPassword.email" />
       </v-row>
       <v-row
         align="center"
         justify="center"
         class="mb-6 mt-0"
       >
-        <Button buttonText="Enviar" @click="login" />
+        <Button buttonText="Enviar email" @click="resetPassword" />
       </v-row>
       <v-row
         no-gutters
@@ -46,7 +47,7 @@
           to="/login"
           class="text-decoration-none"
         >
-          <p class="text-h6 bahama--text">Realizar login</p>
+          <p class="text-h6 bahama--text">Voltar para login</p>
         </router-link>
       </v-row>
     </v-col>
