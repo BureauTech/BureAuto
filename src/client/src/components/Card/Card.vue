@@ -5,9 +5,7 @@
       justify="center"
     >
       <v-col
-        cols="12"
-        sm="6"
-        xl="4"
+        v-bind="$attrs"
       >
         <v-card
           elevation="1"
