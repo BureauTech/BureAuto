@@ -9,6 +9,9 @@ export default new Vuetify({
             light: {
                 bahama: "#2A6484"
             }
+        },
+        options: {
+            customProperties: true
         }
     }
 })

@@ -4,6 +4,7 @@ import Login from "@/views/Login/Login.vue"
 import ForgotPassword from "@/views/ForgotPassword/ForgotPassword.vue"
 import About from "@/views/About/About.vue"
 import store from "@/store"
+import ImportCsv from "@/views/ImportCsv/ImportCsv.vue"
 
 Vue.use(VueRouter)
 
@@ -22,6 +23,10 @@ const routes = [{
     meta: {
         requiresAuth: true
     }
+}, {
+    path: "/cadastrar",
+    name: "Cadastrar",
+    component: ImportCsv
 }]
 
 const router = new VueRouter({
