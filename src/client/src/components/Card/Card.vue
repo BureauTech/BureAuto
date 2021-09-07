@@ -9,10 +9,11 @@
       >
         <v-card
           elevation="1"
-          class="mx-auto my-12 rounded-xl"
+          :class="round"
           align="center"
           justify="center"
           :loading="loading"
+          :color="colorCard"
         >
           <slot></slot>
         </v-card>

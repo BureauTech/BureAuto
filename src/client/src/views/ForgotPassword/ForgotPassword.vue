@@ -5,6 +5,7 @@
     sm="8"
     lg="6"
     xl="4"
+    :roundLevel="4"
   >
     <template slot="progress">
       <v-progress-linear
