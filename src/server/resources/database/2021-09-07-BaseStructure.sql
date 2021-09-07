@@ -16,7 +16,6 @@ create table "user" (
 	use_nickname varchar,
     use_is_cpf_document boolean not null,
     use_document varchar not null,
-    use_username varchar not null,
     use_phone varchar not null,
     use_address varchar not null,
     use_email varchar not null,
