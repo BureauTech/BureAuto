@@ -1,14 +1,26 @@
 <template>
   <v-app>
+    <Topbar v-if="showMenu" />
     <router-view />
   </v-app>
 </template>
 
 <script>
 
+import Topbar from "./components/Topbar/Topbar.vue"
+
 export default {
-    name: "App"
+    name: "App",
+    components: {
+        Topbar
+    },
+    computed: {
+        showMenu: function() {
+            return this.$store.getters.isAuthenticaded
+        }
+    }
 }
+
 </script>
 <style>
 #app {
