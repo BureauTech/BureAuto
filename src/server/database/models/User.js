@@ -18,7 +18,7 @@ module.exports = new EntitySchema({
         use_document: {
             type: "varchar"
         },
-        use_username: {
+        use_nickname: {
             type: "varchar"
         },
         use_phone: {

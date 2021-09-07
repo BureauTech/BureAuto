@@ -15,10 +15,10 @@ module.exports = new EntitySchema({
         adv_man_cod: {
             type: "bigint"
         },
-        adv_brand: {
+        adv_brand_description: {
             type: "varchar"
         },
-        adv_model: {
+        adv_model_description: {
             type: "varchar"
         },
         adv_value: {

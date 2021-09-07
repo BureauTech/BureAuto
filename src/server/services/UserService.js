@@ -22,7 +22,7 @@ module.exports = {
                     use_name: user.data.nome,
                     use_is_cpf_document: true,
                     use_document: user.data.cpf,
-                    use_username: user.data.apelido,
+                    use_nickname: user.data.apelido,
                     use_phone: user.data.telefone,
                     use_address: user.data.endereco,
                     use_email: user.data.email,
