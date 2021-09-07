@@ -24,13 +24,13 @@ app.use("/reset-password", require("./controllers/ResetPasswordController"))
 app.use("/favorite", require("./controllers/FavoriteController"))
 app.use("/message", require("./controllers/MessageController"))
 
+app.use("/auth", authenticate, require("./controllers/AuthController"))
 app.use("/user", authenticate, require("./controllers/UserController"))
 app.use("/advertisement", authenticate, require("./controllers/AdvertisementController"))
-app.get("/authenticate", authenticate, (req, res) => res.send("ok"))
 
 // Rota inexistente
 app.use((req, res) => {
-    res.send("Requisição não encontrada.")
+    res.status(404).send({error: "not found"})
 })
 
 const port = process.env.PORT || 3000
