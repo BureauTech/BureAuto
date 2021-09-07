@@ -49,7 +49,7 @@ router.beforeEach(function(to, from, next) {
 
     if (requiresAuth && !isAuthenticated()) {
         next({name: "Login"})
-    } else if (to.name === "Login" && isAuthenticated()) {
+    } else if ((to.name === "Login" || to.name === "ForgotPassword") && isAuthenticated()) {
         next({name: "AreaLogada"})
     } else {
         next()
