@@ -22,9 +22,11 @@ export default {
     },
     methods: {
         resetPassword: async function() {
-            this.loading = true
-            await axios.post("/reset-password", this.formResetPassword)
-            this.loading = false
+            if (this.$refs.forgotForm.validate()) {
+                this.loading = true
+                await axios.post("/reset-password", this.formResetPassword)
+                this.loading = false
+            }
         }
     }
 }

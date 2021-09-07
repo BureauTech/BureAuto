@@ -24,19 +24,21 @@ export default {
     },
     methods: {
         login: async function() {
-            this.loading = true
-            try {
-                const {data} = await axios.post("/login", this.loginForm)
-                if (data.success) {
-                    await this.$store.dispatch("setAuth", true)
-                    router.push({name: "AreaLogada"})
-                } else {
-                    alert("Erro no login")
+            if (this.$refs.loginForm.validate()) {
+                this.loading = true
+                try {
+                    const {data} = await axios.post("/login", this.loginForm)
+                    if (data.success) {
+                        await this.$store.dispatch("setAuth", true)
+                        router.push({name: "AreaLogada"})
+                    } else {
+                        console.log("Erro no login")
+                    }
+                } catch (error) {
+                    console.log(error)
+                } finally {
+                    this.loading = false
                 }
-            } catch (error) {
-                console.log(error)
-            } finally {
-                this.loading = false
             }
         }
     }
