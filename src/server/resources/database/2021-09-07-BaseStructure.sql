@@ -129,7 +129,7 @@ begin
 	insert into cryptography(cry_use_cod, cry_key) values (new.use_cod, random_key);
   	new.use_name := encrypt(new.use_name::bytea, random_key::bytea, 'aes')::varchar;
   	new.use_document := encrypt(new.use_document::bytea, random_key::bytea, 'aes')::varchar;
-  	new.use_username := encrypt(new.use_username::bytea, random_key::bytea, 'aes')::varchar;
+  	new.use_nickname := encrypt(new.use_nickname::bytea, random_key::bytea, 'aes')::varchar;
   	new.use_phone := encrypt(new.use_phone::bytea, random_key::bytea, 'aes')::varchar;
   	new.use_address := encrypt(new.use_address::bytea, random_key::bytea, 'aes')::varchar;
   	new.use_email := encrypt(new.use_email::bytea, random_key::bytea, 'aes')::varchar;
@@ -156,8 +156,8 @@ begin
   		new.use_document := encrypt(new.use_document::bytea, cry_key::bytea, 'aes')::varchar;
   	end if;
 
-	if new.use_username not like '\\x%' then
-  		new.use_username := encrypt(new.use_username::bytea, cry_key::bytea, 'aes')::varchar;
+	if new.use_nickname not like '\\x%' then
+  		new.use_nickname := encrypt(new.use_nickname::bytea, cry_key::bytea, 'aes')::varchar;
   	end if;
   
   	if new.use_phone not like '\\x%' then
@@ -230,7 +230,7 @@ returns table (
 	use_name varchar,
 	use_is_cpf_document boolean,
 	usu_document varchar,
-	use_username varchar,
+	use_nickname varchar,
 	use_phone varchar,
 	use_address varchar,
 	use_email varchar,
@@ -246,7 +246,7 @@ begin
 		use_name := decrypt_data(user_data.use_name, user_data.cry_key);
 		use_is_cpf_document := user_data.use_is_cpf_document;
 		usu_document := decrypt_data(user_data.use_document, user_data.cry_key);
-		use_username := decrypt_data(user_data.use_username, user_data.cry_key);
+		use_nickname := decrypt_data(user_data.use_nickname, user_data.cry_key);
 		use_phone := decrypt_data(user_data.use_phone, user_data.cry_key);
 		use_address := decrypt_data(user_data.use_address, user_data.cry_key);
 		use_email := decrypt_data(user_data.use_email, user_data.cry_key);
@@ -264,7 +264,7 @@ returns table (
 	use_name varchar,
 	use_is_cpf_document boolean,
 	usu_document varchar,
-	use_username varchar,
+	use_nickname varchar,
 	use_phone varchar,
 	use_address varchar,
 	use_email varchar,
@@ -280,7 +280,7 @@ begin
 		use_name := decrypt_data(user_data.use_name, user_data.cry_key);
 		use_is_cpf_document := user_data.use_is_cpf_document;
 		usu_document := decrypt_data(user_data.use_document, user_data.cry_key);
-		use_username := decrypt_data(user_data.use_username, user_data.cry_key);
+		use_nickname := decrypt_data(user_data.use_nickname, user_data.cry_key);
 		use_phone := decrypt_data(user_data.use_phone, user_data.cry_key);
 		use_address := decrypt_data(user_data.use_address, user_data.cry_key);
 		use_email := decrypt_data(user_data.use_email, user_data.cry_key);
@@ -316,9 +316,9 @@ $$ language 'plpgsql';
 -- ##################### starts queries ######################## --
 
 INSERT INTO "user"
-	(use_name, use_is_cpf_document, use_document, use_username, use_nickname,
+	(use_name, use_is_cpf_document, use_document, use_nickname,
 	 use_phone, use_address, use_email, use_is_temp_password, use_password)
-values ('admin', true, '1234567890', 'admin', 'admin', '129000000',
+values ('admin', true, '1234567890', 'admin', '129000000',
 		'rua dos programadores', 'admin@admin.com', false, 'admin');
 
 -- ##################### ends queries ######################## --
