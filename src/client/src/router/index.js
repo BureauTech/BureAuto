@@ -35,8 +35,8 @@ const router = new VueRouter({
     routes
 })
 
-const isAuthenticaded = function() {
-    if (store.getters.isAuthenticaded) {
+const isAuthenticated = function() {
+    if (store.getters.isAuthenticated) {
         return true
     }
     return false
@@ -47,9 +47,9 @@ router.beforeEach(function(to, from, next) {
         return record.meta.requiresAuth
     })
 
-    if (requiresAuth && !isAuthenticaded()) {
+    if (requiresAuth && !isAuthenticated()) {
         next({name: "Login"})
-    } else if (to.name === "Login" && isAuthenticaded()) {
+    } else if (to.name === "Login" && isAuthenticated()) {
         next({name: "AreaLogada"})
     } else {
         next()

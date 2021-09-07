@@ -5,16 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        isAuthenticaded: false
+        isAuthenticated: false
     },
     mutations: {
         setAuth: function(state, payload) {
-            state.isAuthenticaded = payload
+            state.isAuthenticated = payload
         }
     },
     getters: {
-        isAuthenticaded: function(state) {
-            return state.isAuthenticaded
+        isAuthenticated: function(state) {
+            return state.isAuthenticated
         }
     },
     actions: {
