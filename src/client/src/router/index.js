@@ -17,7 +17,7 @@ const routes = [{
     name: "ForgotPassword",
     component: ForgotPassword
 }, {
-    path: "/area-logada",
+    path: "/",
     name: "AreaLogada",
     component: About,
     meta: {
