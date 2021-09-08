@@ -7,7 +7,7 @@
   },
   "scripts": {
     "lint": "eslint .eslintrc.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "nodemon index.js"
   },
   "author": "",
@@ -28,7 +28,13 @@
     "typeorm": "^0.2.37"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "eslint": "^7.32.0",
-    "nodemon": "^2.0.12"
+    "jest": "^27.1.1",
+    "nodemon": "^2.0.12",
+    "superagent": "^6.1.0",
+    "supertest": "^6.1.6",
+    "supertest-session": "^4.1.0"
   }
 }
