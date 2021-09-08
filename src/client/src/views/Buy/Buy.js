@@ -1,13 +1,8 @@
 import Topbar from "@/components/Topbar/Topbar"
 
 export default {
-    name: "Buy",
+    name: "Comprar",
     components: {
         Topbar
-    },
-    data: function() {
-        return {
-            items: ["marca", "modelo", "ano", "valor"]
-        }
     }
 }

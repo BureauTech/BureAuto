@@ -16,7 +16,7 @@ export default {
     },
     computed: {
         showMenu: function() {
-            return this.$store.getters.isAuthenticated
+            return this.$route.path
         }
     }
 }
