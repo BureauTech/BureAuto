@@ -55,6 +55,8 @@
           <Button
             buttonText="Enviar email"
             type="submit"
+            min-width="150"
+            min-height="50"
             @click.stop.prevent="resetPassword"
           />
         </v-row>

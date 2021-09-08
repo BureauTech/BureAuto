@@ -63,6 +63,8 @@
           <Button
             buttonText="Login"
             type="submit"
+            min-width="150"
+            min-height="50"
             @click.stop.prevent="login"
           />
         </v-row>

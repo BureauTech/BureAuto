@@ -5,8 +5,7 @@
     v-text="buttonText"
     color="bahama"
     class="white--text text-none text-h5"
-    min-width="150"
-    min-height="50"
+    v-bind="$attrs"
     @click="emit"
   ></v-btn>
 </template>
