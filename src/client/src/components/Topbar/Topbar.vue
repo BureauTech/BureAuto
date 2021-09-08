@@ -20,7 +20,7 @@
       </v-col>
       <v-col>
         <router-link
-          to="/"
+          to="/comprar"
           class="text-decoration-none"
         >
           Comprar
@@ -36,7 +36,7 @@
       </v-col>
       <v-col>
         <router-link
-          to="/catalogo"
+          to="/"
           class="text-decoration-none"
         >
           Catálogo

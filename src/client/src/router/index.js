@@ -6,7 +6,7 @@ import Home from "@/views/Home/Home.vue"
 import store from "@/store"
 import ImportCsv from "@/views/ImportCsv/ImportCsv.vue"
 import Advertise from "@/views/Advertise/Advertise.vue"
-import Catalog from "@/views/Catalog/Catalog.vue"
+import Buy from "@/views/Buy/Buy.vue"
 import Reports from "@/views/Reports/Reports.vue"
 import Favorites from "@/views/Favorites/Favorites.vue"
 
@@ -23,10 +23,10 @@ const routes = [{
 }, {
     path: "/",
     name: "Home",
-    component: Home,
-    meta: {
-        requiresAuth: true
-    }
+    component: Home
+    // meta: {
+    //     requiresAuth: true
+    // }
 }, {
     path: "/cadastrar",
     name: "Cadastrar",
@@ -39,12 +39,12 @@ const routes = [{
         requiresAuth: true
     }
 }, {
-    path: "/catalogo",
-    name: "Catalog",
-    component: Catalog,
-    meta: {
-        requiresAuth: true
-    }
+    path: "/comprar",
+    name: "Buy",
+    component: Buy
+    // meta: {
+    //     requiresAuth: true
+    // }
 }, {
     path: "/relatorios",
     name: "Reports",
