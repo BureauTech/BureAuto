@@ -1,13 +1,18 @@
 /* eslint-disable no-undef */
-const app = require("../../index.js")
+const app = require("../../app.js")
 const session = require("supertest-session")
-
-let testSession = null
+const server = app.listen(process.env.TEST_PORT || 3333)
 
 describe("Test AuthController", function() {
 
+    let testSession = null
+
     beforeEach(function() {
-        testSession = session(app)
+        testSession = session(server)
+    })
+
+    afterAll(function() {
+        server.close()
     })
 
     test("It should response the GET method with valid auth", async function() {
