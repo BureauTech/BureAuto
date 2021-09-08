@@ -23,14 +23,17 @@ const routes = [{
 }, {
     path: "/",
     name: "Home",
-    component: Home
-    // meta: {
-    //     requiresAuth: true
-    // }
+    component: Home,
+    meta: {
+        requiresAuth: true
+    }
 }, {
     path: "/cadastrar",
     name: "Cadastrar",
-    component: ImportCsv
+    component: ImportCsv,
+    meta: {
+        requiresAuth: true
+    }
 }, {
     path: "/anunciar",
     name: "Advertise",
@@ -41,10 +44,10 @@ const routes = [{
 }, {
     path: "/comprar",
     name: "Buy",
-    component: Buy
-    // meta: {
-    //     requiresAuth: true
-    // }
+    component: Buy,
+    meta: {
+        requiresAuth: true
+    }
 }, {
     path: "/relatorios",
     name: "Reports",
