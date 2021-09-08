@@ -23,7 +23,6 @@
             max-width="20%"
           >
             <v-select
-              v-model="selection"
               :items="items"
               multiple
               label="Defina uma busca"

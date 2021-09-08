@@ -60,7 +60,6 @@
       </v-col>
       <v-col>
         <a
-          href="/login"
           class="text-decoration-none"
           @click="logout"
         >

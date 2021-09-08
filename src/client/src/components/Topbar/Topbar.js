@@ -5,6 +5,7 @@ export default {
     methods: {
         logout: async function() {
             await axios.get("/logout")
+            window.location.href = "/login"
         }
     }
 }
