@@ -32,43 +32,8 @@
       </v-layout>
     </v-app-bar>
     <v-layout
-      row
-      justify-center
-      align-center
-    >
-      <v-col
-        v-for="c in 3"
-        :key="c"
-        cols="3"
-        align="center"
-      >
-        <v-card
-          min-width="100%"
-          rounded="xl"
-        >
-          <v-card-title>
-            Modelo
-          </v-card-title>
-          <v-img
-            src="@/assets/bureauto_sem_fundo.png"
-            alt="Logo da bureAuto"
-            max-height="200"
-            max-width="200"
-          />
-          <v-card-text>
-            a partir de R$ 000.000
-          </v-card-text>
-          <v-btn
-            elevation="0"
-            color="transparent"
-            small
-          >
-            + informações
-          </v-btn>
-        </v-card>
-      </v-col>
-    </v-layout>
-    <v-layout
+    v-for="r in 2"
+    :key="r"
       row
       justify-center
       align-center

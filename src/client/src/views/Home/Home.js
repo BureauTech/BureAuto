@@ -5,7 +5,9 @@ export default {
     components: {
         Topbar
     },
-    data: () => ({
-        items: ["marca", "modelo", "ano", "valor"]
-    })
+    data: function() {
+        return {
+            items: ["marca", "modelo", "ano", "valor"]
+        }
+    }
 }
