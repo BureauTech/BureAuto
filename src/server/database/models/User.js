@@ -35,6 +35,9 @@ module.exports = new EntitySchema({
         },
         use_password: {
             type: "varchar"
+        },
+        use_is_admin: {
+            type: "boolean"
         }
     },
     relations: {

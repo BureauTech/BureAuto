@@ -1,0 +1,1 @@
+alter table "user" add use_is_admin boolean not null default false;
