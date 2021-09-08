@@ -6,30 +6,66 @@
       class="bahama--text"
     >
       <v-col>
-        <v-img
-          src="@/assets/bureauto_sem_fundo.png"
-          alt="Logo da bureAuto"
-          max-height="100"
-          max-width="100"
-        />
+        <router-link
+          to="/"
+          class="text-decoration-none"
+        >
+          <v-img
+            src="@/assets/bureauto_sem_fundo.png"
+            alt="Logo da bureAuto"
+            max-height="100"
+            max-width="100"
+          />
+        </router-link>
       </v-col>
       <v-col>
-        Comprar
+        <router-link
+          to="/"
+          class="text-decoration-none"
+        >
+          Comprar
+        </router-link>
       </v-col>
       <v-col>
-        Vender
+        <router-link
+          to="/anunciar"
+          class="text-decoration-none"
+        >
+          Anunciar
+        </router-link>
       </v-col>
       <v-col>
-        Catálogo
+        <router-link
+          to="/catalogo"
+          class="text-decoration-none"
+        >
+          Catálogo
+        </router-link>
       </v-col>
       <v-col>
-        Relatórios
+        <router-link
+          to="/relatorios"
+          class="text-decoration-none"
+        >
+          Relatórios
+        </router-link>
       </v-col>
       <v-col>
-        Favoritos
+        <router-link
+          to="/favoritos"
+          class="text-decoration-none"
+        >
+          Favoritos
+        </router-link>
       </v-col>
       <v-col>
-        Logout
+        <a
+          href="/login"
+          class="text-decoration-none"
+          @click="logout"
+        >
+          Logout
+        </a>
       </v-col>
     </v-row>
   </v-container>

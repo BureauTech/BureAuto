@@ -2,9 +2,13 @@ import Vue from "vue"
 import VueRouter from "vue-router"
 import Login from "@/views/Login/Login.vue"
 import ForgotPassword from "@/views/ForgotPassword/ForgotPassword.vue"
-import About from "@/views/About/About.vue"
+import Home from "@/views/Home/Home.vue"
 import store from "@/store"
 import ImportCsv from "@/views/ImportCsv/ImportCsv.vue"
+import Advertise from "@/views/Advertise/Advertise.vue"
+import Catalog from "@/views/Catalog/Catalog.vue"
+import Reports from "@/views/Reports/Reports.vue"
+import Favorites from "@/views/Favorites/Favorites.vue"
 
 Vue.use(VueRouter)
 
@@ -18,8 +22,8 @@ const routes = [{
     component: ForgotPassword
 }, {
     path: "/",
-    name: "AreaLogada",
-    component: About,
+    name: "Home",
+    component: Home,
     meta: {
         requiresAuth: true
     }
@@ -27,6 +31,34 @@ const routes = [{
     path: "/cadastrar",
     name: "Cadastrar",
     component: ImportCsv
+}, {
+    path: "/anunciar",
+    name: "Advertise",
+    component: Advertise,
+    meta: {
+        requiresAuth: true
+    }
+}, {
+    path: "/catalogo",
+    name: "Catalog",
+    component: Catalog,
+    meta: {
+        requiresAuth: true
+    }
+}, {
+    path: "/relatorios",
+    name: "Reports",
+    component: Reports,
+    meta: {
+        requiresAuth: true
+    }
+}, {
+    path: "/favoritos",
+    name: "Favorites",
+    component: Favorites,
+    meta: {
+        requiresAuth: true
+    }
 }]
 
 const router = new VueRouter({
@@ -50,7 +82,7 @@ router.beforeEach(function(to, from, next) {
     if (requiresAuth && !isAuthenticated()) {
         next({name: "Login"})
     } else if ((to.name === "Login" || to.name === "ForgotPassword") && isAuthenticated()) {
-        next({name: "AreaLogada"})
+        next({name: "Home"})
     } else {
         next()
     }
