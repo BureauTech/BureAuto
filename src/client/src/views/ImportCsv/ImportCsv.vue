@@ -1,14 +1,69 @@
 <template>
-  <Card :roundLevel="0" class="Card" colorCard="transparent">
-    <p>TESTE</p>
+  <Card
+    :roundLevel="0"
+    class="Card"
+    colorCard="transparent"
+    sm="10"
+    xs="12"
+  >
+    <Card
+      :roundLevel="0"
+      class="Card "
+      colorCard="transparent"
+    >
+      <v-row class="my-2 px-10 justify-center align-center">
+        <v-col
+          cols="12"
+          sm="3"
+        >
+
+          <Button
+            buttonText="Importar"
+            min-width="100%"
+            @click="importData"
+          />
+        </v-col>
+        <v-col
+          cols="12"
+          sm="7"
+          offset-sm="1"
+        >
+          <v-file-input
+            label="Selecione o arquivo..."
+            outlined
+            rounded
+            dense
+            class="centered-input-text"
+            prepend-icon=""
+          />
+        </v-col>
+      </v-row>
+    </Card>
+    <v-row>
+      <v-col>
+        <v-img
+          src="@/assets/board-image.png"
+          max-height="300"
+          max-width="400"
+          aspect-ratio="1"
+          contain
+        />
+        <v-col
+          lg="4"
+          xl="3"
+          sm="6"
+          cols="9"
+        >
+          <p class="p-info text-h5 font-weight-medium">Você não possui usuários publicados no momento</p>
+
+        </v-col>
+
+      </v-col>
+
+    </v-row>
   </Card>
 </template>
 
 <script src="./ImportCsv.js"></script>
 
-<style>
-.Card .v-card {
-    border: 2px solid;
-    border-color: var(--v-bahama-base) !important;
-}
-</style>
+<style src="./ImportCsv.css"></style>
