@@ -28,11 +28,24 @@ const routes = [{
     //     requiresAuth: true
     // }
 }, {
-    path: "/cadastrar",
-    name: "Cadastrar",
+    path: "/cadastrar/usuario",
+    name: "CadastrarUsuario",
     component: ImportCsv,
     meta: {
         requiresAuth: true
+    },
+    props: {
+        type: "user"
+    }
+}, {
+    path: "/cadastrar/anuncio",
+    name: "CadastrarAnuncio",
+    component: ImportCsv,
+    meta: {
+        requiresAuth: true
+    },
+    props: {
+        type: "advertisement"
     }
 }, {
     path: "/anunciar",
@@ -61,6 +74,11 @@ const routes = [{
     component: Favorites,
     meta: {
         requiresAuth: true
+    }
+}, {
+    path: "/:catchAll(.*)", 
+    redirect: {
+        name: "Home"
     }
 }]
 
