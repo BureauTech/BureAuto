@@ -16,7 +16,6 @@
           cols="12"
           sm="3"
         >
-
           <Button
             buttonText="Importar"
             min-width="100%"
@@ -55,15 +54,12 @@
           cols="9"
         >
           <p class="p-info text-h5 font-weight-medium">Você não possui usuários publicados no momento</p>
-
         </v-col>
-
       </v-col>
-
     </v-row>
   </Card>
 </template>
 
-<script src="./ImportCsv.js"></script>
+<script src="./ImportCsv.js" scoped></script>
 
 <style src="./ImportCsv.css"></style>

@@ -21,7 +21,7 @@
   background-color: white;
 }
 
-.v-text-field__details {
+.centered-input-text .v-text-field__details {
   display: none;
 }
 
