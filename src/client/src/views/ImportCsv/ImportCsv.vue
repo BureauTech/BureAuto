@@ -34,6 +34,7 @@
             dense
             class="centered-input-text"
             prepend-icon=""
+            @change="attachFile"
           />
         </v-col>
       </v-row>
@@ -53,7 +54,7 @@
           sm="6"
           cols="9"
         >
-          <p class="p-info text-h5 font-weight-medium">Você não possui usuários publicados no momento</p>
+          <p class="p-info text-h5 font-weight-medium">Você não possui {{textView}} publicados no momento</p>
         </v-col>
       </v-col>
     </v-row>
