@@ -25,7 +25,7 @@
   display: none;
 }
 
-.v-text-field--rounded > .v-input__control > .v-input__slot {
+.centered-input-text > .v-input__control > .v-input__slot {
   margin-bottom: 0;
 }
 
