@@ -1,6 +1,6 @@
 const purecookieTitle = "Cookies.",
     purecookieDesc = "Ao utilizar este site, você aceita automaticamente que utilizemos cookies.",
-    purecookieLink = "<a href=\"https://www.cssscript.com/privacy-policy/\" target=\"_blank\">Saiba mais</a>",
+    purecookieLink = "",
     purecookieButton = "Entendi"
 
 const pureFadeIn = function(e, o) {
