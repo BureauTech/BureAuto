@@ -21,9 +21,6 @@ app.use("/login", require("./controllers/LoginController"))
 app.use("/logout", require("./controllers/LogoutController"))
 app.use("/reset-password", require("./controllers/ResetPasswordController"))
 
-app.use("/favorite", require("./controllers/FavoriteController"))
-app.use("/message", require("./controllers/MessageController"))
-
 app.use("/auth", authenticate, require("./controllers/AuthController"))
 app.use("/user", authenticate, require("./controllers/UserController"))
 app.use("/advertisement", authenticate, require("./controllers/AdvertisementController"))
