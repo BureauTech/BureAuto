@@ -58,12 +58,20 @@
           Favoritos
         </router-link>
       </v-col>
-      <v-col>
+      <v-col v-if="$store.getters.isAuthenticated">
         <a
           class="text-decoration-none"
           @click="logout"
         >
           Logout
+        </a>
+      </v-col>
+      <v-col v-else>
+        <a
+          class="text-decoration-none"
+          @click="logout"
+        >
+          Login
         </a>
       </v-col>
     </v-row>

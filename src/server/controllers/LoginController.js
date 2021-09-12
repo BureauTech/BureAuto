@@ -18,9 +18,9 @@ router.post("/", async(req, res) => {
 
         const user = (await connection
             .query("select * from decrypt_user($1)", [validate.cod]))[0]
-
+        delete user.use_password
         AuthService.generateToken(user, res)
-        return res.status(200).send({success: true})
+        return res.status(200).send({success: true, user})
 
     } catch (error) {
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})

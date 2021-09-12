@@ -30,6 +30,7 @@ export default {
                     const {data} = await axios.post("/login", this.loginForm)
                     if (data.success) {
                         await this.$store.dispatch("setAuth", true)
+                        await this.$store.dispatch("setUser", data.user)
                         router.push({name: "Home"})
                     } else {
                         console.log("Erro no login")
