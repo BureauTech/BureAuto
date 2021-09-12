@@ -5,6 +5,7 @@ import rulesUtils from "@/utils/rulesUtils"
 import axios from "@/axios"
 import router from "@/router"
 
+
 export default {
     name: "Login",
     components: {
@@ -33,6 +34,7 @@ export default {
                         await this.$store.dispatch("setUser", data.user)
                         router.push({name: "Home"})
                     } else {
+                        this.$toasted.error("Credenciais incorretas")
                         console.log("Erro no login")
                     }
                     if (this.$store.getters.getUser.use_is_temp_password) {
@@ -42,6 +44,7 @@ export default {
                     }
                 } catch (error) {
                     console.log(error)
+                    
                 } finally {
                     this.loading = false
                 }

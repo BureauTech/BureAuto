@@ -4,6 +4,14 @@ import router from "./router"
 import vuetify from "./plugins/vuetify"
 import store from "./store"
 import axios from "./axios"
+import Toasted from "vue-toasted"
+
+Vue.use(Toasted, {
+    position: "top-center",
+    className: "toasted-font",
+    duration: 3000,
+    singleton: true
+})
 
 const startApp = async function() {
     try {

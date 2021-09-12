@@ -50,13 +50,13 @@ const routes = [{
         type: "advertisement"
     }
 }, {
-    path: "/anunciar",
-    name: "Advertise",
-    component: Advertise,
-    meta: {
-        requiresAuth: true
-    }
-}, {
+//     path: "/anunciar",
+//     name: "Advertise",
+//     component: Advertise,
+//     meta: {
+//         requiresAuth: true
+//     }
+// }, {
     path: "/comprar",
     name: "Buy",
     component: Buy

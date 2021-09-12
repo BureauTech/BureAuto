@@ -28,7 +28,7 @@
       </v-col>
       <v-col>
         <router-link
-          to="/anunciar"
+          to="/cadastrar/anuncio"
           class="text-decoration-none"
         >
           Anunciar

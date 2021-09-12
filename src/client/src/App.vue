@@ -31,4 +31,8 @@ export default {
   );
   opacity: 0.8;
 }
+
+.toasted-font {
+  font-family: "Roboto", sans-serif;
+}
 </style>
