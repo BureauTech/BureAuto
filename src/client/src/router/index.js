@@ -9,6 +9,7 @@ import Advertise from "@/views/Advertise/Advertise.vue"
 import Buy from "@/views/Buy/Buy.vue"
 import Reports from "@/views/Reports/Reports.vue"
 import Favorites from "@/views/Favorites/Favorites.vue"
+import ChangePassword from "@/views/ChangePassword/ChangePassword.vue"
 
 Vue.use(VueRouter)
 
@@ -72,6 +73,13 @@ const routes = [{
     path: "/favoritos",
     name: "Favorites",
     component: Favorites,
+    meta: {
+        requiresAuth: true
+    }
+}, {
+    path: "/definir-senha",
+    name: "ChangePassword",
+    component: ChangePassword,
     meta: {
         requiresAuth: true
     }
