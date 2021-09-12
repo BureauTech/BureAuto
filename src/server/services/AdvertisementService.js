@@ -14,7 +14,7 @@ module.exports = {
             step: async function(advertisement) {
                 const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
                 await RepositoryAdvertisement.save({
-                    adv_use_cod: 2,
+                    adv_use_cod: 1,
                     adv_man_cod: 1,
                     adv_model_description: advertisement.data.modelo,
                     adv_year_manufacture: advertisement.data.ano_fabricacao,

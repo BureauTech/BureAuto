@@ -19,17 +19,15 @@
       </v-layout>
     </v-app-bar>
     <v-layout
-    v-for="r in 2"
-    :key="r"
       row
       justify-center
       align-center
       class="no-negative"
     >
       <v-col
-        v-for="c in 3"
-        :key="c"
-        cols="3"
+        v-for="ad in ads"
+        :key="ad.adv_cod"
+        cols="4"
         align="center"
       >
         <v-card
@@ -37,7 +35,7 @@
           rounded="xl"
         >
           <v-card-title>
-            Modelo
+            {{ad.adv_model_description}}
           </v-card-title>
           <v-img
             src="@/assets/bureauto_sem_fundo.png"
@@ -46,7 +44,7 @@
             max-width="200"
           />
           <v-card-text>
-            a partir de R$ 000.000
+          a partir de R$ {{ad.adv_value}}
           </v-card-text>
           <v-btn
             elevation="0"
