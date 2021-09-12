@@ -6,13 +6,11 @@ module.exports = {
 
     registerAdvertisement: async function(filePath) {
         const file = fs.readFileSync(filePath, "utf8")
-
         Papa.parse(file, {
             delimiter: ";",
             header: true,
             skipEmptyLines: true,
             transformHeader: header => header.trim(),
-
             step: async function(advertisement) {
                 const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
                 await RepositoryAdvertisement.save({
@@ -24,11 +22,9 @@ module.exports = {
                     adv_value: advertisement.data.valor
                 })
             },
-
             complete: async function() {
                 fs.unlink(filePath, () => {})
             }
-
         })
     }
 
