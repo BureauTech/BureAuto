@@ -1,9 +1,21 @@
 const router = require("express").Router()
+const Repository = require("../database/Repository")
+const {authenticate} = require("../services/AuthService")
 const AdvertisementService = require("../services/AdvertisementService")
 
 // Mapeado em "/advertisement"
 
-router.post("/register", async(req, res) => {
+router.get("/all", async(req, res) => {
+    try {
+        const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
+        const advertisements = await RepositoryAdvertisement.find()
+        return res.status(200).send({success: true, data: advertisements})
+    } catch (error) {
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
+router.post("/register", authenticate, async(req, res) => {
     try {
         const {csvFile} = req.files
         await AdvertisementService.registerAdvertisement(csvFile.tempFilePath)
