@@ -16,18 +16,6 @@
         >
           Mais recentes:
         </v-col>
-        <!-- <v-col align="left">
-          <v-toolbar
-            dense
-            max-width="20%"
-          >
-            <v-select
-              :items="items"
-              multiple
-              label="Defina uma busca"
-            ></v-select>
-          </v-toolbar>
-        </v-col> -->
       </v-layout>
     </v-app-bar>
     <v-layout
@@ -36,6 +24,7 @@
       row
       justify-center
       align-center
+      class="no-negative"
     >
       <v-col
         v-for="c in 3"
@@ -73,3 +62,5 @@
 </template>
 
 <script src="./Home.js"></script>
+<style src="./Home.css">
+</style>

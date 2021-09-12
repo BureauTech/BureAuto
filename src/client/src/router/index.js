@@ -33,7 +33,8 @@ const routes = [{
     name: "CadastrarUsuario",
     component: ImportCsv,
     meta: {
-        requiresAuth: true
+        requiresAuth: true,
+        requiresAdmin: true
     },
     props: {
         type: "user"
@@ -107,6 +108,18 @@ router.beforeEach(function(to, from, next) {
     const requiresAuth = to.matched.some(function(record) {
         return record.meta.requiresAuth
     })
+
+    const requiresAdmin = to.matched.some(function(record) {
+        return record.meta.requiresAdmin
+    })
+ 
+    if (requiresAdmin) {
+        if (store.getters.getUser.use_is_admin) {
+            next()
+        } else {
+            next({name: "Home"})
+        }
+    }
 
     if (requiresAuth && !isAuthenticated()) {
         next({name: "Login"})

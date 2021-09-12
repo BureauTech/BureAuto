@@ -10,6 +10,7 @@ const startApp = async function() {
         const response = await axios.get("/auth")
         if (response && response.data.success) {
             await store.dispatch("setAuth", true)
+            await store.dispatch("setUser", response.data.user)
         }
     } catch (error) {
         console.log(error)

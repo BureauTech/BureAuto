@@ -7,7 +7,7 @@
   },
   "scripts": {
     "lint": "eslint .eslintrc.js",
-    "test": "jest --maxWorkers=1",
+    "test": "jest --forceExit --detectOpenHandles --watchAll --maxWorkers=1",
     "dev": "nodemon index.js"
   },
   "author": "",
