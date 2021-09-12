@@ -44,6 +44,16 @@
             name="newPassword"
           />
         </v-row>
+        <v-row no-gutters>
+          <Input
+            placeholder="Confirmar senha"
+            :rules="[rules.required,rules.same(ChangePasswordForm.newPassword, ChangePasswordForm.confirmNewPassword)]"
+            v-model="ChangePasswordForm.confirmNewPassword"
+            type="password"
+            required
+            name="validateNewPassword"
+          />
+        </v-row>
         <v-row
           align="center"
           justify="center"
@@ -54,7 +64,7 @@
             type="submit"
             min-width="150"
             min-height="50"
-            @click.stop.prevent="login"
+            @click.stop.prevent="changePassword"
           />
         </v-row>
       </v-form>

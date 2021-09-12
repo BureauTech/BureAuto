@@ -17,7 +17,8 @@ export default {
             rules: rulesUtils,
             loading: false,
             ChangePasswordForm: {
-                newPassword: undefined
+                newPassword: undefined,
+                confirmNewPassword: undefined
             }
         }
     },
@@ -27,6 +28,7 @@ export default {
                 this.loading = true
                 try {
                     const {data} = await axios.post("/reset-password/change", this.ChangePasswordForm)
+                    console.log(`data: ${data}`)
                     if (data.success) {
                         await this.$store.dispatch("setAuth", true)
                         router.push({name: "Home"})

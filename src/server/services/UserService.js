@@ -46,6 +46,18 @@ module.exports = {
             use_is_temp_password: true
         })
         EmailService.sendEmail("BureAuto", user.use_email, "🆘 BureAuto - Troca de Senha", template, data)
+    },
+
+    changePassword: async function(user, password) {
+        const template = "templates/ChangePasswordTemplate.ejs"
+        const data = {nome: user.use_name, senha: password}
+        const RepositoryUser = await Repository.get(Repository.User)
+        await RepositoryUser.save({
+            use_cod: user.use_cod,
+            use_password: data.senha,
+            use_is_temp_password: false
+        })
+        EmailService.sendEmail("BureAuto", user.use_email, "BureAuto - Senha alterada", template, data)
     }
 
 }
