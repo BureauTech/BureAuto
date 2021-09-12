@@ -58,21 +58,20 @@
           Favoritos
         </router-link>
       </v-col>
-      <v-col v-if="$store.getters.isAuthenticated">
-        <a
+      <v-col v-if="$store.getters.getUser.use_is_admin">
+        <router-link
+          to="/cadastrar/usuario"
           class="text-decoration-none"
-          @click="logout"
         >
-          Logout
-        </a>
+          Painel ADM
+        </router-link>
       </v-col>
-      <v-col v-else>
+      <v-col>
         <a
           class="text-decoration-none"
           @click="logout"
-        >
-          Login
-        </a>
+          v-text="$store.getters.isAuthenticated ? 'Logout' : 'Login'"
+        />
       </v-col>
     </v-row>
   </v-container>
