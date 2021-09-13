@@ -16,7 +16,7 @@
     </template>
     <v-col cols="11">
       <v-form
-        ref="loginForm"
+        ref="ChangePasswordForm"
         lazy-validation
       >
         <v-row
@@ -32,27 +32,26 @@
           />
         </v-row>
         <v-row no-gutters>
-          <p class="text-h4 bahama--text">Acesso</p>
-          <p class="text-h5 bahama--text text-start">Insira seu e-mail e senha para fazer o login.</p>
+          <p class="text-h4 bahama--text">Alterar senha</p>
         </v-row>
         <v-row no-gutters>
           <Input
-            placeholder="exemplo@bureau.com"
-            :rules="[rules.required, rules.email]"
-            v-model="loginForm.email"
-            type="email"
-            name="email"
+            placeholder="Nova senha"
+            :rules="[rules.required]"
+            v-model="ChangePasswordForm.newPassword"
+            type="password"
             required
+            name="newPassword"
           />
         </v-row>
         <v-row no-gutters>
           <Input
-            placeholder="Senha"
-            :rules="[rules.required]"
-            v-model="loginForm.password"
+            placeholder="Confirmar senha"
+            :rules="[rules.required,rules.same(ChangePasswordForm.newPassword, ChangePasswordForm.confirmNewPassword)]"
+            v-model="ChangePasswordForm.confirmNewPassword"
             type="password"
             required
-            name="password"
+            name="validateNewPassword"
           />
         </v-row>
         <v-row
@@ -61,28 +60,16 @@
           class="mb-6 mt-6"
         >
           <Button
-            buttonText="Login"
+            buttonText="Salvar"
             type="submit"
             min-width="150"
             min-height="50"
-            @click.stop.prevent="login"
+            @click.stop.prevent="changePassword"
           />
-        </v-row>
-        <v-row
-          no-gutters
-          align="center"
-          justify="center"
-        >
-          <router-link
-            to="/esqueci-a-senha"
-            class="text-decoration-none"
-          >
-            <p class="text-h6 bahama--text">Esqueci minha senha</p>
-          </router-link>
         </v-row>
       </v-form>
     </v-col>
   </Card>
 </template>
 
-<script src="./Login.js"></script>
+<script src="./ChangePassword.js"></script>

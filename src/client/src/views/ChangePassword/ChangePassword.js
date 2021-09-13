@@ -5,9 +5,8 @@ import rulesUtils from "@/utils/rulesUtils"
 import axios from "@/axios"
 import router from "@/router"
 
-
 export default {
-    name: "Login",
+    name: "ChangePassword",
     components: {
         Card,
         Input,
@@ -17,34 +16,27 @@ export default {
         return {
             rules: rulesUtils,
             loading: false,
-            loginForm: {
-                email: undefined,
-                password: undefined
+            ChangePasswordForm: {
+                newPassword: undefined,
+                confirmNewPassword: undefined
             }
         }
     },
     methods: {
-        login: async function() {
-            if (this.$refs.loginForm.validate()) {
+        changePassword: async function() {
+            if (this.$refs.ChangePasswordForm.validate()) {
                 this.loading = true
                 try {
-                    const {data} = await axios.post("/login", this.loginForm)
+                    const {data} = await axios.post("/reset-password/change", this.ChangePasswordForm)
+                    console.log(`data: ${data}`)
                     if (data.success) {
                         await this.$store.dispatch("setAuth", true)
-                        await this.$store.dispatch("setUser", data.user)
                         router.push({name: "Home"})
                     } else {
-                        this.$toasted.error("Credenciais incorretas")
                         console.log("Erro no login")
-                    }
-                    if (this.$store.getters.getUser.use_is_temp_password) {
-                        router.push({name: "ChangePassword"})
-                    } else {
-                        router.push({name: "Home"})
                     }
                 } catch (error) {
                     console.log(error)
-                    
                 } finally {
                     this.loading = false
                 }
