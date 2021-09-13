@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Topbar v-if="showMenu" />
+    <Topbar />
     <router-view />
   </v-app>
 </template>
@@ -13,12 +13,12 @@ export default {
     name: "App",
     components: {
         Topbar
-    },
-    computed: {
-        showMenu: function() {
-            return this.$route.path
-        }
     }
+    // computed: {
+    //     showMenu: function() {
+    //         return this.$route.path
+    //     }
+    // }
 }
 
 </script>
