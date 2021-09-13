@@ -14,18 +14,7 @@
       <v-row class="my-2 px-10 justify-center align-center">
         <v-col
           cols="12"
-          sm="3"
-        >
-          <Button
-            buttonText="Importar"
-            min-width="100%"
-            @click="importData"
-          />
-        </v-col>
-        <v-col
-          cols="12"
           sm="7"
-          offset-sm="1"
         >
           <v-file-input
             label="Selecione o arquivo..."
@@ -35,6 +24,16 @@
             class="centered-input-text"
             prepend-icon=""
             @change="attachFile"
+          />
+        </v-col>
+        <v-col
+          cols="12"
+          sm="3"
+        >
+          <Button
+            buttonText="Importar"
+            min-width="100%"
+            @click="importData"
           />
         </v-col>
       </v-row>
