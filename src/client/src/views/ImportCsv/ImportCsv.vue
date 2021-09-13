@@ -14,27 +14,26 @@
       <v-row class="my-2 px-10 justify-center align-center">
         <v-col
           cols="12"
-          sm="3"
-        >
-          <Button
-            buttonText="Importar"
-            min-width="100%"
-            @click="importData"
-          />
-        </v-col>
-        <v-col
-          cols="12"
           sm="7"
-          offset-sm="1"
         >
           <v-file-input
-            label="Selecione o arquivo..."
+            label="Clique aqui para selecionar o arquivo..."
             outlined
             rounded
             dense
             class="centered-input-text"
             prepend-icon=""
             @change="attachFile"
+          />
+        </v-col>
+        <v-col
+          cols="12"
+          sm="3"
+        >
+          <Button
+            buttonText="Importar"
+            min-width="100%"
+            @click="importData"
           />
         </v-col>
       </v-row>
@@ -54,7 +53,11 @@
           sm="6"
           cols="9"
         >
-          <p class="p-info text-h5 font-weight-medium">Você não possui {{textView}} publicados no momento</p>
+          <p
+            class="p-info text-h5 font-weight-medium"
+            v-text="`Você não possui ${textView} no momento`"
+            key="textView"
+          ></p>
         </v-col>
       </v-col>
     </v-row>

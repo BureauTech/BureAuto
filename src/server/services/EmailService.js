@@ -12,9 +12,13 @@ module.exports = {
     }),
 
     sendEmail: async function(from, to, subject, template, data) {
-        this.transporter.sendMail({
-            from, to, subject, html: (await ejs.renderFile(template, data)).toString()
-        })
+        try {
+            this.transporter.sendMail({from, to, subject, html: (await ejs.renderFile(template, data)).toString()})
+            return true
+        } catch (error) {
+            console.log(error)
+            return false
+        }       
     }
 
 }

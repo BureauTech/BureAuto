@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Topbar v-if="showMenu" />
+    <Topbar />
     <router-view />
   </v-app>
 </template>
@@ -13,12 +13,12 @@ export default {
     name: "App",
     components: {
         Topbar
-    },
-    computed: {
-        showMenu: function() {
-            return this.$route.path
-        }
     }
+    // computed: {
+    //     showMenu: function() {
+    //         return this.$route.path
+    //     }
+    // }
 }
 
 </script>
@@ -30,5 +30,9 @@ export default {
     rgba(196, 196, 196, 0) 99.82%
   );
   opacity: 0.8;
+}
+
+.toasted-font {
+  font-family: "Roboto", sans-serif;
 }
 </style>

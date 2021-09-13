@@ -8,13 +8,11 @@ module.exports = {
 
     registerUser: async function(filePath) {
         const file = fs.readFileSync(filePath, "utf8")
-
         Papa.parse(file, {
             delimiter: ";",
             header: true,
             skipEmptyLines: true,
             transformHeader: header => header.trim(),
-
             step: async function(user) {
                 user.data.senha = PasswordUtils.randomPassword()
                 const RepositoryUser = await Repository.get(Repository.User)
@@ -32,16 +30,14 @@ module.exports = {
                 const template = "templates/FirstAccessTemplate.ejs"
                 EmailService.sendEmail("BureAuto", user.data.email, "BureAuto - Primeiro Acesso", template, user.data)
             },
-
             complete: async function() {
                 fs.unlink(filePath, () => {})
             }
-
         })
     },
 
     resetUserPassword: async function(user) {
-        const template = "templates/ResetPasswordEmailTemplate.ejs"
+        const template = "templates/ResetPasswordTemplate.ejs"
         const data = {nome: user.use_name, senha: PasswordUtils.randomPassword()}
         const RepositoryUser = await Repository.get(Repository.User)
         await RepositoryUser.save({
@@ -50,6 +46,18 @@ module.exports = {
             use_is_temp_password: true
         })
         EmailService.sendEmail("BureAuto", user.use_email, "🆘 BureAuto - Troca de Senha", template, data)
+    },
+
+    changePassword: async function(user, password) {
+        const template = "templates/ChangePasswordTemplate.ejs"
+        const data = {nome: user.use_name, senha: password}
+        const RepositoryUser = await Repository.get(Repository.User)
+        await RepositoryUser.save({
+            use_cod: user.use_cod,
+            use_password: data.senha,
+            use_is_temp_password: false
+        })
+        EmailService.sendEmail("BureAuto", user.use_email, "BureAuto - Senha alterada", template, data)
     }
 
 }

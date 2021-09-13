@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-const app = require("../../app.js")
+const app = require("../../app")
 const session = require("supertest-session")
 const server = app.listen(process.env.TEST_PORT || 3333)
 
