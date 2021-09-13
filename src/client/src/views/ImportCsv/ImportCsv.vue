@@ -24,6 +24,7 @@
             class="centered-input-text"
             prepend-icon=""
             @change="attachFile"
+            ref="csv"
           />
         </v-col>
         <v-col
