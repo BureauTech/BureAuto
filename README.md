@@ -65,16 +65,16 @@ Para executar a aplicação completa localmente, siga as intruções a seguir:
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 
 ```
-Node - Versão: 15.x.x
+NodeJS - Versão: 15.x.x
 PostgreSQL - Versão: 12.x
-VueJs - Versão 2.x
+VueJS - Versão 2.x
 ```
 
 Além disto é bom ter um editor para trabalhar com o código como VSCode.
 
 ## Servidor
 
-Na pasta [***src/server***](/src/server), execute os comandos abaixo: <br>
+1. Na pasta [***src/server***](/src/server), execute os comandos abaixo: <br>
 
 ```
 npm install
@@ -82,6 +82,9 @@ npm run dev
 ```
 
 Ficará disponível em [localhost:3000](http://localhost/3000)
+
+2. Execute no seu SGBD, todos os scripts SQL disponíveis na pasta [***src/server/resources***](/src/server/resources/)
+
 
 ## Cliente
 
@@ -100,10 +103,31 @@ Ficará disponível em [localhost:3001](http://localhost/3001)
 
 As seguintes ferramentas foram usadas na construção do projeto:
 
-- [Node](https://nodejs.org/)
+- [NodeJS](https://nodejs.org/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [VueJS](https://vuejs.org/)
+
+Bibliotecas:
+
 - [Vuetify](https://vuetifyjs.com/en/)
+- [cookie-parser](https://www.npmjs.com/package/cookie-parser)
+- [cors](https://www.npmjs.com/package/cors)
+- [dotenv](https://www.npmjs.com/package/dotenv)
+- [ejs](https://www.npmjs.com/package/ejs)
+- [express](https://www.npmjs.com/package/express)
+- [express-fileupload](https://www.npmjs.com/package/express-fileupload)
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+- [nodemailer](https://www.npmjs.com/package/nodemailer)
+- [papaparse](https://www.npmjs.com/package/papaparse)
+- [pg](https://www.npmjs.com/package/pg)
+- [secure-random-password](https://www.npmjs.com/package/secure-random-password)
+- [typeorm](https://www.npmjs.com/package/typeorm)
+- [axios](https://www.npmjs.com/package/axios)
+- [core-js](https://www.npmjs.com/package/core-js)
+- [vue-router](https://www.npmjs.com/package/vue-router)
+- [vue-toasted](https://www.npmjs.com/package/vue-toasted)
+- [vuetify](https://www.npmjs.com/package/vuetify)
+- [vuex](https://www.npmjs.com/package/vuex)
 
 # Autores
 
