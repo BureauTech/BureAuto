@@ -38,7 +38,7 @@ Protótipo interativo das telas está disponível neste link: --- link do figma,
 
 # Entregas
 
-- [Sprint 1](https://github.com/BureauTech/BureAuto/tree/prod/sprint-1) entrega realizada em 19/09/2021.
+- [Sprint 1](https://github.com/BureauTech/BureAuto/releases/tag/0.1.0) entrega realizada em 19/09/2021.
 
 **Entregas propostas:**
 
