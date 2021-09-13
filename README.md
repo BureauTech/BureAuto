@@ -32,7 +32,7 @@ Desenvolvido pela Bureau Tech.
 
 <br>
 
-Protótipo interativo das telas está disponível neste link: --- link do figma, talvez? ----
+Protótipo interativo das telas está disponível neste link: https://bit.ly/BureAuto
 
 <br>
 
