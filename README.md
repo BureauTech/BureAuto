@@ -109,7 +109,6 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 Bibliotecas:
 
-- [Vuetify](https://vuetifyjs.com/en/)
 - [cookie-parser](https://www.npmjs.com/package/cookie-parser)
 - [cors](https://www.npmjs.com/package/cors)
 - [dotenv](https://www.npmjs.com/package/dotenv)
