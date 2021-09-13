@@ -1,7 +1,7 @@
 const router = require("express").Router()
 const Connection = require("../database/Connection")
 const UserService = require("../services/UserService")
-const {authenticate} = require("../services/AuthService")
+const {authenticate, generateToken} = require("../services/AuthService")
 
 // Mapeado em "/reset-password"
 
@@ -33,9 +33,15 @@ router.post("/change", authenticate, async(req, res) => {
         const form = req.body
 
         await UserService.changePassword(req.user, form.newPassword)
-        return res.status(200).send({success: true})
+        req.user.use_is_temp_password = false
+        delete req.user.iat
+        delete req.user.exp
+        generateToken(req.user, res)
+
+        return res.status(200).send({success: true, user: req.user})
 
     } catch (error) {
+        console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
     }
 })

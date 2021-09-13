@@ -35,16 +35,10 @@ export default {
                         router.push({name: "Home"})
                     } else {
                         this.$toasted.error("Credenciais incorretas")
-                        console.log("Erro no login")
-                    }
-                    if (this.$store.getters.getUser.use_is_temp_password) {
-                        router.push({name: "ChangePassword"})
-                    } else {
-                        router.push({name: "Home"})
                     }
                 } catch (error) {
                     console.log(error)
-                    
+                    this.$toasted.error("Ocorreu um erro na requisição")
                 } finally {
                     this.loading = false
                 }

@@ -98,10 +98,7 @@ const router = new VueRouter({
 })
 
 const isAuthenticated = function() {
-    if (store.getters.isAuthenticated) {
-        return true
-    }
-    return false
+    return store.getters.isAuthenticated
 }
 
 router.beforeEach(function(to, from, next) {
@@ -112,8 +109,10 @@ router.beforeEach(function(to, from, next) {
     const requiresAdmin = to.matched.some(function(record) {
         return record.meta.requiresAdmin
     })
-
-    if (requiresAuth) {
+    
+    if (to.name !== "ChangePassword" && store.getters.getUser.use_is_temp_password) {
+        next({name: "ChangePassword"})
+    } else if (requiresAuth) {
         if (!isAuthenticated()) {
             next({name: "Login"})
         } else if (requiresAdmin && !store.getters.getUser.use_is_admin) {

@@ -31,12 +31,15 @@ export default {
                     console.log(`data: ${data}`)
                     if (data.success) {
                         await this.$store.dispatch("setAuth", true)
+                        await this.$store.dispatch("setUser", data.user)
+                        this.$toasted.success("Senha alterada com sucesso!")
                         router.push({name: "Home"})
                     } else {
-                        console.log("Erro no login")
+                        this.$toasted.error("Ocorreu um erro ao alterar sua senha")
                     }
                 } catch (error) {
                     console.log(error)
+                    this.$toasted.error("Ocorreu um erro na requisição")
                 } finally {
                     this.loading = false
                 }
