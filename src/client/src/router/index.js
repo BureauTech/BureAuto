@@ -5,7 +5,7 @@ import ForgotPassword from "@/views/ForgotPassword/ForgotPassword.vue"
 import Home from "@/views/Home/Home.vue"
 import store from "@/store"
 import ImportCsv from "@/views/ImportCsv/ImportCsv.vue"
-import Advertise from "@/views/Advertise/Advertise.vue"
+//import Advertise from "@/views/Advertise/Advertise.vue"
 import Buy from "@/views/Buy/Buy.vue"
 import Reports from "@/views/Reports/Reports.vue"
 import Favorites from "@/views/Favorites/Favorites.vue"
@@ -104,22 +104,36 @@ router.beforeEach(function(to, from, next) {
     const requiresAdmin = to.matched.some(function(record) {
         return record.meta.requiresAdmin
     })
- 
-    if (requiresAdmin) {
-        if (store.getters.getUser.use_is_admin) {
-            next()
-        } else {
-            next({name: "Home"})
-        }
-    }
 
-    if (requiresAuth && !isAuthenticated()) {
-        next({name: "Login"})
+    if (requiresAuth) {
+        if (!isAuthenticated()) {
+            next({name: "Login"})
+        } else if (requiresAdmin && !store.getters.getUser.use_is_admin) {
+            next({name: "Home"})
+        } else {
+            next()
+        }
     } else if ((to.name === "Login" || to.name === "ForgotPassword") && isAuthenticated()) {
         next({name: "Home"})
     } else {
         next()
     }
+ 
+    // if (requiresAdmin) {
+    //     if (store.getters.getUser.use_is_admin) {
+    //         next()
+    //     } else {
+    //         next({name: "Home"})
+    //     }
+    // }
+
+    // if (requiresAuth && !isAuthenticated()) {
+    //     next({name: "Login"})
+    // } else if ((to.name === "Login" || to.name === "ForgotPassword") && isAuthenticated()) {
+    //     next({name: "Home"})
+    // } else {
+    //     next()
+    // }
 })
 
 export default router
