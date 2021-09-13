@@ -17,7 +17,7 @@
           sm="7"
         >
           <v-file-input
-            label="Selecione o arquivo..."
+            label="Clique aqui para selecionar o arquivo..."
             outlined
             rounded
             dense
