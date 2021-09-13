@@ -43,6 +43,8 @@ export default {
                     console.log(error)
                     this.$toasted.error("Ocorreu um erro na requisição")
                 }
+            } else {
+                this.$refs.csv.$refs.input.click()
             }
         },
         attachFile: function(file) {
