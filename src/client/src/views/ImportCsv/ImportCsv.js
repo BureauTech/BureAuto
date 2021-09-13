@@ -2,6 +2,7 @@ import Card from "@/components/Card/Card.vue"
 import Button from "@/components/Button/Button.vue"
 import Input from "@/components/Input/Input.vue"
 import axios from "@/axios.js"
+import router from "@/router"
 
 export default {
     name: "ImportCsv",
@@ -31,6 +32,10 @@ export default {
                     
                     if (data.success) {
                         this.$toasted.success("Dados importados!")
+                        setTimeout(function() { 
+                            router.push({name: "Home"}) 
+                        }, 3000)
+                        
                     } else {
                         this.$toasted.error("Ocorreu erros na importação")
                     }
