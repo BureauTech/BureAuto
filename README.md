@@ -1,12 +1,11 @@
 # BureAuto
 
-<p align="center">Plataforma de anúncios de veículos.</p>
-
 <div align="center">
 
 ![logo](/doc/img/bureauto_sem_fundo.png)
+<p align="center">Plataforma de anúncios de veículos</p>
 
-Desenvolvido pela Bureau Tech.
+Desenvolvido pela [BureauTech](https://github.com/BureauTech).
 
 </div>
 
