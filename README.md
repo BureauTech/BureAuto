@@ -57,6 +57,7 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/Bur
   <img src="./doc/img/modelo_conceitual.png" align="center" >
  </div>
 <br/>
+
 - Modelo Lógico
 <div align="center">
 <img src="./doc/img/modelo_logico.png"  >
