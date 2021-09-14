@@ -52,13 +52,15 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/Bur
 <br/> 
 
 ## Modelagem de Dados
-- Modelo Conceitual <br/>
-  <img src="./doc/img/modelo_conceitual.png" >
- 
-
-- Modelo Lógico <br/>
-<img src="./doc/img/modelo_logico.png" >
-
+- Modelo Conceitual 
+<div align="center">
+  <img src="./doc/img/modelo_conceitual.png" align="center" >
+ </div>
+<br/>
+- Modelo Lógico
+<div align="center">
+<img src="./doc/img/modelo_logico.png"  >
+</div>
 <br/>  
 
 ## Burndown
@@ -72,7 +74,7 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/Bur
 
 ## Backlog 
 
-- [Product Backlog](./doc/artefatos/product_backlog.pdf)
+- [Product Backlog](./doc/artefatos/product_backlog_bureauto.pdf)
 
 # Como executar localmente
 
