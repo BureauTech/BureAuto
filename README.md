@@ -1,10 +1,7 @@
 # BureAuto
 
 <div align="center">
-
   <img src="./doc/img/bureauto_sem_fundo.png" height="400" width="600"/>
-
-
 <p align="center">Plataforma de anúncios de veículos</p>
 
 Desenvolvido pela [BureauTech](https://github.com/BureauTech).
@@ -45,20 +42,20 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/Bur
 ## Entregas propostas
 
 <div align="center">
-
   <img src="./doc/img/cards_bureauto.png" />
-
 </div>
 <br/> 
 
 ## Modelagem de Dados
 - Modelo Conceitual 
+  
 <div align="center">
   <img src="./doc/img/modelo_conceitual.png" align="center" >
  </div>
 <br/>
 
 - Modelo Lógico
+  
 <div align="center">
 <img src="./doc/img/modelo_logico.png"  >
 </div>
@@ -67,9 +64,7 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/Bur
 ## Burndown
 
 <div align="center">
-
   <img src="./doc/img/burndown.jpeg" />
-
 </div>
 <br/> 
 
@@ -105,7 +100,6 @@ npm run dev
 Ficará disponível em [localhost:3000](http://localhost/3000)
 
 2. Execute no seu SGBD, todos os scripts SQL disponíveis na pasta [***src/server/resources***](/src/server/resources/)
-
 
 ## Cliente
 
