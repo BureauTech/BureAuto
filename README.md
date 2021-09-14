@@ -52,10 +52,11 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/Bur
 <br/> 
 
 ## Modelagem de Dados
-- Modelo Conceitual
+- Modelo Conceitual <br/>
   <img src="./doc/img/modelo_conceitual.png" >
+ 
 
-- Modelo Lógico
+- Modelo Lógico <br/>
 <img src="./doc/img/modelo_logico.png" >
 
 <br/>  
