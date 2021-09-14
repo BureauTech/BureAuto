@@ -3,8 +3,7 @@
 <div align="center">
 
   <img src="./doc/img/bureauto_sem_fundo.png" height="400" width="600"/>
-<br>
-<br>
+
 
 <p align="center">Plataforma de anúncios de veículos</p>
 
@@ -19,8 +18,9 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
    * [Protótipo das telas da aplicação](#protótipo-das-telas-da-aplicação)
    * [Acompanhamento das Atividades](#acompanhamento-das-atividades)
    * [Entregas](#entregas)
-   * [Burndown](#burndown)
-   * [Backlog](#backlog)
+        * [Modelagem de Dados](#modelagem-de-dados)
+      * [Burndown](#burndown)
+      * [Backlog](#backlog)
    * [Como executar localmente](#como-executar-localmente)
       * [Pré-Requisitos](#pré-requisitos)
       * [Servidor](#servidor)
@@ -42,21 +42,36 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/Bur
 
 - [Sprint 1](https://github.com/BureauTech/BureAuto/releases/tag/0.1.0) entrega realizada em 19/09/2021.
 
-**Entregas propostas:**
+## Entregas propostas
 
---- os cards aqui ----
+<div align="center">
 
-**Documentação entregue:**
+  <img src="./doc/img/cards_bureauto.png" />
 
----- os docs aqui ----
+</div>
+<br/> 
 
-# Burndown
+## Modelagem de Dados
+- Modelo Conceitual
+  <img src="./doc/img/modelo_conceitual.png" >
 
----- o burndown aqui ----
+- Modelo Lógico
+<img src="./doc/img/modelo_logico.png" >
 
-# Backlog 
+<br/>  
 
---- o backlog aqui ---
+## Burndown
+
+<div align="center">
+
+  <img src="./doc/img/burndown.jpeg" />
+
+</div>
+<br/> 
+
+## Backlog 
+
+- [Product Backlog](./doc/artefatos/product_backlog.pdf)
 
 # Como executar localmente
 
