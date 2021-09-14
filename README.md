@@ -2,7 +2,10 @@
 
 <div align="center">
 
-![logo](/doc/img/bureauto_sem_fundo.png)
+  <img src="./doc/img/bureauto_sem_fundo.png" height="400" width="600"/>
+<br>
+<br>
+
 <p align="center">Plataforma de anúncios de veículos</p>
 
 Desenvolvido pela [BureauTech](https://github.com/BureauTech).
