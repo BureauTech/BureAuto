@@ -13,7 +13,8 @@ module.exports = {
             header: true,
             skipEmptyLines: true,
             transformHeader: header => header.trim(),
-            step: async function(user) {
+            step: async function(user, parser) {
+                parser.pause()
                 user.data.senha = PasswordUtils.randomPassword()
                 const RepositoryUser = await Repository.get(Repository.User)
                 await RepositoryUser.save({
@@ -27,8 +28,12 @@ module.exports = {
                     use_password: user.data.senha,
                     use_is_temp_password: true
                 })
+                setTimeout(function() {
+                    parser.resume()
+                }, 500)
                 const template = "templates/FirstAccessTemplate.ejs"
                 EmailService.sendEmail("BureAuto", user.data.email, "BureAuto - Primeiro Acesso", template, user.data)
+
             },
             complete: async function() {
                 fs.unlink(filePath, () => {})
