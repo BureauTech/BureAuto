@@ -19,7 +19,7 @@ module.exports = {
                     adv_model_description: advertisement.data.modelo,
                     adv_year_manufacture: advertisement.data.ano_fabricacao,
                     adv_year_model: advertisement.data.ano_modelo,
-                    adv_value: advertisement.data.valor
+                    adv_value: advertisement.data.valor.replace(",", ".")
                 })
             },
             complete: async function() {

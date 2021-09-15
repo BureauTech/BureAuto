@@ -1,3 +1,8 @@
 .no-negative {
     margin: 0px !important;
-  }
+}
+
+
+.layout.no-negative.row {
+    flex-wrap: wrap !important;
+}
