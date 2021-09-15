@@ -60,5 +60,4 @@
 </template>
 
 <script src="./Home.js"></script>
-<style src="./Home.css">
-</style>
+<style src="./Home.css"></style>

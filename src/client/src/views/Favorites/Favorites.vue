@@ -23,6 +23,7 @@
       row
       justify-center
       align-center
+      class="no-negative"
     >
       <v-card
         min-width="75%"
@@ -76,3 +77,4 @@
 </template>
 
 <script src="./Favorites.js"></script>
+<style src="./Favorites.css"></style>
