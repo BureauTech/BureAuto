@@ -6,7 +6,7 @@ const PasswordUtils = require("../../utils/PasswordUtils")
 
 describe("Test EmailService", function() {
 
-    const testEmail = "wesley.dias3@fatec.sp.gov.br"
+    const testEmail = "testes.bureauto@gmail.com"
     const data = {senha: PasswordUtils.randomPassword(), nome: "Teste"}
 
     test("It should response the send first access email", async function() {

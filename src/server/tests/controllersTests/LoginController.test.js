@@ -13,12 +13,12 @@ describe("Test LoginController", function() {
         ConfigTest.server.close()
     })
 
-    test("It should response the GET method with valid login", async function() {
+    test("It should response the POST method with valid login", async function() {
         const response = await testSession.post("/login").send({email: "admin@admin.com", password: "admin"})
         expect(response.body.success).toBe(true)
     })
 
-    test("It should response the GET method with invalid login", async function() {
+    test("It should response the POST method with invalid login", async function() {
         const response = await testSession.post("/login").send({email: "admin@admin.com", password: "wrong"})
         expect(response.body.success).toBe(false)
     })

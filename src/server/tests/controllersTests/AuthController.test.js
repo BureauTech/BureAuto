@@ -13,13 +13,13 @@ describe("Test AuthController", function() {
         ConfigTest.server.close()
     })
 
-    test("It should response the GET method with valid auth", async function() {
+    it("It should response the POST method with valid auth", async function() {
         await testSession.post("/login").send({email: "admin@admin.com", password: "admin"})
         const response = await testSession.get("/auth")
         expect(response.body.success).toBe(true)
     })
 
-    test("It should response the GET method with invalid auth", async function() {
+    it("It should response the POST method with invalid auth", async function() {
         await testSession.post("/login").send({email: "admin@admin.com", password: "wrong"})
         const response = await testSession.get("/auth")
         expect(response.body.success).toBe(false)
