@@ -41,9 +41,9 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
 
 <br>
 
-Protótipo interativo das <b>telas web<b> está disponível neste link: https://bit.ly/BureAuto
+Protótipo interativo das <b>telas web</b> está disponível neste link: https://bit.ly/BureAuto
 
-Protótipo interativo das <b>telas mobile<b> está disponível neste link: https://bit.ly/BureAutoMobile
+Protótipo interativo das <b>telas mobile</b> está disponível neste link: https://bit.ly/BureAutoMobile
 
 <br>
 
@@ -98,7 +98,7 @@ PostgreSQL - Versão: 12.x
 VueJS - Versão 2.x
 ```
 
-Além disto é bom ter um editor para trabalhar com o código como VSCode.
+Além disso é bom ter um editor para trabalhar com o código como VSCode.
 
 ## Servidor
 
