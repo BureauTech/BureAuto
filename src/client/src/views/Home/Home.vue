@@ -44,7 +44,7 @@
             max-width="200"
           />
           <v-card-text>
-          a partir de R$ {{ad.adv_value}}
+          a partir de R$ {{ad.adv_value.toLocaleString('pt-br')}}
           </v-card-text>
           <v-btn
             elevation="0"
