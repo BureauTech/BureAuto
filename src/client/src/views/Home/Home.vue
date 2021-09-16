@@ -42,7 +42,7 @@
             max-height="200"
             max-width="200"
           />
-          <v-card-text v-text="'R$ ' + ad.adv_value" />
+          <v-card-text v-text="'R$ ' + ad.adv_value.toLocaleString('pt-br')" />
           <v-btn
             elevation="0"
             color="transparent"

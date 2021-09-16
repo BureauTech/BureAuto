@@ -27,13 +27,13 @@
             <h3>Engajamento geral dos anúncios</h3>
           </v-card-title>
           <v-card-text>
-            <body-1>N. de visualizações do anúncio:<b> 300</b> </body-1>
+            <p class="text-body-1">N. de visualizações do anúncio:<b> 300</b> </p>
           </v-card-text>
           <v-card-text>
-            <body-1>N. de pessoas que entraram em contato:<b> 20</b></body-1>
+            <p class="text-body-1">N. de pessoas que entraram em contato:<b> 20</b></p>
           </v-card-text>
           <v-card-text>
-            <body-1>Percentual de engajamento do anúncio: <b>6,67%</b></body-1>
+            <p class="text-body-1">Percentual de engajamento do anúncio: <b>6,67%</b></p>
           </v-card-text>
         </v-card>
       </v-col>
