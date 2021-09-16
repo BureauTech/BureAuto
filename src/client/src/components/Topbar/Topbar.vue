@@ -20,14 +20,6 @@
       </v-col>
       <v-col>
         <router-link
-          to="/comprar"
-          class="text-decoration-none"
-        >
-          Comprar
-        </router-link>
-      </v-col>
-      <v-col>
-        <router-link
           to="/cadastrar/anuncio"
           class="text-decoration-none"
         >
