@@ -5,76 +5,56 @@
       elevation="0"
       justify
     >
-      <v-layout>
+      <v-layout
+        align-center
+        justify-sm
+      >
         <v-col
+          max-width="10%"
           cols="16"
           align="left"
         >
-          <h3>
-            Favoritos
-          </h3>
-          Seus anúncios favoritos
+          Mais recentes:
         </v-col>
       </v-layout>
     </v-app-bar>
     <v-layout
-      v-for="r in 2"
-      :key="r"
       row
       justify-center
       align-center
       class="no-negative"
     >
-      <v-card
-        min-width="75%"
-        rounded="xl"
-        align-center
-        class="text-center"
+      <v-col
+        v-for="ad in ads"
+        :key="ad.adv_cod"
+        cols="4"
+        align="center"
       >
-        <v-card-title>
-          <v-col
-            align="right"
-            cols="7"
+        <v-card
+          min-width="100%"
+          rounded="xl"
+        >
+          <v-card-title>
+            {{ad.adv_model_description}}
+          </v-card-title>
+          <v-img
+            src="@/assets/bureauto_sem_fundo.png"
+            alt="Logo da bureAuto"
+            max-height="200"
+            max-width="200"
+          />
+          <v-card-text>
+          a partir de R$ {{ad.adv_value}}
+          </v-card-text>
+          <v-btn
+            elevation="0"
+            color="transparent"
+            small
           >
-            Fusca
-            - R$ 10.250
-          </v-col>
-          <v-col align="right">
-            <v-icon large>
-              mdi-trash-can-outline
-            </v-icon>
-          </v-col>
-        </v-card-title>
-        <v-row>
-          <v-col
-            cols="4"
-            align="center"
-          >
-            <v-card-text>
-              <v-img
-                src="@/assets/bureauto_sem_fundo.png"
-                alt="Logo da bureAuto"
-                max-height="150"
-                max-width="150"
-              />
-            </v-card-text>
-          </v-col>
-          <v-col
-            align="justify"
-            max-width="75%"
-            cols="8"
-          >
-            <v-list-item>
-              Esse Fusca é tunadão! Tem turbo, ar-condicionado, 5 portas e bagageiro<br>
-              É azul! Dá pra você passar em uma escola e ver as crianças se batendo. :)
-            </v-list-item>
-          </v-col>
-        </v-row>
-        Vendido por FuscaTunadao2021
-      </v-card>
+            + informações
+          </v-btn>
+        </v-card>
+      </v-col>
     </v-layout>
   </v-app>
 </template>
-
-<script src="./Favorites.js"></script>
-<style src="./Favorites.css"></style>
