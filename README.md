@@ -32,7 +32,7 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
   <img src="./doc/gif/wireframe_web.gif" />
 </div>
 
-<br/>
+<br>
 
 - Wireframe Aplicação Mobile
 <div align="center">
@@ -41,7 +41,9 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
 
 <br>
 
-Protótipo interativo das telas está disponível neste link: https://bit.ly/BureAuto
+Protótipo interativo das <b>telas web<b> está disponível neste link: https://bit.ly/BureAuto
+
+Protótipo interativo das <b>telas mobile<b> está disponível neste link: https://bit.ly/BureAutoMobile
 
 <br>
 
