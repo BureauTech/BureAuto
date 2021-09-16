@@ -229,7 +229,7 @@ returns table (
 	use_cod bigint,
 	use_name varchar,
 	use_is_cpf_document boolean,
-	use_document varchar,
+	usu_document varchar,
 	use_nickname varchar,
 	use_phone varchar,
 	use_address varchar,
@@ -245,7 +245,7 @@ begin
         use_cod := user_data.use_cod;
 		use_name := decrypt_data(user_data.use_name, user_data.cry_key);
 		use_is_cpf_document := user_data.use_is_cpf_document;
-		use_document := decrypt_data(user_data.use_document, user_data.cry_key);
+		usu_document := decrypt_data(user_data.use_document, user_data.cry_key);
 		use_nickname := decrypt_data(user_data.use_nickname, user_data.cry_key);
 		use_phone := decrypt_data(user_data.use_phone, user_data.cry_key);
 		use_address := decrypt_data(user_data.use_address, user_data.cry_key);
@@ -263,7 +263,7 @@ returns table (
 	use_cod bigint,
 	use_name varchar,
 	use_is_cpf_document boolean,
-	use_document varchar,
+	usu_document varchar,
 	use_nickname varchar,
 	use_phone varchar,
 	use_address varchar,
@@ -279,7 +279,7 @@ begin
         use_cod := user_data.use_cod;
 		use_name := decrypt_data(user_data.use_name, user_data.cry_key);
 		use_is_cpf_document := user_data.use_is_cpf_document;
-		use_document := decrypt_data(user_data.use_document, user_data.cry_key);
+		usu_document := decrypt_data(user_data.use_document, user_data.cry_key);
 		use_nickname := decrypt_data(user_data.use_nickname, user_data.cry_key);
 		use_phone := decrypt_data(user_data.use_phone, user_data.cry_key);
 		use_address := decrypt_data(user_data.use_address, user_data.cry_key);
