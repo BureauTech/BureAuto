@@ -34,18 +34,15 @@
           min-width="100%"
           rounded="xl"
         >
-          <v-card-title>
-            {{ad.adv_model_description}}
-          </v-card-title>
+          <v-card-title v-text="ad.adv_model_description" />
+          <v-card-subtitle v-text="ad.Manufacturer.man_name" />
           <v-img
             src="@/assets/bureauto_sem_fundo.png"
             alt="Logo da bureAuto"
             max-height="200"
             max-width="200"
           />
-          <v-card-text>
-          a partir de R$ {{ad.adv_value}}
-          </v-card-text>
+          <v-card-text v-text="'R$ ' + ad.adv_value" />
           <v-btn
             elevation="0"
             color="transparent"

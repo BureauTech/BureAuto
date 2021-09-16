@@ -32,8 +32,8 @@
               no-gutters
             >
               <p>
-                <v-col>
-                  <b>Apelido:</b> {{$store.getters.getUser.use_nickname}}
+                <v-col> <b>Apelido: </b>
+                  <span v-text="$store.getters.getUser.use_nickname" />
                 </v-col>
               </p>
             </v-row>
@@ -42,8 +42,8 @@
               no-gutters
             >
               <p>
-                <v-col>
-                  <b>Nome:</b> {{$store.getters.getUser.use_name}}
+                <v-col> <b>Nome: </b>
+                  <span v-text="$store.getters.getUser.use_name" />
                 </v-col>
               </p>
             </v-row>
@@ -52,8 +52,8 @@
               no-gutters
             >
               <p>
-                <v-col>
-                  <b>Documento:</b> {{$store.getters.getUser.use_document}}
+                <v-col> <b>Documento: </b>
+                  <span v-text="$store.getters.getUser.use_document" />
                 </v-col>
               </p>
             </v-row>
@@ -62,8 +62,8 @@
               no-gutters
             >
               <p>
-                <v-col>
-                  <b>Telefone:</b> {{$store.getters.getUser.use_phone}}
+                <v-col> <b>Telefone: </b>
+                  <span v-text="$store.getters.getUser.use_phone" />
                 </v-col>
               </p>
             </v-row>
@@ -72,8 +72,8 @@
               no-gutters
             >
               <p>
-                <v-col>
-                  <b>Endereço:</b> {{$store.getters.getUser.use_address}}
+                <v-col> <b>Endereço: </b>
+                  <span v-text="$store.getters.getUser.use_address" />
                 </v-col>
               </p>
             </v-row>
@@ -82,8 +82,8 @@
               no-gutters
             >
               <p>
-                <v-col>
-                  <b>E-mail:</b> {{$store.getters.getUser.use_email}}
+                <v-col> <b>E-mail: </b>
+                  <span v-text="$store.getters.getUser.use_email" />
                 </v-col>
               </p>
             </v-row>
