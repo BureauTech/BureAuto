@@ -25,13 +25,25 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
    * [Tecnologias](#tecnologias)
    * [Autores](#autores)
 
-## Protótipo das telas da aplicação
+## Protótipo das telas da aplicação 
 
-![telas](./assets/gifs/telas.gif)
+- Wireframe Aplicação Web
+<div align="center">
+  <img src="./doc/gif/wireframe_web.gif" />
+</div>
 
 <br>
 
-Protótipo interativo das telas está disponível neste link: https://bit.ly/BureAuto
+- Wireframe Aplicação Mobile
+<div align="center">
+  <img src="./doc/gif/wireframe_app.gif" />
+</div>
+
+<br>
+
+Protótipo interativo das <b>telas web<b> está disponível neste link: https://bit.ly/BureAuto
+
+Protótipo interativo das <b>telas mobile<b> está disponível neste link: https://bit.ly/BureAutoMobile
 
 <br>
 
