@@ -66,6 +66,14 @@
           Painel ADM
         </router-link>
       </v-col>
+      <v-col v-if="$store.getters.isAuthenticated">
+        <router-link
+          to="/perfil"
+          class="text-decoration-none"
+        >
+          Perfil
+        </router-link>
+      </v-col>
       <v-col>
         <a
           class="text-decoration-none"

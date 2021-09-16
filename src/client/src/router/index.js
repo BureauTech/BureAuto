@@ -10,6 +10,8 @@ import Buy from "@/views/Buy/Buy.vue"
 import Reports from "@/views/Reports/Reports.vue"
 import Favorites from "@/views/Favorites/Favorites.vue"
 import ChangePassword from "@/views/ChangePassword/ChangePassword.vue"
+import Profile from "@/views/Profile/Profile.vue"
+
 
 Vue.use(VueRouter)
 
@@ -74,6 +76,13 @@ const routes = [{
     path: "/favoritos",
     name: "Favorites",
     component: Favorites,
+    meta: {
+        requiresAuth: true
+    }
+}, {
+    path: "/perfil",
+    name: "Profile",
+    component: Profile,
     meta: {
         requiresAuth: true
     }
