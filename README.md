@@ -25,9 +25,19 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
    * [Tecnologias](#tecnologias)
    * [Autores](#autores)
 
-## Protótipo das telas da aplicação
+## Protótipo das telas da aplicação 
 
-![telas](./assets/gifs/telas.gif)
+- Wireframe Aplicação Web
+<div align="center">
+  <img src="./doc/gif/wireframe_web.gif" />
+</div>
+
+<br/>
+
+- Wireframe Aplicação Mobile
+<div align="center">
+  <img src="./doc/gif/wireframe_app.gif" />
+</div>
 
 <br>
 
