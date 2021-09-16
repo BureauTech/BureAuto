@@ -21,6 +21,7 @@ create table "user" (
     use_email varchar not null,
     use_is_temp_password boolean not null default true,
 	use_password varchar not null,
+    use_is_admin boolean not null default false,
     constraint user_use_cod_pkey primary key (use_cod)
 );
 
@@ -315,10 +316,30 @@ $$ language 'plpgsql';
 
 -- ##################### starts queries ######################## --
 
-INSERT INTO "user"
+insert into "user"
 	(use_name, use_is_cpf_document, use_document, use_nickname,
-	 use_phone, use_address, use_email, use_is_temp_password, use_password)
+	 use_phone, use_address, use_email, use_is_temp_password, use_password, use_is_admin)
 values ('admin', true, '1234567890', 'admin', '129000000',
-		'rua dos programadores', 'admin@admin.com', false, 'admin');
+		'rua dos programadores', 'admin@admin.com', false, 'admin', true);
+
+
+
+insert into advertisement 
+    (adv_use_cod, adv_man_cod, adv_brand_description, adv_model_description, adv_value,
+    adv_favorites, adv_views, adv_year_model, adv_year_manufacture, adv_images, adv_status)
+values
+ (1, 4, null, 'Q3', 135900.0, 0, 0, 2017, 2016, null, 'active'),
+ (1, 43, null, 'Outlander', 100900.0, 0, 0, 2016, 2015, null, 'active'),
+ (1, 62, null, 'Jetta', 68900.0, 0, 0, 2014, 1014, null, 'active'),
+ (1, 29, null, 'Renegade', 82900.0, 0, 0, 2016, 2016, null, 'active'),
+ (1, 24, null, 'HR-V', 99900.0, 0, 0, 2017, 2016, null, 'active'),
+ (1, 25, null, 'HB20', 61900.0, 0, 0, 2019, 2019, null, 'active'),
+ (1, 13, null, 'Journey', 67900.0, 0, 0, 2013, 2012, null, 'active'),
+ (1, 30, null, 'Sportage', 89900.0, 0, 0, 2015, 2014, null, 'active'),
+ (1, 44, null, 'Kicks', 114900.0, 0, 0, 2020, 2019, null, 'active'),
+ (1, 32, null, 'Range Rover Evoque', 174900.0, 0, 0, 2015, 2014, null, 'active'),
+ (1, 41, null, 'Gle-400', 503900.0, 0, 0, 2019, 2018, null, 'active'),
+ (1, 50, null, '911', 1250000.0, 0, 0, 2021, 2021, null, 'active');
+
 
 -- ##################### ends queries ######################## --
