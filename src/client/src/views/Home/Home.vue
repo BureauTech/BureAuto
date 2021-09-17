@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
+    <!-- <v-app-bar
       color="transparent"
       elevation="0"
       justify
@@ -17,7 +17,14 @@
           Mais recentes:
         </v-col>
       </v-layout>
-    </v-app-bar>
+    </v-app-bar> -->
+    <v-col
+      max-width="10%"
+      cols="16"
+      align="left"
+    >
+      Catálogo:
+    </v-col>
     <v-layout
       row
       justify-center

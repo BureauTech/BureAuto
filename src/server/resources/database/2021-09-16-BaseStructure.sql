@@ -236,7 +236,8 @@ returns table (
 	use_address varchar,
 	use_email varchar,
 	use_is_temp_password boolean,
-	use_password varchar
+	use_password varchar,
+	use_is_admin boolean
 ) as $$
 declare
     user_data record;
@@ -253,6 +254,7 @@ begin
 		use_email := decrypt_data(user_data.use_email, user_data.cry_key);
 		use_password := user_data.use_password;
 		use_is_temp_password := user_data.use_is_temp_password;
+		use_is_admin := user_data.use_is_admin;
         return next;
     end loop;
 end;
@@ -270,7 +272,8 @@ returns table (
 	use_address varchar,
 	use_email varchar,
 	use_is_temp_password boolean,
-	use_password varchar
+	use_password varchar,
+	use_is_admin boolean
 ) as $$
 declare
     user_data record;
@@ -287,6 +290,7 @@ begin
 		use_email := decrypt_data(user_data.use_email, user_data.cry_key);
 		use_password := user_data.use_password;
 		use_is_temp_password := user_data.use_is_temp_password;
+		use_is_admin := user_data.use_is_admin;
         return next;
     end loop;
 end;
@@ -321,7 +325,6 @@ insert into "user"
 	 use_phone, use_address, use_email, use_is_temp_password, use_password, use_is_admin)
 values ('admin', true, '1234567890', 'admin', '129000000',
 		'rua dos programadores', 'admin@admin.com', false, 'admin', true);
-
 
 
 insert into advertisement 

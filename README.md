@@ -41,9 +41,9 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
 
 <br>
 
-Protótipo interativo das <b>telas web<b> está disponível neste link: https://bit.ly/BureAuto
+Protótipo interativo das <b>telas web</b> está disponível neste link: https://bit.ly/BureAuto
 
-Protótipo interativo das <b>telas mobile<b> está disponível neste link: https://bit.ly/BureAutoMobile
+Protótipo interativo das <b>telas mobile</b> está disponível neste link: https://bit.ly/BureAutoMobile
 
 <br>
 
@@ -76,7 +76,7 @@ Protótipo interativo das <b>telas mobile<b> está disponível neste link: https
 ## Burndown
 
 <div align="center">
-  <img src="./doc/img/burndown.jpeg" />
+  <img src="./doc/img/burndown.png" />
 </div>
 <br/> 
 
@@ -98,7 +98,7 @@ PostgreSQL - Versão: 12.x
 VueJS - Versão 2.x
 ```
 
-Além disto é bom ter um editor para trabalhar com o código como VSCode.
+Além disso é bom ter um editor para trabalhar com o código como VSCode.
 
 ## Servidor
 
@@ -159,8 +159,8 @@ Bibliotecas:
 
 <table align="center">
   <tr>
-    <td align="center"><a href="https://github.com/bibiacoutinho"><img src="https://avatars.githubusercontent.com/u/56437723?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Beatriz Coutinho<br>Master</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=bibiacoutinho" title="Master">:headphones::nail_care::computer_mouse:</a></td>
     <td align="center"><a href="https://github.com/anaclaragraciano"><img src="https://avatars.githubusercontent.com/u/64653864?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ana Clara<br>PO</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=anaclaragraciano" title="PO">:sparkles::iphone::open_book:</a></td>
+    <td align="center"><a href="https://github.com/bibiacoutinho"><img src="https://avatars.githubusercontent.com/u/56437723?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Beatriz Coutinho<br>Master</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=bibiacoutinho" title="Master">:headphones::nail_care::computer_mouse:</a></td>
     <td align="center"><a href="https://github.com/caiquesjc"><img src="https://avatars.githubusercontent.com/u/54915913?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Caique Nascimento<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=caiquesjc" title="Dev Team">:keyboard::desktop_computer::computer_mouse:</a></td>     
 </table>
 <table align="center">
