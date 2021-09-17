@@ -6,3 +6,7 @@
 .layout.no-negative.row {
     flex-wrap: wrap !important;
 }
+
+.mousehover:hover {
+    background-color: rgba(0,0,0,0.2);
+}
