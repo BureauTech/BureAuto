@@ -13,7 +13,6 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
    * [Sobre](#bureauto)
    * [Sumário](#sumário)
    * [Protótipo das telas da aplicação](#protótipo-das-telas-da-aplicação)
-   * [Acompanhamento das Atividades](#acompanhamento-das-atividades)
    * [Entregas](#entregas)
         * [Modelagem de Dados](#modelagem-de-dados)
       * [Burndown](#burndown)
@@ -22,6 +21,7 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
       * [Pré-Requisitos](#pré-requisitos)
       * [Servidor](#servidor)
       * [Cliente](#cliente)
+   * [Testes da Aplicação](#testes-da-aplicação)
    * [Tecnologias](#tecnologias)
    * [Autores](#autores)
 
@@ -49,7 +49,7 @@ Protótipo interativo das <b>telas mobile</b> está disponível neste link: http
 
 # Entregas
 
-- [Sprint 1](https://github.com/BureauTech/BureAuto/releases/tag/0.1.0) entrega realizada em 19/09/2021.
+- [Sprint 1](https://github.com/BureauTech/BureAuto/releases/tag/1.0.0) entrega realizada em 19/09/2021.
 
 ## Entregas propostas
 
@@ -125,6 +125,14 @@ npm run dev
 ```
 
 Ficará disponível em [localhost:3001](http://localhost/3001)
+
+# Testes da aplicação
+
+Para realização dos testes unitários do backend da aplicação, vá em [***src/server***](/src/server) e execute:
+
+```
+npm run test
+```
 
 # Tecnologias
 
