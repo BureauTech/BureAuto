@@ -1,0 +1,80 @@
+<template>
+  <v-container>
+    <v-row
+      justify="center"
+      align="center"
+      class="bahama--text"
+    >
+      <v-col>
+        <router-link
+          to="/"
+          class="text-decoration-none"
+        >
+          <v-img
+            src="@/assets/bureauto_sem_fundo.png"
+            alt="Logo da bureAuto"
+            max-height="100"
+            max-width="100"
+          />
+        </router-link>
+      </v-col>
+      <v-col>
+        <router-link
+          to="/cadastrar/anuncio"
+          class="text-decoration-none"
+        >
+          Anunciar
+        </router-link>
+      </v-col>
+      <v-col>
+        <router-link
+          to="/"
+          class="text-decoration-none"
+        >
+          Catálogo
+        </router-link>
+      </v-col>
+      <v-col>
+        <router-link
+          to="/relatorios"
+          class="text-decoration-none"
+        >
+          Relatórios
+        </router-link>
+      </v-col>
+      <v-col>
+        <router-link
+          to="/favoritos"
+          class="text-decoration-none"
+        >
+          Favoritos
+        </router-link>
+      </v-col>
+      <v-col v-if="$store.getters.getUser.use_is_admin">
+        <router-link
+          to="/cadastrar/usuario"
+          class="text-decoration-none"
+        >
+          Painel ADM
+        </router-link>
+      </v-col>
+      <v-col v-if="$store.getters.isAuthenticated">
+        <router-link
+          to="/perfil"
+          class="text-decoration-none"
+        >
+          Perfil
+        </router-link>
+      </v-col>
+      <v-col>
+        <a
+          class="text-decoration-none"
+          @click="logout"
+          v-text="$store.getters.isAuthenticated ? 'Logout' : 'Login'"
+        />
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script src="./Topbar.js"></script>
