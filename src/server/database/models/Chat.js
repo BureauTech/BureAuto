@@ -31,7 +31,7 @@ module.exports = new EntitySchema({
         },
         Advertisement: {
             type: "one-to-one",
-            target: "user",
+            target: "advertisement",
             joinColumn: {
                 name: "cha_adv_cod",
                 referencedColumnName: "adv_cod"

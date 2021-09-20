@@ -36,7 +36,7 @@ module.exports = new EntitySchema({
         },
         Chat: {
             type: "one-to-one",
-            target: "user",
+            target: "chat",
             joinColumn: {
                 name: "mes_cha_cod",
                 referencedColumnName: "cha_cod"
