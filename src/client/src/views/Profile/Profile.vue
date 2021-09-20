@@ -95,7 +95,6 @@
           cols="12"
           align="right"
         >
-
           <v-btn
             align="right"
             color="transparent"
