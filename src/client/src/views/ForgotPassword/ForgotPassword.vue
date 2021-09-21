@@ -53,12 +53,13 @@
           class="mb-6 mt-0"
         >
           <Button
-            buttonText="Enviar email"
             type="submit"
             min-width="150"
             min-height="50"
             @click.stop.prevent="resetPassword"
-          />
+          >
+            Enviar email
+          </Button>
         </v-row>
         <v-row
           no-gutters
