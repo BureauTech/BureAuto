@@ -36,6 +36,13 @@ module.exports = {
 
     getAdvertisement: async function(adv_cod) {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
-        return await RepositoryAdvertisement.find({relations: ["Manufacturer"], where: {adv_cod: adv_cod, adv_status: Not("excluded")}})
+        const advertisement = await RepositoryAdvertisement.find({
+            relations: ["Manufacturer", "User"], where: {adv_cod: adv_cod, adv_status: Not("excluded")}
+        })
+        if (advertisement.length) {
+            advertisement[0].use_is_cpf_document = advertisement[0].User.use_is_cpf_document
+            delete advertisement[0].User
+        }
+        return advertisement
     }
 }
