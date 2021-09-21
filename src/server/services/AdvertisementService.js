@@ -1,5 +1,6 @@
 const fs = require("fs")
 const Papa = require("papaparse")
+const {Not} = require("typeorm")
 const Repository = require("../database/Repository")
 
 module.exports = {
@@ -15,7 +16,7 @@ module.exports = {
                 const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
                 await RepositoryAdvertisement.save({
                     adv_use_cod: 1,
-                    adv_man_cod: 1,
+                    adv_man_cod: 15,
                     adv_model_description: advertisement.data.modelo,
                     adv_year_manufacture: advertisement.data.ano_fabricacao,
                     adv_year_model: advertisement.data.ano_modelo,
@@ -26,6 +27,15 @@ module.exports = {
                 fs.unlink(filePath, () => {})
             }
         })
-    }
+    },
 
+    getAllAdvertisement: async function() {
+        const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
+        return await RepositoryAdvertisement.find({relations: ["Manufacturer"], where: {adv_status: Not("excluded")}})
+    },
+
+    getAdvertisement: async function(adv_cod) {
+        const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
+        return await RepositoryAdvertisement.find({relations: ["Manufacturer"], where: {adv_cod: adv_cod, adv_status: Not("excluded")}})
+    }
 }

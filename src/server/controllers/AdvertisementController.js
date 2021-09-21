@@ -1,15 +1,25 @@
 const router = require("express").Router()
-const Repository = require("../database/Repository")
 const {authenticate} = require("../services/AuthService")
 const AdvertisementService = require("../services/AdvertisementService")
+const {getAllAdvertisement, getAdvertisement} = require("../services/AdvertisementService")
 
 // Mapeado em "/advertisement"
 
 router.get("/all", async(req, res) => {
     try {
-        const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
-        const advertisements = await RepositoryAdvertisement.find({relations: ["Manufacturer"]})
+        const advertisements = await getAllAdvertisement()
         return res.status(200).send({success: true, data: advertisements})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
+router.get("/:adv_cod", async(req, res) => {
+    try {
+        const {adv_cod} = req.params
+        const advertisement = await getAdvertisement(adv_cod)
+        return res.status(200).send({success: true, data: advertisement})
     } catch (error) {
         console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
