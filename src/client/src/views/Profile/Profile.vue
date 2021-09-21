@@ -18,9 +18,11 @@
             no-gutters
           >
           </v-row>
-          <v-row no-gutters>
-            <p class="text-h4 bahama--text">Dados do seu perfil</p>
-          </v-row>
+          <v-col>
+            <v-row no-gutters>
+              <p class="text-h4 bahama--text">Dados do seu perfil</p>
+            </v-row>
+          </v-col>
           <v-card
             min-width="50%"
             rounded="xl"
@@ -89,6 +91,18 @@
             </v-row>
           </v-card>
         </v-form>
+        <v-col
+          cols="12"
+          align="right"
+        >
+          <v-btn
+            align="right"
+            color="transparent"
+            small
+          >
+            Editar Informações
+          </v-btn>
+        </v-col>
       </v-col>
     </v-layout>
   </v-app>

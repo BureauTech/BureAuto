@@ -27,4 +27,10 @@ describe("Test EmailService", function() {
         expect(response).toBe(true)
     })
 
+    test("It should response the delete account email", async function() {
+        const template = "templates/DeleteAccount.ejs"
+        const response = await EmailService.sendEmail("BureAuto", testEmail, "BureAuto - Sua conta foi excluída", template, data)
+        expect(response).toBe(true)
+    })
+
 })

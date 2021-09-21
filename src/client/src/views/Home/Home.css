@@ -2,6 +2,10 @@
     margin: 0px !important;
 }
 
+.bg-transparent {
+    background-color: transparent;
+}
+
 
 .layout.no-negative.row {
     flex-wrap: wrap !important;
