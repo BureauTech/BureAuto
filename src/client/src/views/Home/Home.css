@@ -6,6 +6,19 @@
     background-color: transparent;
 }
 
+.btn-search {
+    border-bottom-left-radius:20px;
+    border-bottom-right-radius:20px
+}
+
+.panel-search {
+    border-top-left-radius:20px !important;
+    border-top-right-radius:20px !important
+}
+
+.margin-layout {
+    margin-top: 12px;
+}
 
 .layout.no-negative.row {
     flex-wrap: wrap !important;

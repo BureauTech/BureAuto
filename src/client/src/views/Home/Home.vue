@@ -6,26 +6,83 @@
         justify-center
         class="no-negative"
       >
-        <v-col cols="3">
-          <v-card
-            min-width="100%"
-            rounded="xl"
-            max-height="30%"
-            cols="3"
-            class="bg-transparent"
-          >
-            <v-card-text
-              v-text="'R$ '"
-              class="text-h5"
-            />
-            <v-btn
-              elevation="0"
-              color="transparent"
-              small
+        <v-col
+          cols="3"
+          class="margin-layout"
+        >
+          <v-row>
+            <v-card
+              min-width="100%"
+              rounded="xl"
+              max-height="30%"
+              cols="3"
+              class="bg-transparent"
             >
-              + informações
-            </v-btn>
-          </v-card>
+              <v-expansion-panels multiple>
+                <v-expansion-panel class="panel-search">
+                  <v-expansion-panel-header class="panel-search">
+                    <v-card-text
+                      v-text="'Filtros '"
+                      class="text-h5"
+                    />
+                  </v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <Select
+                      placeholder="Marca"
+                      type="text"
+                      name="brand"
+                      :items="formCategories.brand"
+                    />
+                    <Select
+                      placeholder="Modelo"
+                      type="text"
+                      name="model"
+                      :items="formCategories.model"
+                    />
+                    <Select
+                      placeholder="Ano do modelo"
+                      type="text"
+                      name="yearModel"
+                      :items="formCategories.yearModel"
+                    />
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+                <v-expansion-panel>
+                  <v-expansion-panel-header>
+                    <v-card-text
+                      v-text="'Valor '"
+                      class="text-h5"
+                    />
+                  </v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <Input
+                      placeholder="Mínimo R$"
+                      :rules="[rules.number]"
+                      v-model="formCategories.valueMin"
+                      type="text"
+                      name="valueMin"
+                    />
+                    <Input
+                      placeholder="Máximo R$"
+                      :rules="[rules.number]"
+                      v-model="formCategories.valueMax"
+                      type="text"
+                      name="valueMax"
+                    />
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panels>
+              <v-btn
+                elevation="0"
+                large
+                color="transparent"
+                min-width="100%"
+                class="btn-search"
+              >
+                Buscar
+              </v-btn>
+            </v-card>
+          </v-row>
         </v-col>
         <v-col cols="9">
           <v-row>
@@ -70,7 +127,6 @@
         </v-col>
       </v-layout>
     </v-layout>
-
   </v-app>
 </template>
 
