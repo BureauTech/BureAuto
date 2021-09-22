@@ -60,12 +60,13 @@
           class="mb-6 mt-6"
         >
           <Button
-            buttonText="Salvar"
             type="submit"
             min-width="150"
             min-height="50"
             @click.stop.prevent="changePassword"
-          />
+          >
+            Salvar
+          </Button>
         </v-row>
       </v-form>
     </v-col>

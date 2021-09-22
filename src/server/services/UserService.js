@@ -3,6 +3,7 @@ const Papa = require("papaparse")
 const Repository = require("../database/Repository")
 const PasswordUtils = require("../utils/PasswordUtils")
 const EmailService = require("../services/EmailService")
+const {Not} = require("typeorm")
 
 module.exports = {
 
@@ -63,6 +64,16 @@ module.exports = {
             use_is_temp_password: false
         })
         EmailService.sendEmail("BureAuto", user.use_email, "BureAuto - Senha alterada", template, data)
+    },
+
+    deleteUser: async function(use_cod) {
+        //const template = "templates/DeleteAccount.ejs"
+        const RepositoryCryptography = await Repository.get(Repository.Cryptography)
+        const response = await RepositoryCryptography.delete({cry_use_cod: use_cod})
+        console.log(response)
+        //await user.save({cry_key: "123"})
+        //EmailService.sendEmail("BureaAuto", user.use_email, "BureAuto - Exclusão de Conta", template)
+
     }
 
 }
