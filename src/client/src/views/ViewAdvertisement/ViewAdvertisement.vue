@@ -21,12 +21,12 @@
       <v-col md="4">
         <Card
           :roundLevel="4"
-          cols="7"
+          cols="9"
         >
           <v-col cols="10">
             <p
               class="text-h3 bahama--text font-weight-bold"
-              v-text="`R$ ${advertisement.adv_value.toLocaleString('pt-br')}`"
+              v-text="advertisement.adv_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })"
             ></p>
             <p class="text-h5 bahama--text font-weight-medium">Sobre esse veículo</p>
             <v-row class="align-center">
@@ -63,12 +63,12 @@
             </v-row>
             <Button
               block
-              class="mb-5"
+              class="my-5"
             >
               <v-icon left>mdi-star</v-icon>
               Favoritar
             </Button>
-            <Button block>
+            <Button block class="my-5">
               Entrar em contato
             </Button>
           </v-col>

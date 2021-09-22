@@ -111,13 +111,14 @@
                   class="text-h5"
                 />
                 <v-card-text
-                  v-text="'R$ ' + ad.adv_value.toLocaleString('pt-br')"
+                  v-text="ad.adv_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })"
                   class="text-h5"
                 />
                 <v-btn
                   elevation="0"
                   color="transparent"
                   small
+                  @click="$router.push(`/anuncio/${ad.adv_cod}`)"
                 >
                   + informações
                 </v-btn>
