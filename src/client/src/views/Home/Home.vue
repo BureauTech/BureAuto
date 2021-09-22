@@ -64,7 +64,7 @@
                     />
                     <Input
                       placeholder="Máximo R$"
-                      :rules="[rules.number]"
+                      :rules="[rules.number, rules.maxValue(formCategories.valueMin, formCategories.valueMax)]"
                       v-model="formCategories.valueMax"
                       type="text"
                       name="valueMax"

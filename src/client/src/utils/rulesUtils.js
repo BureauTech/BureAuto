@@ -7,7 +7,8 @@ export default {
     },
     same: (firstValue, secondValue) => firstValue === secondValue || "Senhas diferentes.",
     number: value => {
-        const pattern = /[\d\.\,]+/
+        const pattern = /[0-9.,]/
         return pattern.test(value) || "Número inválido." 
-    }
+    },
+    maxValue: (firstValue, secondValue) => firstValue <= secondValue || "Valor menor que o mínimo."
 }
