@@ -52,6 +52,14 @@ module.exports = new EntitySchema({
                 name: "adv_use_cod",
                 referencedColumnName: "use_cod"
             }
+        },
+        Manufacturer: {
+            type: "many-to-one",
+            target: "manufacturer",
+            joinColumn: {
+                name: "adv_man_cod",
+                referencedColumnName: "man_cod"
+            }       
         }
     }
 })

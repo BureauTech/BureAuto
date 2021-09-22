@@ -33,10 +33,11 @@
           sm="3"
         >
           <Button
-            buttonText="Importar"
             min-width="100%"
             @click="importData"
-          />
+          >
+            Importar
+          </Button>
         </v-col>
       </v-row>
     </Card>

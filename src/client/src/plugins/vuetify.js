@@ -13,5 +13,9 @@ export default new Vuetify({
         options: {
             customProperties: true
         }
+    },
+    icons: {
+        iconfont: "mdi"
     }
+
 })

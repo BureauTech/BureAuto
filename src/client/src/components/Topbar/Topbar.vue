@@ -20,14 +20,6 @@
       </v-col>
       <v-col>
         <router-link
-          to="/comprar"
-          class="text-decoration-none"
-        >
-          Comprar
-        </router-link>
-      </v-col>
-      <v-col>
-        <router-link
           to="/cadastrar/anuncio"
           class="text-decoration-none"
         >
@@ -64,6 +56,14 @@
           class="text-decoration-none"
         >
           Painel ADM
+        </router-link>
+      </v-col>
+      <v-col v-if="$store.getters.isAuthenticated">
+        <router-link
+          to="/perfil"
+          class="text-decoration-none"
+        >
+          Perfil
         </router-link>
       </v-col>
       <v-col>

@@ -5,11 +5,13 @@ import ForgotPassword from "@/views/ForgotPassword/ForgotPassword.vue"
 import Home from "@/views/Home/Home.vue"
 import store from "@/store"
 import ImportCsv from "@/views/ImportCsv/ImportCsv.vue"
-//import Advertise from "@/views/Advertise/Advertise.vue"
+import ViewAdvertisement from "@/views/ViewAdvertisement/ViewAdvertisement.vue"
 import Buy from "@/views/Buy/Buy.vue"
 import Reports from "@/views/Reports/Reports.vue"
 import Favorites from "@/views/Favorites/Favorites.vue"
 import ChangePassword from "@/views/ChangePassword/ChangePassword.vue"
+import Profile from "@/views/Profile/Profile.vue"
+
 
 Vue.use(VueRouter)
 
@@ -50,13 +52,10 @@ const routes = [{
         type: "advertisement"
     }
 }, {
-//     path: "/anunciar",
-//     name: "Advertise",
-//     component: Advertise,
-//     meta: {
-//         requiresAuth: true
-//     }
-// }, {
+    path: "/anuncio/:id",
+    name: "ViewAdvertisement",
+    component: ViewAdvertisement
+}, {
     path: "/comprar",
     name: "Buy",
     component: Buy
@@ -74,6 +73,13 @@ const routes = [{
     path: "/favoritos",
     name: "Favorites",
     component: Favorites,
+    meta: {
+        requiresAuth: true
+    }
+}, {
+    path: "/perfil",
+    name: "Profile",
+    component: Profile,
     meta: {
         requiresAuth: true
     }
@@ -125,22 +131,6 @@ router.beforeEach(function(to, from, next) {
     } else {
         next()
     }
- 
-    // if (requiresAdmin) {
-    //     if (store.getters.getUser.use_is_admin) {
-    //         next()
-    //     } else {
-    //         next({name: "Home"})
-    //     }
-    // }
-
-    // if (requiresAuth && !isAuthenticated()) {
-    //     next({name: "Login"})
-    // } else if ((to.name === "Login" || to.name === "ForgotPassword") && isAuthenticated()) {
-    //     next({name: "Home"})
-    // } else {
-    //     next()
-    // }
 })
 
 export default router

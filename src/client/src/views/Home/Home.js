@@ -1,10 +1,17 @@
 import Topbar from "@/components/Topbar/Topbar"
+import Select from "@/components/Select/Select.vue"
+import Input from "@/components/Input/Input.vue"
+import Button from "@/components/Button/Button.vue"
+import rulesUtils from "@/utils/rulesUtils"
 import axios from "@/axios"
 
 export default {
     name: "Home",
     components: {
-        Topbar
+        Topbar,
+        Select,
+        Input,
+        Button
     },
     methods: { 
         getAds: async function() {
@@ -14,7 +21,15 @@ export default {
     },
     data: function() {
         return {
-            ads: []
+            ads: [],
+            rules: rulesUtils,
+            formCategories: {
+                brand: ["brand1", "brand2"],
+                model: ["model1", "model2"],
+                yearModel: ["2020/2021", "2021/2022"],
+                valueMin: "",
+                valueMax: ""
+            }
         }
     },
     beforeMount: function() {

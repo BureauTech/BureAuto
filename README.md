@@ -13,7 +13,6 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
    * [Sobre](#bureauto)
    * [Sumário](#sumário)
    * [Protótipo das telas da aplicação](#protótipo-das-telas-da-aplicação)
-   * [Acompanhamento das Atividades](#acompanhamento-das-atividades)
    * [Entregas](#entregas)
         * [Modelagem de Dados](#modelagem-de-dados)
       * [Burndown](#burndown)
@@ -22,22 +21,35 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
       * [Pré-Requisitos](#pré-requisitos)
       * [Servidor](#servidor)
       * [Cliente](#cliente)
+   * [Testes da Aplicação](#testes-da-aplicação)
    * [Tecnologias](#tecnologias)
    * [Autores](#autores)
 
-## Protótipo das telas da aplicação
+## Protótipo das telas da aplicação 
 
-![telas](./assets/gifs/telas.gif)
+- Wireframe Aplicação Web
+<div align="center">
+  <img src="./doc/gif/wireframe_web.gif" />
+</div>
 
 <br>
 
-Protótipo interativo das telas está disponível neste link: https://bit.ly/BureAuto
+- Wireframe Aplicação Mobile
+<div align="center">
+  <img src="./doc/gif/wireframe_app.gif" />
+</div>
+
+<br>
+
+Protótipo interativo das <b>telas web</b> está disponível neste link: https://bit.ly/BureAuto
+
+Protótipo interativo das <b>telas mobile</b> está disponível neste link: https://bit.ly/BureAutoMobile
 
 <br>
 
 # Entregas
 
-- [Sprint 1](https://github.com/BureauTech/BureAuto/releases/tag/0.1.0) entrega realizada em 19/09/2021.
+- [Sprint 1](https://github.com/BureauTech/BureAuto/releases/tag/1.0.0) entrega realizada em 19/09/2021.
 
 ## Entregas propostas
 
@@ -64,7 +76,7 @@ Protótipo interativo das telas está disponível neste link: https://bit.ly/Bur
 ## Burndown
 
 <div align="center">
-  <img src="./doc/img/burndown.jpeg" />
+  <img src="./doc/img/burndown.png" />
 </div>
 <br/> 
 
@@ -86,7 +98,7 @@ PostgreSQL - Versão: 12.x
 VueJS - Versão 2.x
 ```
 
-Além disto é bom ter um editor para trabalhar com o código como VSCode.
+Além disso é bom ter um editor para trabalhar com o código como VSCode.
 
 ## Servidor
 
@@ -113,6 +125,14 @@ npm run dev
 ```
 
 Ficará disponível em [localhost:3001](http://localhost/3001)
+
+# Testes da aplicação
+
+Para realização dos testes unitários do backend da aplicação, vá em [***src/server***](/src/server) e execute:
+
+```
+npm run test
+```
 
 # Tecnologias
 
@@ -147,8 +167,8 @@ Bibliotecas:
 
 <table align="center">
   <tr>
-    <td align="center"><a href="https://github.com/bibiacoutinho"><img src="https://avatars.githubusercontent.com/u/56437723?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Beatriz Coutinho<br>Master</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=bibiacoutinho" title="Master">:headphones::nail_care::computer_mouse:</a></td>
     <td align="center"><a href="https://github.com/anaclaragraciano"><img src="https://avatars.githubusercontent.com/u/64653864?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ana Clara<br>PO</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=anaclaragraciano" title="PO">:sparkles::iphone::open_book:</a></td>
+    <td align="center"><a href="https://github.com/bibiacoutinho"><img src="https://avatars.githubusercontent.com/u/56437723?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Beatriz Coutinho<br>Master</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=bibiacoutinho" title="Master">:headphones::nail_care::computer_mouse:</a></td>
     <td align="center"><a href="https://github.com/caiquesjc"><img src="https://avatars.githubusercontent.com/u/54915913?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Caique Nascimento<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=caiquesjc" title="Dev Team">:keyboard::desktop_computer::computer_mouse:</a></td>     
 </table>
 <table align="center">
