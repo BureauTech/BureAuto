@@ -59,6 +59,14 @@ module.exports = new EntitySchema({
                 referencedColumnName: "cry_use_cod",
                 inverseSide: "user"
             }
+        },
+        Favorite: {
+            type: "one-to-many",
+            target: "favorite",
+            joinColumn: {
+                name: "use_cod",
+                referencedColumnName: "fav_use_cod"
+            }       
         }
     }
 })

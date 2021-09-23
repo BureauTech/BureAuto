@@ -22,7 +22,7 @@ module.exports = new EntitySchema({
     },
     relations: {
         User: {
-            type: "one-to-many",
+            type: "many-to-one",
             target: "user",
             joinColumn: {
                 name: "fav_use_cod",
@@ -30,12 +30,12 @@ module.exports = new EntitySchema({
             }
         },
         Advertisement: {
-            type: "one-to-many",
-            target: "user",
+            type: "many-to-one",
+            target: "advertisement",
             joinColumn: {
                 name: "fav_adv_cod",
                 referencedColumnName: "adv_cod"
             }
-        }  
+        }
     }
 })

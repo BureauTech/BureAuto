@@ -59,7 +59,15 @@ module.exports = new EntitySchema({
             joinColumn: {
                 name: "adv_man_cod",
                 referencedColumnName: "man_cod"
-            }       
+            }
+        },
+        Favorite: {
+            type: "one-to-many",
+            target: "favorite",
+            joinColumn: {
+                name: "adv_cod",
+                referencedColumnName: "fav_adv_cod"
+            }
         }
     }
 })
