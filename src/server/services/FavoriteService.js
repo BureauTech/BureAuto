@@ -16,7 +16,7 @@ module.exports = {
         const RepositoryFavorite = await Repository.get(Repository.Favorite)
         const favoriteExists = await RepositoryFavorite.findOne({where: {fav_use_cod: use_cod, fav_adv_cod: adv_cod}})
 
-        if (favoriteExists) return
+        if (favoriteExists) return favoriteExists
 
         return await RepositoryFavorite.save({
             fav_use_cod: use_cod,
