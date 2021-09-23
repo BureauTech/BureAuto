@@ -1,13 +1,12 @@
 const router = require("express").Router()
 const {authenticate} = require("../services/AuthService")
 const AdvertisementService = require("../services/AdvertisementService")
-const {getAllAdvertisement, getAdvertisement} = require("../services/AdvertisementService")
 
 // Mapeado em "/advertisement"
 
 router.get("/all", async(req, res) => {
     try {
-        const advertisements = await getAllAdvertisement()
+        const advertisements = await AdvertisementService.getAllAdvertisement()
         return res.status(200).send({success: true, data: advertisements})
     } catch (error) {
         console.log(error)
@@ -18,7 +17,7 @@ router.get("/all", async(req, res) => {
 router.get("/:adv_cod", async(req, res) => {
     try {
         const {adv_cod} = req.params
-        const advertisement = await getAdvertisement(adv_cod)
+        const advertisement = await AdvertisementService.getAdvertisement(adv_cod)
         return res.status(200).send({success: true, data: advertisement})
     } catch (error) {
         console.log(error)
