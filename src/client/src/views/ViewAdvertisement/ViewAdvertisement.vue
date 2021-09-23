@@ -64,13 +64,16 @@
             <Button
               block
               class="my-5"
+              @click="updateFavorite"
             >
               <v-icon left>mdi-star</v-icon>
-              Favoritar
+              {{favorite ? 'Desfavoritar' : 'Favoritar'}}
             </Button>
-            <Button block class="my-5">
-              Entrar em contato
-            </Button>
+            <Button
+              block
+              class="my-5"
+              v-text="'Entrar em contato'"
+            ></Button>
           </v-col>
         </Card>
       </v-col>
