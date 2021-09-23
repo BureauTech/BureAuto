@@ -4,13 +4,15 @@ import Login from "@/views/Login/Login.vue"
 import ForgotPassword from "@/views/ForgotPassword/ForgotPassword.vue"
 import Home from "@/views/Home/Home.vue"
 import store from "@/store"
-import ImportCsv from "@/views/ImportCsv/ImportCsv.vue"
 import ViewAdvertisement from "@/views/ViewAdvertisement/ViewAdvertisement.vue"
 import Buy from "@/views/Buy/Buy.vue"
 import Reports from "@/views/Reports/Reports.vue"
 import Favorites from "@/views/Favorites/Favorites.vue"
 import ChangePassword from "@/views/ChangePassword/ChangePassword.vue"
 import Profile from "@/views/Profile/Profile.vue"
+import UploadUser from "@/views/UploadUser/UploadUser.vue"
+import UploadAdvertisement from "@/views/UploadAdvertisement/UploadAdvertisement.vue"
+
 
 
 Vue.use(VueRouter)
@@ -33,23 +35,17 @@ const routes = [{
 }, {
     path: "/cadastrar/usuario",
     name: "CadastrarUsuario",
-    component: ImportCsv,
+    component: UploadUser,
     meta: {
         requiresAuth: true,
         requiresAdmin: true
-    },
-    props: {
-        type: "user"
     }
 }, {
     path: "/cadastrar/anuncio",
     name: "CadastrarAnuncio",
-    component: ImportCsv,
+    component: UploadAdvertisement,
     meta: {
         requiresAuth: true
-    },
-    props: {
-        type: "advertisement"
     }
 }, {
     path: "/anuncio/:id",
