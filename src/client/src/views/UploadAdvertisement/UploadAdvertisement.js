@@ -1,20 +1,20 @@
 import Card from "@/components/Card/Card.vue"
 import Button from "@/components/Button/Button.vue"
 import Input from "@/components/Input/Input.vue"
+import ImportCsv from "@/components/ImportCsv/ImportCsv.vue"
 import axios from "@/axios.js"
 import router from "@/router"
 
 export default {
-    name: "ImportCsv",
+    name: "UploadAdvertisement",
     components: {
         Card,
         Button,
-        Input
+        Input,
+        ImportCsv
     },
     data: function() {
         return {
-            urlData: undefined,
-            textView: undefined,
             csvFile: null
         }
     },
@@ -24,7 +24,7 @@ export default {
                 const formData = new FormData()
                 formData.append("csvFile", this.csvFile)
                 try {
-                    const {data} = await axios.post(this.urlData, formData, {
+                    const {data} = await axios.post("http://localhost:3000/advertisement/register", formData, {
                         headers: {
                             "Content-Type": "multipart/form-data"
                         }
@@ -49,28 +49,6 @@ export default {
         },
         attachFile: function(file) {
             this.csvFile = file
-        },
-        setConfig: function() {
-            const props = this.$route.matched[0].props
-            let url, text
-            if (props.default.type === "user") {
-                url = "user"
-                text = "usuários cadastrados"
-            } else if (props.default.type === "advertisement") {
-                url = "advertisement"
-                text = "anúncios publicados"
-            }
-
-            this.urlData = `http://localhost:3000/${url}/register`
-            this.textView = text
         }
-    },
-    watch: {
-        $route: function() {
-            this.setConfig()
-        }
-    },
-    beforeMount: function() {
-        this.setConfig()
     }
 }
