@@ -44,5 +44,11 @@ module.exports = {
             delete advertisement[0].User
         }
         return advertisement
+    },
+
+    editAdvertisement: async function(adv_edt) {
+        const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
+
+        RepositoryAdvertisement.update({adv_cod: adv_edt.adv_cod}, adv_edt)
     }
 }

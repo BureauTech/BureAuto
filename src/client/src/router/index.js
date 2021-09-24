@@ -88,7 +88,7 @@ const routes = [{
         requiresAuth: true
     }
 }, {
-    path: "/editar-anuncio",
+    path: "/editar-anuncio/:id",
     name: "EditAdvertise",
     component: EditAdvertise,
     meta: {

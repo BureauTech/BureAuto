@@ -35,4 +35,15 @@ router.post("/register", authenticate, async(req, res) => {
     }
 })
 
+
+router.put("/edit", authenticate, async(req, res) => {
+    try { 
+        const adv_edt = req.body
+        AdvertisementService.editAdvertisement(adv_edt)
+        return res.status(200).send({success: true})
+    } catch (error) {
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
 module.exports = router
