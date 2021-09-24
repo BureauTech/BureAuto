@@ -20,6 +20,14 @@ const AuthService = module.exports = {
     generateToken: function(user, res) {
         const token = jwt.sign(user, AuthService.secretKey, {expiresIn: AuthService.expiresIn})
         res.cookie(AuthService.cookieName, token, {httpOnly: true, maxAge: AuthService.expiresIn * 1000})
-    }
+    },
 
+    verifyAdmin: async function(req, res, next) {
+        try {
+            if (req.user.use_is_admin) return next()
+            return res.status(200).send({success: false, error: "permission denied"})
+        } catch (error) {
+            return res.status(200).send({success: false, error: "authentication failed"})
+        }
+    }
 }

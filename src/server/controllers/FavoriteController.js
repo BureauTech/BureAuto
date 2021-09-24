@@ -1,4 +1,5 @@
 const router = require("express").Router()
+const AuthService = require("../services/AuthService")
 const FavoriteService = require("../services/FavoriteService")
 
 
@@ -37,10 +38,20 @@ router.delete("/:fav_cod", async(req, res) => {
     }
 })
 
+router.get("/report/admin", AuthService.verifyAdmin, async(req, res) => {
+    try {
+        const percentage = await FavoriteService.getAdminReport()
+        return res.status(200).send({success: true, data: percentage})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
 router.get("/report/:adv_use_cod", async(req, res) => {
     try {
-        const a = await FavoriteService.getAdvertiserReport(req.params.adv_use_cod)
-        return res.status(200).send({success: true, data: a})
+        const percentage = await FavoriteService.getAdvertiserReport(req.params.adv_use_cod)
+        return res.status(200).send({success: true, data: percentage})
     } catch (error) {
         console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
