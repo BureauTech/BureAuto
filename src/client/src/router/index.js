@@ -12,6 +12,7 @@ import ChangePassword from "@/views/ChangePassword/ChangePassword.vue"
 import Profile from "@/views/Profile/Profile.vue"
 import UploadUser from "@/views/UploadUser/UploadUser.vue"
 import UploadAdvertisement from "@/views/UploadAdvertisement/UploadAdvertisement.vue"
+import EditAdvertise from "@views/EditAdvertise/EditAdvertise.vue"
 
 
 
@@ -83,6 +84,13 @@ const routes = [{
     path: "/definir-senha",
     name: "ChangePassword",
     component: ChangePassword,
+    meta: {
+        requiresAuth: true
+    }
+}, {
+    path: "/editar-anuncio",
+    name: "EditAdvertise",
+    component: EditAdvertise,
     meta: {
         requiresAuth: true
     }
