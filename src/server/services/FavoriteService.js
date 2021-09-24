@@ -38,7 +38,7 @@ module.exports = {
             .getMany()).length
         //  Se não tem nenhum, é 0%
         if (!advertisementFavoritedCount) {
-            return "0,00%"
+            return "0%"
         }
         
         const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
@@ -46,10 +46,10 @@ module.exports = {
         
         //  Se não tem nenhum, é 0%
         if (!allAdvertisementCount) {
-            return "0,00%"
+            return "0%"
         }
         
-        return `${(advertisementFavoritedCount / allAdvertisementCount).toFixed(2)}%`
+        return `${(advertisementFavoritedCount * 100 / allAdvertisementCount).toFixed(0)}%`
     },
 
     getAdminReport: async function() {
@@ -62,7 +62,7 @@ module.exports = {
 
         //  Se não tem nenhum, é 0%
         if (!allAdvertisementFavoritedCount) {
-            return "0,00%"
+            return "0%"
         }
 
         const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
@@ -70,9 +70,9 @@ module.exports = {
 
         //  Se não tem nenhum, é 0%
         if (!allAdvertisementCount) {
-            return "0,00%"
+            return "0%"
         }
 
-        return `${(allAdvertisementFavoritedCount / allAdvertisementCount).toFixed(2)}%`
+        return `${(allAdvertisementFavoritedCount * 100 / allAdvertisementCount).toFixed(0) }%`
     }
 }
