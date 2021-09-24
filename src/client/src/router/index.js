@@ -12,7 +12,7 @@ import ChangePassword from "@/views/ChangePassword/ChangePassword.vue"
 import Profile from "@/views/Profile/Profile.vue"
 import UploadUser from "@/views/UploadUser/UploadUser.vue"
 import UploadAdvertisement from "@/views/UploadAdvertisement/UploadAdvertisement.vue"
-import EditAdvertise from "@views/EditAdvertise/EditAdvertise.vue"
+import EditAdvertise from "@/views/EditAdvertise/EditAdvertise.vue"
 
 
 
