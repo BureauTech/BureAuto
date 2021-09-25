@@ -1,3 +1,4 @@
+const { Not } = require("typeorm")
 const Repository = require("../database/Repository")
 
 module.exports = {
@@ -7,34 +8,35 @@ module.exports = {
         return await RepositoryFavorite.find({where: {fav_use_cod: use_cod}})
     },
 
-    getFavorite: async function(use_cod, adv_cod) {
+    getFavorite: async function(user, adv_cod) {
         const RepositoryFavorite = await Repository.get(Repository.Favorite)
-        return await RepositoryFavorite.findOne({where: {fav_use_cod: use_cod, fav_adv_cod: adv_cod}})
+        return await RepositoryFavorite.findOne({where: {fav_use_cod: user.use_cod, fav_adv_cod: adv_cod}})
     },
 
-    registerFavorite: async function(use_cod, adv_cod) {
+    registerFavorite: async function(user, adv_cod) {
         const RepositoryFavorite = await Repository.get(Repository.Favorite)
-        const favoriteExists = await RepositoryFavorite.findOne({where: {fav_use_cod: use_cod, fav_adv_cod: adv_cod}})
+        const favoriteExists = await RepositoryFavorite.findOne({where: {fav_use_cod: user.use_cod, fav_adv_cod: adv_cod}})
 
         if (favoriteExists) return favoriteExists
 
         return await RepositoryFavorite.save({
-            fav_use_cod: use_cod,
+            fav_use_cod: user.use_cod,
             fav_adv_cod: adv_cod
         })
     },
 
-    deleteFavorite: async function(fav_cod) {
+    deleteFavorite: async function(fav_cod, user) {
         const RepositoryFavorite = await Repository.get(Repository.Favorite)
-        return await RepositoryFavorite.delete(fav_cod)
+        return await RepositoryFavorite.delete({fav_cod: fav_cod, fav_use_cod: user.use_cod})
     },
 
-    getAdvertiserReport: async function(adv_use_cod) {
+    getAdvertiserReport: async function(user) {
         const RepositoryFavorite = await Repository.get(Repository.Favorite)
         const advertisementFavoritedCount = (await RepositoryFavorite.createQueryBuilder("favorite")
             .distinctOn(["favorite.fav_adv_cod"])
             .leftJoin("advertisement", "advertisement", "favorite.fav_adv_cod = advertisement.adv_cod")
-            .where("advertisement.adv_use_cod = :adv_use_cod", {adv_use_cod: adv_use_cod})
+            .where("advertisement.adv_use_cod = :adv_use_cod", {adv_use_cod: user.use_cod})
+            .andWhere("advertisement.adv_status != :status", {status: "paused"})
             .getMany()).length
         //  Se não tem nenhum, é 0%
         if (!advertisementFavoritedCount) {
@@ -42,7 +44,7 @@ module.exports = {
         }
         
         const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
-        const allAdvertisementCount = await RepositoryAdvertisement.count({adv_use_cod: adv_use_cod})
+        const allAdvertisementCount = await RepositoryAdvertisement.count({adv_use_cod: user.use_cod, adv_status: Not("paused")})
         
         //  Se não tem nenhum, é 0%
         if (!allAdvertisementCount) {

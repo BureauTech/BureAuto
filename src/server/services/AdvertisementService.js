@@ -31,17 +31,17 @@ module.exports = {
 
     getAllAdvertisement: async function() {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
-        return await RepositoryAdvertisement.find({relations: ["Manufacturer"], where: {adv_status: Not("excluded")}})
+        return await RepositoryAdvertisement.find({relations: ["Manufacturer"], where: {adv_status: Not("paused")}})
     },
 
     getAdvertisement: async function(adv_cod) {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
-        const advertisement = await RepositoryAdvertisement.find({
-            relations: ["Manufacturer", "User"], where: {adv_cod: adv_cod, adv_status: Not("excluded")}
+        const advertisement = await RepositoryAdvertisement.findOne({
+            relations: ["Manufacturer", "User"], where: {adv_cod: adv_cod, adv_status: Not("paused")}
         })
-        if (advertisement.length) {
-            advertisement[0].use_is_cpf_document = advertisement[0].User.use_is_cpf_document
-            delete advertisement[0].User
+        if (advertisement) {
+            advertisement.use_is_cpf_document = advertisement.User.use_is_cpf_document
+            delete advertisement.User
         }
         return advertisement
     }

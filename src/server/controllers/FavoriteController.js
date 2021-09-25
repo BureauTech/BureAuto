@@ -18,8 +18,8 @@ router.get("/all/:use_cod", async(req, res) => {
 
 router.post("/register", async(req, res) => {
     try {
-        const {use_cod, adv_cod} = req.body
-        const favorite = await FavoriteService.registerFavorite(use_cod, adv_cod)
+        const {adv_cod} = req.body
+        const favorite = await FavoriteService.registerFavorite(req.user, adv_cod)
         return res.status(200).send({success: true, data: favorite})
     } catch (error) {
         console.log(error)
@@ -30,7 +30,7 @@ router.post("/register", async(req, res) => {
 router.delete("/:fav_cod", async(req, res) => {
     try {
         const {fav_cod} = req.params
-        await FavoriteService.deleteFavorite(fav_cod)
+        await FavoriteService.deleteFavorite(fav_cod, req.user)
         return res.status(200).send({success: true})
     } catch (error) {
         console.log(error)
@@ -48,9 +48,9 @@ router.get("/report/admin", AuthService.verifyAdmin, async(req, res) => {
     }
 })
 
-router.get("/report/:adv_use_cod", async(req, res) => {
+router.get("/report", async(req, res) => {
     try {
-        const percentage = await FavoriteService.getAdvertiserReport(req.params.adv_use_cod)
+        const percentage = await FavoriteService.getAdvertiserReport(req.user)
         return res.status(200).send({success: true, data: percentage})
     } catch (error) {
         console.log(error)
@@ -58,10 +58,10 @@ router.get("/report/:adv_use_cod", async(req, res) => {
     }
 })
 
-router.get("/:use_cod/:adv_cod", async(req, res) => {
+router.get("/:adv_cod", async(req, res) => {
     try {
-        const {use_cod, adv_cod} = req.params
-        const favorite = await FavoriteService.getFavorite(use_cod, adv_cod)
+        const {adv_cod} = req.params
+        const favorite = await FavoriteService.getFavorite(req.user, adv_cod)
         return res.status(200).send({success: true, data: favorite})
     } catch (error) {
         console.log(error)
