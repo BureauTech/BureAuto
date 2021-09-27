@@ -13,10 +13,10 @@ router.post("/register", async(req, res) => {
     }
 })
 
-router.post("/delete/:cry_use_cod", async(req, res) => {
+router.delete("/:use_cod", async(req, res) => {
     try {
-        const {cry_use_cod} = req.params
-        await UserService.deleteUser(cry_use_cod)
+        const {use_cod} = req.params
+        await UserService.deleteUser(use_cod)
         return res.status(200).send({success: true})
     } catch (error) {
         console.log(error)
