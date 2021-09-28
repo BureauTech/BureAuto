@@ -26,8 +26,8 @@ export default {
         getAdvertisement: async function() {
             try {
                 const {data} = await axios.get(`/advertisement/${this.$route.params.id}`)//
-                if (data.success && data.data.length) {
-                    this.advertisement = data.data[0]
+                if (data.success && data.data) {
+                    this.advertisement = data.data
                 } else {
                     this.$router.push("/")
                 }

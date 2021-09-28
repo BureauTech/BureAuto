@@ -28,9 +28,8 @@ export default {
 
     methods: {
         getFavoriteReport: async function() {
-            const {use_cod} = this.$store.getters.getUser
             try {
-                const {data} = await axios.get(`/favorite/report/${use_cod}`)
+                const {data} = await axios.get("/favorite/report")
                 if (data.success) {
                     this.favorite[0].value = data.data
                 }

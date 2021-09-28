@@ -27,8 +27,8 @@ export default {
         getAdvertisement: async function() {
             try {
                 const {data} = await axios.get(`/advertisement/${this.$route.params.id}`)
-                if (data.success && data.data.length) {
-                    this.advertisement = data.data[0]
+                if (data.success && data.data) {
+                    this.advertisement = data.data
                 } else {
                     this.$router.push("/")
                 }
@@ -48,7 +48,6 @@ export default {
                     } else {
                         // create
                         const body = {
-                            use_cod: this.$store.getters.getUser.use_cod,
                             adv_cod: this.$route.params.id
                         }
                         const {data} = await axios.post("/favorite/register", body)
@@ -67,10 +66,9 @@ export default {
             try {
                 const use_cod = this.$store.getters.getUser.use_cod
                 // verificar se o usuário está logado
-                console.log(use_cod)
                 if (use_cod) {
                     const adv_cod = this.$route.params.id
-                    const {data} = await axios.get(`/favorite/${use_cod}/${adv_cod}`)
+                    const {data} = await axios.get(`/favorite/${adv_cod}`)
                     this.favorite = data.data
                 }
             } catch (error) {
