@@ -2,6 +2,7 @@ const fs = require("fs")
 const Papa = require("papaparse")
 const {Not} = require("typeorm")
 const Repository = require("../database/Repository")
+const Connection = require("../database/Connection")
 
 module.exports = {
 
@@ -48,7 +49,11 @@ module.exports = {
 
     editAdvertisement: async function(adv_edt) {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
-
         RepositoryAdvertisement.update({adv_cod: adv_edt.adv_cod}, adv_edt)
+    },
+
+    getNumberOfAds: async function() {
+        const connection = await Connection
+        return (await connection.query("select count(adv_status) as total_ads from advertisement where adv_status = 'active'"))[0]
     }
 }
