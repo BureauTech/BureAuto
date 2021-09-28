@@ -26,17 +26,15 @@ export default {
         getAdvertisement: async function() {
             try {
                 const {data} = await axios.get(`/advertisement/${this.$route.params.id}`)
-                console.log("params "+ this.$route.params.id)
-                if (data.success && data.data.length) {
-                    this.advertisement = data.data[0]
-                    
+                const isUser = this.$store.getters.getUser.use_cod === data.data[0].adv_use_cod
+
+                if (data.success && data.data.length & isUser) {
+                    this.advertisement = data.data[0]    
                 } else {
-                    //this.$router.push("/")
+                    this.$router.push("/")
                 }
             } catch (error) {
                 this.$toasted.error("Ocorreu um erro ao pegar os dados do anúncio")
-                // this.$router.push("/")
-                console.log("params "+ JSON.stringify(this.$route.params))
             }
         },
         editAdvertisement: function() {
