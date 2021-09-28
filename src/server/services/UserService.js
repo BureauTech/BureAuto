@@ -3,7 +3,7 @@ const Papa = require("papaparse")
 const Repository = require("../database/Repository")
 const PasswordUtils = require("../utils/PasswordUtils")
 const EmailService = require("../services/EmailService")
-const {Not} = require("typeorm")
+const Connection = require("../database/Connection")
 
 module.exports = {
 
@@ -67,13 +67,18 @@ module.exports = {
     },
 
     deleteUser: async function(use_cod) {
-        //const template = "templates/DeleteAccount.ejs"
+        const connection = await Connection
+        const user = (await connection
+            .query("select * from decrypt_user($1)", [use_cod]))[0]
         const RepositoryCryptography = await Repository.get(Repository.Cryptography)
         const response = await RepositoryCryptography.delete({cry_use_cod: use_cod})
-        console.log(response)
-        //await user.save({cry_key: "123"})
-        //EmailService.sendEmail("BureaAuto", user.use_email, "BureAuto - Exclusão de Conta", template)
-
+        if (!response.affected) {
+            return false
+        }
+        const template = "templates/DeleteAccount.ejs"
+        const data = {nome: user.use_name}
+        EmailService.sendEmail("BureaAuto", user.use_email, "BureAuto - Exclusão de Conta", template, data)
+        return true
     }
 
 }

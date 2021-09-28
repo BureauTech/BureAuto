@@ -40,7 +40,7 @@ module.exports = {
         if (!advertisementFavoritedCount) {
             return "0%"
         }
-        
+
         const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
         const allAdvertisementCount = await RepositoryAdvertisement.count({adv_use_cod: adv_use_cod})
         
