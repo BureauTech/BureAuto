@@ -11,7 +11,7 @@
               outlined
               rounded
               color="bahama"
-              :value="advertisement.Manufacturer.man_name"
+              v-model="advertisement.Manufacturer.man_name"
             />
           </v-col>
           <v-col>
@@ -20,7 +20,7 @@
               outlined
               rounded
               color="bahama"
-              :value="advertisement.adv_model_description"
+              v-model="advertisement.adv_model_description"
             />
           </v-col>
         </v-row>
@@ -32,7 +32,7 @@
             rounded
             height="auto"
             color="bahama"
-            value=""
+            v-model="advertisement.adv_brand_description"
           />
 
         </div>
@@ -50,7 +50,7 @@
               outlined
               rounded
               color="bahama"
-              :value="advertisement.adv_year_manufacture"
+              v-model="advertisement.adv_year_manufacture"
             />
           </v-col>
           <v-col>
@@ -60,7 +60,7 @@
               outlined
               rounded
               color="bahama"
-              :value="advertisement.adv_year_model"
+              v-model="advertisement.adv_year_model"
             />
           </v-col>
         </v-row>
@@ -73,7 +73,7 @@
               name="preco"
               rounded
               color="bahama"
-              :value="advertisement.adv_value.toLocaleString('pt-br')"
+              v-model="advertisement.adv_value"
             />
           </v-col>
         </v-row>
@@ -101,7 +101,7 @@
     >
       <v-col md="5">
 
-        <Button min-width="100%">
+        <Button min-width="100%" @click="editAdvertisement">
           Salvar
         </Button>
       </v-col>
@@ -110,3 +110,11 @@
 </template>
 
 <script src="./EditAdvertise.js"/>
+
+<!--
+:value="advertisement.adv_value"
+:value="advertisement.adv_year_model"
+:value="advertisement.adv_year_manufacture"
+:value="advertisement.adv_model_description"
+:value="advertisement.adv_brand_description"
+-->

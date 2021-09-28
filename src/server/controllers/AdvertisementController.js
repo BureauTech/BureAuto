@@ -4,6 +4,16 @@ const AdvertisementService = require("../services/AdvertisementService")
 
 // Mapeado em "/advertisement"
 
+router.get("/total-advertisements", async(req, res) => {
+    try {
+        const total = await AdvertisementService.getNumberOfAds()
+        return res.json({total: total.total_ads})
+    }  catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
 router.get("/all", async(req, res) => {
     try {
         const advertisements = await AdvertisementService.getAllAdvertisement()
@@ -29,6 +39,17 @@ router.post("/register", authenticate, async(req, res) => {
     try {
         const {csvFile} = req.files
         await AdvertisementService.registerAdvertisement(csvFile.tempFilePath)
+        return res.status(200).send({success: true})
+    } catch (error) {
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
+
+router.put("/edit", authenticate, async(req, res) => {
+    try { 
+        const adv_edt = req.body
+        AdvertisementService.editAdvertisement(adv_edt)
         return res.status(200).send({success: true})
     } catch (error) {
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})

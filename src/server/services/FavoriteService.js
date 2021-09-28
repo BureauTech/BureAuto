@@ -1,4 +1,4 @@
-const { Not } = require("typeorm")
+const {Not} = require("typeorm")
 const Repository = require("../database/Repository")
 
 module.exports = {
@@ -42,7 +42,7 @@ module.exports = {
         if (!advertisementFavoritedCount) {
             return "0%"
         }
-        
+
         const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
         const allAdvertisementCount = await RepositoryAdvertisement.count({adv_use_cod: user.use_cod, adv_status: Not("paused")})
         

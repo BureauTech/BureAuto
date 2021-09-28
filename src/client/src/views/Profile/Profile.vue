@@ -21,6 +21,78 @@
           <v-col>
             <v-row no-gutters>
               <p class="text-h4 bahama--text">Dados do seu perfil</p>
+              <v-col align="right">
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-dialog
+                      v-model="dialog"
+                      persistent
+                      max-width="290"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          v-bind="attrs"
+                          v-on="on"
+                          class="mx-2"
+                          fab
+                          dark
+                          small
+                          color="red"
+                        >
+                          <v-icon dark>
+                            mdi-trash-can-outline
+                          </v-icon>
+                        </v-btn>
+                      </template>
+                      <v-card>
+                        <v-card-title class="text-h5">
+                          Excluir minha conta
+                        </v-card-title>
+                        <v-card-text>
+                          Ao clicar em "Confirmar", sua conta será permanentemente excluída, e será necessário contatar o adminstrador
+                          para criação de um novo cadastro.
+                        </v-card-text>
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                          <v-btn
+                            color="green darken-1"
+                            text
+                            @click="dialog = false"
+                          >
+                            Cancelar
+                          </v-btn>
+                          <v-btn
+                            color="green darken-1"
+                            text
+                            @click="deleteUser"
+                          >
+                            Confirmar
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
+                  </template>
+                  <span>Excluir minha conta</span>
+                </v-tooltip>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                      v-bind="attrs"
+                      v-on="on"
+                      class="mx-2"
+                      fab
+                      dark
+                      small
+                      color="blue"
+                    >
+                      <v-icon dark>
+                        mdi-square-edit-outline
+                      </v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Editar meu perfil</span>
+                </v-tooltip>
+              </v-col>
             </v-row>
           </v-col>
           <v-card
@@ -91,19 +163,9 @@
             </v-row>
           </v-card>
         </v-form>
-        <v-col
-          cols="12"
-          align="right"
-        >
-          <v-btn
-            align="right"
-            color="transparent"
-            small
-          >
-            Editar Informações
-          </v-btn>
-        </v-col>
       </v-col>
     </v-layout>
   </v-app>
 </template>
+
+<script src="./Profile.js"></script>
