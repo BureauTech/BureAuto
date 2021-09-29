@@ -13,6 +13,7 @@ import Profile from "@/views/Profile/Profile.vue"
 import UploadUser from "@/views/UploadUser/UploadUser.vue"
 import UploadAdvertisement from "@/views/UploadAdvertisement/UploadAdvertisement.vue"
 import EditAdvertise from "@/views/EditAdvertise/EditAdvertise.vue"
+import EditProfile from "@/views/EditProfile/EditProfile.vue"
 
 
 
@@ -91,6 +92,13 @@ const routes = [{
     path: "/editar-anuncio/:id",
     name: "EditAdvertise",
     component: EditAdvertise,
+    meta: {
+        requiresAuth: true
+    }
+}, {
+    path: "/editar-perfil",
+    name: "EditProfile",
+    component: EditProfile,
     meta: {
         requiresAuth: true
     }

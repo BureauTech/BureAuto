@@ -84,6 +84,7 @@
                       dark
                       small
                       color="blue"
+                      @click="goToEditProfile"
                     >
                       <v-icon dark>
                         mdi-square-edit-outline

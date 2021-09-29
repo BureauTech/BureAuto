@@ -20,6 +20,9 @@ export default {
             } else {
                 this.$router.push({name: "Login"})
             }
+        },
+        goToEditProfile: function() {
+            this.$router.push("/editar-perfil")
         }
     }
 }
