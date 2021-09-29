@@ -79,6 +79,11 @@ module.exports = {
         const data = {nome: user.use_name}
         EmailService.sendEmail("BureaAuto", user.use_email, "BureAuto - Exclusão de Conta", template, data)
         return true
+    },
+
+    updateUser: async function(use_edt) {
+        const RepositoryUser = await Repository.get(Repository.User)
+        RepositoryUser.update({use_cod: use_edt.use_cod}, use_edt)
     }
 
 }

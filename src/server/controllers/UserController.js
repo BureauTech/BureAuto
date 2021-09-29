@@ -27,4 +27,15 @@ router.delete("/:use_cod", async(req, res) => {
     }
 })
 
+router.put("/edit", async(req, res) => {
+    try {
+        const use_edt = req.body
+        await UserService.updateUser(use_edt)
+        return res.status(200).send({success: true})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
 module.exports = router
