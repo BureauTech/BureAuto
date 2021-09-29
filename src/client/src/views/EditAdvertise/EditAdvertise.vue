@@ -96,25 +96,35 @@
     </v-row>
 
     <v-row
-      class="justify-center"
+      class="justify-space-around pb-5"
       no-gutters
     >
-      <v-col md="5">
-
-        <Button min-width="100%" @click="editAdvertisement">
+      <v-col md="4">
+        <v-btn
+          min-width="100%"
+          elevation="2"
+          rounded
+          color="bahama"
+          class="white--text text-none text-h5"
+          @click="editAdvertisement"
+        >
           Salvar
-        </Button>
+        </v-btn>
+      </v-col>
+      <v-col md="4">
+        <v-btn
+          min-width="100%"
+          elevation="2"
+          rounded
+          color="red"
+          class="white--text text-none text-h5"
+          @click="cancel"
+        >
+          Cancelar
+        </v-btn>
       </v-col>
     </v-row>
   </div>
 </template>
 
 <script src="./EditAdvertise.js"/>
-
-<!--
-:value="advertisement.adv_value"
-:value="advertisement.adv_year_model"
-:value="advertisement.adv_year_manufacture"
-:value="advertisement.adv_model_description"
-:value="advertisement.adv_brand_description"
--->

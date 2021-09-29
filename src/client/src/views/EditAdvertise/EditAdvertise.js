@@ -1,13 +1,8 @@
-import Topbar from "@/components/Topbar/Topbar"
-import Button from "@/components/Button/Button.vue"
 import axios from "@/axios.js"
 
 export default {
     name: "ViewAdvertisement",
-    components: {
-        Topbar,
-        Button
-    },
+
     data: function() {
         return {
             advertisement: {
@@ -26,13 +21,11 @@ export default {
         getAdvertisement: async function() {
             try {
                 const {data} = await axios.get(`/advertisement/${this.$route.params.id}`)
-                
-                if (data.success && data.data) {
-                    const isUser = this.$store.getters.getUser.use_cod === data.data.adv_use_cod
-                    if (!isUser) {
-                        this.$router.push("/")
-                    }
-                    this.advertisement = data.data
+                const isUser =
+          this.$store.getters.getUser.use_cod === data.data[0].adv_use_cod
+
+                if (data.success && data.data.length & isUser) {
+                    this.advertisement = data.data[0]
                 } else {
                     this.$router.push("/")
                 }
@@ -51,13 +44,20 @@ export default {
                     adv_brand_description: this.advertisement.adv_brand_description
                 }
                 axios.put("/advertisement/edit", adv_edt)
+                
+                this.$toasted.success("Anúncio editado com sucesso!")
                 this.$router.push("/")
+                this.$router.push(`/anuncio/${this.advertisement.adv_cod}`)
             } catch (error) {
                 this.$toasted.error("Ocorreu um erro ao fazer a requisição")
             }
+        },
+        cancel: function() {
+            this.$router.push(`/anuncio/${this.advertisement.adv_cod}`)
+            window.location.reload()
         }
     },
     created: async function() {
         await this.getAdvertisement()
     }
-} 
+}
