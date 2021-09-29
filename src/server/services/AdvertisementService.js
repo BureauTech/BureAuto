@@ -55,5 +55,16 @@ module.exports = {
     getNumberOfAds: async function() {
         const connection = await Connection
         return (await connection.query("select count(adv_status) as total_ads from advertisement where adv_status = 'active'"))[0]
+    },
+
+    deleteAdvertisement: async function(adv_cod, user) {
+        const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
+        const advertisement = await RepositoryAdvertisement.findOne({
+            where: {
+                adv_cod: adv_cod, adv_use_cod: user.use_cod, adv_status: Not("excluded")
+            }
+        })
+        if (!advertisement) return
+        return await RepositoryAdvertisement.save({adv_cod: adv_cod, adv_use_cod: user.use_cod, adv_status: "excluded"})
     }
 }

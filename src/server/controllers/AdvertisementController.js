@@ -56,4 +56,18 @@ router.put("/edit", authenticate, async(req, res) => {
     }
 })
 
+router.delete("/:adv_cod", authenticate, async(req, res) => {
+    try { 
+        const {adv_cod} = req.params
+        const result = await AdvertisementService.deleteAdvertisement(adv_cod, req.user)
+        if (result) {
+            return res.status(200).send({success: true})
+        }
+        return res.status(404).send({success: false, error: "advertisement not found"})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
 module.exports = router
