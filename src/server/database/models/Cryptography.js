@@ -10,7 +10,8 @@ module.exports = new EntitySchema({
             generated: true
         },
         cry_key: {
-            type: "varchar"
+            type: "varchar",
+            unique: true
         }
     },
     relations: {
