@@ -25,6 +25,7 @@ app.use("/auth", authenticate, require("./controllers/AuthController"))
 app.use("/user", authenticate, require("./controllers/UserController"))
 app.use("/advertisement", require("./controllers/AdvertisementController"))
 app.use("/favorite", authenticate, require("./controllers/FavoriteController"))
+app.use("/administrator", authenticate, require("./controllers/AdministratorController"))
 
 // Rota inexistente
 app.use((req, res) => {

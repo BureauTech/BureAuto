@@ -84,6 +84,20 @@ module.exports = {
     updateUser: async function(use_edt) {
         const RepositoryUser = await Repository.get(Repository.User)
         RepositoryUser.update({use_cod: use_edt.use_cod}, use_edt)
+    },
+
+    getAllUsers: async function() {
+        const RepositoryCryptography = await Repository.get(Repository.Cryptography)
+        const RepositoryUser = await Repository.get(Repository.User)
+
+        const returnCryptography = await RepositoryCryptography.find()
+
+        const returnUsers = await Promise.all(returnCryptography.map(async(cryptography) => {
+            return (await RepositoryUser.query(`SELECT * from decrypt_user(${cryptography.cry_use_cod})`))[0]
+        }))
+
+        return returnUsers
     }
+
 
 }
