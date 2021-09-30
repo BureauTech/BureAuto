@@ -1,4 +1,4 @@
-const {Not} = require("typeorm")
+const {Not, MoreThan} = require("typeorm")
 const Repository = require("../database/Repository")
 
 module.exports = {
@@ -31,50 +31,43 @@ module.exports = {
     },
 
     getAdvertiserReport: async function(user) {
-        const RepositoryFavorite = await Repository.get(Repository.Favorite)
-        const advertisementFavoritedCount = (await RepositoryFavorite.createQueryBuilder("favorite")
-            .distinctOn(["favorite.fav_adv_cod"])
-            .leftJoin("advertisement", "advertisement", "favorite.fav_adv_cod = advertisement.adv_cod")
-            .where("advertisement.adv_use_cod = :adv_use_cod", {adv_use_cod: user.use_cod})
-            .andWhere("advertisement.adv_sty_cod != :status", {status: 2})
-            .getMany()).length
+        const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
+        const advertisementFavoritedCount = await RepositoryAdvertisement.count({
+            adv_use_cod: user.use_cod,
+            adv_favorites: MoreThan(0),
+            adv_sty_cod: Not(2)
+        })
+
         //  Se não tem nenhum, é 0%
         if (!advertisementFavoritedCount) {
-            return "0%"
+            return "0,00%"
         }
-
-        const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
         const allAdvertisementCount = await RepositoryAdvertisement.count({adv_use_cod: user.use_cod, adv_sty_cod: Not(2)})
         
         //  Se não tem nenhum, é 0%
         if (!allAdvertisementCount) {
-            return "0%"
+            return "0,00%"
         }
-        
-        return `${(advertisementFavoritedCount * 100 / allAdvertisementCount).toFixed(0)}%`
+        return `${(advertisementFavoritedCount * 100 / allAdvertisementCount).toFixed(2)}%`.replace(".", ",")
     },
 
     getAdminReport: async function() {
-        const RepositoryFavorite = await Repository.get(Repository.Favorite)
-        // distinctOn(["favorite.fav_adv_cod"]) -> Remove anúncios duplicados na query
-        const allAdvertisementFavoritedCount = (await RepositoryFavorite.createQueryBuilder("favorite")
-            .distinctOn(["favorite.fav_adv_cod"])
-            .leftJoin("advertisement", "advertisement", "favorite.fav_adv_cod = advertisement.adv_cod")
-            .getMany()).length
+        const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
+        const allAdvertisementFavoritedCount = await RepositoryAdvertisement.count({
+            adv_favorites: MoreThan(0),
+            adv_sty_cod: Not(2)
+        })
 
         //  Se não tem nenhum, é 0%
         if (!allAdvertisementFavoritedCount) {
-            return "0%"
+            return "0,00%"
         }
-
-        const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
-        const allAdvertisementCount = await RepositoryAdvertisement.count()
+        const allAdvertisementCount = await RepositoryAdvertisement.count({adv_sty_cod: Not(2)})
 
         //  Se não tem nenhum, é 0%
         if (!allAdvertisementCount) {
-            return "0%"
+            return "0,00%"
         }
-
-        return `${(allAdvertisementFavoritedCount * 100 / allAdvertisementCount).toFixed(0) }%`
+        return `${(allAdvertisementFavoritedCount * 100 / allAdvertisementCount).toFixed(2) }%`.replace(".", ",")
     }
 }
