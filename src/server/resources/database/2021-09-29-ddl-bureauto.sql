@@ -158,6 +158,20 @@ create index advertisement_adv_sty_cod_fkey on advertisement using btree (adv_st
 
 -- ##################### starts triggers ######################## --
 
+create or replace function delete_cryptography()
+returns trigger as $$
+begin
+	update advertisement set adv_sty_cod = 2
+	where adv_use_cod = old.cry_use_cod;
+	return old;
+end;
+$$ language plpgsql;
+create trigger trg_delete_cryptography
+before delete on cryptography
+for each row
+execute procedure delete_cryptography();
+
+
 create or replace function insert_favorite()
 returns trigger as $$
 begin
