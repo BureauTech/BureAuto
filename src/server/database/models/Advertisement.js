@@ -48,7 +48,8 @@ module.exports = new EntitySchema({
         },
         adv_sty_cod: {
             type: "bigint",
-            nullable: false
+            nullable: false,
+            default: 1
         },
         adv_created_at: {
             type: "timestamp with time zone",

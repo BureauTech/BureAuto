@@ -25,9 +25,9 @@ module.exports = {
         })
     },
 
-    deleteFavorite: async function(fav_cod, user) {
+    deleteFavorite: async function(fav_adv_cod, user) {
         const RepositoryFavorite = await Repository.get(Repository.Favorite)
-        return await RepositoryFavorite.delete({fav_cod: fav_cod, fav_use_cod: user.use_cod})
+        return await RepositoryFavorite.delete({fav_adv_cod: fav_adv_cod, fav_use_cod: user.use_cod})
     },
 
     getAdvertiserReport: async function(user) {
@@ -36,7 +36,7 @@ module.exports = {
             .distinctOn(["favorite.fav_adv_cod"])
             .leftJoin("advertisement", "advertisement", "favorite.fav_adv_cod = advertisement.adv_cod")
             .where("advertisement.adv_use_cod = :adv_use_cod", {adv_use_cod: user.use_cod})
-            .andWhere("advertisement.adv_status != :status", {status: "paused"})
+            .andWhere("advertisement.adv_sty_cod != :status", {status: 2})
             .getMany()).length
         //  Se não tem nenhum, é 0%
         if (!advertisementFavoritedCount) {
@@ -44,7 +44,7 @@ module.exports = {
         }
 
         const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
-        const allAdvertisementCount = await RepositoryAdvertisement.count({adv_use_cod: user.use_cod, adv_status: Not("paused")})
+        const allAdvertisementCount = await RepositoryAdvertisement.count({adv_use_cod: user.use_cod, adv_sty_cod: Not(2)})
         
         //  Se não tem nenhum, é 0%
         if (!allAdvertisementCount) {

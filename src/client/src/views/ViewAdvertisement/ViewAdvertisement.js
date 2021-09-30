@@ -43,7 +43,7 @@ export default {
                 try {
                     if (this.favorite) {
                         // delete
-                        await axios.delete(`/favorite/${this.favorite.fav_cod}`)
+                        await axios.delete(`/favorite/${this.favorite.fav_adv_cod}`)
                         this.favorite = undefined
                     } else {
                         // create

@@ -44,7 +44,7 @@ export default {
         },
         logout: async function() {
             await axios.get("/logout")
-            window.location.href = "/login"
+            window.location.href = "/"
         }
     },
     created: function() {
