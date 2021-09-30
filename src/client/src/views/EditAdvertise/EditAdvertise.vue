@@ -36,6 +36,29 @@
           />
 
         </div>
+        <div>
+
+          <p class="bahama--text font-weight-medium pt-2">Selecione a imagem</p>
+          <v-file-input
+            v-model="files"
+            placeholder="Selecione a imagem"
+            outlined
+            rounded
+            height="auto"
+            color="bahama"
+            accept="image/*"
+            @change="imageUploaded"
+          />
+          <v-col>
+            <img
+              width="100%"
+              id="image"
+              src="@/assets/bureauto_sem_fundo.png"
+            />
+          </v-col>
+
+        </div>
+
       </v-col>
 
       <v-col
@@ -77,21 +100,6 @@
             />
           </v-col>
         </v-row>
-      </v-col>
-    </v-row>
-
-    <v-row
-      class="align-start justify-start"
-      no-gutters
-    >
-      <v-col
-        md="7"
-        offset="1"
-      >
-        <v-img
-          src="@/assets/bureauto_sem_fundo.png"
-          alt="Imagem do anúncio"
-        />
       </v-col>
     </v-row>
 

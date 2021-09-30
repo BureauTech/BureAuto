@@ -18,6 +18,7 @@ export default {
         }
     },
     methods: {
+        
         getAdvertisement: async function() {
             try {
                 const {data} = await axios.get(`/advertisement/${this.$route.params.id}`)
@@ -33,6 +34,7 @@ export default {
                 this.$router.push("/")
             }
         },
+
         editAdvertisement: function() {
             try {
                 const adv_edt = {
@@ -52,10 +54,24 @@ export default {
                 this.$toasted.error("Ocorreu um erro ao fazer a requisição")
             }
         },
+
         cancel: function() {
             this.$router.push(`/anuncio/${this.advertisement.adv_cod}`)
             window.location.reload()
+        },
+
+        imageUploaded: function() {
+            const file = document.querySelector("input[type=file]")["files"][0]
+            const reader = new FileReader()
+	
+            reader.onload = function() {
+                const base64String = reader.result.replace("data:", "")
+                    .replace(/^.+,/, "")
+                document.getElementById("image").src=`data:image/jpeg;base64,${base64String}`
+            }
+            reader.readAsDataURL(file)
         }
+
     },
     created: async function() {
         await this.getAdvertisement()
