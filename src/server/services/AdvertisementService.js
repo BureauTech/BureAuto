@@ -65,6 +65,7 @@ module.exports = {
             }
         })
         if (!advertisement) return
-        return await RepositoryAdvertisement.save({adv_cod: adv_cod, adv_use_cod: user.use_cod, adv_sty_cod: 2})
+        advertisement.adv_sty_cod = 2
+        return await RepositoryAdvertisement.save(advertisement)
     }
 }
