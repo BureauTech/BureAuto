@@ -1,5 +1,11 @@
 <template>
   <div>
+      <v-progress-linear
+      :active="loading"
+        color="deep-purple"
+        height="10"
+        indeterminate
+      ></v-progress-linear>
 
     <v-row class="mt-5 justify-space-around align-start">
 
@@ -40,7 +46,6 @@
 
           <p class="bahama--text font-weight-medium pt-2">Selecione a imagem</p>
           <v-file-input
-            v-model="files"
             placeholder="Selecione a imagem"
             outlined
             rounded
@@ -52,6 +57,7 @@
           <v-col>
             <img
               width="100%"
+              style="border-radius:40px"
               id="image"
               src="@/assets/bureauto_sem_fundo.png"
             />
@@ -132,6 +138,12 @@
         </v-btn>
       </v-col>
     </v-row>
+    <v-progress-linear
+      :active="loading"
+        color="deep-purple"
+        height="10"
+        indeterminate
+      ></v-progress-linear>
   </div>
 </template>
 

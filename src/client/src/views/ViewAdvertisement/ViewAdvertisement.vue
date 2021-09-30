@@ -12,11 +12,15 @@
             >
             </span>
           </p>
-          <v-img
-            src="@/assets/bureauto_sem_fundo.png"
-            alt="Imagem do anúncio"
-          />
         </div>
+
+          <img
+              width="100%"
+              id="image"
+              src="@/assets/bureauto_sem_fundo.png"
+            />
+
+
       </v-col>
       <v-col md="4">
         <Card
