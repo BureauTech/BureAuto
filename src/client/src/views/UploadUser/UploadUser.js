@@ -16,10 +16,21 @@ export default {
     },
     data: function() {
         return {
-            csvFile: null
+            csvFile: null,
+            headers: [{text: "Nome", align: "start", value: "use_name"}, {text: "E-mail",
+                value: "use_email"
+            }, {text: "Editar", value: "edit"}, {text: "Excluir", value: "delete"}],
+            users: []
         }
     },
+    beforeMount: function() {
+        this.getUsers()
+    },
     methods: {
+        getUsers: async function() {
+            const response = await axios.get("/administrator/")
+            this.users = response.data.data
+        },
         importData: async function() {
             if (this.csvFile) {
                 const formData = new FormData()
@@ -50,6 +61,12 @@ export default {
         },
         attachFile: function(file) {
             this.csvFile = file
+        },
+        Edit(item) {
+            console.log(item)
+        },
+        Delete(item) {
+            console.log(item)
         }
     }
 }

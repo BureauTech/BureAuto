@@ -15,10 +15,23 @@ export default {
     },
     data: function() {
         return {
-            csvFile: null
+            csvFile: null,
+            headers: [{text: "Veículo",
+                align: "start",
+                value: "adv_model_description"
+                // eslint-disable-next-line max-len
+            }, {text: "Status", value: "adv_status"}, {text: "Valor (R$)", value: "adv_value"}, {text: "Ano Fabricação", value: "adv_year_manufacture"}, {text: "Ano Modelo", value: "adv_year_model"}, {text: "Visualizações", value: "adv_views"}, {text: "Favoritados", value: "adv_favorites"}, {text: "Exibir", value: "show"}, {text: "Editar", value: "edit"}, {text: "Editar Status", value: "editStatus"}],
+            advertisements: []
         }
     },
+    beforeMount: function() {
+        this.getAds()
+    },
     methods: {
+        getAds: async function() {
+            const response = await axios.get("/advertisement/all")
+            this.advertisements = response.data.data
+        },
         importData: async function() {
             if (this.csvFile) {
                 const formData = new FormData()
@@ -49,6 +62,15 @@ export default {
         },
         attachFile: function(file) {
             this.csvFile = file
+        },
+        Edit(item) {
+            console.log(item)
+        },
+        EditStatus(item) {
+            console.log(item)
+        },
+        Show(item) {
+            console.log(item)
         }
     }
 }
