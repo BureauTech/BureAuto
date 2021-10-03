@@ -11,18 +11,20 @@ module.exports = new EntitySchema({
         },
         mes_use_cod: {
             type: "bigint",
-            unique: true,
             nullable: false
         },
         mes_cha_cod: {
             type: "bigint",
-            unique: true,
             nullable: false
         },
         mes_text: {
             type: "varchar",
-            unique: true,
             nullable: false
+        },
+        mes_created_at: {
+            type: "timestamp with time zone",
+            nullable: false,
+            default: "current_timestamp"
         }
     },
     relations: {

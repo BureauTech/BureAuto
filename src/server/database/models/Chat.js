@@ -3,6 +3,10 @@ const EntitySchema = require("typeorm").EntitySchema
 module.exports = new EntitySchema({
     name: "Chat",
     tableName: "chat",
+    uniques: [{
+        name: "chat_cha_use_cod_cha_adv_cod_ukey",
+        columns: ["cha_use_cod", "cha_adv_cod"]
+    }],
     columns: {
         cha_cod: {
             primary: true,
@@ -11,13 +15,16 @@ module.exports = new EntitySchema({
         },
         cha_use_cod: {
             type: "bigint",
-            unique: true,
             nullable: false
         },
         cha_adv_cod: {
             type: "bigint",
-            unique: true,
             nullable: false
+        },
+        cha_created_at: {
+            type: "timestamp with time zone",
+            nullable: false,
+            default: "current_timestamp"
         }
     },
     relations: {
@@ -36,6 +43,15 @@ module.exports = new EntitySchema({
                 name: "cha_adv_cod",
                 referencedColumnName: "adv_cod"
             }
-        }  
+        },
+        Message: {
+            type: "one-to-one",
+            target: "message",
+            joinColumn: {
+                name: "cha_cod",
+                referencedColumnName: "mes_cha_cod",
+                inverseSide: "chat"
+            }
+        } 
     }
 })

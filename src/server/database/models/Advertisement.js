@@ -10,10 +10,12 @@ module.exports = new EntitySchema({
             generated: true
         },
         adv_use_cod: {
-            type: "bigint"
+            type: "bigint",
+            nullable: false
         },
         adv_man_cod: {
-            type: "bigint"
+            type: "bigint",
+            nullable: false
         },
         adv_brand_description: {
             type: "varchar"
@@ -25,10 +27,14 @@ module.exports = new EntitySchema({
             type: "double precision"
         },
         adv_favorites: {
-            type: "integer"
+            type: "integer",
+            default: 0,
+            nullable: false
         },
         adv_views: {
-            type: "integer"
+            type: "integer",
+            default: 0,
+            nullable: false
         },
         adv_year_model: {
             type: "integer"
@@ -40,8 +46,15 @@ module.exports = new EntitySchema({
             type: "bytea",
             array: true
         },
-        adv_status: {
-            type: "varchar"
+        adv_sty_cod: {
+            type: "bigint",
+            nullable: false,
+            default: 1
+        },
+        adv_created_at: {
+            type: "timestamp with time zone",
+            nullable: false,
+            default: "current_timestamp"
         }
     },
     relations: {
@@ -67,6 +80,23 @@ module.exports = new EntitySchema({
             joinColumn: {
                 name: "adv_cod",
                 referencedColumnName: "fav_adv_cod"
+            }
+        },
+        StatusType: {
+            type: "one-to-one",
+            target: "status_type",
+            joinColumn: {
+                name: "adv_sty_cod",
+                referencedColumnName: "sty_cod"
+            }
+        },
+        Chat: {
+            type: "one-to-one",
+            target: "chat",
+            joinColumn: {
+                name: "adv_cod",
+                referencedColumnName: "cha_adv_cod",
+                inverseSide: "advertisement"
             }
         }
     }

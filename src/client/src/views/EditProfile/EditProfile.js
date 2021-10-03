@@ -14,12 +14,14 @@ export default {
                 use_phone: "",
                 use_address: "",
                 use_email: ""
-            }
+            },
+            loading: false
         }
     },
       
     methods: {
         editUser: function() {
+            this.loading = true
             try {
                 const data = {
                     use_cod: this.userInf.use_cod,
@@ -31,8 +33,13 @@ export default {
                     use_email: this.userInf.use_email
                 }
                 axios.put("/user/edit", data)
-                this.$toasted.success("Usuário alterado com sucesso!")
-                this.logout()
+                    .then(res => {
+                        if(res.data.success) {
+                            this.$toasted.success("Usuário alterado com sucesso!")
+                            this.logout()
+                            this.loading = false
+                        }
+                    })
                 
             } catch (error) {
                 this.$toasted.error("Ocorreu um erro ao fazer a requisição")
@@ -44,7 +51,7 @@ export default {
         },
         logout: async function() {
             await axios.get("/logout")
-            window.location.href = "/login"
+            window.location.href = "/"
         }
     },
     created: function() {

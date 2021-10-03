@@ -4,20 +4,20 @@ module.exports = new EntitySchema({
     name: "Favorite",
     tableName: "favorite",
     columns: {
-        fav_cod: {
-            primary: true,
-            type: "bigint",
-            generated: true
-        },
         fav_use_cod: {
             type: "bigint",
-            unique: true,
-            nullable: false
+            nullable: false,
+            primary: true
         },
         fav_adv_cod: {
             type: "bigint",
-            unique: true,
-            nullable: false
+            nullable: false,
+            primary: true
+        },
+        fav_created_at: {
+            type: "timestamp with time zone",
+            nullable: false,
+            default: "current_timestamp"
         }
     },
     relations: {
