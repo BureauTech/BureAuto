@@ -1,6 +1,7 @@
 import Card from "@/components/Card/Card.vue"
 import Button from "@/components/Button/Button.vue"
 import axios from "@/axios.js"
+import imageConverterUtil from "@/utils/imageConverterUtil"
 
 export default {
     name: "ViewAdvertisement",
@@ -31,9 +32,8 @@ export default {
                     this.advertisement = data.data
 
                     if(this.advertisement.adv_images != null) {
-                        document.getElementById("image").src=`data:image/jpeg;base64,
-                        ${this.arrayBufferToString(this.advertisement.adv_images[0].data)}`
-                        //console.log("sim")
+                        document.getElementById("image").src=`
+                        ${imageConverterUtil.arrayBufferToString(this.advertisement.adv_images)}`
                     }
                 } else {
                     this.$router.push("/")
@@ -80,26 +80,8 @@ export default {
             } catch (error) {
                 this.$toasted.error("Ocorreu um erro ao verificar o favorito")
             }
-        },
-
-        arrayBufferToString: function(buffer) {
-
-            const bufView = new Uint16Array(buffer)
-            const length = bufView.length
-            let result = ""
-            let addition = Math.pow(2, 16)-1
-        
-            for(let i = 0;i<length;i+=addition) {
-        
-                if(i + addition > length) {
-                    addition = length - i
-                }
-                result += String.fromCharCode.apply(null, bufView.subarray(i, i+addition))
-            }
-        
-            return result
-        
         }
+        
     },
     created: async function() {
         await this.getAdvertisement()
