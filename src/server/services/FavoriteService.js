@@ -68,9 +68,8 @@ module.exports = {
         if (!allAdvertisementCount) {
             return "0,00%"
         }
-<<<<<<< HEAD
 
-        return `${(allAdvertisementFavoritedCount * 100 / allAdvertisementCount).toFixed(0) }%`
+        return `${(allAdvertisementFavoritedCount * 100 / allAdvertisementCount).toFixed(2) }%`.replace(".", ",")
     },
 
     getAllFavorites: async function() {
@@ -86,9 +85,6 @@ module.exports = {
         }
 
         return allFavorites
-=======
-        return `${(allAdvertisementFavoritedCount * 100 / allAdvertisementCount).toFixed(2) }%`.replace(".", ",")
->>>>>>> c7d342d0dd6887b807f0ff0d419d5f5544054fbe
     }
     
 }
