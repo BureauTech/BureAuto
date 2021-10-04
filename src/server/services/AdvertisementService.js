@@ -54,7 +54,7 @@ module.exports = {
 
     getNumberOfAds: async function() {
         const connection = await Connection
-        return (await connection.query("select count(adv_sty_cod) as total_ads from advertisement where adv_sty_cod = 'active'"))[0]
+        return (await connection.query("select count(adv_sty_cod) as total_ads from advertisement where adv_sty_cod = 1"))[0]
     },
 
     deleteAdvertisement: async function(adv_cod, user) {

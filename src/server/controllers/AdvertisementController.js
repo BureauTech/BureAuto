@@ -7,7 +7,7 @@ const AdvertisementService = require("../services/AdvertisementService")
 router.get("/total-advertisements", async(req, res) => {
     try {
         const total = await AdvertisementService.getNumberOfAds()
-        return res.json({total: total.total_ads})
+        return res.json({success: true, total: total.total_ads})
     }  catch (error) {
         console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
