@@ -69,7 +69,7 @@ module.exports = {
             return "0,00%"
         }
 
-        return `${(allAdvertisementFavoritedCount * 100 / allAdvertisementCount).toFixed(0) }%`
+        return `${(allAdvertisementFavoritedCount * 100 / allAdvertisementCount).toFixed(2) }%`.replace(".", ",")
     },
 
     getAllFavorites: async function() {
