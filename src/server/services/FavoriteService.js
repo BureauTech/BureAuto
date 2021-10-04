@@ -76,5 +76,21 @@ module.exports = {
         }
 
         return `${(allAdvertisementFavoritedCount * 100 / allAdvertisementCount).toFixed(0) }%`
+    },
+
+    getAllFavorites: async function() {
+        const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
+
+        const allFavorites = (await RepositoryAdvertisement.createQueryBuilder("advertisement")
+            .innerJoin("favorite", "favorite", "favorite.fav_adv_cod = advertisement.adv_cod")
+            .getMany())
+
+        //  Se não tem nenhum, é 0%
+        if (!allFavorites) {
+            return "0%"
+        }
+
+        return allFavorites
     }
+    
 }

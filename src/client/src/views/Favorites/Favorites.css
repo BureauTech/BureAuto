@@ -1,3 +1,7 @@
 .no-negative {
     margin: 0px !important;
 }
+
+.margin-layout {
+    margin-top: 20px;
+}
