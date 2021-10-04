@@ -32,7 +32,7 @@
         </v-col>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-else>
       <v-col>
         <Card
           :roundLevel="0"
@@ -67,14 +67,6 @@
                   @click="Show(item)"
                 >
                   <v-icon>mdi-eye</v-icon>
-                </v-btn>
-              </template>
-              <template v-slot:item.editStatus="{ item }">
-                <v-btn
-                  small
-                  @click="EditStatus(item)"
-                >
-                  <v-icon>mdi-autorenew</v-icon>
                 </v-btn>
               </template>
             </v-data-table>
