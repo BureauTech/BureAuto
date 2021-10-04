@@ -96,7 +96,7 @@
         >
           <p class="text-h4 bahama--text font-weight-medium pt-2">Descrição do veículo</p>
           <p
-            class="text-subtitle-1 text-left px-10 pb-2"
+            class="text-subtitle-1 text-left px-10 pb-2 breakline"
             v-text="advertisement.adv_brand_description"
           ></p>
         </Card>
@@ -106,3 +106,4 @@
 </template>
 
 <script src="./ViewAdvertisement.js" />
+<style src="./ViewAdvertisement.css" />
