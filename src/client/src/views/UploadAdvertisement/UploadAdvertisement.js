@@ -20,7 +20,7 @@ export default {
                 align: "start",
                 value: "adv_model_description"
                 // eslint-disable-next-line max-len
-            }, {text: "Status", value: "adv_status"}, {text: "Valor (R$)", value: "adv_value"}, {text: "Ano Fabricação", value: "adv_year_manufacture"}, {text: "Ano Modelo", value: "adv_year_model"}, {text: "Visualizações", value: "adv_views"}, {text: "Favoritados", value: "adv_favorites"}, {text: "Exibir", value: "show"}, {text: "Editar", value: "edit"}, {text: "Editar Status", value: "editStatus"}],
+            }, {text: "Status", value: "sty_description"}, {text: "Valor (R$)", value: "adv_value"}, {text: "Ano Fabricação", value: "adv_year_manufacture"}, {text: "Ano Modelo", value: "adv_year_model"}, {text: "Visualizações", value: "adv_views"}, {text: "Favoritados", value: "adv_favorites"}, {text: "Exibir", value: "show"}, {text: "Editar", value: "edit"}],
             advertisements: []
         }
     },
@@ -29,8 +29,12 @@ export default {
     },
     methods: {
         getAds: async function() {
-            const response = await axios.get("/advertisement/all")
+            const status = {1: "Ativo", 3: "Pausado"}
+            const response = await axios.get(`advertisement/all/${this.$store.getters.getUser.use_cod}`)
             this.advertisements = response.data.data
+            this.advertisements.forEach(ad => {
+                ad.sty_description = status[ad.adv_sty_cod]
+            })
         },
         importData: async function() {
             if (this.csvFile) {
@@ -64,13 +68,10 @@ export default {
             this.csvFile = file
         },
         Edit(item) {
-            console.log(item)
-        },
-        EditStatus(item) {
-            console.log(item)
+            this.$router.push(`/editar-anuncio/${item.adv_cod}`)
         },
         Show(item) {
-            console.log(item)
+            this.$router.push(`/anuncio/${item.adv_cod}`)
         }
     }
 }
