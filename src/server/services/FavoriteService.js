@@ -74,11 +74,11 @@ module.exports = {
 
     getAllFavorites: async function() {
         const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
-
         const allFavorites = (await RepositoryAdvertisement.createQueryBuilder("advertisement")
             .innerJoin("favorite", "favorite", "favorite.fav_adv_cod = advertisement.adv_cod")
+            .where("advertisement.adv_sty_cod != :advertisement", {advertisement: 2})
             .getMany())
-
+            
         //  Se não tem nenhum, é 0%
         if (!allFavorites) {
             return "0%"
