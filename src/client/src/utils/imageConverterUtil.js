@@ -1,7 +1,7 @@
 export default {
     arrayBufferToString: function(bufferArray) {
         if(!bufferArray) {
-            return "@/assets/bureauto_sem_fundo.png"
+            return "https://raw.githubusercontent.com/BureauTech/BureAuto/master/doc/img/bureauto_sem_fundo.png"
         }
         
         const buffer = bufferArray[0].data
