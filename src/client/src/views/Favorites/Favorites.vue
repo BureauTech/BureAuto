@@ -35,8 +35,8 @@
         >
           <v-card-title>
             <v-col
-              align="right"
-              cols="7"
+              align="center"
+              cols="12"
               v-text="ad.adv_model_description + ' - ' + ad.adv_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })"
             >
             </v-col>
