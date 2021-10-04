@@ -38,10 +38,10 @@ router.post("/register", async(req, res) => {
     }
 })
 
-router.delete("/:fav_cod", async(req, res) => {
+router.delete("/:fav_adv_cod", async(req, res) => {
     try {
-        const {fav_cod} = req.params
-        await FavoriteService.deleteFavorite(fav_cod, req.user)
+        const {fav_adv_cod} = req.params
+        await FavoriteService.deleteFavorite(fav_adv_cod, req.user)
         return res.status(200).send({success: true})
     } catch (error) {
         console.log(error)

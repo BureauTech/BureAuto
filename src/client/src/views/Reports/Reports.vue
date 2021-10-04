@@ -1,22 +1,25 @@
 <template>
-  <v-app>
-    <v-col
-      max-width="10%"
-      cols="16"
-      align="left"
-    >
-      Desempenho dos Anúncios
-    </v-col>
-    <v-layout
-      row
-      justify-center
-      align-top
-      class="no-negative"
-    >
-      <ReportCard title="Engajamento geral dos anúncios" :content="engagement" />
-      <ReportCard title="Engajamento dos anúncios favoritos" :content="favorite" />
-    </v-layout>
-  </v-app>
+  <v-container>
+    <v-row>
+      <v-col
+        cols="12"
+        align="left"
+      >
+        Desempenho dos Anúncios
+      </v-col>
+    </v-row>
+    <v-row>
+      <ReportCard
+        title="Engajamento da plataforma"
+        :content="platform"
+        v-if="is_admin"
+      />
+      <ReportCard
+        title="Engajamento dos anúncios favoritos"
+        :content="favorite"
+      />
+    </v-row>
+  </v-container>
 </template>
 
 <script src="./Reports.js"></script>

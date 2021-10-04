@@ -1,5 +1,11 @@
 <template>
   <v-app>
+    <v-progress-linear
+      :active="loading"
+        color="deep-purple"
+        height="10"
+        indeterminate
+      ></v-progress-linear>
     <v-layout
       row
       justify-center
