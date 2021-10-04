@@ -34,9 +34,17 @@
         <v-card-title>
           <v-col
             align="right"
-            cols="11"
+            cols="10"
             v-text="ad.adv_model_description + ' - ' + ad.adv_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })"
           >
+          </v-col>
+          <v-col align="right">
+            <v-icon
+              large
+              @click="viewAdvertisement(ad.adv_cod)"
+            >
+              mdi-eye
+            </v-icon>
           </v-col>
           <v-col align="right">
             <v-icon

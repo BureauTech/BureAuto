@@ -25,6 +25,12 @@ export default {
                 await axios.delete(`/favorite/${adv_cod}`)
                 this.ads.splice(index, 1)
             }
+        },
+
+        viewAdvertisement: async function(adv_cod) {
+            if (this.$store.getters.isAuthenticated) {
+                this.$router.push(`/anuncio/${adv_cod}`)
+            }
         }
     },
     beforeMount: function() {
