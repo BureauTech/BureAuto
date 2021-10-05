@@ -81,4 +81,15 @@ router.delete("/:adv_cod", authenticate, async(req, res) => {
     }
 })
 
+router.get("/search/:term", async(req, res) => {
+    try {
+        const {term} = req.params
+        const advertisement = await AdvertisementService.searchAdvertisement(term)
+        return res.status(200).send({success: true, data: advertisement})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
 module.exports = router
