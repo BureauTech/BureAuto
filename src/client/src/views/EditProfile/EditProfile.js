@@ -54,8 +54,6 @@ export default {
         }
     },
     mounted: function() {
-        console.log(this.$route)
-        console.log(`adm: ${this.$store.getters.getUser.use_is_admin}`)
         if (this.$route.params.user && this.$store.getters.getUser.use_is_admin) {
             this.userInf = this.$route.params.user
         } else {
@@ -63,7 +61,3 @@ export default {
         }
     }
 }
-
-
-// add rota para buscar usuarios para listagem adm, 
-//add edit usuario a artir de listagem de usuario"
