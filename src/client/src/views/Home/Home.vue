@@ -97,7 +97,7 @@
                 rounded="xl"
               >
                 <v-img
-                  src="@/assets/bureauto_sem_fundo.png"
+                  :src="imageConverter.arrayBufferToString(ad.adv_images)"
                   alt="Logo da bureAuto"
                   max-height="300"
                 >

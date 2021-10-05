@@ -13,12 +13,14 @@
         <v-row>
           <v-col>
             <p class="bahama--text font-weight-medium pt-2">Marca</p>
-            <v-text-field
+            <v-select
               outlined
               rounded
               color="bahama"
+              :items="advertisement.adv_brands"
               v-model="advertisement.Manufacturer.man_name"
-            />
+            >
+            </v-select>
           </v-col>
           <v-col>
             <p class="bahama--text font-weight-medium pt-2">Modelo</p>
@@ -103,6 +105,16 @@
               rounded
               color="bahama"
               v-model="advertisement.adv_value"
+            />
+          </v-col>
+          <v-col md="6">
+            <p class="bahama--text font-weight-medium pt-2">Status</p>
+            <v-select
+              outlined
+              rounded
+              color="bahama"
+              :items="status"
+              v-model="advertisement.adv_sty_cod"
             />
           </v-col>
         </v-row>

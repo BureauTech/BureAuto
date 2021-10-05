@@ -32,6 +32,7 @@ module.exports = {
                 setTimeout(function() {
                     parser.resume()
                 }, 500)
+                console.log(user.data)
                 const template = "templates/FirstAccessTemplate.ejs"
                 EmailService.sendEmail("BureAuto", user.data.email, "BureAuto - Primeiro Acesso", template, user.data)
 

@@ -9,18 +9,14 @@ export default {
 
     data: function() {
         return {
-            engagement: [{
-                text: "N. de visualizações do anúncio: ",
-                value: 300
-            }, {
-                text: "N. de pessoas que entraram em contato: ",
-                value: 20
-            }, {
-                text: "Percentual de engajamento do anúncio: ",
-                value: "6,67%"
-            }],
+            is_admin: this.$store.getters.getUser.use_is_admin,
             favorite: [{
-                text: "Porcentagem de anúncios favoritados: ",
+                text: this.is_admin?
+                    "Porcentagem de anúncios favoritados na plataforma: " : "Porcentagem de anúncios favoritados: ",
+                value: ""
+            }],
+            platform: [{
+                text: "Quantidade total de anúncios ativos: ",
                 value: ""
             }]
         }
@@ -29,9 +25,19 @@ export default {
     methods: {
         getFavoriteReport: async function() {
             try {
-                const {data} = await axios.get("/favorite/report")
+                const {data} = await axios.get(`/favorite/report${this.is_admin? "/admin" : ""}`)
                 if (data.success) {
                     this.favorite[0].value = data.data
+                }
+            } catch (error) {
+                this.$toasted.error("Ocorreu um erro ao buscar o relatório de favoritos")
+            }
+        },
+        getTotalAds: async function() {
+            try {
+                const {data} = await axios.get("/advertisement/total-advertisements")
+                if (data.success) {
+                    this.platform[0].value = data.total
                 }
             } catch (error) {
                 this.$toasted.error("Ocorreu um erro ao buscar o relatório de favoritos")
@@ -41,5 +47,8 @@ export default {
 
     created: function() {
         this.getFavoriteReport()
+        if (this.is_admin) {
+            this.getTotalAds()
+        }
     }
 }

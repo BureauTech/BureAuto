@@ -1,8 +1,12 @@
 <template>
   <div>
 
-    <v-row class="mt-5 justify-space-around align-start">
-      <v-col md="5">
+    <v-row class="mt-5 justify-space-around align-start" no-gutters>
+      <v-col
+        md="5"
+        sm="8"
+        cols="11"
+      >
         <div>
           <p class="text-h3 bahama--text">
             {{advertisement.Manufacturer.man_name}}
@@ -14,22 +18,26 @@
           </p>
         </div>
 
-          <img
-              width="100%"
-              id="image"
-              src="@/assets/bureauto_sem_fundo.png"
-            />
-
+        <img
+          width="100%"
+          id="image"
+          src="@/assets/bureauto_sem_fundo.png"
+        />
 
       </v-col>
-      <v-col md="4">
+      <v-col
+        md="5"
+        sm="8"
+        cols="11"
+      >
         <Card
           :roundLevel="4"
-          cols="9"
+          lg="9"
+          sm="12"
         >
-          <v-col cols="10">
+          <v-col md="10" sm="11" cols="12">
             <p
-              class="text-h3 bahama--text font-weight-bold"
+              class="text-h4 bahama--text font-weight-bold"
               v-text="advertisement.adv_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })"
             ></p>
             <p class="text-h5 bahama--text font-weight-medium">Sobre esse veículo</p>
@@ -82,13 +90,12 @@
         </Card>
       </v-col>
     </v-row>
-    <v-row
-      class="align-start justify-start"
-      no-gutters
-    >
+    <v-row class="mt-5 justify-space-around align-start" no-gutters>
       <v-col
-        md="7"
-        offset="1"
+        lg="5"
+        md="6"
+        sm="8"
+        cols="11"
       >
         <Card
           :roundLevel="2"
@@ -96,13 +103,19 @@
         >
           <p class="text-h4 bahama--text font-weight-medium pt-2">Descrição do veículo</p>
           <p
-            class="text-subtitle-1 text-left px-10 pb-2"
+            class="text-subtitle-1 text-left px-10 pb-2 breakline"
             v-text="advertisement.adv_brand_description"
           ></p>
         </Card>
       </v-col>
+      <v-col
+        md="5"
+        sm="8"
+        cols="11"
+      ></v-col>
     </v-row>
   </div>
 </template>
 
 <script src="./ViewAdvertisement.js" />
+<style src="./ViewAdvertisement.css" />

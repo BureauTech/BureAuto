@@ -16,6 +16,17 @@ router.get("/all/:use_cod", async(req, res) => {
     }
 })
 
+router.get("/favorites/:fav_use_cod", async(req, res) => {
+    try {
+        const {fav_use_cod} = req.params
+        const favorites = await FavoriteService.getAllFavorites(fav_use_cod)
+        return res.status(200).send({success: true, data: favorites})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
 router.post("/register", async(req, res) => {
     try {
         const {adv_cod} = req.body
