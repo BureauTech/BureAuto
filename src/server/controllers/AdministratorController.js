@@ -28,7 +28,6 @@ router.put("/", async(req, res) => {
 })
 
 router.delete("/:user_id", async(req, res) => {
-    debugger
     const {user} = req
     const {user_id} = req.params
     if(!user.use_is_admin) return res.status(401).send({success: false, error: "unauthorized"})

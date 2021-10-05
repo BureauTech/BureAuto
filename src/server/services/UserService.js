@@ -68,7 +68,6 @@ module.exports = {
     },
 
     deleteUser: async function(use_cod) {
-        debugger
         const connection = await Connection
         const user = (await connection
             .query("select * from decrypt_user($1)", [use_cod]))[0]
