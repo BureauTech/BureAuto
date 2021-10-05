@@ -32,7 +32,7 @@ module.exports = {
 
     getAllAdvertisement: async function() {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
-        return await RepositoryAdvertisement.find({relations: ["Manufacturer", "StatusType"], where: {adv_sty_cod: Not(2)}})
+        return await RepositoryAdvertisement.find({relations: ["Manufacturer", "StatusType"], where: {adv_sty_cod: 1}})
     },
     getAllAdvertisementByUser: async function(adv_use_cod) {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)

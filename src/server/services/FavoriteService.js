@@ -72,11 +72,12 @@ module.exports = {
         return `${(allAdvertisementFavoritedCount * 100 / allAdvertisementCount).toFixed(2) }%`.replace(".", ",")
     },
 
-    getAllFavorites: async function() {
+    getAllFavorites: async function(fav_use_cod) {
         const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
         const allFavorites = (await RepositoryAdvertisement.createQueryBuilder("advertisement")
             .innerJoin("favorite", "favorite", "favorite.fav_adv_cod = advertisement.adv_cod")
             .where("advertisement.adv_sty_cod != :advertisement", {advertisement: 2})
+            .andWhere("favorite.fav_use_cod = :fav_use_cod", {fav_use_cod: fav_use_cod})
             .getMany())
             
         //  Se não tem nenhum, é 0%
