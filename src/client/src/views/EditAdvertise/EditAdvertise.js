@@ -1,8 +1,12 @@
 import axios from "@/axios.js"
 import imageConverterUtil from "@/utils/imageConverterUtil"
+import Card from "@/components/Card/Card.vue"
 
 export default {
     name: "ViewAdvertisement",
+    components: {
+        Card
+    },
 
     data: function() {
         return {

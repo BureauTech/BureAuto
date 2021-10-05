@@ -56,14 +56,21 @@
             accept="image/*"
             @change="imageUploaded"
           />
+          <Card
+          :roundLevel="4"
+          md="12"
+          sm="12"
+        >
           <v-col>
             <img
               width="100%"
+              height="300"
               style="border-radius:40px"
               id="image"
               src="@/assets/bureauto_sem_fundo.png"
             />
           </v-col>
+          </Card>
 
         </div>
 

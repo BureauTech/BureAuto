@@ -1,7 +1,10 @@
 <template>
   <div>
 
-    <v-row class="mt-5 justify-space-around align-start" no-gutters>
+    <v-row
+      class="mt-5 justify-space-around align-start"
+      no-gutters
+    >
       <v-col
         md="5"
         sm="8"
@@ -17,12 +20,24 @@
             </span>
           </p>
         </div>
-
-        <img
-          width="100%"
-          id="image"
-          src="@/assets/bureauto_sem_fundo.png"
-        />
+        <Card
+          :roundLevel="4"
+          md="12"
+          sm="12"
+        >
+          <v-col
+            class="align-center"
+            md="12"
+          >
+            <img
+              height="300"
+              width="100%"
+              md="6"
+              id="image"
+              src="@/assets/bureauto_sem_fundo.png"
+            />
+          </v-col>
+        </Card>
 
       </v-col>
       <v-col
@@ -35,7 +50,11 @@
           lg="9"
           sm="12"
         >
-          <v-col md="10" sm="11" cols="12">
+          <v-col
+            md="10"
+            sm="11"
+            cols="12"
+          >
             <p
               class="text-h4 bahama--text font-weight-bold"
               v-text="advertisement.adv_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })"
@@ -90,7 +109,10 @@
         </Card>
       </v-col>
     </v-row>
-    <v-row class="mt-5 justify-space-around align-start" no-gutters>
+    <v-row
+      class="mt-5 justify-space-around align-start"
+      no-gutters
+    >
       <v-col
         lg="5"
         md="6"
