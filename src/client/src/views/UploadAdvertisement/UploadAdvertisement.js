@@ -20,7 +20,7 @@ export default {
                 align: "start",
                 value: "adv_model_description"
                 // eslint-disable-next-line max-len
-            }, {text: "Status", value: "sty_description"}, {text: "Valor (R$)", value: "adv_value"}, {text: "Ano Fabricação", value: "adv_year_manufacture"}, {text: "Ano Modelo", value: "adv_year_model"}, {text: "Visualizações", value: "adv_views"}, {text: "Favoritados", value: "adv_favorites"}, {text: "Exibir", value: "show"}, {text: "Editar", value: "edit"}],
+            }, {text: "Valor (R$)", value: "adv_value"}, {text: "Ano Fabricação", value: "adv_year_manufacture"}, {text: "Ano Modelo", value: "adv_year_model"}, {text: "Visualizações", value: "adv_views"}, {text: "Favoritados", value: "adv_favorites"}, {text: "Status", value: "sty_description"}, {text: "Exibir", value: "show"}, {text: "Editar", value: "edit"}],
             advertisements: []
         }
     },
