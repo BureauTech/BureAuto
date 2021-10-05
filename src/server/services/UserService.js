@@ -76,7 +76,7 @@ module.exports = {
         if (!response.affected) {
             return false
         }
-        const template = "../templates/DeleteAccount.ejs"
+        const template = "templates/DeleteAccount.ejs"
         const data = {nome: user.use_name}
         EmailService.sendEmail("BureaAuto", user.use_email, "BureAuto - Exclusão de Conta", template, data)
         return true
