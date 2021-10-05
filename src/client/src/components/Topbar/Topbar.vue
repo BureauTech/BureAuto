@@ -55,7 +55,7 @@
           to="/cadastrar/usuario"
           class="text-decoration-none"
         >
-          Painel ADM
+          Usuários
         </router-link>
       </v-col>
       <v-col v-if="$store.getters.isAuthenticated">

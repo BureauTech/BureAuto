@@ -36,8 +36,8 @@ export default {
                     .then(res => {
                         if(res.data.success) {
                             this.$toasted.success("Usuário alterado com sucesso!")
-                            this.logout()
                             this.loading = false
+                            window.history.back()
                         }
                     })
                 
@@ -46,15 +46,24 @@ export default {
             }
         },
         cancel: function() {
-            this.$router.push("/perfil")
-            window.location.reload()
+            window.history.back()
         },
         logout: async function() {
             await axios.get("/logout")
             window.location.href = "/"
         }
     },
-    created: function() {
-        this.userInf = this.$store.getters.getUser
+    mounted: function() {
+        console.log(this.$route)
+        console.log(`adm: ${this.$store.getters.getUser.use_is_admin}`)
+        if (this.$route.params.user && this.$store.getters.getUser.use_is_admin) {
+            this.userInf = this.$route.params.user
+        } else {
+            this.userInf = this.$store.getters.getUser
+        }
     }
 }
+
+
+// add rota para buscar usuarios para listagem adm, 
+//add edit usuario a artir de listagem de usuario"

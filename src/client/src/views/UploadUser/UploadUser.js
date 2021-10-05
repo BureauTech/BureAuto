@@ -20,7 +20,9 @@ export default {
             headers: [{text: "Nome", align: "start", value: "use_name"}, {text: "E-mail",
                 value: "use_email"
             }, {text: "Editar", value: "edit"}, {text: "Excluir", value: "delete"}],
-            users: []
+            users: [],
+            dialog: false,
+            teste: undefined
         }
     },
     beforeMount: function() {
@@ -45,7 +47,7 @@ export default {
                     if (data.success) {
                         this.$toasted.success("Dados importados!")
                         setTimeout(function() { 
-                            router.push({name: "Home"}) 
+                            window.location.reload()
                         }, 3000)
                         
                     } else {
@@ -63,10 +65,24 @@ export default {
             this.csvFile = file
         },
         Edit(item) {
-            console.log(item)
+            this.$router.push({name: "EditProfile", params: {user: item}})
         },
         Delete(item) {
-            console.log(item)
+            this.dialog = true
+            this.teste = item
+            console.log(item.use_cod)
+        },
+        async DeleteUser() {
+            const response = await axios.delete(`/administrator/${this.teste.use_cod}/`)
+            this.dialog = false
+            if (!response.data.success) {
+                return this.$toasted.error("Ocorreu um erro na requisição")
+            }
+            this.$toasted.success("Usuário excluído com sucesso!")
+            setTimeout(function() { 
+                window.location.reload()
+            }, 1500)
+            console.log(response)
         }
     }
 }

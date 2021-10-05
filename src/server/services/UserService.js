@@ -67,6 +67,7 @@ module.exports = {
     },
 
     deleteUser: async function(use_cod) {
+        debugger
         const connection = await Connection
         const user = (await connection
             .query("select * from decrypt_user($1)", [use_cod]))[0]
@@ -75,7 +76,7 @@ module.exports = {
         if (!response.affected) {
             return false
         }
-        const template = "templates/DeleteAccount.ejs"
+        const template = "../templates/DeleteAccount.ejs"
         const data = {nome: user.use_name}
         EmailService.sendEmail("BureaAuto", user.use_email, "BureAuto - Exclusão de Conta", template, data)
         return true
@@ -95,8 +96,19 @@ module.exports = {
         const returnUsers = await Promise.all(returnCryptography.map(async(cryptography) => {
             return (await RepositoryUser.query(`SELECT * from decrypt_user(${cryptography.cry_use_cod})`))[0]
         }))
-
         return returnUsers
+    },
+    getAllUsersToAdm: async function(use_cod) {
+        const RepositoryCryptography = await Repository.get(Repository.Cryptography)
+        const RepositoryUser = await Repository.get(Repository.User)
+
+        const returnCryptography = await RepositoryCryptography.find()
+
+        const returnUsers = await Promise.all(returnCryptography.map(async(cryptography) => {
+            return (await RepositoryUser.query(`SELECT * from decrypt_user(${cryptography.cry_use_cod})`))[0]
+        }))
+        const usersToAdm = returnUsers.filter((user) => user.use_cod !== use_cod)
+        return usersToAdm
     }
 
 

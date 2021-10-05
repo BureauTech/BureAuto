@@ -88,17 +88,18 @@ const routes = [{
     meta: {
         requiresAuth: true
     }
-}, {
-    path: "/editar-anuncio/:id",
-    name: "EditAdvertise",
-    component: EditAdvertise,
+},
+{
+    path: "/editar-perfil",
+    name: "EditProfile",
+    component: EditProfile,
     meta: {
         requiresAuth: true
     }
 }, {
-    path: "/editar-perfil",
-    name: "EditProfile",
-    component: EditProfile,
+    path: "/editar-anuncio/:id",
+    name: "EditAdvertise",
+    component: EditAdvertise,
     meta: {
         requiresAuth: true
     }

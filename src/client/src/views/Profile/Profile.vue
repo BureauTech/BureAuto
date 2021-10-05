@@ -49,7 +49,7 @@
                           Excluir minha conta
                         </v-card-title>
                         <v-card-text>
-                          Ao clicar em "Confirmar", sua conta será permanentemente excluída, e será necessário contatar o adminstrador
+                          Ao clicar em "Confirmar", sua conta será permanentemente excluída, e será necessário contatar o administrador
                           para criação de um novo cadastro.
                         </v-card-text>
                         <v-card-actions>
@@ -73,7 +73,7 @@
                     </v-dialog>
                   </template>
                   <span>Excluir minha conta</span>
-                </v-tooltip>
+                  </v-tooltip>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn
