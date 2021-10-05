@@ -1,11 +1,11 @@
 <template>
   <div>
-      <v-progress-linear
+    <v-progress-linear
       :active="loading"
-        color="deep-purple"
-        height="10"
-        indeterminate
-      ></v-progress-linear>
+      color="deep-purple"
+      height="10"
+      indeterminate
+    ></v-progress-linear>
 
     <v-row class="mt-5 justify-space-around align-start">
 
@@ -40,7 +40,7 @@
             rounded
             height="auto"
             color="bahama"
-            v-model="advertisement.adv_brand_description"
+            v-model="advertisement.adv_description"
           />
 
         </div>
@@ -57,19 +57,19 @@
             @change="imageUploaded"
           />
           <Card
-          :roundLevel="4"
-          md="12"
-          sm="12"
-        >
-          <v-col>
-            <img
-              width="100%"
-              height="300"
-              style="border-radius:40px"
-              id="image"
-              src="@/assets/bureauto_sem_fundo.png"
-            />
-          </v-col>
+            :roundLevel="4"
+            md="12"
+            sm="12"
+          >
+            <v-col>
+              <img
+                width="100%"
+                height="300"
+                style="border-radius:40px"
+                id="image"
+                src="@/assets/bureauto_sem_fundo.png"
+              />
+            </v-col>
           </Card>
 
         </div>
@@ -159,10 +159,10 @@
     </v-row>
     <v-progress-linear
       :active="loading"
-        color="deep-purple"
-        height="10"
-        indeterminate
-      ></v-progress-linear>
+      color="deep-purple"
+      height="10"
+      indeterminate
+    ></v-progress-linear>
   </div>
 </template>
 

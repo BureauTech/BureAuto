@@ -85,7 +85,8 @@ create table advertisement (
     adv_use_cod bigint not null,
     adv_man_cod bigint not null,
     adv_sty_cod bigint not null default 1,
-    adv_brand_description varchar,
+    adv_description varchar,
+	adv_brand varchar,
     adv_model_description varchar,
     adv_value double precision,
     adv_favorites integer not null default 0,
@@ -410,21 +411,21 @@ values ('admin', true, '1234567890', 'admin', '129000000',
 
 
 insert into advertisement
-    (adv_use_cod, adv_man_cod, adv_sty_cod, adv_brand_description, adv_model_description, adv_value,
+    (adv_use_cod, adv_man_cod, adv_sty_cod, adv_description, adv_brand, adv_model_description, adv_value,
     adv_favorites, adv_views, adv_year_model, adv_year_manufacture, adv_images)
 values
- (1, 4, 1, null, 'Q3', 135900.0, 0, 0, 2017, 2016, null),
- (1, 43, 1, null, 'Outlander', 100900.0, 0, 0, 2016, 2015, null),
- (1, 62, 1, null, 'Jetta', 68900.0, 0, 0, 2014, 1014, null),
- (1, 29, 1, null, 'Renegade', 82900.0, 0, 0, 2016, 2016, null),
- (1, 24, 1, null, 'HR-V', 99900.0, 0, 0, 2017, 2016, null),
- (1, 25, 1, null, 'HB20', 61900.0, 0, 0, 2019, 2019, null),
- (1, 13, 1, null, 'Journey', 67900.0, 0, 0, 2013, 2012, null),
- (1, 30, 1, null, 'Sportage', 89900.0, 0, 0, 2015, 2014, null),
- (1, 44, 1, null, 'Kicks', 114900.0, 0, 0, 2020, 2019, null),
- (1, 32, 1, null, 'Range Rover Evoque', 174900.0, 0, 0, 2015, 2014, null),
- (1, 41, 1, null, 'Gle-400', 503900.0, 0, 0, 2019, 2018, null),
- (1, 50, 1, null, '911', 1250000.0, 0, 0, 2021, 2021, null);
+ (1, 4, 1, null, null, 'Q3', 135900.0, 0, 0, 2017, 2016, null),
+ (1, 43, 1, null, null, 'Outlander', 100900.0, 0, 0, 2016, 2015, null),
+ (1, 62, 1, null, null, 'Jetta', 68900.0, 0, 0, 2014, 1014, null),
+ (1, 29, 1, null, null, 'Renegade', 82900.0, 0, 0, 2016, 2016, null),
+ (1, 24, 1, null, null, 'HR-V', 99900.0, 0, 0, 2017, 2016, null),
+ (1, 25, 1, null, null, 'HB20', 61900.0, 0, 0, 2019, 2019, null),
+ (1, 13, 1, null, null, 'Journey', 67900.0, 0, 0, 2013, 2012, null),
+ (1, 30, 1, null, null, 'Sportage', 89900.0, 0, 0, 2015, 2014, null),
+ (1, 44, 1, null, null, 'Kicks', 114900.0, 0, 0, 2020, 2019, null),
+ (1, 32, 1, null, null, 'Range Rover Evoque', 174900.0, 0, 0, 2015, 2014, null),
+ (1, 41, 1, null, null, 'Gle-400', 503900.0, 0, 0, 2019, 2018, null),
+ (1, 50, 1, null, null, '911', 1250000.0, 0, 0, 2021, 2021, null);
 
 
 -- ##################### ends queries ######################## --

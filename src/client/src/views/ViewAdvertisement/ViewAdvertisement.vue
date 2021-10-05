@@ -126,7 +126,7 @@
           <p class="text-h4 bahama--text font-weight-medium pt-2">Descrição do veículo</p>
           <p
             class="text-subtitle-1 text-left px-10 pb-2 breakline"
-            v-text="advertisement.adv_brand_description"
+            v-text="advertisement.adv_description"
           ></p>
         </Card>
       </v-col>

@@ -74,7 +74,7 @@
             max-width="75%"
             cols="6"
           >
-            <v-list-item v-text="ad.adv_brand_description">
+            <v-list-item class="breakline text-left" v-text="ad.adv_description">
             </v-list-item>
           </v-col>
         </v-row>

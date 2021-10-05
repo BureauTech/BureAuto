@@ -80,7 +80,7 @@ module.exports = {
         const advertisement = await RepositoryAdvertisement.find({
             relations: ["Manufacturer", "StatusType"],
             where: [
-                {adv_brand_description: ILike(`%${term}%`)},
+                {adv_description: ILike(`%${term}%`)},
                 {adv_model_description: ILike(`%${term}%`)}
             
             ]

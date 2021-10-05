@@ -5,3 +5,7 @@
 .margin-layout {
     margin-top: 20px;
 }
+
+.breakline {
+    white-space: pre;
+}

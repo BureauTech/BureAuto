@@ -15,7 +15,7 @@ export default {
                 adv_value: "",
                 adv_year_manufacture: "",
                 adv_year_model: "",
-                adv_brand_description: "",
+                adv_description: "",
                 Manufacturer: {
                     man_name: ""
                 }
@@ -78,7 +78,7 @@ export default {
                     adv_value: parseFloat(this.advertisement.adv_value),
                     adv_year_manufacture: parseInt(this.advertisement.adv_year_manufacture),
                     adv_year_model: parseInt(this.advertisement.adv_year_model),
-                    adv_brand_description: this.advertisement.adv_brand_description,
+                    adv_description: this.advertisement.adv_description,
                     adv_sty_cod: 1,
                     adv_images: this.images
                 }

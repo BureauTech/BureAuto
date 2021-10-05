@@ -16,7 +16,7 @@ export default {
                 adv_value: "",
                 adv_year_manufacture: "",
                 adv_year_model: "",
-                adv_brand_description: "",
+                adv_description: "",
                 Manufacturer: {
                     man_name: ""
                 }

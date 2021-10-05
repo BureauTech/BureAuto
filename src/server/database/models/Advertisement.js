@@ -17,7 +17,10 @@ module.exports = new EntitySchema({
             type: "bigint",
             nullable: false
         },
-        adv_brand_description: {
+        adv_description: {
+            type: "varchar"
+        },
+        adv_brand: {
             type: "varchar"
         },
         adv_model_description: {
