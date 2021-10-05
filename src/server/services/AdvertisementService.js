@@ -1,6 +1,6 @@
 const fs = require("fs")
 const Papa = require("papaparse")
-const {Not} = require("typeorm")
+const {Not, ILike} = require("typeorm")
 const Repository = require("../database/Repository")
 const Connection = require("../database/Connection")
 
@@ -73,5 +73,18 @@ module.exports = {
         if (!advertisement) return
         advertisement.adv_sty_cod = 2
         return await RepositoryAdvertisement.save(advertisement)
+    },
+
+    searchAdvertisement: async function(term) {
+        const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
+        const advertisement = await RepositoryAdvertisement.find({
+            relations: ["Manufacturer", "StatusType"],
+            where: [
+                {adv_brand_description: ILike(`%${term}%`)},
+                {adv_model_description: ILike(`%${term}%`)}
+            
+            ]
+        })
+        return advertisement
     }
 }

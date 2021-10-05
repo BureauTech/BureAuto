@@ -20,6 +20,15 @@
             >
               <v-expansion-panels multiple>
                 <v-expansion-panel class="panel-search">
+
+                  <v-text-field
+                    outlined
+                    rounded
+                    required
+                    color="bahama"
+                    placeholder="Pesquisa"
+                    v-model="termSearch"
+                  />
                   <v-expansion-panel-header class="panel-search">
                     <v-card-text
                       v-text="'Filtros '"
@@ -78,6 +87,7 @@
                 color="transparent"
                 min-width="100%"
                 class="btn-search"
+                @click="searchAds"
               >
                 Buscar
               </v-btn>
@@ -99,7 +109,7 @@
                 <v-img
                   :src="imageConverter.arrayBufferToString(ad.adv_images)"
                   alt="Logo da bureAuto"
-                  max-height="300"
+                  height="200"
                 >
                   <v-card-title
                     v-text="ad.Manufacturer.man_name"

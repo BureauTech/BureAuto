@@ -18,6 +18,15 @@ export default {
         getAds: async function() {
             const response = await axios.get("/advertisement/all")
             this.ads = response.data.data
+        },
+
+        searchAds: async function() {
+            if(!this.termSearch) {
+                this.getAds()
+            } else {
+                const response = await axios.get(`/advertisement/search/${this.termSearch}`)
+                this.ads = response.data.data
+            }
         }
         
     },
@@ -32,10 +41,12 @@ export default {
                 valueMin: "",
                 valueMax: ""
             },
-            imageConverter: imageConverterUtil
+            imageConverter: imageConverterUtil,
+            termSearch: "",
+            teste: []
         }
     },
-    beforeMount: function() {
+    created: function() {
         this.getAds()
     }
 }
