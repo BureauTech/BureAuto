@@ -17,7 +17,10 @@ export default {
     methods: { 
         getAds: async function() {
             const response = await axios.get("/advertisement/all")
-            this.ads = response.data.data
+            this.ads = response.data.data.map(ad => {
+                ad.adv_images = imageConverterUtil.arrayBufferToString(ad.adv_images)
+                return ad
+            })
         },
 
         searchAds: async function() {
@@ -25,7 +28,10 @@ export default {
                 this.getAds()
             } else {
                 const response = await axios.get(`/advertisement/search/${this.termSearch}`)
-                this.ads = response.data.data
+                this.ads = response.data.data.map(ad => {
+                    ad.adv_images = imageConverterUtil.arrayBufferToString(ad.adv_images)
+                    return ad
+                })
             }
         }
         

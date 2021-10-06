@@ -107,7 +107,7 @@
                 rounded="xl"
               >
                 <v-img
-                  :src="imageConverter.arrayBufferToString(ad.adv_images)"
+                  :src="ad.adv_images"
                   alt="Logo da bureAuto"
                   height="200"
                 >
