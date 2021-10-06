@@ -74,11 +74,11 @@
             max-width="75%"
             cols="5"
           >
-            <v-list-item
-              class="breakline text-left"
+            <v-card-text
+              class="breakline text-left overflow"
               v-text="ad.adv_description"
             >
-            </v-list-item>
+            </v-card-text>
           </v-col>
         </v-row>
       </v-card>
