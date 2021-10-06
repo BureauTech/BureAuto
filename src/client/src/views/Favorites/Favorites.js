@@ -1,6 +1,7 @@
 import Topbar from "@/components/Topbar/Topbar"
 import rulesUtils from "@/utils/rulesUtils"
 import axios from "@/axios.js"
+import imageConverterUtil from "@/utils/imageConverterUtil"
 
 export default {
     name: "Favorites",
@@ -17,7 +18,10 @@ export default {
     methods: {
         getFavs: async function() {
             const favorites = await axios.get(`/favorite/favorites/${this.$store.getters.getUser.use_cod}`)
-            this.ads = favorites.data.data              
+            this.ads = favorites.data.data.map(ad => {
+                ad.adv_images = imageConverterUtil.arrayBufferToString(ad.adv_images)
+                return ad
+            })
         },
 
         deleteFav: async function(adv_cod, index) {
