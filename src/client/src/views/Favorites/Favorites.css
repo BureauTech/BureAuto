@@ -9,3 +9,18 @@
 .breakline {
     white-space: pre-line;
 }
+
+.overflow {
+    max-height: 350px;
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+}
