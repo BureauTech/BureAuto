@@ -7,7 +7,9 @@
         class="no-negative"
       >
         <v-col
-          cols="3"
+          cols="9"
+          sm="5"
+          md="3"
           class="margin-layout"
         >
           <v-row>
@@ -20,7 +22,6 @@
             >
               <v-expansion-panels multiple>
                 <v-expansion-panel class="panel-search">
-
                   <v-text-field
                     outlined
                     rounded
@@ -94,12 +95,13 @@
             </v-card>
           </v-row>
         </v-col>
-        <v-col cols="9">
+        <v-col cols="10" sm="12" md="9">
           <v-row>
             <v-col
               v-for="ad in ads"
               :key="ad.adv_cod"
-              cols="4"
+              sm="6"
+              md="4"
               align="center"
             >
               <router-link
