@@ -102,37 +102,44 @@
               cols="4"
               align="center"
             >
-              <v-card
-                min-width="100%"
-                rounded="xl"
+              <router-link
+                :to="`/anuncio/${ad.adv_cod}`"
+                class="text-decoration-none"
               >
-                <v-img
-                  :src="ad.adv_images"
-                  alt="Logo da bureAuto"
-                  height="200"
+                <v-card
+                  min-width="100%"
+                  rounded="xl"
+                  hover
+                  class="hover-card"
                 >
-                  <v-card-title
-                    v-text="ad.Manufacturer.man_name"
-                    class="text-h5 bahama--text mousehover"
+                  <v-img
+                    :src="ad.adv_images"
+                    alt="Logo da bureAuto"
+                    height="200"
+                  >
+                    <v-card-title
+                      v-text="ad.Manufacturer.man_name"
+                      class="text-h5 bahama--text mousehover"
+                    />
+                  </v-img>
+                  <v-card-subtitle
+                    v-text="ad.adv_model_description"
+                    class="text-h5"
                   />
-                </v-img>
-                <v-card-subtitle
-                  v-text="ad.adv_model_description"
-                  class="text-h5"
-                />
-                <v-card-text
-                  v-text="ad.adv_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })"
-                  class="text-h5"
-                />
-                <v-btn
-                  elevation="0"
-                  color="transparent"
-                  small
-                  @click="$router.push(`/anuncio/${ad.adv_cod}`)"
-                >
-                  + informações
-                </v-btn>
-              </v-card>
+                  <v-card-text
+                    v-text="ad.adv_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })"
+                    class="text-h5"
+                  />
+                  <!-- <v-btn
+                    elevation="0"
+                    color="transparent"
+                    small
+                    @click="$router.push(`/anuncio/${ad.adv_cod}`)"
+                  >
+                    + informações
+                  </v-btn> -->
+                </v-card>
+              </router-link>
             </v-col>
           </v-row>
         </v-col>

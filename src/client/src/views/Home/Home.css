@@ -27,3 +27,7 @@
 .mousehover:hover {
     background-color: rgb(247, 241, 241);
 }
+
+.hover-card:hover {
+    box-shadow: 0px 0px 41px 5px rgba(0,0,0,0.7);
+}
