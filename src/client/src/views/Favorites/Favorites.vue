@@ -26,7 +26,7 @@
       class="no-negative"
     >
       <v-card
-        min-width="75%"
+        min-width="100%"
         rounded="xl"
         align-center
         class="text-center margin-layout"
@@ -72,9 +72,12 @@
           </v-col>
           <v-col
             max-width="75%"
-            cols="6"
+            cols="5"
           >
-            <v-list-item class="breakline text-left" v-text="ad.adv_description">
+            <v-list-item
+              class="breakline text-left"
+              v-text="ad.adv_description"
+            >
             </v-list-item>
           </v-col>
         </v-row>
