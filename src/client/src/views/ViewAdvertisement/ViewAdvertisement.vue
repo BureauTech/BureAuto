@@ -34,7 +34,7 @@
               width="100%"
               md="6"
               id="image"
-              src="@/assets/bureauto_sem_fundo.png"
+              :src="imageUrl"
             />
           </v-col>
         </Card>

@@ -93,7 +93,7 @@ create table advertisement (
     adv_views integer not null default 0,
     adv_year_model integer,
     adv_year_manufacture integer,
-	adv_images bytea[],
+	adv_images varchar,
 	adv_created_at timestamp with time zone default current_timestamp not null,
     constraint advertisement_adv_cod_pkey primary key (adv_cod),
     constraint advertisement_adv_use_cod_fkey foreign key (adv_use_cod) references "user" (use_cod),

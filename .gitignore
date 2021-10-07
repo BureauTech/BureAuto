@@ -2,5 +2,6 @@
 **/package-lock.json
 **/temp/*
 **/dist
+**/resources/img/upload
 
 !.keep

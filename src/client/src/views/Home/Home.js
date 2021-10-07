@@ -4,7 +4,9 @@ import Input from "@/components/Input/Input.vue"
 import Button from "@/components/Button/Button.vue"
 import rulesUtils from "@/utils/rulesUtils"
 import axios from "@/axios"
-import imageConverterUtil from "@/utils/imageConverterUtil"
+import config from "../../config"
+import logoBureau from "@/assets/bureauto_sem_fundo.png" 
+
 
 export default {
     name: "Home",
@@ -18,8 +20,13 @@ export default {
         getAds: async function() {
             const response = await axios.get("/advertisement/all")
             this.ads = response.data.data.map(ad => {
-                ad.adv_images = imageConverterUtil.arrayBufferToString(ad.adv_images)
+                if(!ad.adv_images) {
+                    ad.adv_images =  logoBureau
+                } else {
+                    ad.adv_images = config.SERVER_URL+ ad.adv_images
+                }
                 return ad
+                
             })
         },
         getAdsValues: async function() {
@@ -35,7 +42,11 @@ export default {
             } else {
                 const response = await axios.get(`/advertisement/search/${this.termSearch}`)
                 this.ads = response.data.data.map(ad => {
-                    ad.adv_images = imageConverterUtil.arrayBufferToString(ad.adv_images)
+                    if(!ad.adv_image) {
+                        ad.adv_images =  this.logoBureau
+                    } else {
+                        ad.adv_images = config.SERVER_URL+ ad.adv_images
+                    }
                     return ad
                 })
             }
@@ -53,7 +64,6 @@ export default {
                 valueMin: "",
                 valueMax: ""
             },
-            imageConverter: imageConverterUtil,
             termSearch: "",
             teste: [],
             adsMinValue: undefined,

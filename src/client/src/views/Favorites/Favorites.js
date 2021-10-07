@@ -1,7 +1,8 @@
 import Topbar from "@/components/Topbar/Topbar"
 import rulesUtils from "@/utils/rulesUtils"
 import axios from "@/axios.js"
-import imageConverterUtil from "@/utils/imageConverterUtil"
+import config from "../../config"
+import logoBureau from "@/assets/bureauto_sem_fundo.png" 
 
 export default {
     name: "Favorites",
@@ -19,7 +20,11 @@ export default {
         getFavs: async function() {
             const favorites = await axios.get(`/favorite/favorites/${this.$store.getters.getUser.use_cod}`)
             this.ads = favorites.data.data.map(ad => {
-                ad.adv_images = imageConverterUtil.arrayBufferToString(ad.adv_images)
+                if(!ad.adv_images) {
+                    ad.adv_images =  logoBureau
+                } else {
+                    ad.adv_images = config.SERVER_URL+ ad.adv_images
+                }
                 return ad
             })
         },
