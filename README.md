@@ -12,11 +12,10 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
 
    * [Sobre](#bureauto)
    * [Sumário](#sumário)
-   * [Protótipo das telas da aplicação](#protótipo-das-telas-da-aplicação)
    * [Entregas](#entregas)
         * [Modelagem de Dados](#modelagem-de-dados)
       * [Burndown](#burndown)
-      * [Backlog](#backlog)
+      * [Documentações](#documentações)
    * [Como executar localmente](#como-executar-localmente)
       * [Pré-Requisitos](#pré-requisitos)
       * [Servidor](#servidor)
@@ -25,36 +24,40 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
    * [Tecnologias](#tecnologias)
    * [Autores](#autores)
 
-## Protótipo das telas da aplicação 
+## Aplicação 
 
-- Wireframe Aplicação Web
+- Gif com a aplicação em execução
 <div align="center">
   <img src="./doc/gif/wireframe_web.gif" />
 </div>
 
 <br>
 
-- Wireframe Aplicação Mobile
-<div align="center">
-  <img src="./doc/gif/wireframe_app.gif" />
-</div>
-
-<br>
-
-Protótipo interativo das <b>telas web</b> está disponível neste link: https://bit.ly/BureAuto
-
-Protótipo interativo das <b>telas mobile</b> está disponível neste link: https://bit.ly/BureAutoMobile
-
-<br>
 
 # Entregas
 
 - [Sprint 1](https://github.com/BureauTech/BureAuto/releases/tag/1.0.0) entrega realizada em 19/09/2021.
+- [Sprint 2](https://github.com/BureauTech/BureAuto/releases/tag/1.1.0) entrega realizada em 10/10/2021.
 
-## Entregas propostas
-
+## Visão geral do projeto
 <div align="center">
-  <img src="./doc/img/cards_bureauto.png" />
+  <img src="./doc/img/funcionalidades_projeto.png" />
+</div>
+<div align="center">
+  <img src="./doc/img/abordagem_spritns.png" />
+</div>
+
+<br/> 
+
+## Entregas propostas Sprint 2
+<div align="center">
+  <img src="./doc/img/cards.png" />
+</div>
+<div align="center">
+  <img src="./doc/img/cards2.png" />
+</div>
+<div align="center">
+  <img src="./doc/img/cards3.png" />
 </div>
 <br/> 
 
@@ -80,9 +83,11 @@ Protótipo interativo das <b>telas mobile</b> está disponível neste link: http
 </div>
 <br/> 
 
-## Backlog 
+## Documentações 
 
 - [Product Backlog](./doc/artefatos/product_backlog_bureauto.pdf)
+
+- [Documentação BureAuto](./doc/artefatos/documentacao_BureAuto.pdf)
 
 # Como executar localmente
 
