@@ -23,8 +23,11 @@
           </v-row>
           <v-col>
             <v-row no-gutters>
-              <v-col cols="12" sm="auto">
-              <p class="text-h4 bahama--text">Dados do seu perfil</p>
+              <v-col
+                cols="12"
+                sm="auto"
+              >
+                <p class="text-h4 bahama--text">Dados do seu perfil</p>
 
               </v-col>
               <v-col align="right">
@@ -61,14 +64,14 @@
                         <v-card-actions>
                           <v-spacer></v-spacer>
                           <v-btn
-                            color="green darken-1"
+                            color="red darken-1"
                             text
                             @click="dialog = false"
                           >
                             Cancelar
                           </v-btn>
                           <v-btn
-                            color="green darken-1"
+                            color="blue darken-1"
                             text
                             @click="deleteUser"
                           >

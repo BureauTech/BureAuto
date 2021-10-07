@@ -82,7 +82,6 @@ export default {
             setTimeout(function() { 
                 window.location.reload()
             }, 1500)
-            console.log(response)
         }
     }
 }
