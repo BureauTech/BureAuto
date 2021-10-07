@@ -6,12 +6,19 @@
       height="10"
       indeterminate
     ></v-progress-linear>
-
-    <v-row class="mt-5 justify-space-around align-start">
-
-      <v-col md="5">
-        <v-row>
-          <v-col>
+    <v-row class="mt-5 justify-space-around align-start" no-gutters>
+      <v-col
+        md="5"
+        cols="10"
+        >
+        <v-row 
+          no-gutters
+          justify="space-between"
+          >
+          <v-col
+            cols="12"
+            sm="5"
+          >
             <p class="bahama--text font-weight-medium pt-2">Marca</p>
             <v-select
               outlined
@@ -22,7 +29,10 @@
             >
             </v-select>
           </v-col>
-          <v-col>
+          <v-col
+            cols="12"
+            sm="5"
+          >
             <p class="bahama--text font-weight-medium pt-2">Modelo</p>
             <v-text-field
               outlined
@@ -58,8 +68,7 @@
           />
           <Card
             :roundLevel="4"
-            md="12"
-            sm="12"
+            cols="12"
           >
             <v-col>
               <img
@@ -71,17 +80,19 @@
               />
             </v-col>
           </Card>
-
         </div>
-
       </v-col>
-
       <v-col
-        md="4"
+        md="5"
         cols="10"
       >
-        <v-row>
-          <v-col>
+        <v-row
+          no-gutters
+          justify="space-between">
+          <v-col
+            cols="12"
+            sm="5"
+          >
             <p class="bahama--text font-weight-medium pt-2">Ano fabricção</p>
             <v-text-field
               type="number"
@@ -91,7 +102,10 @@
               v-model="advertisement.adv_year_manufacture"
             />
           </v-col>
-          <v-col>
+          <v-col
+            cols="12"
+            sm="5"
+          >
             <p class="bahama--text font-weight-medium pt-2">Ano modelo</p>
             <v-text-field
               type="number"
@@ -102,8 +116,14 @@
             />
           </v-col>
         </v-row>
-        <v-row>
-          <v-col md="6">
+        <v-row
+          no-gutters
+          justify="space-between"
+        >
+          <v-col
+            cols="12"
+            sm="5"
+          >
             <p class="bahama--text font-weight-medium pt-2">Preço</p>
             <v-text-field
               type="number"
@@ -112,9 +132,13 @@
               rounded
               color="bahama"
               v-model="advertisement.adv_value"
+              prefix="R$"
             />
           </v-col>
-          <v-col md="6">
+          <v-col
+            cols="12"
+            sm="5"
+          >
             <p class="bahama--text font-weight-medium pt-2">Status</p>
             <v-select
               outlined
@@ -132,7 +156,12 @@
       class="justify-space-around pb-5"
       no-gutters
     >
-      <v-col md="4">
+      <v-col
+        md="4"
+        cols="10"
+        sm="4"
+        class="my-2"
+      >
         <v-btn
           min-width="100%"
           elevation="2"
@@ -144,7 +173,12 @@
           Salvar
         </v-btn>
       </v-col>
-      <v-col md="4">
+      <v-col
+        md="4"
+        cols="10"
+        sm="4"
+        class="my-2"
+      >
         <v-btn
           min-width="100%"
           elevation="2"
