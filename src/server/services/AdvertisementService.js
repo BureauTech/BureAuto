@@ -6,7 +6,7 @@ const Connection = require("../database/Connection")
 
 module.exports = {
 
-    registerAdvertisement: async function(filePath) {
+    registerAdvertisement: async function(filePath, use_cod) {
         const file = fs.readFileSync(filePath, "utf8")
         Papa.parse(file, {
             delimiter: ";",
@@ -16,11 +16,12 @@ module.exports = {
             step: async function(advertisement) {
                 const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
                 await RepositoryAdvertisement.save({
-                    adv_use_cod: 1,
+                    adv_use_cod: use_cod,
                     adv_man_cod: 15,
                     adv_model_description: advertisement.data.modelo,
                     adv_year_manufacture: advertisement.data.ano_fabricacao,
                     adv_year_model: advertisement.data.ano_modelo,
+                    adv_year_brand: advertisement.data.marca,
                     adv_value: advertisement.data.valor.replace(",", ".")
                 })
             },

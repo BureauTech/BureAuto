@@ -59,8 +59,10 @@ router.get("/:adv_cod", async(req, res) => {
 
 router.post("/register", authenticate, async(req, res) => {
     try {
+        debugger
         const {csvFile} = req.files
-        await AdvertisementService.registerAdvertisement(csvFile.tempFilePath)
+        const user = req.user.use_cod
+        await AdvertisementService.registerAdvertisement(csvFile.tempFilePath, user)
         return res.status(200).send({success: true})
     } catch (error) {
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
