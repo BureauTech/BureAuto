@@ -69,7 +69,44 @@
                   <v-icon>mdi-eye</v-icon>
                 </v-btn>
               </template>
+              <template v-slot:item.delete="{ item }">
+                <v-btn
+                  small
+                  @click="Delete(item)"
+                >
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </template>
             </v-data-table>
+            <v-dialog
+              v-model="dialog"
+              persistent
+              max-width="290"
+            >
+              <v-card>
+                <v-card-title class="text-h5">
+                  Excluir anúncio
+                </v-card-title>
+                <v-card-text>Tem certeza que deseja excluir este anúncio?</v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    color="red darken-1"
+                    text
+                    @click="dialog = false"
+                  >
+                    Não
+                  </v-btn>
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="confirmDelete"
+                  >
+                    Sim
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </template>
         </Card>
       </v-col>

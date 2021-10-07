@@ -20,8 +20,10 @@ export default {
                 align: "start",
                 value: "adv_model_description"
                 // eslint-disable-next-line max-len
-            }, {text: "Valor (R$)", value: "adv_value"}, {text: "Ano Fabricação", value: "adv_year_manufacture"}, {text: "Ano Modelo", value: "adv_year_model"}, {text: "Visualizações", value: "adv_views"}, {text: "Favoritados", value: "adv_favorites"}, {text: "Status", value: "sty_description"}, {text: "Exibir", value: "show"}, {text: "Editar", value: "edit"}],
-            advertisements: []
+            }, {text: "Valor (R$)", value: "adv_value"}, {text: "Ano Fabricação", value: "adv_year_manufacture"}, {text: "Ano Modelo", value: "adv_year_model"}, {text: "Visualizações", value: "adv_views"}, {text: "Favoritados", value: "adv_favorites"}, {text: "Status", value: "sty_description"}, {text: "Exibir", value: "show"}, {text: "Editar", value: "edit"}, {text: "Excluir", value: "delete"}],
+            advertisements: [],
+            dialog: false,
+            deleteAd: undefined
         }
     },
     beforeMount: function() {
@@ -72,6 +74,19 @@ export default {
         },
         Show(item) {
             this.$router.push(`/anuncio/${item.adv_cod}`)
+        },
+        Delete(item) {
+            this.dialog = true
+            this.deleteAd = item
+        },
+        async confirmDelete() {
+            this.dialog = false
+            const response = await axios.delete(`/advertisement/${this.deleteAd.adv_cod}`)
+            if (!response.data.success) this.$toasted.error("Ocorreu um erro na requisição")
+            this.$toasted.success("Anúncio excluído com sucesso!")
+            setTimeout(function() { 
+                window.location.reload()
+            }, 1500)
         }
     }
 }
