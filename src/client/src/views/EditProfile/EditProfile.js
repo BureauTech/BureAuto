@@ -46,11 +46,7 @@ export default {
             }
         },
         cancel: function() {
-            window.history.back()
-        },
-        logout: async function() {
-            await axios.get("/logout")
-            window.location.href = "/"
+            this.$router.back()
         }
     },
     mounted: function() {

@@ -88,8 +88,7 @@ const routes = [{
     meta: {
         requiresAuth: true
     }
-},
-{
+}, {
     path: "/editar-perfil",
     name: "EditProfile",
     component: EditProfile,

@@ -63,10 +63,10 @@
           >
             <v-card-text>
               <v-img
-                src="@/assets/bureauto_sem_fundo.png"
-                alt="Logo da bureAuto"
-                max-height="150"
-                max-width="150"
+                :src="ad.adv_images"
+                alt="Logo da BureAuto"
+                max-height="400"
+                max-width="400"
               />
             </v-card-text>
           </v-col>
@@ -74,11 +74,11 @@
             max-width="75%"
             cols="5"
           >
-            <v-list-item
-              class="breakline text-left"
+            <v-card-text
+              class="breakline text-left overflow"
               v-text="ad.adv_description"
             >
-            </v-list-item>
+            </v-card-text>
           </v-col>
         </v-row>
       </v-card>

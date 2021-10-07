@@ -34,4 +34,8 @@ export default {
 .toasted-font {
   font-family: "Roboto", sans-serif;
 }
+
+.v-card__text, .v-card__title {
+  word-break: normal !important;
+}
 </style>

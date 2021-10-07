@@ -8,7 +8,7 @@
         Desempenho dos Anúncios
       </v-col>
     </v-row>
-    <v-row>
+    <v-row justify="center">
       <ReportCard
         title="Engajamento da plataforma"
         :content="platform"
