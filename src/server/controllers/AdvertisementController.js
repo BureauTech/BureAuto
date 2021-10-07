@@ -24,6 +24,17 @@ router.get("/all", async(req, res) => {
     }
 })
 
+router.get("/values", async(req, res) => {
+    try {
+        const min = await AdvertisementService.getMinAdvertisementValue()
+        const max = await AdvertisementService.getMaxAdvertisementValue()
+        return res.status(200).send({success: true, data: [min, max]})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
 router.get("/all/:adv_use_cod", async(req, res) => {
     try {
         const {adv_use_cod} = req.params

@@ -64,20 +64,30 @@
                     />
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <Input
-                      placeholder="Mínimo R$"
-                      :rules="[rules.number]"
-                      v-model="formCategories.valueMin"
-                      type="text"
-                      name="valueMin"
-                    />
-                    <Input
-                      placeholder="Máximo R$"
-                      :rules="[rules.number, rules.maxValue(formCategories.valueMin, formCategories.valueMax)]"
-                      v-model="formCategories.valueMax"
-                      type="text"
-                      name="valueMax"
-                    />
+                    <v-subheader class="pl-0">
+                      Mínimo R$ {{formCategories.valueMin}}
+                    </v-subheader>
+                    <v-row>
+                      <v-slider
+                        name="valueMin"
+                        v-model="formCategories.valueMin"
+                        :max="adsMaxValue"
+                        :min="adsMinValue"
+                      ></v-slider>
+                    </v-row>
+                    <v-subheader class="pl-0">
+                      Máximo R$ {{formCategories.valueMax}}
+                    </v-subheader>
+                    <v-row>
+                      <v-slider
+                        name="valueMax"
+                        v-model="formCategories.valueMax"
+                        :max="adsMaxValue"
+                        :min="adsMinValue"
+                        :rules="[rules.maxValue(formCategories.valueMin, formCategories.valueMax)]"
+                      >
+                      </v-slider>
+                    </v-row>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
               </v-expansion-panels>

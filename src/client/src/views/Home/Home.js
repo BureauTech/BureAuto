@@ -22,6 +22,12 @@ export default {
                 return ad
             })
         },
+        getAdsValues: async function() {
+            const response = await axios.get("/advertisement/values")
+            if (!response.data.success) console.log("Não foi possível pegar valores")
+            this.adsMinValue = response.data.data[0]
+            this.adsMaxValue = response.data.data[1]
+        },
 
         searchAds: async function() {
             if(!this.termSearch) {
@@ -49,10 +55,13 @@ export default {
             },
             imageConverter: imageConverterUtil,
             termSearch: "",
-            teste: []
+            teste: [],
+            adsMinValue: undefined,
+            adsMaxValue: undefined
         }
     },
     created: function() {
         this.getAds()
+        this.getAdsValues()
     }
 }
