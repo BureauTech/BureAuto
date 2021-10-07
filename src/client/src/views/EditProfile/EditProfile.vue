@@ -20,8 +20,8 @@
         indeterminate
       ></v-progress-linear>
     </template>
-      <v-row class="mt-5 justify-space-around align-start">
-        <v-col md="6">
+      <v-row class="mt-5 justify-space-around align-start" no-gutters>
+        <v-col sm="8" md="6" cols="11">
           <p class="text-h4 bahama--text pb-10">Dados do seu perfil</p>
           <v-row class="justify-center">
             <v-col md="3">
