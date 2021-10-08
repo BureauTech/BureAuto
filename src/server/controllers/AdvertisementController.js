@@ -62,9 +62,10 @@ router.post("/register", authenticate, async(req, res) => {
     try {
         const {csvFile} = req.files
         const user = req.user.use_cod
-        await AdvertisementService.registerAdvertisement(csvFile.tempFilePath, user)
-        return res.status(200).send({success: true})
+        const response = await AdvertisementService.registerAdvertisement(csvFile.tempFilePath, user)
+        return res.status(200).send({success: true, csvError: response})
     } catch (error) {
+        console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
     }
 })
@@ -72,34 +73,11 @@ router.post("/register", authenticate, async(req, res) => {
 
 router.put("/edit", async(req, res) => {
     try {
-        const advertisement = AdvertisementService
-
-        console.log(req)
-
-        const adv_edt = {
-            adv_cod: req.body.adv_cod,
-            adv_model_description: req.body.adv_model_description,
-            adv_man_cod: req.body.adv_man_cod,
-            adv_value: req.body.adv_value,
-            adv_year_manufacture: req.body.adv_year_manufacture,
-            adv_year_model: req.body.adv_year_model,
-            adv_description: req.body.adv_description,
-            adv_sty_cod: req.body.adv_sty_cod
-        }
-        if(req.body.adv_images) {
-            adv_edt.adv_images = req.body.adv_images
-        }
-        const result = advertisement.editAdvertisement(adv_edt)
-
-        return res.status(200).send({success: true, data: result})
-
+        await AdvertisementService.editAdvertisement(req.body)
+        return res.status(200).send({success: true})
     } catch (error) {
-        return res
-            .status(500)
-            .send({
-                success: false,
-                error: "an error occurred while processing the request"
-            })
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
     }
 })
 

@@ -9,6 +9,7 @@ router.post("/register", async(req, res) => {
         const response = await UserService.registerUser(csvFile.tempFilePath)
         return res.status(200).send({success: true, csvError: response})
     } catch (error) {
+        console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
     }
 })
