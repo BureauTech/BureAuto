@@ -45,6 +45,7 @@ module.exports = {
             select: ["adv_cod", "adv_model_description", "adv_value", "adv_images"]
         })
     },
+
     getMaxAdvertisementValue: async function() {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         const response = await RepositoryAdvertisement.createQueryBuilder("advertisement")
@@ -52,6 +53,7 @@ module.exports = {
             .getRawOne()
         return response.max
     },
+
     getMinAdvertisementValue: async function() {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         const response = await RepositoryAdvertisement.createQueryBuilder("advertisement")
@@ -59,6 +61,7 @@ module.exports = {
             .getRawOne()
         return response.min
     },
+
     getAllAdvertisementByUser: async function(adv_use_cod) {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         return await RepositoryAdvertisement.find({

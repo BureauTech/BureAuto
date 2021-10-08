@@ -13,7 +13,7 @@ module.exports = {
 
 
         const connection = await Connection
-        
+
         const newDocument = ValidationUtils.validDocument(user.documento)
         user.tipoDocumento = newDocument.type
         if (!newDocument.valid) {
@@ -36,7 +36,7 @@ module.exports = {
         if (email.exists) {
             return {valid: false, error: "email já cadastrado na plataforma"}
         }
-        
+
         return {valid: true}
     }
 
