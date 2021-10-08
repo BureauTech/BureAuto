@@ -13,13 +13,13 @@ module.exports = {
             header: true,
             skipEmptyLines: true,
             transformHeader: header => header.trim(),
+
             step: async function(advertisement) {
-                const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
                 const RepositoryManufacturer = await Repository.get(Repository.Manufacturer)
                 const {man_cod} = await RepositoryManufacturer.findOne({
-                    where: {man_name: ILike(advertisement.data.marca)},
-                    select: ["man_cod"]
+                    where: {man_name: ILike(advertisement.data.marca)}, select: ["man_cod"]
                 }) || {man_cod: "1"}
+                const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
                 await RepositoryAdvertisement.save({
                     adv_use_cod: use_cod,
                     adv_man_cod: man_cod,
@@ -30,9 +30,11 @@ module.exports = {
                     adv_value: advertisement.data.valor.replace(",", ".")
                 })
             },
+
             complete: async function() {
                 fs.unlink(filePath, () => {})
             }
+
         })
     },
 

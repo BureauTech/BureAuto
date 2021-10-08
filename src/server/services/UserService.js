@@ -8,44 +8,41 @@ const Connection = require("../database/Connection")
 
 module.exports = {
 
-    registerUser: async function(filePath) {
+    registerUser: function(filePath) {
         const file = fs.readFileSync(filePath, "utf8")
         return new Promise(function(resolve) {
-            const errors = []
             Papa.parse(file, {
                 delimiter: ";",
                 header: true,
                 skipEmptyLines: true,
                 transformHeader: header => header.trim(),
-
-                step: async function(user) {
-                    const response = UserValidationService.validate(user)
-                    if (!response.valid) {
-                        user.data.motivo = response.error
-                        errors.push(user.data)
-                    } else {
-                        user.data.senha = PasswordUtils.randomPassword()
-                        const RepositoryUser = await Repository.get(Repository.User)
-                        await RepositoryUser.save({
-                            use_name: user.data.nome,
-                            use_is_cpf_document: true,
-                            use_document: user.data.documento,
-                            use_nickname: user.data.apelido,
-                            use_phone: user.data.telefone,
-                            use_address: user.data.endereco,
-                            use_email: user.data.email,
-                            use_password: user.data.senha,
-                            use_is_temp_password: true
-                        })
-
-                        const template = "templates/FirstAccessTemplate.ejs"
-                        EmailService.sendEmail("BureAuto", user.data.email, "BureAuto - Primeiro Acesso", template, user.data)
+                complete: async function(results) {
+                    const errors = []
+                    for (const user of results.data) {
+                        const response = await UserValidationService.validateUser(user)
+                        if (!response.valid) {
+                            user.motivo = response.error
+                            errors.push(user)
+                        } else {
+                            user.senha = PasswordUtils.randomPassword()
+                            const RepositoryUser = await Repository.get(Repository.User)
+                            await RepositoryUser.save({
+                                use_name: user.nome,
+                                use_is_cpf_document: user.tipoDocumento === "cpf",
+                                use_document: user.documento,
+                                use_nickname: user.apelido,
+                                use_phone: user.telefone,
+                                use_address: user.endereco,
+                                use_email: user.email,
+                                use_password: user.senha,
+                                use_is_temp_password: true
+                            })
+                            const template = "templates/FirstAccessTemplate.ejs"
+                            EmailService.sendEmail("BureAuto", user.email, "BureAuto - Primeiro Acesso", template, user)
+                        }
+                        fs.unlink(filePath, () => {})
+                        resolve(Papa.unparse(errors, {delimiter: ";", newline: "\n"}))
                     }
-                },
-
-                complete: function() {
-                    fs.unlink(filePath, () => {})
-                    resolve(Papa.unparse(errors, {delimiter: ";", newline: "\n"}))
                 }
 
             })
