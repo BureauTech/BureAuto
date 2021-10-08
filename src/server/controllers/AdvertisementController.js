@@ -1,9 +1,7 @@
 const router = require("express").Router()
-const multer = require("multer")
 const {authenticate} = require("../services/AuthService")
 const AdvertisementService = require("../services/AdvertisementService")
-const {storage} = require("../services/ImageService")
-const {imageFilter} = require("../utils/ImageFilterUtils")
+const {deleteImage} = require("../services/ImageService")
 
 // Mapeado em "/advertisement"
 
@@ -72,44 +70,28 @@ router.post("/register", authenticate, async(req, res) => {
 })
 
 
-router.put("/edit", authenticate, async(req, res) => {
+router.put("/edit", async(req, res) => {
     try {
-        const upload = multer({storage: storage, fileFilter: imageFilter}).single("image")
         const advertisement = AdvertisementService
 
-        upload(req, res, function(err) {
-            let filePath = ""
+        console.log(req)
 
-            const adv_edt = {
-                adv_cod: req.body.adv_cod,
-                adv_model_description: req.body.adv_model_description,
-                adv_man_cod: req.body.adv_man_cod,
-                adv_value: req.body.adv_value,
-                adv_year_manufacture: req.body.adv_year_manufacture,
-                adv_year_model: req.body.adv_year_model,
-                adv_description: req.body.adv_description,
-                adv_sty_cod: req.body.adv_sty_cod
-            }
+        const adv_edt = {
+            adv_cod: req.body.adv_cod,
+            adv_model_description: req.body.adv_model_description,
+            adv_man_cod: req.body.adv_man_cod,
+            adv_value: req.body.adv_value,
+            adv_year_manufacture: req.body.adv_year_manufacture,
+            adv_year_model: req.body.adv_year_model,
+            adv_description: req.body.adv_description,
+            adv_sty_cod: req.body.adv_sty_cod,
+            adv_images: req.body.adv_images
+        }
 
-            let result = ""
-            if (!req.file) {
-                result = advertisement.editAdvertisement(adv_edt)
-                return res.status(200).send({success: true})
-            }
-            filePath = "/upload/" + req.file.filename
-            adv_edt.adv_images = filePath
-            result = advertisement.editAdvertisement(adv_edt)
+        const result = advertisement.editAdvertisement(adv_edt)
 
-            if (req.imageFilter) {
-                return res.send(req.imageFilter)
-            } else if (err) {
-                return res.send(err)
-            }
+        return res.status(200).send({success: true, data: result})
 
-            return res
-                .status(200)
-                .send({success: true, data: result, imageUrl: filePath})
-        })
     } catch (error) {
         return res
             .status(500)
@@ -123,7 +105,10 @@ router.put("/edit", authenticate, async(req, res) => {
 router.delete("/:adv_cod", authenticate, async(req, res) => {
     try { 
         const {adv_cod} = req.params
+        const advertisement = await AdvertisementService.getAdvertisement(adv_cod)
         const result = await AdvertisementService.deleteAdvertisement(adv_cod, req.user)
+
+        deleteImage(`./resources/img${advertisement.adv_images}`)
         if (result) {
             return res.status(200).send({success: true})
         }

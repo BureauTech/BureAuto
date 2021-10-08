@@ -12,6 +12,7 @@ const app = express()
 app.use(cors({credentials: true, origin: "http://localhost:3001"}))
 app.use(cookieParser())
 app.use(express.json({limit: "50mb"}))
+app.use("/image", require("./controllers/ImageController"))
 app.use(fileUpload({useTempFiles: true, tempFileDir: "./resources/temp/"}))
 app.use(express.urlencoded({limit: "50mb", extended: true, parameterLimit: 50000}))
 app.use(express.static("resources/img"))
@@ -27,7 +28,6 @@ app.use("/advertisement", require("./controllers/AdvertisementController"))
 app.use("/favorite", authenticate, require("./controllers/FavoriteController"))
 app.use("/administrator", authenticate, require("./controllers/AdministratorController"))
 app.use("/manufacturer", authenticate, require("./controllers/ManufacturerController"))
-app.use("/advertisement", require("./controllers/AdvertisementController"))
 
 
 // Rota inexistente

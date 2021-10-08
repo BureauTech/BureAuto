@@ -6,7 +6,7 @@ router.get("/", async(req, res) => {
     const {user} = req
     if(!user.use_is_admin) return res.status(401).send({success: false, error: "unauthorized"})
     try {
-        const users = await UserService.getAllUsersToAdm(user.use_cod)
+        const users = await UserService.getAllUsers(user.use_cod)
         return res.status(200).send({success: true, data: users})
     } catch (error) {
         console.error(error)
