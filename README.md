@@ -180,9 +180,9 @@ Bibliotecas:
     <td align="center"><a href="https://github.com/charles-ramos"><img src="https://avatars.githubusercontent.com/u/25464287?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Charles Ramos<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=charles-ramos" title="Dev Team">:fist_raised::open_book::hamburger:</a></td> 
 </table>
 <table align="center">
-    <td align="center"><a href="https://github.com/RobertaAb"><img src="https://avatars.githubusercontent.com/u/27467246?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Roberta Abreu<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=RobertaAb" title="Dev Team">:v::art::sparkling_heart:</a></td>
     <td align="center"><a href="https://github.com/danielsantosoliveira"><img src="https://avatars.githubusercontent.com/u/55162125?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Daniel Oliveira<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=danielsantosoliveira" title="Dev Team">:computer::guitar::soccer:</a></td>
     <td align="center"><a href="https://github.com/Denis-Lima"><img src="https://avatars.githubusercontent.com/u/55518511?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Denis Lima<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=Denis-Lima" title="Dev Team">:computer::v::pizza:</a></td>
+    <td align="center"><a href="https://github.com/RobertaAb"><img src="https://avatars.githubusercontent.com/u/27467246?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Roberta Abreu<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=RobertaAb" title="Dev Team">:v::art::sparkling_heart:</a></td>
     <td align="center"><a href="https://github.com/WeDias"><img src="https://avatars.githubusercontent.com/u/56437612?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Wesley Dias<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=WeDias" title="Dev Team">:rocket::milky_way::new_moon:</a></td>
   </tr>
 </table>
