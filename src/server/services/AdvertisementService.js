@@ -3,31 +3,42 @@ const Papa = require("papaparse")
 const {Not, ILike} = require("typeorm")
 const Repository = require("../database/Repository")
 const Connection = require("../database/Connection")
+const AdvertisementValidationService = require("./AdvertisementValidationService")
 
 module.exports = {
 
     registerAdvertisement: async function(filePath, use_cod) {
         const file = fs.readFileSync(filePath, "utf8")
-        Papa.parse(file, {
-            delimiter: ";",
-            header: true,
-            skipEmptyLines: true,
-            transformHeader: header => header.trim(),
-            step: async function(advertisement) {
-                const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
-                await RepositoryAdvertisement.save({
-                    adv_use_cod: use_cod,
-                    adv_man_cod: 15,
-                    adv_model_description: advertisement.data.modelo,
-                    adv_year_manufacture: advertisement.data.ano_fabricacao,
-                    adv_year_model: advertisement.data.ano_modelo,
-                    adv_year_brand: advertisement.data.marca,
-                    adv_value: advertisement.data.valor.replace(",", ".")
-                })
-            },
-            complete: async function() {
-                fs.unlink(filePath, () => {})
-            }
+        return new Promise(function(resolve) {
+            Papa.parse(file, {
+                delimiter: ";",
+                header: true,
+                skipEmptyLines: true,
+                transformHeader: header => header.trim(),
+                complete: async function(results) {
+                    const errors = []
+                    for (const advertisement of results.data) {
+                        const response = await AdvertisementValidationService.validateAdvertisement(advertisement)
+                        if (!response.valid) {
+                            advertisement.motivo = response.error
+                            errors.push(advertisement)
+                        } else {
+                            const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
+                            await RepositoryAdvertisement.save({
+                                adv_use_cod: use_cod,
+                                adv_man_cod: advertisement.adv_man_cod,
+                                adv_model_description: advertisement.modelo,
+                                adv_year_manufacture: advertisement.ano_fabricacao,
+                                adv_year_model: advertisement.ano_modelo,
+                                adv_year_brand: advertisement.marca,
+                                adv_value: advertisement.valor.replace(",", ".")
+                            })
+                        }
+                        fs.unlink(filePath, () => {})
+                        resolve(Papa.unparse(errors, {delimiter: ";", newline: "\n"}))
+                    }
+                }
+            })
         })
     },
 
@@ -38,6 +49,7 @@ module.exports = {
             select: ["adv_cod", "adv_model_description", "adv_value", "adv_images"]
         })
     },
+
     getMaxAdvertisementValue: async function() {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         const response = await RepositoryAdvertisement.createQueryBuilder("advertisement")
@@ -45,6 +57,7 @@ module.exports = {
             .getRawOne()
         return response.max
     },
+
     getMinAdvertisementValue: async function() {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         const response = await RepositoryAdvertisement.createQueryBuilder("advertisement")
@@ -52,6 +65,7 @@ module.exports = {
             .getRawOne()
         return response.min
     },
+
     getAllAdvertisementByUser: async function(adv_use_cod) {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         return await RepositoryAdvertisement.find({
@@ -98,8 +112,9 @@ module.exports = {
         const advertisement = await RepositoryAdvertisement.find({
             relations: ["Manufacturer", "StatusType"],
             where: [
-                {adv_description: ILike(`%${term}%`)},
-                {adv_model_description: ILike(`%${term}%`)}
+                {adv_description: ILike(`%${term}%`), adv_sty_cod: 1},
+                {adv_model_description: ILike(`%${term}%`), adv_sty_cod: 1},
+                {Manufacturer: {man_name: ILike(`%${term}%`)}}
             
             ]
         })

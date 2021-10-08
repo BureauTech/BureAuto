@@ -42,12 +42,13 @@ export default {
             } else {
                 const response = await axios.get(`/advertisement/search/${this.termSearch}`)
                 this.ads = response.data.data.map(ad => {
-                    if(!ad.adv_image) {
-                        ad.adv_images =  this.logoBureau
+                    if(!ad.adv_images) {
+                        ad.adv_images =  logoBureau
                     } else {
                         ad.adv_images = config.SERVER_URL+ ad.adv_images
                     }
                     return ad
+                    
                 })
             }
         }

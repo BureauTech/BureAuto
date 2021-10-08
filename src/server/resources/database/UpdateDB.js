@@ -1,5 +1,5 @@
-const {Pool}        = require("pg")
-const fs            = require("fs")
+const {Pool} = require("pg")
+const fs = require("fs")
 
 // Instalar a biblioteca pg || npm install -save pg
 // Se atentar as configurações do DB antes de executar o script.
