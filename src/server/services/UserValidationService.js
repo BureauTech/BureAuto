@@ -4,6 +4,14 @@ const ValidationUtils = require("../utils/ValidationUtils")
 module.exports = {
 
     validateUser: async function(user) {
+        const fields = ["documento", "nome", "apelido", "email", "telefone", "endereco"]
+        for (const field of fields) {
+            if (!user[field]) {
+                return {valid: false, error: `campo '${field}' não informado`}
+            }
+        }
+
+
         const connection = await Connection
         
         const newDocument = ValidationUtils.validDocument(user.documento)
@@ -17,11 +25,18 @@ module.exports = {
             return {valid: false, error: "documento já cadastrado na plataforma"}
         }
 
+
+        // eslint-disable-next-line max-len
+        const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        if(!emailPattern.test(user.email)) {
+            return {valid: false, error: "email inválido"}
+        }
+
         const email = (await connection.query("select * from user_email_exists($1) exists", [user.email]))[0]
         if (email.exists) {
             return {valid: false, error: "email já cadastrado na plataforma"}
         }
-
+        
         return {valid: true}
     }
 
