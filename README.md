@@ -103,6 +103,8 @@ PostgreSQL - Versão: 12.x
 VueJS - Versão 2.x
 ```
 
+Por padrão, o usuário e senha do banco estão definidos como `postgres`, caso essas configurações não sejam as mesmas do seu ambiente, altere as propriedades `USER_DB` e `PWD_DB` no arquivo [***src/server/.env***](/src/server/.env)
+
 Além disso é bom ter um editor para trabalhar com o código como VSCode.
 
 ## Servidor
@@ -116,7 +118,7 @@ npm run dev
 
 Ficará disponível em [localhost:3000](http://localhost/3000)
 
-2. Execute no seu SGBD, todos os scripts SQL disponíveis na pasta [***src/server/resources***](/src/server/resources/)
+1. Execute no seu SGBD, o script SQL disponível na pasta [***src/server/resources***](/src/server/resources/). Caso não queira executar o script SQL, execute o script `UpdateDB.js` diretamente pelo seu terminal.
 
 ## Cliente
 
