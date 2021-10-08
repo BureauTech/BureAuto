@@ -109,7 +109,6 @@ module.exports = {
             
             ]
         })
-        console.log(advertisement)
         return advertisement
     }
 }

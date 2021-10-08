@@ -84,10 +84,11 @@ router.put("/edit", async(req, res) => {
             adv_year_manufacture: req.body.adv_year_manufacture,
             adv_year_model: req.body.adv_year_model,
             adv_description: req.body.adv_description,
-            adv_sty_cod: req.body.adv_sty_cod,
-            adv_images: req.body.adv_images
+            adv_sty_cod: req.body.adv_sty_cod
         }
-
+        if(req.body.adv_images) {
+            adv_edt.adv_images = req.body.adv_images
+        }
         const result = advertisement.editAdvertisement(adv_edt)
 
         return res.status(200).send({success: true, data: result})

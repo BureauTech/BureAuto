@@ -21,9 +21,7 @@ router.post("/upload", async(req, res) => {
                 return res.send(err)
             }
 
-            return res
-                .status(200)
-                .send({success: true, data: true, imageUrl: filePath})
+            return res.status(200).send({success: true, data: true, imageUrl: filePath})
         })
     } catch (error) {
         return res
