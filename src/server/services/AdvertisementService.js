@@ -15,9 +15,14 @@ module.exports = {
             transformHeader: header => header.trim(),
             step: async function(advertisement) {
                 const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
+                const RepositoryManufacturer = await Repository.get(Repository.Manufacturer)
+                const {man_cod} = await RepositoryManufacturer.findOne({
+                    where: {man_name: ILike(advertisement.data.marca)},
+                    select: ["man_cod"]
+                }) || {man_cod: "1"}
                 await RepositoryAdvertisement.save({
                     adv_use_cod: use_cod,
-                    adv_man_cod: 15,
+                    adv_man_cod: man_cod,
                     adv_model_description: advertisement.data.modelo,
                     adv_year_manufacture: advertisement.data.ano_fabricacao,
                     adv_year_model: advertisement.data.ano_modelo,
