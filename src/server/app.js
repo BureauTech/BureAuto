@@ -12,7 +12,7 @@ const app = express()
 app.use(cors({credentials: true, origin: "http://localhost:3001"}))
 app.use(cookieParser())
 app.use(express.json({limit: "50mb"}))
-//app.use(fileUpload({useTempFiles: true, tempFileDir: "./resources/temp/"}))
+app.use(fileUpload({useTempFiles: true, tempFileDir: "./resources/temp/"}))
 app.use(express.urlencoded({limit: "50mb", extended: true, parameterLimit: 50000}))
 app.use(express.static("resources/img"))
 

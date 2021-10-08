@@ -3,43 +3,52 @@ const Papa = require("papaparse")
 const Repository = require("../database/Repository")
 const PasswordUtils = require("../utils/PasswordUtils")
 const EmailService = require("../services/EmailService")
+const UserValidationService = require("../services/UserValidationService")
 const Connection = require("../database/Connection")
 
 module.exports = {
 
     registerUser: async function(filePath) {
         const file = fs.readFileSync(filePath, "utf8")
-        Papa.parse(file, {
-            delimiter: ";",
-            header: true,
-            skipEmptyLines: true,
-            transformHeader: header => header.trim(),
-            step: async function(user, parser) {
-                parser.pause()
-                user.data.senha = PasswordUtils.randomPassword()
-                const RepositoryUser = await Repository.get(Repository.User)
-                await RepositoryUser.save({
-                    use_name: user.data.nome,
-                    use_is_cpf_document: true,
-                    use_document: user.data.cpf,
-                    use_nickname: user.data.apelido,
-                    use_phone: user.data.telefone,
-                    use_address: user.data.endereco,
-                    use_email: user.data.email,
-                    use_password: user.data.senha,
-                    use_is_temp_password: true
-                })
-                setTimeout(function() {
-                    parser.resume()
-                }, 500)
-                console.log(user.data)
-                const template = "templates/FirstAccessTemplate.ejs"
-                EmailService.sendEmail("BureAuto", user.data.email, "BureAuto - Primeiro Acesso", template, user.data)
+        return new Promise(function(resolve) {
+            const errors = []
+            Papa.parse(file, {
+                delimiter: ";",
+                header: true,
+                skipEmptyLines: true,
+                transformHeader: header => header.trim(),
 
-            },
-            complete: async function() {
-                fs.unlink(filePath, () => {})
-            }
+                step: async function(user) {
+                    const response = UserValidationService.validate(user)
+                    if (!response.valid) {
+                        user.data.motivo = response.error
+                        errors.push(user.data)
+                    } else {
+                        user.data.senha = PasswordUtils.randomPassword()
+                        const RepositoryUser = await Repository.get(Repository.User)
+                        await RepositoryUser.save({
+                            use_name: user.data.nome,
+                            use_is_cpf_document: true,
+                            use_document: user.data.documento,
+                            use_nickname: user.data.apelido,
+                            use_phone: user.data.telefone,
+                            use_address: user.data.endereco,
+                            use_email: user.data.email,
+                            use_password: user.data.senha,
+                            use_is_temp_password: true
+                        })
+
+                        const template = "templates/FirstAccessTemplate.ejs"
+                        EmailService.sendEmail("BureAuto", user.data.email, "BureAuto - Primeiro Acesso", template, user.data)
+                    }
+                },
+
+                complete: function() {
+                    fs.unlink(filePath, () => {})
+                    resolve(Papa.unparse(errors, {delimiter: ";", newline: "\n"}))
+                }
+
+            })
         })
     },
 
@@ -97,19 +106,6 @@ module.exports = {
             return (await RepositoryUser.query(`SELECT * from decrypt_user(${cryptography.cry_use_cod})`))[0]
         }))
         return returnUsers
-    },
-    getAllUsersToAdm: async function(use_cod) {
-        const RepositoryCryptography = await Repository.get(Repository.Cryptography)
-        const RepositoryUser = await Repository.get(Repository.User)
-
-        const returnCryptography = await RepositoryCryptography.find()
-
-        const returnUsers = await Promise.all(returnCryptography.map(async(cryptography) => {
-            return (await RepositoryUser.query(`SELECT * from decrypt_user(${cryptography.cry_use_cod})`))[0]
-        }))
-        const usersToAdm = returnUsers.filter((user) => user.use_cod !== use_cod)
-        return usersToAdm
     }
-
 
 }
