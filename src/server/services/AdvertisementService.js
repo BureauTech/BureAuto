@@ -103,11 +103,13 @@ module.exports = {
         const advertisement = await RepositoryAdvertisement.find({
             relations: ["Manufacturer", "StatusType"],
             where: [
-                {adv_description: ILike(`%${term}%`)},
-                {adv_model_description: ILike(`%${term}%`)}
+                {adv_description: ILike(`%${term}%`), adv_sty_cod: 1},
+                {adv_model_description: ILike(`%${term}%`), adv_sty_cod: 1},
+                {Manufacturer: {man_name: ILike(`%${term}%`)}}
             
             ]
         })
+        console.log(advertisement)
         return advertisement
     }
 }
