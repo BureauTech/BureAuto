@@ -46,8 +46,7 @@ module.exports = new EntitySchema({
             type: "integer"
         },
         adv_images: {
-            type: "bytea",
-            array: true
+            type: "varchar"
         },
         adv_sty_cod: {
             type: "bigint",

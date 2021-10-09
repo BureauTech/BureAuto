@@ -1,5 +1,6 @@
 <template>
   <div>
+    <form id="advEdt" @submit.prevent="editAdvertisement2">
     <v-progress-linear
       :active="loading"
       color="deep-purple"
@@ -26,6 +27,7 @@
               color="bahama"
               :items="advertisement.adv_brands"
               v-model="advertisement.Manufacturer.man_name"
+              name="adv_man_cod"
             >
             </v-select>
           </v-col>
@@ -39,6 +41,7 @@
               rounded
               color="bahama"
               v-model="advertisement.adv_model_description"
+              name="adv_model_description"
             />
           </v-col>
         </v-row>
@@ -51,6 +54,7 @@
             height="auto"
             color="bahama"
             v-model="advertisement.adv_description"
+            name="adv_description"
           />
 
         </div>
@@ -100,6 +104,7 @@
               rounded
               color="bahama"
               v-model="advertisement.adv_year_manufacture"
+              name="adv_year_manufacture"
             />
           </v-col>
           <v-col
@@ -113,6 +118,7 @@
               rounded
               color="bahama"
               v-model="advertisement.adv_year_model"
+              name="adv_year_model"
             />
           </v-col>
         </v-row>
@@ -128,11 +134,11 @@
             <v-text-field
               type="number"
               outlined
-              name="preco"
               rounded
               color="bahama"
               v-model="advertisement.adv_value"
               prefix="R$"
+              name="adv_value"
             />
           </v-col>
           <v-col
@@ -146,6 +152,7 @@
               color="bahama"
               :items="status"
               v-model="advertisement.adv_sty_cod"
+              name="adv_sty_cod"
             />
           </v-col>
         </v-row>
@@ -197,6 +204,7 @@
       height="10"
       indeterminate
     ></v-progress-linear>
+    </form>
   </div>
 </template>
 

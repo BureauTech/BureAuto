@@ -1,6 +1,8 @@
 import axios from "@/axios.js"
 import imageConverterUtil from "@/utils/imageConverterUtil"
 import Card from "@/components/Card/Card.vue"
+import config from "../../config"
+import logoBureau from "@/assets/bureauto_sem_fundo.png"
 
 export default {
     name: "ViewAdvertisement",
@@ -23,7 +25,8 @@ export default {
             loading: false,
             images: null,
             brands: [],
-            status: ["Ativo", "Pausado"]
+            status: ["Ativo", "Pausado"],
+            file: null
         }
     },
     methods: {
@@ -39,7 +42,7 @@ export default {
                     this.loading = false
                     this.advertisement = data.data
 
-                    if(this.advertisement.adv_sty_cod === "1") {
+                    if (this.advertisement.adv_sty_cod === "1") {
                         this.advertisement.adv_sty_cod = "Ativo"
                     } else if (this.advertisement.adv_sty_cod === "3") {
                         this.advertisement.adv_sty_cod = "Pausado"
@@ -54,7 +57,8 @@ export default {
 
                     this.advertisement.adv_brands = tempArray
                     if (this.advertisement.adv_images != null) {
-                        const stringImage = imageConverterUtil.arrayBufferToString(this.advertisement.adv_images)
+                        const stringImage =
+              config.SERVER_URL + this.advertisement.adv_images
                         document.getElementById("image").src = `
                         ${stringImage}`
                         this.images = [stringImage]
@@ -68,35 +72,45 @@ export default {
             }
         },
 
-        editAdvertisement: function() {
+        editAdvertisement: async function(event) {
             try {
-                this.loading = true
-                const adv_edt = {
-                    adv_cod: this.advertisement.adv_cod,
-                    adv_model_description: this.advertisement.adv_model_description,
-                    adv_man_cod: this.advertisement.adv_man_cod,
-                    adv_value: parseFloat(this.advertisement.adv_value),
-                    adv_year_manufacture: parseInt(this.advertisement.adv_year_manufacture),
-                    adv_year_model: parseInt(this.advertisement.adv_year_model),
-                    adv_description: this.advertisement.adv_description,
-                    adv_sty_cod: 1,
-                    adv_images: this.images
+                event.preventDefault()
+                const config = {
+                    header: {
+                        "Content-Type": "multipart/form-data"
+                    }
                 }
 
-                if(this.advertisement.adv_sty_cod === "Ativo") {
-                    adv_edt.adv_sty_cod = "1"
+                this.loading = true
+
+                const form = document.getElementById("advEdt")
+                const formData = new FormData(form)
+                const formImage = new FormData()
+                formData.append("adv_cod", this.advertisement.adv_cod)
+
+                if (this.advertisement.adv_sty_cod === "Ativo") {
+                    formData.set("adv_sty_cod", "1")
                 } else {
-                    adv_edt.adv_sty_cod = "3"
+                    formData.set("adv_sty_cod", "3")
                 }
 
                 const brandName = this.advertisement.Manufacturer.man_name
                 this.brands.forEach(function(brand) {
                     if (brand.man_name === brandName) {
-                        adv_edt.adv_man_cod = brand.man_cod
+                        formData.set("adv_man_cod", brand.man_cod)
                     }
                 })
 
-                axios.put("/advertisement/edit", adv_edt).then((res) => {
+                if (this.file) {
+                    formImage.append("image", this.file, this.file.name)
+                }
+                const {data} = await axios.post("/image/upload", formImage, config)
+
+                if (data.success) {
+                    formData.append("adv_images", data.imageUrl)
+                }
+
+                axios.put("/advertisement/edit", formData, config).then((res) => {
                     if (res.data.success) {
                         this.loading = false
                         this.$toasted.success("Anúncio editado com sucesso!")
@@ -108,6 +122,7 @@ export default {
             } catch (error) {
                 this.$toasted.error("Ocorreu um erro ao fazer a requisição")
                 this.$router.push(`/anuncio/${this.advertisement.adv_cod}`)
+                console.log(error)
             }
         },
 
@@ -118,7 +133,12 @@ export default {
 
         imageUploaded: function() {
             const file = document.querySelector("input[type=file]")["files"][0]
-            this.images = imageConverterUtil.loadImageFileAsURL(file)
+            this.file = file
+            if (!file) {
+                document.getElementById("image").src = logoBureau
+            } else {
+                imageConverterUtil.loadImageFileAsURL(file)
+            }
         }
     },
     created: async function() {

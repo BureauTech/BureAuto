@@ -1,6 +1,7 @@
 const router = require("express").Router()
 const {authenticate} = require("../services/AuthService")
 const AdvertisementService = require("../services/AdvertisementService")
+const {deleteImage} = require("../services/ImageService")
 
 // Mapeado em "/advertisement"
 
@@ -67,20 +68,21 @@ router.post("/register", authenticate, async(req, res) => {
     try {
         const {csvFile} = req.files
         const user = req.user.use_cod
-        await AdvertisementService.registerAdvertisement(csvFile.tempFilePath, user)
-        return res.status(200).send({success: true})
+        const response = await AdvertisementService.registerAdvertisement(csvFile.tempFilePath, user)
+        return res.status(200).send({success: true, csvError: response})
     } catch (error) {
+        console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
     }
 })
 
 
-router.put("/edit", authenticate, async(req, res) => {
-    try { 
-        const adv_edt = req.body
-        AdvertisementService.editAdvertisement(adv_edt)
+router.put("/edit", async(req, res) => {
+    try {
+        await AdvertisementService.editAdvertisement(req.body)
         return res.status(200).send({success: true})
     } catch (error) {
+        console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
     }
 })
@@ -88,7 +90,10 @@ router.put("/edit", authenticate, async(req, res) => {
 router.delete("/:adv_cod", authenticate, async(req, res) => {
     try { 
         const {adv_cod} = req.params
+        const advertisement = await AdvertisementService.getAdvertisement(adv_cod)
         const result = await AdvertisementService.deleteAdvertisement(adv_cod, req.user)
+
+        deleteImage(`./resources/img${advertisement.adv_images}`)
         if (result) {
             return res.status(200).send({success: true})
         }

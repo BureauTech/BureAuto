@@ -3,7 +3,7 @@ import Button from "@/components/Button/Button.vue"
 import Input from "@/components/Input/Input.vue"
 import ImportCsv from "@/components/ImportCsv/ImportCsv.vue"
 import axios from "@/axios.js"
-import router from "@/router"
+import {saveAs} from "file-saver"
 
 export default {
     name: "UploadAdvertisement",
@@ -23,7 +23,9 @@ export default {
             }, {text: "Valor (R$)", value: "adv_value"}, {text: "Ano Fabricação", value: "adv_year_manufacture"}, {text: "Ano Modelo", value: "adv_year_model"}, {text: "Visualizações", value: "adv_views"}, {text: "Favoritados", value: "adv_favorites"}, {text: "Status", value: "sty_description"}, {text: "Exibir", value: "show"}, {text: "Editar", value: "edit"}, {text: "Excluir", value: "delete"}],
             advertisements: [],
             dialog: false,
-            deleteAd: undefined
+            deleteAd: undefined,
+            dialogCsvError: false,
+            errors: ""
         }
     },
     beforeMount: function() {
@@ -49,14 +51,15 @@ export default {
                         }
                     })
                     
-                    if (data.success) {
+                    if (data.success && data.csvError == "") {
                         this.$toasted.success("Dados importados!")
                         setTimeout(function() { 
-                            router.push({name: "Home"}) 
+                            window.location.reload()
                         }, 3000)
                         
-                    } else {
-                        this.$toasted.error("Ocorreu erros na importação")
+                    } else if (data.csvError !== "") {
+                        this.dialogCsvError = true
+                        this.errors = data.csvError
                     }
                 } catch (error) {
                     console.log(error)
@@ -87,6 +90,11 @@ export default {
             setTimeout(function() { 
                 window.location.reload()
             }, 1500)
+        },
+        DownloadErrors() {
+            this.dialogCsvError = false
+            const blob = new Blob([this.errors], {type: "text/csv"})
+            saveAs(blob, "Erros.csv")
         }
     }
 }

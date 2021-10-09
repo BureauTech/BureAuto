@@ -1,5 +1,5 @@
-const {Pool}        = require("pg")
-const fs            = require("fs")
+const {Pool} = require("pg")
+const fs = require("fs")
 
 // Instalar a biblioteca pg || npm install -save pg
 // Se atentar as configurações do DB antes de executar o script.
@@ -14,7 +14,7 @@ const config = {
 
 const pool = new Pool(config)
 
-const sql_ddl_bureauto = fs.readFileSync("./2021-10-05-ddl-bureauto.sql").toString()
+const sql_ddl_bureauto = fs.readFileSync("./2021-10-08-ddl-bureauto.sql").toString()
 
 pool.connect(async function(err, client, done) {
     if (err) {

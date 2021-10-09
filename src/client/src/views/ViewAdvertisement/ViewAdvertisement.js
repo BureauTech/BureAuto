@@ -1,7 +1,8 @@
 import Card from "@/components/Card/Card.vue"
 import Button from "@/components/Button/Button.vue"
 import axios from "@/axios.js"
-import imageConverterUtil from "@/utils/imageConverterUtil"
+import logoBureau from "@/assets/bureauto_sem_fundo.png" 
+import config from "../../config"
 
 export default {
     name: "ViewAdvertisement",
@@ -21,7 +22,8 @@ export default {
                     man_name: ""
                 }
             },
-            favorite: undefined
+            favorite: undefined,
+            imageUrl: logoBureau
         }
     },
     methods: {
@@ -32,8 +34,7 @@ export default {
                     this.advertisement = data.data
 
                     if(this.advertisement.adv_images != null) {
-                        document.getElementById("image").src=`
-                        ${imageConverterUtil.arrayBufferToString(this.advertisement.adv_images)}`
+                        this.imageUrl = config.SERVER_URL + this.advertisement.adv_images
                     }
                 } else {
                     this.$router.push("/")

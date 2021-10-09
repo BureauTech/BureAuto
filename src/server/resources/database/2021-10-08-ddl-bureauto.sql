@@ -53,7 +53,7 @@ create table manufacturer (
 );
 
 insert into manufacturer (man_name) values 
-	('Acura'), ('Alfa Romeo'), ('Aston Martin'), ('Audi'), ('BMW'),
+	('Desconhecido'), ('Acura'), ('Alfa Romeo'), ('Aston Martin'), ('Audi'), ('BMW'),
 	('Bentley'), ('Buick'), ('Cadillac'), ('Chevrolet'), ('Chrysler'),
 	('Daewoo'), ('Daihatsu'), ('Dodge'), ('Eagle'), ('FIAT'), ('Ferrari'),
 	('Fisker'), ('Ford'), ('Freightliner'), ('GMC'), ('Genesis'), ('Geo'),
@@ -93,7 +93,7 @@ create table advertisement (
     adv_views integer not null default 0,
     adv_year_model integer,
     adv_year_manufacture integer,
-	adv_images bytea[],
+	adv_images varchar,
 	adv_created_at timestamp with time zone default current_timestamp not null,
     constraint advertisement_adv_cod_pkey primary key (adv_cod),
     constraint advertisement_adv_use_cod_fkey foreign key (adv_use_cod) references "user" (use_cod),
@@ -404,11 +404,13 @@ $$ language 'plpgsql';
 -- ##################### starts queries ######################## --
 
 insert into "user"
-	(use_name, use_is_cpf_document, use_document, use_nickname,
-	 use_phone, use_address, use_email, use_is_temp_password, use_password, use_is_admin)
-values ('admin', true, '1234567890', 'admin', '129000000',
-		'rua dos programadores', 'admin@admin.com', false, 'admin', true);
-
+	(use_name, use_is_cpf_document, use_document, use_nickname, 
+		use_phone, use_address, use_email, use_is_temp_password, use_password, use_is_admin)
+values 
+	('admin', true, '93194008064', 'admin', '129000000', 
+		'Rua 1, Avenida 2, São José dos Campos-SP', 'admin@admin.com', false, 'admin', true),
+	('user', false, '38086451000166', 'user', '129000000', 
+		'Rua 1, Avenida 2, São José dos Campos-SP', 'user@user.com', false, 'user', false);
 
 insert into advertisement
     (adv_use_cod, adv_man_cod, adv_sty_cod, adv_description, adv_brand, adv_model_description, adv_value,

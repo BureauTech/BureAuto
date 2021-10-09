@@ -9,15 +9,12 @@ router.post("/", async(req, res) => {
         const {email, password} = req.body
         const connection = await Connection
 
-        const validate = (await connection
-            .query("select validate_user_access($1, $2) cod", [email, password]))[0]
-
+        const validate = (await connection.query("select validate_user_access($1, $2) cod", [email, password]))[0]
         if (!validate.cod) {
             return res.status(200).send({success: false, error: "incorrect username or password"})
         }
 
-        const user = (await connection
-            .query("select * from decrypt_user($1)", [validate.cod]))[0]
+        const user = (await connection.query("select * from decrypt_user($1)", [validate.cod]))[0]
         delete user.use_password
         AuthService.generateToken(user, res)
         return res.status(200).send({success: true, user})

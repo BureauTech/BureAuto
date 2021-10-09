@@ -29,6 +29,7 @@
                     color="bahama"
                     placeholder="Pesquisa"
                     v-model="termSearch"
+                    @keypress.enter="searchAds"
                   />
                   <v-expansion-panel-header class="panel-search">
                     <v-card-text

@@ -3,7 +3,7 @@ import Button from "@/components/Button/Button.vue"
 import Input from "@/components/Input/Input.vue"
 import ImportCsv from "@/components/ImportCsv/ImportCsv.vue"
 import axios from "@/axios.js"
-import router from "@/router"
+import {saveAs} from "file-saver"
 
 export default {
     name: "UploadUser",
@@ -22,7 +22,9 @@ export default {
             }, {text: "Editar", value: "edit"}, {text: "Excluir", value: "delete"}],
             users: [],
             dialog: false,
-            teste: undefined
+            teste: undefined,
+            dialogCsvError: false,
+            errors: ""
         }
     },
     beforeMount: function() {
@@ -43,15 +45,15 @@ export default {
                             "Content-Type": "multipart/form-data"
                         }
                     })
-                    
-                    if (data.success) {
+                    if (data.success && data.csvError == "") {
                         this.$toasted.success("Dados importados!")
                         setTimeout(function() { 
                             window.location.reload()
                         }, 3000)
                         
-                    } else {
-                        this.$toasted.error("Ocorreu erros na importação")
+                    } else if (data.csvError !== "") {
+                        this.dialogCsvError = true
+                        this.errors = data.csvError
                     }
                 } catch (error) {
                     console.log(error)
@@ -82,6 +84,11 @@ export default {
             setTimeout(function() { 
                 window.location.reload()
             }, 1500)
+        },
+        DownloadErrors() {
+            this.dialogCsvError = false
+            const blob = new Blob([this.errors], {type: "text/csv"})
+            saveAs(blob, "Erros.csv")
         }
     }
 }
