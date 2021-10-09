@@ -3,6 +3,7 @@ const Papa = require("papaparse")
 const {Not, ILike} = require("typeorm")
 const Repository = require("../database/Repository")
 const Connection = require("../database/Connection")
+const AdvertisementUtils = require("../utils/AdvertisementUtils")
 
 module.exports = {
 
@@ -35,7 +36,7 @@ module.exports = {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         return await RepositoryAdvertisement.find({
             relations: ["Manufacturer", "StatusType"], where: {adv_sty_cod: 1},
-            select: ["adv_cod", "adv_model_description", "adv_value", "adv_images"]
+            select: ["adv_cod", "adv_model_description", "adv_value", "adv_images", "adv_year_manufacture", "adv_year_model"]
         })
     },
     getMaxAdvertisementValue: async function() {
@@ -100,9 +101,47 @@ module.exports = {
             where: [
                 {adv_description: ILike(`%${term}%`)},
                 {adv_model_description: ILike(`%${term}%`)}
-            
             ]
         })
         return advertisement
+    },
+
+    filterAdvertisements: async function(advertisements, filters) {
+        advertisements = advertisements.filter(function(advertisement) {
+            return (filters.brand ? AdvertisementUtils.equalBrand(filters.brand, advertisement.Manufacturer.man_name) : true)
+                && (filters.model ? AdvertisementUtils.equalModel(filters.model, advertisement.adv_model_description) : true)
+                && (filters.yearModel ? AdvertisementUtils.equalYearManMod(filters.yearModel, advertisement) : true)
+                && (filters.valueMin && filters.valueMax ?
+                    AdvertisementUtils.rangeValue(filters.valueMin, filters.valueMax, advertisement.adv_value) : true)
+                && (filters.valueMin && !filters.valueMax ? AdvertisementUtils.valueMin(filters.valueMin, advertisement.adv_value) : true)
+                && (!filters.valueMin && filters.valueMax ? AdvertisementUtils.valueMax(filters.valueMax, advertisement.adv_value) : true)
+        })
+        return advertisements
+    },
+
+    returnFilters: function(advertisements) {
+        const response = {
+            brand: {brands: []},
+            model: {models: []},
+            yearModel: {yearModels: []},
+            value: {values: [], min: undefined, max: undefined}
+        }
+        
+        for (const advertisement of advertisements) {
+            response.brand.brands.push(advertisement.Manufacturer.man_name)
+            response.model.models.push(advertisement.adv_model_description)
+            response.yearModel.yearModels.push("".concat(advertisement.adv_year_manufacture, "/", advertisement.adv_year_model))
+            response.value.values.push(advertisement.adv_value)
+        }
+
+        response.brand.brands = [... new Set(response.brand.brands)]
+        response.model.models = [... new Set(response.model.models)]
+        response.yearModel.yearModels = [... new Set(response.yearModel.yearModels)]
+        response.value.values = [... new Set(response.value.values)]
+        response.value.min = Math.min(...response.value.values)
+        response.value.max = Math.max(...response.value.values)
+        delete response.value.values
+
+        return response
     }
 }

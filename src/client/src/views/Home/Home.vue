@@ -37,23 +37,26 @@
                     />
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <Select
+                    <v-select
                       placeholder="Marca"
                       type="text"
                       name="brand"
                       :items="formCategories.brand"
+                      v-model="filters.brand"
                     />
-                    <Select
+                    <v-select
                       placeholder="Modelo"
                       type="text"
                       name="model"
                       :items="formCategories.model"
+                      v-model="filters.model"
                     />
-                    <Select
+                    <v-select
                       placeholder="Ano do modelo"
                       type="text"
                       name="yearModel"
-                      :items="formCategories.yearModel"
+                      :items="formCategories.yearManModel"
+                      v-model="filters.yearManModel"
                     />
                   </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -66,26 +69,27 @@
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
                     <v-subheader class="pl-0">
-                      Mínimo R$ {{formCategories.valueMin}}
+                      Mínimo R$ {{filters.valueMin}}
                     </v-subheader>
                     <v-row>
                       <v-slider
                         name="valueMin"
-                        v-model="formCategories.valueMin"
-                        :max="adsMaxValue"
-                        :min="adsMinValue"
+                        v-model="filters.valueMin"
+                        :max="formCategories.valueMax"
+                        :min="formCategories.valueMin"
                       ></v-slider>
                     </v-row>
                     <v-subheader class="pl-0">
-                      Máximo R$ {{formCategories.valueMax}}
+                      Máximo R$ {{filters.valueMax}}
                     </v-subheader>
                     <v-row>
                       <v-slider
                         name="valueMax"
-                        v-model="formCategories.valueMax"
-                        :max="adsMaxValue"
-                        :min="adsMinValue"
-                        :rules="[rules.maxValue(formCategories.valueMin, formCategories.valueMax)]"
+                        v-model="filters.valueMax"
+                        :max="formCategories.valueMax"
+                        :min="formCategories.valueMin"
+                        @change="getAds"
+                        :rules="[rules.maxValue(filters.valueMin, filters.valueMax)]"
                       >
                       </v-slider>
                     </v-row>

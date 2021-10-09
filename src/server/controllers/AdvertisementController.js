@@ -14,10 +14,16 @@ router.get("/total-advertisements", async(req, res) => {
     }
 })
 
-router.get("/all", async(req, res) => {
+router.get("/all/:filters", async(req, res) => {
     try {
-        const advertisements = await AdvertisementService.getAllAdvertisement()
-        return res.status(200).send({success: true, data: advertisements})
+        let {filters} = req.params
+        if(typeof filters === "string") filters = JSON.parse(filters)
+        let advertisements = await AdvertisementService.getAllAdvertisement()
+        if(filters.brand || filters.model || filters.yearManModel || filters.valueMin || filters.valueMax) {
+            advertisements = await AdvertisementService.filterAdvertisements(advertisements, filters)
+        }
+        const returnFilters = await AdvertisementService.returnFilters(advertisements)
+        return res.status(200).send({success: true, data: advertisements, filters: returnFilters})
     } catch (error) {
         console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
@@ -59,7 +65,6 @@ router.get("/:adv_cod", async(req, res) => {
 
 router.post("/register", authenticate, async(req, res) => {
     try {
-        debugger
         const {csvFile} = req.files
         const user = req.user.use_cod
         await AdvertisementService.registerAdvertisement(csvFile.tempFilePath, user)
@@ -94,11 +99,16 @@ router.delete("/:adv_cod", authenticate, async(req, res) => {
     }
 })
 
-router.get("/search/:term", async(req, res) => {
+router.get("/search/:term/:filters", async(req, res) => {
     try {
-        const {term} = req.params
-        const advertisement = await AdvertisementService.searchAdvertisement(term)
-        return res.status(200).send({success: true, data: advertisement})
+        let {term, filters} = req.params
+        if(typeof filters === "string") filters = JSON.parse(filters)
+        let advertisements = await AdvertisementService.searchAdvertisement(term)
+        if(filters.brand || filters.model || filters.yearManModel || filters.valueMin || filters.valueMax) {
+            advertisements = await AdvertisementService.filterAdvertisements(advertisements, filters)
+        }
+        const returnFilter = await AdvertisementService.returnFilters(advertisements)
+        return res.status(200).send({success: true, data: advertisements, filters: returnFilter})
     } catch (error) {
         console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
