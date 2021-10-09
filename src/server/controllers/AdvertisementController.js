@@ -42,7 +42,7 @@ router.get("/values", async(req, res) => {
     }
 })
 
-router.get("/all/:adv_use_cod", async(req, res) => {
+router.get("/allAdsByUser/:adv_use_cod", async(req, res) => {
     try {
         const {adv_use_cod} = req.params
         const advertisements = await AdvertisementService.getAllAdvertisementByUser(adv_use_cod)

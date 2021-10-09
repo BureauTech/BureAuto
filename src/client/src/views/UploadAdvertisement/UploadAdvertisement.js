@@ -34,7 +34,7 @@ export default {
     methods: {
         getAds: async function() {
             const status = {1: "Ativo", 3: "Pausado"}
-            const response = await axios.get(`advertisement/all/${this.$store.getters.getUser.use_cod}`)
+            const response = await axios.get(`advertisement/allAdsByUser/${this.$store.getters.getUser.use_cod}`)
             this.advertisements = response.data.data
             this.advertisements.forEach(ad => {
                 ad.sty_description = status[ad.adv_sty_cod]
