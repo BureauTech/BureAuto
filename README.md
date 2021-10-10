@@ -28,7 +28,7 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
 
 - Gif com a aplicação em execução
 <div align="center">
-  <img src="./doc/gif/wireframe_web.gif" />
+  <img src="./doc/gif/entrega-sprint-2.gif" />
 </div>
 
 <br>
