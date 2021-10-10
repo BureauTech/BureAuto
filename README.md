@@ -79,7 +79,7 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
 ## Burndown
 
 <div align="center">
-  <img src="./doc/img/burndown.png" />
+  <img src="./doc/img/burndown2.png" />
 </div>
 <br/> 
 
