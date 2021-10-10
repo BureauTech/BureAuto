@@ -10,34 +10,50 @@ module.exports = new EntitySchema({
             generated: true
         },
         use_name: {
-            type: "varchar"
+            type: "varchar",
+            nullable: false
         },
         use_is_cpf_document: {
-            type: "boolean"
+            type: "boolean",
+            nullable: false
         },
         use_document: {
-            type: "varchar"
+            type: "varchar",
+            nullable: false
         },
         use_nickname: {
             type: "varchar"
         },
         use_phone: {
-            type: "varchar"
+            type: "varchar",
+            nullable: false
         },
         use_address: {
-            type: "varchar"
+            type: "varchar",
+            nullable: false
         },
         use_email: {
-            type: "varchar"
+            type: "varchar",
+            nullable: false
         },
         use_is_temp_password: {
-            type: "boolean"
+            type: "boolean",
+            nullable: false,
+            default: true
         },
         use_password: {
-            type: "varchar"
+            type: "varchar",
+            nullable: false
         },
         use_is_admin: {
-            type: "boolean"
+            type: "boolean",
+            nullable: false,
+            default: false
+        },
+        use_created_at: {
+            type: "timestamp with time zone",
+            nullable: false,
+            default: "current_timestamp"
         }
     },
     relations: {
@@ -46,10 +62,8 @@ module.exports = new EntitySchema({
             target: "advertisement",
             joinColumn: {
                 name: "use_cod",
-                referencedColumnName: "anu_use_cod"
-                
-            },
-            inverseSide: "User"
+                referencedColumnName: "adv_use_cod"
+            }
         },
         Cryptography: {
             type: "one-to-one",
@@ -57,6 +71,32 @@ module.exports = new EntitySchema({
             joinColumn: {
                 name: "use_cod",
                 referencedColumnName: "cry_use_cod",
+                inverseSide: "user"
+            }
+        },
+        Favorite: {
+            type: "one-to-many",
+            target: "favorite",
+            joinColumn: {
+                name: "use_cod",
+                referencedColumnName: "fav_use_cod"
+            }
+        },
+        Chat: {
+            type: "one-to-one",
+            target: "chat",
+            joinColumn: {
+                name: "use_cod",
+                referencedColumnName: "cha_use_cod",
+                inverseSide: "user"
+            }
+        },
+        Message: {
+            type: "one-to-one",
+            target: "message",
+            joinColumn: {
+                name: "use_cod",
+                referencedColumnName: "mes_use_cod",
                 inverseSide: "user"
             }
         }

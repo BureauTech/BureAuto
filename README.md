@@ -12,11 +12,10 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
 
    * [Sobre](#bureauto)
    * [Sumário](#sumário)
-   * [Protótipo das telas da aplicação](#protótipo-das-telas-da-aplicação)
    * [Entregas](#entregas)
         * [Modelagem de Dados](#modelagem-de-dados)
       * [Burndown](#burndown)
-      * [Backlog](#backlog)
+      * [Documentações](#documentações)
    * [Como executar localmente](#como-executar-localmente)
       * [Pré-Requisitos](#pré-requisitos)
       * [Servidor](#servidor)
@@ -25,36 +24,40 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
    * [Tecnologias](#tecnologias)
    * [Autores](#autores)
 
-## Protótipo das telas da aplicação 
+## Aplicação 
 
-- Wireframe Aplicação Web
+- Gif com a aplicação em execução
 <div align="center">
-  <img src="./doc/gif/wireframe_web.gif" />
+  <img src="./doc/gif/entrega-sprint-2.gif" />
 </div>
 
 <br>
 
-- Wireframe Aplicação Mobile
-<div align="center">
-  <img src="./doc/gif/wireframe_app.gif" />
-</div>
-
-<br>
-
-Protótipo interativo das <b>telas web</b> está disponível neste link: https://bit.ly/BureAuto
-
-Protótipo interativo das <b>telas mobile</b> está disponível neste link: https://bit.ly/BureAutoMobile
-
-<br>
 
 # Entregas
 
 - [Sprint 1](https://github.com/BureauTech/BureAuto/releases/tag/1.0.0) entrega realizada em 19/09/2021.
+- [Sprint 2](https://github.com/BureauTech/BureAuto/releases/tag/1.1.0) entrega realizada em 10/10/2021.
 
-## Entregas propostas
-
+## Visão geral do projeto
 <div align="center">
-  <img src="./doc/img/cards_bureauto.png" />
+  <img src="./doc/img/funcionalidades_projeto.png" />
+</div>
+<div align="center">
+  <img src="./doc/img/abordagem_spritns.png" />
+</div>
+
+<br/> 
+
+## Entregas propostas Sprint 2
+<div align="center">
+  <img src="./doc/img/cards.png" />
+</div>
+<div align="center">
+  <img src="./doc/img/cards2.png" />
+</div>
+<div align="center">
+  <img src="./doc/img/cards3.png" />
 </div>
 <br/> 
 
@@ -76,13 +79,15 @@ Protótipo interativo das <b>telas mobile</b> está disponível neste link: http
 ## Burndown
 
 <div align="center">
-  <img src="./doc/img/burndown.png" />
+  <img src="./doc/img/burndown2.png" />
 </div>
 <br/> 
 
-## Backlog 
+## Documentações 
 
 - [Product Backlog](./doc/artefatos/product_backlog_bureauto.pdf)
+
+- [Documentação BureAuto](./doc/artefatos/documentacao_BureAuto.pdf)
 
 # Como executar localmente
 
@@ -98,6 +103,8 @@ PostgreSQL - Versão: 12.x
 VueJS - Versão 2.x
 ```
 
+Por padrão, o usuário e senha do banco estão definidos como `postgres`, caso essas configurações não sejam as mesmas do seu ambiente, altere as propriedades `USER_DB` e `PWD_DB` no arquivo [***src/server/.env***](/src/server/.env)
+
 Além disso é bom ter um editor para trabalhar com o código como VSCode.
 
 ## Servidor
@@ -111,7 +118,7 @@ npm run dev
 
 Ficará disponível em [localhost:3000](http://localhost/3000)
 
-2. Execute no seu SGBD, todos os scripts SQL disponíveis na pasta [***src/server/resources***](/src/server/resources/)
+1. Execute no seu SGBD, o script SQL disponível na pasta [***src/server/resources***](/src/server/resources/). Caso não queira executar o script SQL, execute o script `UpdateDB.js` diretamente pelo seu terminal.
 
 ## Cliente
 
@@ -169,12 +176,13 @@ Bibliotecas:
   <tr>
     <td align="center"><a href="https://github.com/anaclaragraciano"><img src="https://avatars.githubusercontent.com/u/64653864?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ana Clara<br>PO</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=anaclaragraciano" title="PO">:sparkles::iphone::open_book:</a></td>
     <td align="center"><a href="https://github.com/bibiacoutinho"><img src="https://avatars.githubusercontent.com/u/56437723?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Beatriz Coutinho<br>Master</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=bibiacoutinho" title="Master">:headphones::nail_care::computer_mouse:</a></td>
-    <td align="center"><a href="https://github.com/caiquesjc"><img src="https://avatars.githubusercontent.com/u/54915913?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Caique Nascimento<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=caiquesjc" title="Dev Team">:keyboard::desktop_computer::computer_mouse:</a></td>     
+    <td align="center"><a href="https://github.com/caiquesjc"><img src="https://avatars.githubusercontent.com/u/54915913?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Caique Nascimento<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=caiquesjc" title="Dev Team">:keyboard::desktop_computer::computer_mouse:</a></td>    
+    <td align="center"><a href="https://github.com/charles-ramos"><img src="https://avatars.githubusercontent.com/u/25464287?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Charles Ramos<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=charles-ramos" title="Dev Team">:fist_raised::open_book::hamburger:</a></td> 
 </table>
 <table align="center">
-    <td align="center"><a href="https://github.com/charles-ramos"><img src="https://avatars.githubusercontent.com/u/25464287?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Charles Ramos<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=charles-ramos" title="Dev Team">:fist_raised::open_book::hamburger:</a></td>
     <td align="center"><a href="https://github.com/danielsantosoliveira"><img src="https://avatars.githubusercontent.com/u/55162125?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Daniel Oliveira<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=danielsantosoliveira" title="Dev Team">:computer::guitar::soccer:</a></td>
     <td align="center"><a href="https://github.com/Denis-Lima"><img src="https://avatars.githubusercontent.com/u/55518511?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Denis Lima<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=Denis-Lima" title="Dev Team">:computer::v::pizza:</a></td>
+    <td align="center"><a href="https://github.com/RobertaAb"><img src="https://avatars.githubusercontent.com/u/27467246?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Roberta Abreu<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=RobertaAb" title="Dev Team">:v::art::sparkling_heart:</a></td>
     <td align="center"><a href="https://github.com/WeDias"><img src="https://avatars.githubusercontent.com/u/56437612?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Wesley Dias<br>Dev</b></sub></a><br /><a href="https://github.com/BureauTech/BureAuto/commits?author=WeDias" title="Dev Team">:rocket::milky_way::new_moon:</a></td>
   </tr>
 </table>

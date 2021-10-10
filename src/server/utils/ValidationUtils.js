@@ -46,7 +46,7 @@ const ValidationUtils = module.exports = {
 
     validDocument: function(documentString) {
         if (!documentString) {
-            return {type: "unknown", valid: false}
+            return {type: "desconhecido", valid: false}
         }
         
         const treatedValue = documentString.replace(/[-*&/.]/g, "")
@@ -57,7 +57,7 @@ const ValidationUtils = module.exports = {
             return {type: "cnpj", valid: ValidationUtils.validCnpj(treatedValue)}
         }
             
-        return {type: "unknown", valid: false}
+        return {type: "desconhecido", valid: false}
     }
     
 }

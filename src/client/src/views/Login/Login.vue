@@ -61,12 +61,13 @@
           class="mb-6 mt-6"
         >
           <Button
-            buttonText="Login"
             type="submit"
             min-width="150"
             min-height="50"
             @click.stop.prevent="login"
-          />
+          >
+            Login
+          </Button>
         </v-row>
         <v-row
           no-gutters

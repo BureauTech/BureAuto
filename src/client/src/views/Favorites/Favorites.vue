@@ -1,79 +1,118 @@
 <template>
-  <v-app>
-    <v-app-bar
-      color="transparent"
-      elevation="0"
-      justify
-    >
-      <v-layout>
-        <v-col
-          cols="16"
-          align="left"
-        >
-          <h3>
-            Favoritos
-          </h3>
-          Seus anúncios favoritos
-        </v-col>
-      </v-layout>
-    </v-app-bar>
-    <v-layout
-      v-for="r in 2"
-      :key="r"
+  <v-container>
+    <v-row>
+      <v-app-bar
+        color="transparent"
+        elevation="0"
+        justify
+      >
+        <v-layout>
+          <v-col cols="12">
+            <h3>
+              Favoritos
+            </h3>
+            Seus anúncios favoritos
+          </v-col>
+        </v-layout>
+      </v-app-bar>
+    </v-row>
+    <!-- <v-layout
+      v-for="(ad, index) in ads"
+      :key="ad.adv_cod"
+      cols="4"
       row
       justify-center
-      align-center
+      align-start
       class="no-negative"
+    > -->
+    <v-row
+      justify="center"
+      justify-lg="start"
     >
+        <v-col
+          cols="12"
+          sm="10"
+          lg="6"
+          v-for="(ad, index) in ads"
+      :key="ad.adv_cod"
+        >
       <v-card
-        min-width="75%"
+        min-width="100%"
         rounded="xl"
         align-center
-        class="text-center"
+        class="text-center margin-layout"
       >
+        <v-col>
         <v-card-title>
-          <v-col
-            align="right"
-            cols="7"
+          <v-row
+            no-gutters
+            justify="end"
           >
-            Fusca
-            - R$ 10.250
-          </v-col>
-          <v-col align="right">
-            <v-icon large>
-              mdi-trash-can-outline
-            </v-icon>
-          </v-col>
+            <v-col
+              align="right"
+              cols="auto"
+              v-text="ad.adv_model_description + ' - ' + ad.adv_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })"
+            >
+            </v-col>
+            <v-col
+              align="right"
+              cols="1"
+              class="mx-2"
+            >
+              <v-icon
+                large
+                @click="viewAdvertisement(ad.adv_cod)"
+              >
+                mdi-eye
+              </v-icon>
+            </v-col>
+            <v-col
+              align="right"
+              cols="1"
+              class="mx-2"
+            >
+              <v-icon
+                large
+                @click="deleteFav(ad.adv_cod, index)"
+              >
+                mdi-trash-can-outline
+              </v-icon>
+            </v-col>
+          </v-row>
         </v-card-title>
         <v-row>
           <v-col
-            cols="4"
+            cols="12"
+            md="7"
             align="center"
+            justify="center"
           >
             <v-card-text>
               <v-img
-                src="@/assets/bureauto_sem_fundo.png"
-                alt="Logo da bureAuto"
-                max-height="150"
-                max-width="150"
+                :src="ad.adv_images"
+                alt="Logo da BureAuto"
+                max-height="400"
+                max-width="400"
               />
             </v-card-text>
           </v-col>
           <v-col
-            align="justify"
-            max-width="75%"
-            cols="8"
+            cols="12"
+            md="5"
           >
-            <v-list-item>
-              Esse Fusca é tunadão! Tem turbo, ar-condicionado, 5 portas e bagageiro<br>
-              É azul! Dá pra você passar em uma escola e ver as crianças se batendo. :)
-            </v-list-item>
+            <v-card-text
+              class="breakline text-left overflow overflow-y-auto"
+              v-text="ad.adv_description"
+            >
+            </v-card-text>
           </v-col>
         </v-row>
-        Vendido por FuscaTunadao2021
+        </v-col>
       </v-card>
-    </v-layout>
-  </v-app>
+        </v-col>
+    <!-- </v-layout> -->
+    </v-row>
+  </v-container>
 </template>
 
 <script src="./Favorites.js"></script>

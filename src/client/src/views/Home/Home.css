@@ -2,11 +2,32 @@
     margin: 0px !important;
 }
 
+.bg-transparent {
+    background-color: transparent;
+}
+
+.btn-search {
+    border-bottom-left-radius:20px;
+    border-bottom-right-radius:20px
+}
+
+.panel-search {
+    border-top-left-radius:20px !important;
+    border-top-right-radius:20px !important
+}
+
+.margin-layout {
+    margin-top: 12px;
+}
 
 .layout.no-negative.row {
     flex-wrap: wrap !important;
 }
 
 .mousehover:hover {
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgb(247, 241, 241);
+}
+
+.hover-card:hover {
+    box-shadow: 0px 0px 41px 5px rgba(0,0,0,0.7);
 }
