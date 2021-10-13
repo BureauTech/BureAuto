@@ -110,7 +110,11 @@
             </v-card>
           </v-row>
         </v-col>
-        <v-col cols="10" sm="12" md="9">
+        <v-col
+          cols="10"
+          sm="12"
+          md="9"
+        >
           <v-row>
             <v-col
               v-for="ad in ads"

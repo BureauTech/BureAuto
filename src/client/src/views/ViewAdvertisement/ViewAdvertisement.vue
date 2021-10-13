@@ -71,7 +71,7 @@
                 <p class="text-subtitle-1 bahama--text ma-0 text-left">ano</p>
                 <p
                   class="text-h5 bahama--text font-weight-medium text-left"
-                  v-text="`${advertisement.adv_year_manufacture} / ${advertisement.adv_year_model}`"
+                  v-text="`${advertisement.adv_year_manufacture} - ${advertisement.adv_year_model}`"
                 >
 
                 </p>

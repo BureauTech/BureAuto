@@ -125,11 +125,9 @@ module.exports = {
         advertisements = advertisements.filter(function(advertisement) {
             return (filters.brand ? AdvertisementUtils.equalBrand(filters.brand, advertisement.Manufacturer.man_name) : true)
                 && (filters.model ? AdvertisementUtils.equalModel(filters.model, advertisement.adv_model_description) : true)
-                && (filters.yearModel ? AdvertisementUtils.equalYearManMod(filters.yearModel, advertisement) : true)
+                && (filters.yearManModel ? AdvertisementUtils.equalYearManMod(filters.yearManModel, advertisement) : true)
                 && (filters.valueMin && filters.valueMax ?
                     AdvertisementUtils.rangeValue(filters.valueMin, filters.valueMax, advertisement.adv_value) : true)
-                && (filters.valueMin && !filters.valueMax ? AdvertisementUtils.valueMin(filters.valueMin, advertisement.adv_value) : true)
-                && (!filters.valueMin && filters.valueMax ? AdvertisementUtils.valueMax(filters.valueMax, advertisement.adv_value) : true)
         })
         return advertisements
     },
@@ -145,7 +143,7 @@ module.exports = {
         for (const advertisement of advertisements) {
             response.brand.brands.push(advertisement.Manufacturer.man_name)
             response.model.models.push(advertisement.adv_model_description)
-            response.yearModel.yearModels.push("".concat(advertisement.adv_year_manufacture, "/", advertisement.adv_year_model))
+            response.yearModel.yearModels.push("".concat(advertisement.adv_year_manufacture, "-", advertisement.adv_year_model))
             response.value.values.push(advertisement.adv_value)
         }
 
