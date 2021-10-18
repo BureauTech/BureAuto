@@ -81,10 +81,20 @@ export default {
             } catch (error) {
                 this.$toasted.error("Ocorreu um erro ao verificar o favorito")
             }
+        },
+
+        incrementView: function() {
+            try {
+                const adv_cod = this.$route.params.id
+                axios.put(`/advertisement/views/${adv_cod}`)
+            } catch (error) {
+                return
+            }
         }
         
     },
     created: async function() {
+        this.incrementView()
         await this.getAdvertisement()
         await this.getFavorite()
     }

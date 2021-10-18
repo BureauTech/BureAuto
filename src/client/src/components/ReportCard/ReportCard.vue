@@ -15,7 +15,7 @@
       <v-card-text
         v-for="(item, index) in content"
         :key="index"
-        
+        class="black--text"
       >
         <p class="text-body-1 bk-word">{{item.text}}<b>{{item.value}}</b> </p>
       </v-card-text>

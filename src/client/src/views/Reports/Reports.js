@@ -18,6 +18,16 @@ export default {
             platform: [{
                 text: "Quantidade total de anúncios ativos: ",
                 value: ""
+            }],
+            advertisement: [{
+                text: "Nº de visualizações total: ",
+                value: ""
+            }, {
+                text: "Nº de pessoas que entraram em contato: ",
+                value: ""
+            }, {
+                text: "Nº de visualizações a cada 1 contato: ",
+                value: ""
             }]
         }
     },
@@ -42,11 +52,24 @@ export default {
             } catch (error) {
                 this.$toasted.error("Ocorreu um erro ao buscar o relatório de favoritos")
             }
+        },
+        getAdvertisementReport: async function() {
+            try {
+                const {data} = await axios.get("/advertisement/report/view-contact")
+                if (data.success) {
+                    this.advertisement[0].value = data.data.totalViews
+                    this.advertisement[1].value = data.data.totalContacts
+                    this.advertisement[2].value = data.data.report
+                }
+            } catch (error) {
+                this.$toasted.error("Ocorreu um erro ao buscar o relatório de favoritos")
+            }
         }
     },
 
     created: function() {
         this.getFavoriteReport()
+        this.getAdvertisementReport()
         if (this.is_admin) {
             this.getTotalAds()
         }
