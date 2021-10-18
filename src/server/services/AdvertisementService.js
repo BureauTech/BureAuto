@@ -172,7 +172,7 @@ module.exports = {
             .getRawOne()
         
         if (!totalViews) {
-            return {totalViews: totalViews, totalContacts: 0, report: 0}
+            return {totalViews: 0, totalContacts: 0, report: 0}
         }
 
         const RepositoryChat = await Repository.get(Repository.Chat)
