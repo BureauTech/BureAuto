@@ -76,7 +76,7 @@ create table status_type (
 );
 
 insert into status_type (sty_description)
-values ('active'), ('inactive'), ('paused');
+values ('active'), ('inactive'), ('paused'), ('sold');
 
 -- drop table advertisement cascade;
 
