@@ -28,6 +28,8 @@ app.use("/advertisement", require("./controllers/AdvertisementController"))
 app.use("/favorite", authenticate, require("./controllers/FavoriteController"))
 app.use("/administrator", authenticate, require("./controllers/AdministratorController"))
 app.use("/manufacturer", authenticate, require("./controllers/ManufacturerController"))
+app.use("/chat", authenticate, require("./controllers/ChatController"))
+app.use("/message", authenticate, require("./controllers/MessageController"))
 
 
 // Rota inexistente
