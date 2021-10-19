@@ -416,18 +416,18 @@ insert into advertisement
     (adv_use_cod, adv_man_cod, adv_sty_cod, adv_description, adv_brand, adv_model_description, adv_value,
     adv_favorites, adv_views, adv_year_model, adv_year_manufacture, adv_images)
 values
- (1, 4, 1, null, null, 'Q3', 135900.0, 0, 0, 2017, 2016, null),
- (1, 43, 1, null, null, 'Outlander', 100900.0, 0, 0, 2016, 2015, null),
- (1, 62, 1, null, null, 'Jetta', 68900.0, 0, 0, 2014, 1014, null),
- (1, 29, 2, null, null, 'Renegade', 82900.0, 0, 0, 2016, 2016, null),
- (1, 24, 3, null, null, 'HR-V', 99900.0, 0, 0, 2017, 2016, null),
- (1, 25, 3, null, null, 'HB20', 61900.0, 0, 0, 2019, 2019, null),
- (1, 13, 4, null, null, 'Journey', 67900.0, 0, 0, 2013, 2012, null),
- (1, 30, 1, null, null, 'Sportage', 89900.0, 0, 0, 2015, 2014, null),
- (1, 44, 4, null, null, 'Kicks', 114900.0, 0, 0, 2020, 2019, null),
- (1, 32, 1, null, null, 'Range Rover Evoque', 174900.0, 0, 0, 2015, 2014, null),
- (1, 41, 2, null, null, 'Gle-400', 503900.0, 0, 0, 2019, 2018, null),
- (1, 50, 1, null, null, '911', 1250000.0, 0, 0, 2021, 2021, null);
+ (1, 5, 1, null, null, 'Q3', 135900.0, 0, 0, 2017, 2016, '/q3.jpg'),
+ (1, 44, 1, null, null, 'Outlander', 100900.0, 0, 0, 2016, 2015, '/outlander.jpg'),
+ (1, 63, 1, null, null, 'Jetta', 68900.0, 0, 0, 2014, 1014, '/Jetta.jpg'),
+ (1, 30, 2, null, null, 'Renegade', 82900.0, 0, 0, 2016, 2016, '/renegade.jpg'),
+ (1, 25, 3, null, null, 'HR-V', 99900.0, 0, 0, 2017, 2016, '/hrv.jpg'),
+ (1, 26, 3, null, null, 'HB20', 61900.0, 0, 0, 2019, 2019, '/hb20.jpg'),
+ (1, 14, 4, null, null, 'Journey', 67900.0, 0, 0, 2013, 2012, '/journey.jpeg'),
+ (1, 30, 1, null, null, 'Sportage', 89900.0, 0, 0, 2015, 2014, '/sportage.jpg'),
+ (1, 45, 4, null, null, 'Kicks', 114900.0, 0, 0, 2020, 2019, '/kicks.jpg'),
+ (1, 33, 1, null, null, 'Range Rover Evoque', 174900.0, 0, 0, 2015, 2014, '/evoque.jpg'),
+ (1, 42, 2, null, null, 'Gle-400', 503900.0, 0, 0, 2019, 2018, '/gle-400.jpg'),
+ (1, 51, 1, null, null, '911', 1250000.0, 0, 0, 2021, 2021, '/911.jpg');
 
 
 -- ##################### ends queries ######################## --
