@@ -423,7 +423,7 @@ values
  (1, 25, 3, null, null, 'HR-V', 99900.0, 0, 0, 2017, 2016, '/hrv.jpg'),
  (1, 26, 3, null, null, 'HB20', 61900.0, 0, 0, 2019, 2019, '/hb20.jpg'),
  (1, 14, 4, null, null, 'Journey', 67900.0, 0, 0, 2013, 2012, '/journey.jpeg'),
- (1, 30, 1, null, null, 'Sportage', 89900.0, 0, 0, 2015, 2014, '/sportage.jpg'),
+ (1, 31, 1, null, null, 'Sportage', 89900.0, 0, 0, 2015, 2014, '/sportage.jpg'),
  (1, 45, 4, null, null, 'Kicks', 114900.0, 0, 0, 2020, 2019, '/kicks.jpg'),
  (1, 33, 1, null, null, 'Range Rover Evoque', 174900.0, 0, 0, 2015, 2014, '/evoque.jpg'),
  (1, 42, 2, null, null, 'Gle-400', 503900.0, 0, 0, 2019, 2018, '/gle-400.jpg'),
