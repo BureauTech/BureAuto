@@ -419,14 +419,14 @@ values
  (1, 4, 1, null, null, 'Q3', 135900.0, 0, 0, 2017, 2016, null),
  (1, 43, 1, null, null, 'Outlander', 100900.0, 0, 0, 2016, 2015, null),
  (1, 62, 1, null, null, 'Jetta', 68900.0, 0, 0, 2014, 1014, null),
- (1, 29, 1, null, null, 'Renegade', 82900.0, 0, 0, 2016, 2016, null),
- (1, 24, 1, null, null, 'HR-V', 99900.0, 0, 0, 2017, 2016, null),
- (1, 25, 1, null, null, 'HB20', 61900.0, 0, 0, 2019, 2019, null),
- (1, 13, 1, null, null, 'Journey', 67900.0, 0, 0, 2013, 2012, null),
+ (1, 29, 2, null, null, 'Renegade', 82900.0, 0, 0, 2016, 2016, null),
+ (1, 24, 3, null, null, 'HR-V', 99900.0, 0, 0, 2017, 2016, null),
+ (1, 25, 3, null, null, 'HB20', 61900.0, 0, 0, 2019, 2019, null),
+ (1, 13, 4, null, null, 'Journey', 67900.0, 0, 0, 2013, 2012, null),
  (1, 30, 1, null, null, 'Sportage', 89900.0, 0, 0, 2015, 2014, null),
- (1, 44, 1, null, null, 'Kicks', 114900.0, 0, 0, 2020, 2019, null),
+ (1, 44, 4, null, null, 'Kicks', 114900.0, 0, 0, 2020, 2019, null),
  (1, 32, 1, null, null, 'Range Rover Evoque', 174900.0, 0, 0, 2015, 2014, null),
- (1, 41, 1, null, null, 'Gle-400', 503900.0, 0, 0, 2019, 2018, null),
+ (1, 41, 2, null, null, 'Gle-400', 503900.0, 0, 0, 2019, 2018, null),
  (1, 50, 1, null, null, '911', 1250000.0, 0, 0, 2021, 2021, null);
 
 

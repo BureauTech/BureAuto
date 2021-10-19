@@ -14,7 +14,7 @@ const config = {
 
 const pool = new Pool(config)
 
-const sql_ddl_bureauto = fs.readFileSync("./2021-10-08-ddl-bureauto.sql").toString()
+const sql_ddl_bureauto = fs.readFileSync("./2021-10-19-ddl-bureauto.sql").toString()
 
 pool.connect(async function(err, client, done) {
     if (err) {

@@ -186,5 +186,14 @@ module.exports = {
 
         const totalViewsByContacts = (totalViews / totalContacts).toFixed(0)
         return {totalViews: totalViews, totalContacts: totalContacts, report: totalViewsByContacts}
-    }    
+    },
+    
+    getStatusReport: async function() {
+        const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
+        const statusReport = await RepositoryAdvertisement.createQueryBuilder(Repository.Advertisement)
+            .select("sty_description", "status").addSelect("count(sty_cod)", "total")
+            .leftJoin("Advertisement.StatusType", "status").groupBy("sty_cod").getRawMany()
+        return statusReport
+    }
+
 }
