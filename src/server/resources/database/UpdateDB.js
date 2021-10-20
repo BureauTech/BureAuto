@@ -1,5 +1,6 @@
 const {Pool} = require("pg")
 const fs = require("fs")
+const path = require("path")
 
 // Instalar a biblioteca pg || npm install -save pg
 // Se atentar as configurações do DB antes de executar o script.
@@ -13,8 +14,9 @@ const config = {
 }
 
 const pool = new Pool(config)
+const sqlFile = fs.readdirSync(__dirname).filter(file => file.includes(".sql"))[0]
 
-const sql_ddl_bureauto = fs.readFileSync("./2021-10-19-ddl-bureauto.sql").toString()
+const sql_ddl_bureauto = fs.readFileSync(path.join(__dirname, sqlFile)).toString()
 
 pool.connect(async function(err, client, done) {
     if (err) {

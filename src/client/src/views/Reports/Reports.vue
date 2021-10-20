@@ -19,6 +19,11 @@
         :content="favorite"
       />
       <ReportCard
+        title="Visão geral dos anúncios"
+        :content="advertisementStatus"
+        v-if="is_admin"
+      />
+      <ReportCard
         title="Engajamento dos anúncios"
         :content="advertisement"
       />

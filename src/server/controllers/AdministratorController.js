@@ -1,4 +1,5 @@
 const router = require("express").Router()
+const AdvertisementService = require("../services/AdvertisementService")
 const FavoriteService = require("../services/FavoriteService")
 const UserService = require("../services/UserService")
 
@@ -41,7 +42,13 @@ router.delete("/:user_id", async(req, res) => {
 })
 
 router.get("/report/status", async(req, res) => {
-    return res.send("Ok")
+    try {
+        const report = await AdvertisementService.getStatusReport()
+        return res.status(200).send({success: true, data: report})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
 })
 
 router.get("/report/favorite", async(req, res) => {

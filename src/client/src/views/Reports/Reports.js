@@ -28,7 +28,14 @@ export default {
             }, {
                 text: "Nº de visualizações a cada 1 contato: ",
                 value: ""
-            }]
+            }],
+            advertisementStatus: [],
+            advertisementStatusMap: {
+                sold: "vendidos",
+                inactive: "excluídos",
+                active: "ativos",
+                paused: "pausados"
+            }
         }
     },
 
@@ -43,14 +50,14 @@ export default {
                 this.$toasted.error("Ocorreu um erro ao buscar o relatório de favoritos")
             }
         },
-        getTotalAds: async function() {
+        getTotalAds: async function() { // admin
             try {
                 const {data} = await axios.get("/advertisement/total-advertisements")
                 if (data.success) {
                     this.platform[0].value = data.total
                 }
             } catch (error) {
-                this.$toasted.error("Ocorreu um erro ao buscar o relatório de favoritos")
+                this.$toasted.error("Ocorreu um erro ao buscar o relatório da quantidade de anúncios")
             }
         },
         getAdvertisementReport: async function() {
@@ -62,7 +69,19 @@ export default {
                     this.advertisement[2].value = data.data.report
                 }
             } catch (error) {
-                this.$toasted.error("Ocorreu um erro ao buscar o relatório de favoritos")
+                this.$toasted.error("Ocorreu um erro ao buscar o relatório visualizações vs contatos")
+            }
+        },
+        getAdvertisementStatusReport: async function() { // admin
+            try {
+                const {data} = await axios.get("/administrator/report/status")
+                if (data.success) {
+                    this.advertisementStatus = data.data.map(report => {
+                        return {text: `Quantidade de anúncios ${this.advertisementStatusMap[report.status]}: `, value: report.total}
+                    })
+                }
+            } catch (error) {
+                this.$toasted.error("Ocorreu um erro ao buscar o relatório de status dos anúncios")
             }
         }
     },
@@ -72,6 +91,7 @@ export default {
         this.getAdvertisementReport()
         if (this.is_admin) {
             this.getTotalAds()
+            this.getAdvertisementStatusReport()
         }
     }
 }

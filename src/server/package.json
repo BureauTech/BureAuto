@@ -8,7 +8,8 @@
   "scripts": {
     "lint": "eslint .eslintrc.js",
     "test": "jest --forceExit --detectOpenHandles --watchAll --maxWorkers=1",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "bd": "node ./resources/database/UpdateDB.js"
   },
   "author": "",
   "license": "ISC",
