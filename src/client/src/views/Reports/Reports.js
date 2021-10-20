@@ -11,7 +11,7 @@ export default {
         return {
             is_admin: this.$store.getters.getUser.use_is_admin,
             favorite: [{
-                text: this.is_admin?
+                text: this.$store.getters.getUser.use_is_admin?
                     "Porcentagem de anúncios favoritados na plataforma: " : "Porcentagem de anúncios favoritados: ",
                 value: ""
             }],
@@ -35,7 +35,7 @@ export default {
     methods: {
         getFavoriteReport: async function() {
             try {
-                const {data} = await axios.get(`/favorite/report${this.is_admin? "/admin" : ""}`)
+                const {data} = await axios.get(`/${this.is_admin ? "administrator" : "favorite"}/report/favorite`)
                 if (data.success) {
                     this.favorite[0].value = data.data
                 }
