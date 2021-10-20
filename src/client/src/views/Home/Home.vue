@@ -140,7 +140,7 @@
                   >
                     <v-card-title
                       v-text="ad.Manufacturer.man_name"
-                      class="text-h5 bahama--text mousehover"
+                      class="text-h5 mousehover text-shadow"
                     />
                   </v-img>
                   <v-card-subtitle
