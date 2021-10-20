@@ -11,21 +11,38 @@ export default {
         return {
             is_admin: this.$store.getters.getUser.use_is_admin,
             favorite: [{
-                text: this.is_admin?
+                text: this.$store.getters.getUser.use_is_admin?
                     "Porcentagem de anúncios favoritados na plataforma: " : "Porcentagem de anúncios favoritados: ",
                 value: ""
             }],
             platform: [{
                 text: "Quantidade total de anúncios ativos: ",
                 value: ""
-            }]
+            }],
+            advertisement: [{
+                text: "Nº de visualizações total: ",
+                value: ""
+            }, {
+                text: "Nº de pessoas que entraram em contato: ",
+                value: ""
+            }, {
+                text: "Nº de visualizações a cada 1 contato: ",
+                value: ""
+            }],
+            advertisementStatus: [],
+            advertisementStatusMap: {
+                sold: "vendidos",
+                inactive: "excluídos",
+                active: "ativos",
+                paused: "pausados"
+            }
         }
     },
 
     methods: {
         getFavoriteReport: async function() {
             try {
-                const {data} = await axios.get(`/favorite/report${this.is_admin? "/admin" : ""}`)
+                const {data} = await axios.get(`/${this.is_admin ? "administrator" : "favorite"}/report/favorite`)
                 if (data.success) {
                     this.favorite[0].value = data.data
                 }
@@ -33,22 +50,48 @@ export default {
                 this.$toasted.error("Ocorreu um erro ao buscar o relatório de favoritos")
             }
         },
-        getTotalAds: async function() {
+        getTotalAds: async function() { // admin
             try {
                 const {data} = await axios.get("/advertisement/total-advertisements")
                 if (data.success) {
                     this.platform[0].value = data.total
                 }
             } catch (error) {
-                this.$toasted.error("Ocorreu um erro ao buscar o relatório de favoritos")
+                this.$toasted.error("Ocorreu um erro ao buscar o relatório da quantidade de anúncios")
+            }
+        },
+        getAdvertisementReport: async function() {
+            try {
+                const {data} = await axios.get("/advertisement/report/view-contact")
+                if (data.success) {
+                    this.advertisement[0].value = data.data.totalViews
+                    this.advertisement[1].value = data.data.totalContacts
+                    this.advertisement[2].value = data.data.report
+                }
+            } catch (error) {
+                this.$toasted.error("Ocorreu um erro ao buscar o relatório visualizações vs contatos")
+            }
+        },
+        getAdvertisementStatusReport: async function() { // admin
+            try {
+                const {data} = await axios.get("/administrator/report/status")
+                if (data.success) {
+                    this.advertisementStatus = data.data.map(report => {
+                        return {text: `Quantidade de anúncios ${this.advertisementStatusMap[report.status]}: `, value: report.total}
+                    })
+                }
+            } catch (error) {
+                this.$toasted.error("Ocorreu um erro ao buscar o relatório de status dos anúncios")
             }
         }
     },
 
     created: function() {
         this.getFavoriteReport()
+        this.getAdvertisementReport()
         if (this.is_admin) {
             this.getTotalAds()
+            this.getAdvertisementStatusReport()
         }
     }
 }

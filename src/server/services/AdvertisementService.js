@@ -1,6 +1,6 @@
 const fs = require("fs")
 const Papa = require("papaparse")
-const {Not, ILike} = require("typeorm")
+const {Not, ILike, In} = require("typeorm")
 const Repository = require("../database/Repository")
 const Connection = require("../database/Connection")
 const AdvertisementUtils = require("../utils/AdvertisementUtils")
@@ -156,5 +156,44 @@ module.exports = {
         delete response.value.values
 
         return response
+    },
+
+    incrementViews: async function(adv_cod) {
+        const manager = (await Repository.get(Repository.Advertisement)).manager
+        const {affected} = await manager.increment(Repository.Advertisement, {adv_cod: adv_cod}, "adv_views", 1)
+        return affected
+    },
+
+    getReportViewContact: async function(use_cod) {
+        const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
+        const {totalViews} = await RepositoryAdvertisement.createQueryBuilder("advertisement")
+            .select("SUM(advertisement.adv_views)", "totalViews")
+            .where("advertisement.adv_use_cod = :adv_use_cod", {adv_use_cod: use_cod})
+            .getRawOne()
+        
+        if (!totalViews) {
+            return {totalViews: 0, totalContacts: 0, report: 0}
+        }
+
+        const RepositoryChat = await Repository.get(Repository.Chat)
+        const allUserAdvertisements = await RepositoryAdvertisement.find({where: {adv_use_cod: use_cod}, select: ["adv_cod"]})
+        const allUserAdvertisementsCod = allUserAdvertisements.map(adv => Number(adv.adv_cod))
+
+        const totalContacts = await RepositoryChat.count({cha_adv_cod: In(allUserAdvertisementsCod)})
+        if (!totalContacts) {
+            return {totalViews: totalViews, totalContacts: totalContacts, report: 0}
+        }
+
+        const totalViewsByContacts = (totalViews / totalContacts).toFixed(0)
+        return {totalViews: totalViews, totalContacts: totalContacts, report: totalViewsByContacts}
+    },
+    
+    getStatusReport: async function() {
+        const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
+        const statusReport = await RepositoryAdvertisement.createQueryBuilder(Repository.Advertisement)
+            .select("sty_description", "status").addSelect("count(sty_cod)", "total")
+            .leftJoin("Advertisement.StatusType", "status").groupBy("sty_cod").getRawMany()
+        return statusReport
     }
+
 }

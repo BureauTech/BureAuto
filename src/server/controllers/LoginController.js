@@ -20,6 +20,7 @@ router.post("/", async(req, res) => {
         return res.status(200).send({success: true, user})
 
     } catch (error) {
+        console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
     }
 })

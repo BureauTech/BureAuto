@@ -10,7 +10,8 @@
     "test": "jest --forceExit --detectOpenHandles --watchAll --maxWorkers=1",
     "dev": "nodemon index.js",
     "start": "nodemon ./index.js",
-    "debug": "nodemon --debug --inspect-brk=9229 ./index.js"
+    "debug": "nodemon --debug --inspect-brk=9229 ./index.js",
+    "bd": "node ./resources/database/UpdateDB.js"
   },
   "author": "",
   "license": "ISC",

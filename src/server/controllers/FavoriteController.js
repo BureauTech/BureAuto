@@ -1,7 +1,5 @@
 const router = require("express").Router()
-const AuthService = require("../services/AuthService")
 const FavoriteService = require("../services/FavoriteService")
-
 
 // Mapeado em "/favorite"
 
@@ -49,17 +47,7 @@ router.delete("/:fav_adv_cod", async(req, res) => {
     }
 })
 
-router.get("/report/admin", AuthService.verifyAdmin, async(req, res) => {
-    try {
-        const percentage = await FavoriteService.getAdminReport()
-        return res.status(200).send({success: true, data: percentage})
-    } catch (error) {
-        console.log(error)
-        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
-    }
-})
-
-router.get("/report", async(req, res) => {
+router.get("/report/favorite", async(req, res) => {
     try {
         const percentage = await FavoriteService.getAdvertiserReport(req.user)
         return res.status(200).send({success: true, data: percentage})

@@ -3,6 +3,10 @@ import Button from "@/components/Button/Button.vue"
 import axios from "@/axios.js"
 import logoBureau from "@/assets/bureauto_sem_fundo.png" 
 import config from "../../config"
+import CloseIcon from "@/assets/close-icon.png"
+import OpenIcon from "@/assets/logo-no-bg.svg"
+import FileIcon from "@/assets/file.svg"
+import CloseIconSvg from "@/assets/close.svg"
 
 export default {
     name: "ViewAdvertisement",
@@ -18,12 +22,70 @@ export default {
                 adv_year_manufacture: "",
                 adv_year_model: "",
                 adv_description: "",
+                adv_use_cod: "",
                 Manufacturer: {
                     man_name: ""
                 }
             },
             favorite: undefined,
-            imageUrl: logoBureau
+            imageUrl: logoBureau,
+            icons: {
+                open: {
+                    img: OpenIcon,
+                    name: "default"
+                },
+                close: {
+                    img: CloseIcon,
+                    name: "default"
+                },
+                file: {
+                    img: FileIcon,
+                    name: "default"
+                },
+                closeSvg: {
+                    img: CloseIconSvg,
+                    name: "default"
+                }
+            },
+            participants: [{
+                id: "advertisement.adv_description",
+                name: "Matteo"
+            }, {
+                id: "user2",
+                name: "Support"
+            }],
+            // the list of all the participant of the conversation. `name` is the user name, `id` is used to establish the author of a message, `imageUrl` is supposed to be the user avatar.
+            // titleImageUrl: "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
+            messageList: [{type: "text", author: "me", data: {text: "Say yes!"}}, {type: "text", author: "user1", data: {text: "No."}}], // the list of the messages to show, can be paginated and adjusted dynamically
+            newMessagesCount: 0,
+            isChatOpen: false, // to determine whether the chat window should be open or closed
+            showTypingIndicator: "", // when set to a value matching the participant.id it shows the typing indicator for the specific user
+            colors: {
+                header: {
+                    bg: "#4e8cff",
+                    text: "#ffffff"
+                },
+                launcher: {
+                    bg: "#4e8cff"
+                },
+                messageList: {
+                    bg: "#ffffff"
+                },
+                sentMessage: {
+                    bg: "#4e8cff",
+                    text: "#ffffff"
+                },
+                receivedMessage: {
+                    bg: "#eaeaea",
+                    text: "#222222"
+                },
+                userInput: {
+                    bg: "#f4f7f9",
+                    text: "#565867"
+                }
+            }, // specifies the color scheme for the component
+            alwaysScrollToBottom: false, // when set to true always scrolls the chat to the bottom when new events are in (new message, user starts typing...)
+            messageStyling: true // enables *bold* /emph/ _underline_ and such (more info at github.com/mattezza/msgdown)
         }
     },
     methods: {
@@ -81,10 +143,50 @@ export default {
             } catch (error) {
                 this.$toasted.error("Ocorreu um erro ao verificar o favorito")
             }
+        },
+
+        incrementView: function() {
+            try {
+                const adv_cod = this.$route.params.id
+                axios.put(`/advertisement/views/${adv_cod}`)
+            } catch (error) {
+                return
+            }
+        },
+        sendMessage(text) {
+            if (text.length > 0) {
+                this.newMessagesCount = this.isChatOpen ? this.newMessagesCount : this.newMessagesCount + 1
+                this.onMessageWasSent({author: "support", type: "text", data: {text}})
+            }
+        },
+        onMessageWasSent(message) {
+            // called when the user sends a message
+            this.messageList = [...this.messageList, message]
+        },
+        openChat() {
+            // called when the user clicks on the fab button to open the chat
+            this.isChatOpen = true
+            this.newMessagesCount = 0
+        },
+        closeChat() {
+            // called when the user clicks on the botton to close the chat
+            this.isChatOpen = false
+        },
+        handleScrollToTop() {
+            // called when the user scrolls message list to top
+            // leverage pagination for loading another page of messages
+        },
+        handleOnType() {
+            console.log("Emit typing event")
+        },
+        editMessage(message) {
+            const m = this.messageList.find(m=>m.id === message.id)
+            m.isEdited = true
+            m.data.text = message.data.text
         }
-        
     },
     created: async function() {
+        this.incrementView()
         await this.getAdvertisement()
         await this.getFavorite()
     }
