@@ -14,7 +14,8 @@ const config = {
 }
 
 const pool = new Pool(config)
-const sqlFile = fs.readdirSync(__dirname).filter(file => file.includes(".sql"))[0]
+const files = fs.readdirSync(__dirname).filter(file => file.includes(".sql"))
+const sqlFile = files[files.length - 1]
 
 const sql_ddl_bureauto = fs.readFileSync(path.join(__dirname, sqlFile)).toString()
 
