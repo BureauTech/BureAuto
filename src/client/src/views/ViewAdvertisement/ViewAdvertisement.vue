@@ -104,7 +104,43 @@
               block
               class="my-5"
               v-text="'Entrar em contato'"
+              v-if="!isChatOpen"
+              href="#"
+              @click.prevent="openChat()"
             ></Button>
+            <Button
+              block
+              class="my-5"
+              v-text="'Fechar o chat'"
+              v-if="isChatOpen"
+              href="#"
+              @click.prevent="closeChat()"
+            ></Button>
+            <div>
+              <beautiful-chat
+                :participants="participants"
+                :titleImageUrl="titleImageUrl"
+                :onMessageWasSent="onMessageWasSent"
+                :messageList="messageList"
+                :newMessagesCount="newMessagesCount"
+                :isOpen="isChatOpen"
+                :close="closeChat"
+                :icons="icons"
+                :open="openChat"
+                :showEmoji="true"
+                :showFile="true"
+                :showEdition="true"
+                :showDeletion="true"
+                :showTypingIndicator="showTypingIndicator"
+                :showLauncher="true"
+                :showCloseButton="true"
+                :colors="colors"
+                :alwaysScrollToBottom="alwaysScrollToBottom"
+                :messageStyling="messageStyling"
+                @onType="handleOnType"
+                @edit="editMessage"
+              />
+            </div>
           </v-col>
         </Card>
       </v-col>
