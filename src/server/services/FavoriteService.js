@@ -1,4 +1,4 @@
-const {Not, MoreThan} = require("typeorm")
+const {MoreThan} = require("typeorm")
 const Repository = require("../database/Repository")
 
 module.exports = {
@@ -35,14 +35,14 @@ module.exports = {
         const advertisementFavoritedCount = await RepositoryAdvertisement.count({
             adv_use_cod: user.use_cod,
             adv_favorites: MoreThan(0),
-            adv_sty_cod: Not(2)
+            adv_sty_cod: 1
         })
 
         //  Se não tem nenhum, é 0%
         if (!advertisementFavoritedCount) {
             return "0,00%"
         }
-        const allAdvertisementCount = await RepositoryAdvertisement.count({adv_use_cod: user.use_cod, adv_sty_cod: Not(2)})
+        const allAdvertisementCount = await RepositoryAdvertisement.count({adv_use_cod: user.use_cod, adv_sty_cod: 1})
         
         //  Se não tem nenhum, é 0%
         if (!allAdvertisementCount) {
@@ -55,14 +55,14 @@ module.exports = {
         const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
         const allAdvertisementFavoritedCount = await RepositoryAdvertisement.count({
             adv_favorites: MoreThan(0),
-            adv_sty_cod: Not(2)
+            adv_sty_cod: 1
         })
 
         //  Se não tem nenhum, é 0%
         if (!allAdvertisementFavoritedCount) {
             return "0,00%"
         }
-        const allAdvertisementCount = await RepositoryAdvertisement.count({adv_sty_cod: Not(2)})
+        const allAdvertisementCount = await RepositoryAdvertisement.count({adv_sty_cod: 1})
 
         //  Se não tem nenhum, é 0%
         if (!allAdvertisementCount) {
@@ -76,7 +76,7 @@ module.exports = {
         const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
         const allFavorites = (await RepositoryAdvertisement.createQueryBuilder("advertisement")
             .innerJoin("favorite", "favorite", "favorite.fav_adv_cod = advertisement.adv_cod")
-            .where("advertisement.adv_sty_cod != :advertisement", {advertisement: 2})
+            .where("advertisement.adv_sty_cod = :sty_cod", {sty_cod: 1})
             .andWhere("favorite.fav_use_cod = :fav_use_cod", {fav_use_cod: fav_use_cod})
             .getMany())
             
