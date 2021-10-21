@@ -3,7 +3,7 @@ const {promisify} = require("util")
 
 const AuthService = module.exports = {
 
-    expiresIn: 1800,
+    expiresIn: 10800,
     cookieName: "jwtoken",
     secretKey: "$2a$10$VXQnRiZbWyDaPcTHxi7V/egucIrqjoYFTMzSQ98bFJC7a6LMW5q/.",
 

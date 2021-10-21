@@ -77,7 +77,7 @@ module.exports = {
     getAdvertisement: async function(adv_cod) {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         const advertisement = await RepositoryAdvertisement.findOne({
-            relations: ["Manufacturer", "User"], where: {adv_cod: adv_cod, adv_sty_cod: Not(2)}
+            relations: ["Manufacturer", "User"], where: {adv_cod: adv_cod, adv_sty_cod: 1}
         })
         if (advertisement) {
             advertisement.use_is_cpf_document = advertisement.User.use_is_cpf_document
