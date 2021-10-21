@@ -33,6 +33,10 @@ export default {
                 requiresAdmin: true,
                 text: "Usuários"
             }, {
+                path: "/mensagens",
+                requiresAdmin: false,
+                text: "Mensagens"
+            }, {
                 path: "/perfil",
                 requiresAdmin: false,
                 text: "Perfil"
