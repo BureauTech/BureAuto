@@ -8,7 +8,7 @@ router.post("/create", async(req, res) => {
     try {
         const newChat = await ChatService.createChat(req.user.use_cod, req.body.adv_cod)
         if (newChat) return res.status(201).send({success: true, data: newChat})
-        return res.status(500).send({sucess: false, error: "an error occurred while processing the request"})
+        return res.status(400).send({sucess: false, error: "this advertisement is not avaliable or it's your"})
     } catch (error) {
         console.log(error)
         return res.status(500).send({sucess: false, error: "an error occurred while processing the request"})

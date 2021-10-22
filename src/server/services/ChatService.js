@@ -2,9 +2,15 @@ const Repository = require("../database/Repository")
 
 module.exports = {
     createChat: async function(user_cod, adv_cod) {
+        const AdvertisementRepository = await Repository.get(Repository.Advertisement)
+        const isUserAdvertisement = await AdvertisementRepository.findOne({adv_cod: adv_cod, adv_use_cod: user_cod})
+        if (isUserAdvertisement) return
+
+        const chatIsAvaliable = await AdvertisementRepository.findOne({adv_cod: adv_cod, adv_sty_cod: 1})
+        if (!chatIsAvaliable) return
+
         const ChatRepository = await Repository.get(Repository.Chat)
         const chatExists = await ChatRepository.findOne({cha_use_cod: user_cod, cha_adv_cod: adv_cod})
-
         if (chatExists) return chatExists
 
         const newChat = await ChatRepository.save({cha_use_cod: user_cod, cha_adv_cod: adv_cod})
@@ -25,7 +31,7 @@ module.exports = {
             .leftJoin("Chat.Advertisement", "Advertisement")
             .leftJoin("Chat.User", "User")
             .where("Advertisement.adv_use_cod = :adv_use_cod", {adv_use_cod: user_cod})
-            .orWhere("Chat.cha_cod = :cha_use_cod", {cha_use_cod: user_cod})
+            .orWhere("Chat.cha_use_cod = :cha_use_cod", {cha_use_cod: user_cod})
             .groupBy("Chat.cha_cod")
             .addGroupBy("Message.mes_created_at")
             .addGroupBy("Message.mes_text")
