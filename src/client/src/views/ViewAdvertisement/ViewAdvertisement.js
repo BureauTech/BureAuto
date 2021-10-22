@@ -54,9 +54,11 @@ export default {
                 id: "user2",
                 name: "Support"
             }],
-            // the list of all the participant of the conversation. `name` is the user name, `id` is used to establish the author of a message, `imageUrl` is supposed to be the user avatar.
+            // the list of all the participant of the conversation. `name` is the user name,
+            // `id` is used to establish the author of a message, `imageUrl` is supposed to be the user avatar.
             // titleImageUrl: "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
-            messageList: [{type: "text", author: "me", data: {text: "Say yes!"}}, {type: "text", author: "user1", data: {text: "No."}}], // the list of the messages to show, can be paginated and adjusted dynamically
+            messageList: [{type: "text", author: "me", data: {text: "Say yes!"}}, {type: "text", author: "user1", data: {text: "No."}}],
+            // the list of the messages to show, can be paginated and adjusted dynamically
             newMessagesCount: 0,
             isChatOpen: false, // to determine whether the chat window should be open or closed
             showTypingIndicator: "", // when set to a value matching the participant.id it shows the typing indicator for the specific user
@@ -84,7 +86,8 @@ export default {
                     text: "#565867"
                 }
             }, // specifies the color scheme for the component
-            alwaysScrollToBottom: false, // when set to true always scrolls the chat to the bottom when new events are in (new message, user starts typing...)
+            alwaysScrollToBottom: false,
+            // when set to true always scrolls the chat to the bottom when new events are in (new message, user starts typing...)
             messageStyling: true // enables *bold* /emph/ _underline_ and such (more info at github.com/mattezza/msgdown)
         }
     },

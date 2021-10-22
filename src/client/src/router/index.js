@@ -14,6 +14,7 @@ import UploadUser from "@/views/UploadUser/UploadUser.vue"
 import UploadAdvertisement from "@/views/UploadAdvertisement/UploadAdvertisement.vue"
 import EditAdvertise from "@/views/EditAdvertise/EditAdvertise.vue"
 import EditProfile from "@/views/EditProfile/EditProfile.vue"
+import Messages from "@/views/Messages/Messages.vue"
 import Chat from "vue-beautiful-chat"
 
 Vue.use(Chat)
@@ -94,6 +95,13 @@ const routes = [{
     path: "/editar-perfil",
     name: "EditProfile",
     component: EditProfile,
+    meta: {
+        requiresAuth: true
+    }
+}, {
+    path: "/mensagens",
+    name: "Messages",
+    component: Messages,
     meta: {
         requiresAuth: true
     }
