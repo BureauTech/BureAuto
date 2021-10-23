@@ -56,7 +56,7 @@ export default {
             }],
             // the list of all the participant of the conversation. `name` is the user name,
             // `id` is used to establish the author of a message, `imageUrl` is supposed to be the user avatar.
-            // titleImageUrl: "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
+            titleImageUrl: "",
             messageList: [{type: "text", author: "me", data: {text: "Say yes!"}}, {type: "text", author: "user1", data: {text: "No."}}],
             // the list of the messages to show, can be paginated and adjusted dynamically
             newMessagesCount: 0,
@@ -166,14 +166,8 @@ export default {
             // called when the user sends a message
             this.messageList = [...this.messageList, message]
         },
-        openChat() {
-            // called when the user clicks on the fab button to open the chat
-            this.isChatOpen = true
-            this.newMessagesCount = 0
-        },
-        closeChat() {
-            // called when the user clicks on the botton to close the chat
-            this.isChatOpen = false
+        handleChat() {
+            this.isChatOpen = !this.isChatOpen
         },
         handleScrollToTop() {
             // called when the user scrolls message list to top

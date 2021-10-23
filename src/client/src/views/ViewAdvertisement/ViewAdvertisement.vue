@@ -96,6 +96,7 @@
               block
               class="my-5"
               @click="updateFavorite"
+              :disabled = "advertisement.adv_use_cod == $store.getters.getUser.use_cod"
             >
               <v-icon left>mdi-star</v-icon>
               {{favorite ? 'Desfavoritar' : 'Favoritar'}}
@@ -103,20 +104,12 @@
             <Button
               block
               class="my-5"
-              v-text="'Entrar em contato'"
-              v-if="!isChatOpen"
+              v-text="isChatOpen ? 'Fechar o chat' : 'Entrar em contato'"
               href="#"
-              @click.prevent="openChat()"
-            ></Button>
-            <Button
-              block
-              class="my-5"
-              v-text="'Fechar o chat'"
-              v-if="isChatOpen"
-              href="#"
-              @click.prevent="closeChat()"
-            ></Button>
-            <div>
+              @click.prevent="handleChat()"
+              :disabled = "advertisement.adv_use_cod == $store.getters.getUser.use_cod"
+            />
+            <div v-if="advertisement.adv_use_cod != $store.getters.getUser.use_cod">
               <beautiful-chat
                 :participants="participants"
                 :titleImageUrl="titleImageUrl"
@@ -124,9 +117,9 @@
                 :messageList="messageList"
                 :newMessagesCount="newMessagesCount"
                 :isOpen="isChatOpen"
-                :close="closeChat"
+                :close="handleChat"
                 :icons="icons"
-                :open="openChat"
+                :open="handleChat"
                 :showEmoji="true"
                 :showFile="true"
                 :showEdition="true"
