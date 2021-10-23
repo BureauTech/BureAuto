@@ -194,6 +194,25 @@ module.exports = {
             .select("sty_description", "status").addSelect("count(sty_cod)", "total")
             .leftJoin("Advertisement.StatusType", "status").groupBy("sty_cod").getRawMany()
         return statusReport
-    }
+    },
 
+    getAdminReportViewContact: async function() {
+        const AdvertisementRepository = await Repository.get(Repository.Advertisement)
+        const {totalViews} = await AdvertisementRepository.createQueryBuilder("advertisement")
+            .select("SUM(advertisement.adv_views)", "totalViews")
+            .getRawOne()
+        
+        if (!totalViews) {
+            return {totalViews: 0, totalContacts: 0, report: 0}
+        }
+
+        const ChatRepository = await Repository.get(Repository.Chat)
+        const totalContacts = await ChatRepository.count()
+        if (!totalContacts) {
+            return {totalViews: totalViews, totalContacts: totalContacts, report: 0}
+        }
+
+        const totalViewsByContacts = (totalViews / totalContacts).toFixed(0)
+        return {totalViews: totalViews, totalContacts: totalContacts, report: totalViewsByContacts}
+    }
 }

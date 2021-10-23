@@ -61,4 +61,14 @@ router.get("/report/favorite", async(req, res) => {
     }
 })
 
+router.get("/report/view-contact", async(req, res) => {
+    try {
+        const report = await AdvertisementService.getAdminReportViewContact()
+        return res.status(200).send({success: true, data: report})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
 module.exports = router
