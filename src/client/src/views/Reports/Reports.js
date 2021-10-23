@@ -19,7 +19,7 @@ export default {
                 text: "Quantidade total de anúncios ativos: ",
                 value: ""
             }],
-            advertisement: [{
+            statusAdvertisement: [{
                 text: "Nº de visualizações total: ",
                 value: ""
             }, {
@@ -62,11 +62,11 @@ export default {
         },
         getAdvertisementReport: async function() {
             try {
-                const {data} = await axios.get("/advertisement/report/view-contact")
+                const {data} = await axios.get(`/${this.is_admin ? "administrator" : "advertisement"}/report/view-contact`)
                 if (data.success) {
-                    this.advertisement[0].value = data.data.totalViews
-                    this.advertisement[1].value = data.data.totalContacts
-                    this.advertisement[2].value = data.data.report
+                    this.statusAdvertisement[0].value = data.data.totalViews
+                    this.statusAdvertisement[1].value = data.data.totalContacts
+                    this.statusAdvertisement[2].value = data.data.report
                 }
             } catch (error) {
                 this.$toasted.error("Ocorreu um erro ao buscar o relatório visualizações vs contatos")

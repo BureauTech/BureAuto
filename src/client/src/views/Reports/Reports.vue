@@ -15,17 +15,17 @@
         v-if="is_admin"
       />
       <ReportCard
-        title="Engajamento dos anúncios favoritos"
+        :title="`Engajamento dos anúncios favoritos ${is_admin ? 'na plataforma' : ''}`"
         :content="favorite"
       />
       <ReportCard
-        title="Visão geral dos anúncios"
+        title="Visão geral dos anúncios na plataforma"
         :content="advertisementStatus"
         v-if="is_admin"
       />
       <ReportCard
-        title="Engajamento dos anúncios"
-        :content="advertisement"
+        :title="`Engajamento dos anúncios ${is_admin ? 'na plataforma' : ''}`"
+        :content="statusAdvertisement"
       />
     </v-row>
   </v-container>
