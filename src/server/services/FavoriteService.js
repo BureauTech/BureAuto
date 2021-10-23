@@ -13,14 +13,19 @@ module.exports = {
         return await RepositoryFavorite.findOne({where: {fav_use_cod: user.use_cod, fav_adv_cod: adv_cod}})
     },
 
-    registerFavorite: async function(user, adv_cod) {
+    registerFavorite: async function(use_cod, adv_cod) {
         const RepositoryFavorite = await Repository.get(Repository.Favorite)
-        const favoriteExists = await RepositoryFavorite.findOne({where: {fav_use_cod: user.use_cod, fav_adv_cod: adv_cod}})
+        const favoriteExists = await RepositoryFavorite.findOne({where: {fav_use_cod: use_cod, fav_adv_cod: adv_cod}})
 
         if (favoriteExists) return favoriteExists
 
+        const AdvertisementRepository = await Repository.get(Repository.Advertisement)
+        const isUserAdvertisement = await AdvertisementRepository.findOne({adv_cod: adv_cod, adv_use_cod: use_cod})
+
+        if (isUserAdvertisement) return
+
         return await RepositoryFavorite.save({
-            fav_use_cod: user.use_cod,
+            fav_use_cod: use_cod,
             fav_adv_cod: adv_cod
         })
     },

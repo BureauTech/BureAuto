@@ -28,8 +28,9 @@ router.get("/favorites/:fav_use_cod", async(req, res) => {
 router.post("/register", async(req, res) => {
     try {
         const {adv_cod} = req.body
-        const favorite = await FavoriteService.registerFavorite(req.user, adv_cod)
-        return res.status(200).send({success: true, data: favorite})
+        const favorite = await FavoriteService.registerFavorite(req.user.use_cod, adv_cod)
+        if (favorite) return res.status(200).send({success: true, data: favorite})
+        return res.status(400).send({success: false, error: "you can't favorite your advertisement"})
     } catch (error) {
         console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
