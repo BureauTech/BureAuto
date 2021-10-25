@@ -8,30 +8,33 @@ export default {
     name: "Messages",
     components: {
         Topbar
-
     },
     data: function() {
         return {
             favs: [],
             ads: [],
             chats: [],
+            messages: [],
             rules: rulesUtils
         }
     },
     methods: {
         getUserChats: async function() {
-            try {
-                const {data} = await axios.get("/chat/userChats/")
-                if (data.success) {
-                    this.advertisement[0].value = data.data.totalViews
-                    this.advertisement[1].value = data.data.totalContacts
-                    this.advertisement[2].value = data.data.report
+            const chat = await axios.get("/chat/userChats/")
+            this.chats = chat.data.data.map(chat => {
+                if(!chat.adv_images) {
+                    chat.adv_images =  logoBureau
+                } else {
+                    chat.adv_images = config.SERVER_URL + chat.adv_images
                 }
-            } catch (error) {
-                this.$toasted.error("Ocorreu um erro ao buscar o relatório visualizações vs contatos")
-            }
-            return userChats
+                return chat
+            })    
             
+        },
+        getMessages: async function(cha_cod) {
+            const message = await axios.get(`/message/messages/${cha_cod}`)
+            this.messages = message.data.data
+            return message          
         },
         getFavs: async function() {
             const favorites = await axios.get(`/favorite/favorites/${this.$store.getters.getUser.use_cod}`)
@@ -39,7 +42,7 @@ export default {
                 if(!ad.adv_images) {
                     ad.adv_images =  logoBureau
                 } else {
-                    ad.adv_images = config.SERVER_URL+ ad.adv_images
+                    ad.adv_images = config.SERVER_URL + ad.adv_images
                 }
                 return ad
             })
@@ -58,6 +61,6 @@ export default {
         }
     },
     beforeMount: function() {
-        this.getFavs()
+        this.getUserChats()
     }
 }
