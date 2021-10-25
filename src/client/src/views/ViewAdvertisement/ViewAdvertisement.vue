@@ -71,7 +71,7 @@
                 <p class="text-subtitle-1 bahama--text ma-0 text-left">ano</p>
                 <p
                   class="text-h5 bahama--text font-weight-medium text-left"
-                  v-text="`${advertisement.adv_year_manufacture} / ${advertisement.adv_year_model}`"
+                  v-text="`${advertisement.adv_year_manufacture} - ${advertisement.adv_year_model}`"
                 >
 
                 </p>
@@ -96,6 +96,7 @@
               block
               class="my-5"
               @click="updateFavorite"
+              :disabled = "advertisement.adv_use_cod == $store.getters.getUser.use_cod"
             >
               <v-icon left>mdi-star</v-icon>
               {{favorite ? 'Desfavoritar' : 'Favoritar'}}
@@ -103,8 +104,36 @@
             <Button
               block
               class="my-5"
-              v-text="'Entrar em contato'"
-            ></Button>
+              v-text="isChatOpen ? 'Fechar o chat' : 'Entrar em contato'"
+              href="#"
+              @click.prevent="handleChat()"
+              :disabled = "advertisement.adv_use_cod == $store.getters.getUser.use_cod"
+            />
+            <div v-if="advertisement.adv_use_cod != $store.getters.getUser.use_cod">
+              <beautiful-chat
+                :participants="participants"
+                :titleImageUrl="titleImageUrl"
+                :onMessageWasSent="onMessageWasSent"
+                :messageList="messageList"
+                :newMessagesCount="newMessagesCount"
+                :isOpen="isChatOpen"
+                :close="handleChat"
+                :icons="icons"
+                :open="handleChat"
+                :showEmoji="true"
+                :showFile="true"
+                :showEdition="true"
+                :showDeletion="true"
+                :showTypingIndicator="showTypingIndicator"
+                :showLauncher="true"
+                :showCloseButton="true"
+                :colors="colors"
+                :alwaysScrollToBottom="alwaysScrollToBottom"
+                :messageStyling="messageStyling"
+                @onType="handleOnType"
+                @edit="editMessage"
+              />
+            </div>
           </v-col>
         </Card>
       </v-col>

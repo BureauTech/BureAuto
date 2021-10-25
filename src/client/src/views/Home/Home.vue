@@ -110,7 +110,11 @@
             </v-card>
           </v-row>
         </v-col>
-        <v-col cols="10" sm="12" md="9">
+        <v-col
+          cols="10"
+          sm="12"
+          md="9"
+        >
           <v-row>
             <v-col
               v-for="ad in ads"
@@ -136,7 +140,7 @@
                   >
                     <v-card-title
                       v-text="ad.Manufacturer.man_name"
-                      class="text-h5 bahama--text mousehover"
+                      class="text-h5 mousehover text-shadow"
                     />
                   </v-img>
                   <v-card-subtitle

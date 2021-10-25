@@ -8,8 +8,9 @@ module.exports = {
         return value === filterModel
     },
 
-    equalYearManMod: function(filterYearManMod, value) {
-        return value.adv_year_manufacture + "/" + value.adv_year_model === filterYearManMod
+    equalYearManMod: function(filterYearManModel, value) {
+
+        return value.adv_year_manufacture + "-" + value.adv_year_model === filterYearManModel
     },
 
     rangeValue: function(valueMin, valueMax, value) {

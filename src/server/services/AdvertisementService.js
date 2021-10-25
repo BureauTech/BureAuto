@@ -1,6 +1,6 @@
 const fs = require("fs")
 const Papa = require("papaparse")
-const {Not, ILike} = require("typeorm")
+const {Not, ILike, In} = require("typeorm")
 const Repository = require("../database/Repository")
 const Connection = require("../database/Connection")
 const AdvertisementUtils = require("../utils/AdvertisementUtils")
@@ -77,7 +77,7 @@ module.exports = {
     getAdvertisement: async function(adv_cod) {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         const advertisement = await RepositoryAdvertisement.findOne({
-            relations: ["Manufacturer", "User"], where: {adv_cod: adv_cod, adv_sty_cod: Not(2)}
+            relations: ["Manufacturer", "User"], where: {adv_cod: adv_cod, adv_sty_cod: 1}
         })
         if (advertisement) {
             advertisement.use_is_cpf_document = advertisement.User.use_is_cpf_document
@@ -125,11 +125,9 @@ module.exports = {
         advertisements = advertisements.filter(function(advertisement) {
             return (filters.brand ? AdvertisementUtils.equalBrand(filters.brand, advertisement.Manufacturer.man_name) : true)
                 && (filters.model ? AdvertisementUtils.equalModel(filters.model, advertisement.adv_model_description) : true)
-                && (filters.yearModel ? AdvertisementUtils.equalYearManMod(filters.yearModel, advertisement) : true)
+                && (filters.yearManModel ? AdvertisementUtils.equalYearManMod(filters.yearManModel, advertisement) : true)
                 && (filters.valueMin && filters.valueMax ?
                     AdvertisementUtils.rangeValue(filters.valueMin, filters.valueMax, advertisement.adv_value) : true)
-                && (filters.valueMin && !filters.valueMax ? AdvertisementUtils.valueMin(filters.valueMin, advertisement.adv_value) : true)
-                && (!filters.valueMin && filters.valueMax ? AdvertisementUtils.valueMax(filters.valueMax, advertisement.adv_value) : true)
         })
         return advertisements
     },
@@ -145,7 +143,7 @@ module.exports = {
         for (const advertisement of advertisements) {
             response.brand.brands.push(advertisement.Manufacturer.man_name)
             response.model.models.push(advertisement.adv_model_description)
-            response.yearModel.yearModels.push("".concat(advertisement.adv_year_manufacture, "/", advertisement.adv_year_model))
+            response.yearModel.yearModels.push("".concat(advertisement.adv_year_manufacture, "-", advertisement.adv_year_model))
             response.value.values.push(advertisement.adv_value)
         }
 
@@ -158,5 +156,118 @@ module.exports = {
         delete response.value.values
 
         return response
+    },
+
+    incrementViews: async function(adv_cod) {
+        const manager = (await Repository.get(Repository.Advertisement)).manager
+        const {affected} = await manager.increment(Repository.Advertisement, {adv_cod: adv_cod}, "adv_views", 1)
+        return affected
+    },
+
+    getReportViewContact: async function(use_cod) {
+        const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
+        const {totalViews} = await RepositoryAdvertisement.createQueryBuilder("advertisement")
+            .select("SUM(advertisement.adv_views)", "totalViews")
+            .where("advertisement.adv_use_cod = :adv_use_cod", {adv_use_cod: use_cod})
+            .getRawOne()
+        
+        if (!totalViews) {
+            return {totalViews: 0, totalContacts: 0, report: 0}
+        }
+
+        const RepositoryChat = await Repository.get(Repository.Chat)
+        const allUserAdvertisements = await RepositoryAdvertisement.find({where: {adv_use_cod: use_cod}, select: ["adv_cod"]})
+        const allUserAdvertisementsCod = allUserAdvertisements.map(adv => Number(adv.adv_cod))
+
+        const totalContacts = await RepositoryChat.count({cha_adv_cod: In(allUserAdvertisementsCod)})
+        if (!totalContacts) {
+            return {totalViews: totalViews, totalContacts: totalContacts, report: 0}
+        }
+
+        const totalViewsByContacts = (totalViews / totalContacts).toFixed(0)
+        return {totalViews: totalViews, totalContacts: totalContacts, report: totalViewsByContacts}
+    },
+    
+    getStatusReport: async function() {
+        const RepositoryAdvertisement = await Repository.get(Repository.Advertisement)
+        const statusReport = await RepositoryAdvertisement.createQueryBuilder(Repository.Advertisement)
+            .select("sty_description", "status").addSelect("count(sty_cod)", "total")
+            .leftJoin("Advertisement.StatusType", "status").groupBy("sty_cod").getRawMany()
+        return statusReport
+    },
+
+    getAdminReportViewContact: async function() {
+        const AdvertisementRepository = await Repository.get(Repository.Advertisement)
+        const {totalViews} = await AdvertisementRepository.createQueryBuilder("advertisement")
+            .select("SUM(advertisement.adv_views)", "totalViews")
+            .getRawOne()
+        
+        if (!totalViews) {
+            return {totalViews: 0, totalContacts: 0, report: 0}
+        }
+
+        const ChatRepository = await Repository.get(Repository.Chat)
+        const totalContacts = await ChatRepository.count()
+        if (!totalContacts) {
+            return {totalViews: totalViews, totalContacts: totalContacts, report: 0}
+        }
+
+        const totalViewsByContacts = (totalViews / totalContacts).toFixed(0)
+        return {totalViews: totalViews, totalContacts: totalContacts, report: totalViewsByContacts}
+    },
+
+    getSoldAdvertisementsReport: async function(use_cod) {
+        const AdvertisementRepository = await Repository.get(Repository.Advertisement)
+        const sold = await AdvertisementRepository.count({adv_use_cod: use_cod, adv_sty_cod: 4})
+        const totalQuantity = await AdvertisementRepository.count({adv_use_cod: use_cod, adv_sty_cod: In([1, 4])})
+        if (!totalQuantity) return {sold, percentage: "0,00%"}
+        return {sold, percentage: `${(sold / totalQuantity * 100).toFixed(2)}%`.replace(".", ",")}
+    },
+
+    getSoldByCategoryReport: async function(use_cod) {
+        const AdvertisementRepository = await Repository.get(Repository.Advertisement)
+        const categoriesMap = {
+            adv_brand: "Marca mais vendida",
+            adv_model_description: "Modelo mais vendido",
+            adv_year_model: "Ano do modelo mais vendido"
+        }
+        const categories = ["adv_brand", "adv_model_description", "adv_year_model"]
+        const report = []
+        for (let i = 0; i < categories.length; i++) {
+            const result = await (await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
+                .select(`Advertisement.${categories[i]}`, "category")
+                .addSelect(`count(Advertisement.${categories[i]})`, "totalSold")
+                .where("Advertisement.adv_use_cod = :adv_use_cod", {adv_use_cod: use_cod})
+                .andWhere("Advertisement.adv_sty_cod = :adv_sty_cod", {adv_sty_cod: 4})
+                .groupBy(`Advertisement.${categories[i]}`)
+                .orderBy("\"totalSold\"", "DESC")
+                .limit(1)
+                .getRawMany())[0]
+            report.push({category: categoriesMap[categories[i]], result: result.category ? result.category : "Não encontrado"})
+        }
+        return report
+    },
+
+    getSoldByCategoryAdminReport: async function() {
+        const AdvertisementRepository = await Repository.get(Repository.Advertisement)
+        const categoriesMap = {
+            adv_brand: "Marca mais vendida",
+            adv_model_description: "Modelo mais vendido",
+            adv_year_model: "Ano do modelo mais vendido"
+        }
+        const categories = ["adv_brand", "adv_model_description", "adv_year_model"]
+        const report = []
+        for (let i = 0; i < categories.length; i++) {
+            const result = await (await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
+                .select(`Advertisement.${categories[i]}`, "category")
+                .addSelect(`count(Advertisement.${categories[i]})`, "totalSold")
+                .where("Advertisement.adv_sty_cod = :adv_sty_cod", {adv_sty_cod: 4})
+                .groupBy(`Advertisement.${categories[i]}`)
+                .orderBy("\"totalSold\"", "DESC")
+                .limit(1)
+                .getRawMany())[0]
+            report.push({category: categoriesMap[categories[i]], result: result.category ? result.category : "Não encontrado"})
+        }
+        return report
     }
 }

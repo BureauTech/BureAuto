@@ -120,4 +120,50 @@ router.get("/search/:term/:filters", async(req, res) => {
     }
 })
 
+router.put("/views/:adv_cod", async(req, res) => {
+    try {
+        const updated = await AdvertisementService.incrementViews(req.params.adv_cod)
+        if (updated) {
+            return res.status(200).send({success: true})
+        }
+        return res.status(400).send({success: false, error: "advertisement code not found"})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
+router.get("/report/view-contact", authenticate, async(req, res) => {
+    try {
+        const report = await AdvertisementService.getReportViewContact(req.user.use_cod)
+        return res.status(200).send({success: true, data: report})
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
+router.get("/report/sold", authenticate, async(req, res) => {
+    try {
+        const report = await AdvertisementService.getSoldAdvertisementsReport(req.user.use_cod)
+        return res.status(200).send({success: true, data: report})
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
+router.get("/report/soldByCategory", authenticate, async(req, res) => {
+    try {
+        const report = await AdvertisementService.getSoldByCategoryReport(req.user.use_cod)
+        return res.status(200).send({success: true, data: report})
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
 module.exports = router

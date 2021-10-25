@@ -3,7 +3,7 @@ const {promisify} = require("util")
 
 const AuthService = module.exports = {
 
-    expiresIn: 1800,
+    expiresIn: 10800,
     cookieName: "jwtoken",
     secretKey: "$2a$10$VXQnRiZbWyDaPcTHxi7V/egucIrqjoYFTMzSQ98bFJC7a6LMW5q/.",
 
@@ -25,7 +25,7 @@ const AuthService = module.exports = {
     verifyAdmin: async function(req, res, next) {
         try {
             if (req.user.use_is_admin) return next()
-            return res.status(200).send({success: false, error: "permission denied"})
+            return res.status(401).send({success: false, error: "unauthorized"})
         } catch (error) {
             return res.status(200).send({success: false, error: "authentication failed"})
         }

@@ -94,13 +94,16 @@ export default {
     },
     watch: {
         "filters.brand"() {
-            this.getAds()
+            if (this.formCategories.brand.length > 1) return this.getAds()
+            return
         },
         "filters.model"() {
-            this.getAds()
+            if(this.formCategories.model.length > 1) return this.getAds()
+            return
         },
         "filters.yearManModel"() {
-            this.getAds()
+            if (this.formCategories.yearManModel.length > 1) return this.getAds()
+            return
         }
     }
 }
