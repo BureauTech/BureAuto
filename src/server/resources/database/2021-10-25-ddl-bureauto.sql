@@ -266,6 +266,25 @@ before update on "user"
 for each row
 execute procedure update_user();
 
+
+create or replace function update_advertisement()
+returns trigger as $$
+begin
+	if new.adv_sty_cod = 3 and (old.adv_sty_cod != new.adv_sty_cod or old.adv_sty_cod is null) then
+		new.adv_stopped_at := current_timestamp;
+	elsif old.adv_sty_cod = 3 and new.adv_sty_cod = 1 then
+		new.adv_total_stopped := old.adv_total_stopped + extract(epoch from current_timestamp) - extract(epoch from new.adv_stopped_at);
+		new.adv_stopped_at = null;
+	end if;
+	return new;
+end;
+$$ language plpgsql;
+create trigger trg_update_advertisement
+before insert or update on advertisement
+for each row
+execute procedure update_advertisement();
+
+
 -- ##################### ends triggers ######################## --
 
 
