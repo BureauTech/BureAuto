@@ -214,5 +214,13 @@ module.exports = {
 
         const totalViewsByContacts = (totalViews / totalContacts).toFixed(0)
         return {totalViews: totalViews, totalContacts: totalContacts, report: totalViewsByContacts}
+    },
+
+    getSoldAdvertisements: async function(use_cod) {
+        const AdvertisementRepository = await Repository.get(Repository.Advertisement)
+        const sold = await AdvertisementRepository.count({adv_use_cod: use_cod, adv_sty_cod: 4})
+        const totalQuantity = await AdvertisementRepository.count({adv_use_cod: use_cod, adv_sty_cod: In([1, 4])})
+        if (!totalQuantity) return {sold, percentage: "0,00%"}
+        return {sold, percentage: `${(sold / totalQuantity * 100).toFixed(2)}%`.replace(".", ",")}
     }
 }
