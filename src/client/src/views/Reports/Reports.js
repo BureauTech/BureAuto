@@ -35,7 +35,14 @@ export default {
                 inactive: "excluídos",
                 active: "ativos",
                 paused: "pausados"
-            }
+            },
+            soldAdvertisement: [{
+                text: "Quantidade total de anúncios vendidos: ",
+                value: ""
+            }, {
+                text: "Porcentagem total de anúncios vendidos: ",
+                value: ""
+            }]
         }
     },
 
@@ -83,12 +90,24 @@ export default {
             } catch (error) {
                 this.$toasted.error("Ocorreu um erro ao buscar o relatório de status dos anúncios")
             }
+        },
+        getSoldAdvertisements: async function() {
+            try {
+                const {data} = await axios.get("/advertisement/report/sold")
+                if (data.success) {
+                    this.soldAdvertisement[0].value = data.data.sold
+                    this.soldAdvertisement[1].value = data.data.percentage
+                }
+            } catch (error) {
+                this.$toasted.error("Ocorreu um erro ao buscar o relatório de vendas")
+            }
         }
     },
 
     created: function() {
         this.getFavoriteReport()
         this.getAdvertisementReport()
+        this.getSoldAdvertisements()
         if (this.is_admin) {
             this.getTotalAds()
             this.getAdvertisementStatusReport()
