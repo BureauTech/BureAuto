@@ -31,6 +31,10 @@
         title="Relação geral de vendas dos anúncios"
         :content="soldAdvertisement"
       />
+      <ReportCard
+        title="Top 3 anúncios vendidos por modelo"
+        :content="soldByModel"
+      />
     </v-row>
   </v-container>
 </template>

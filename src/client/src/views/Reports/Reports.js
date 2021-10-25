@@ -42,6 +42,10 @@ export default {
             }, {
                 text: "Porcentagem total de anúncios vendidos: ",
                 value: ""
+            }],
+            soldByModel: [{
+                text: "",
+                value: ""
             }]
         }
     },
@@ -101,6 +105,25 @@ export default {
             } catch (error) {
                 this.$toasted.error("Ocorreu um erro ao buscar o relatório de vendas")
             }
+        },
+        getSoldByCategory: async function() {
+            try {
+                const {data} = await axios.get("/advertisement/report/soldByCategory")
+                if (data.success) {
+                    if (!data.data.length) {
+                        this.soldByModel = [{text: "Você não possui nenhum veículo vendido ainda", value: ""}]
+                        return
+                    }
+                    this.soldByModel = data.data.map(report => {
+                        return {
+                            text: `Quantidade de vendas do modelo ${report.model}: `,
+                            value: report.totalSold
+                        }
+                    })
+                }
+            } catch (error) {
+                this.$toasted.error("Ocorreu um erro ao buscar o relatório de vendas por categoria (modelo)")
+            }
         }
     },
 
@@ -108,6 +131,7 @@ export default {
         this.getFavoriteReport()
         this.getAdvertisementReport()
         this.getSoldAdvertisements()
+        this.getSoldByCategory()
         if (this.is_admin) {
             this.getTotalAds()
             this.getAdvertisementStatusReport()
