@@ -216,11 +216,24 @@ module.exports = {
         return {totalViews: totalViews, totalContacts: totalContacts, report: totalViewsByContacts}
     },
 
-    getSoldAdvertisements: async function(use_cod) {
+    getSoldAdvertisementsReport: async function(use_cod) {
         const AdvertisementRepository = await Repository.get(Repository.Advertisement)
         const sold = await AdvertisementRepository.count({adv_use_cod: use_cod, adv_sty_cod: 4})
         const totalQuantity = await AdvertisementRepository.count({adv_use_cod: use_cod, adv_sty_cod: In([1, 4])})
         if (!totalQuantity) return {sold, percentage: "0,00%"}
         return {sold, percentage: `${(sold / totalQuantity * 100).toFixed(2)}%`.replace(".", ",")}
+    },
+
+    getSoldByCategoryReport: async function(use_cod) {
+        const AdvertisementRepository = await Repository.get(Repository.Advertisement)
+        return await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
+            .select("Advertisement.adv_model_description", "model")
+            .addSelect("count(Advertisement.adv_model_description)", "totalSold")
+            .where("Advertisement.adv_use_cod = :adv_use_cod", {adv_use_cod: use_cod})
+            .andWhere("Advertisement.adv_sty_cod = :adv_sty_cod", {adv_sty_cod: 4})
+            .groupBy("Advertisement.adv_model_description")
+            .orderBy("\"totalSold\"", "DESC")
+            .limit(3)
+            .getRawMany()
     }
 }

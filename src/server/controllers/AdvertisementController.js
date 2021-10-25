@@ -146,7 +146,18 @@ router.get("/report/view-contact", authenticate, async(req, res) => {
 
 router.get("/report/sold", authenticate, async(req, res) => {
     try {
-        const report = await AdvertisementService.getSoldAdvertisements(req.user.use_cod)
+        const report = await AdvertisementService.getSoldAdvertisementsReport(req.user.use_cod)
+        return res.status(200).send({success: true, data: report})
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
+router.get("/report/soldByCategory", authenticate, async(req, res) => {
+    try {
+        const report = await AdvertisementService.getSoldByCategoryReport(req.user.use_cod)
         return res.status(200).send({success: true, data: report})
 
     } catch (error) {
