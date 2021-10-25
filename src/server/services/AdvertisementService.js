@@ -226,26 +226,48 @@ module.exports = {
 
     getSoldByCategoryReport: async function(use_cod) {
         const AdvertisementRepository = await Repository.get(Repository.Advertisement)
-        return await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
-            .select("Advertisement.adv_model_description", "model")
-            .addSelect("count(Advertisement.adv_model_description)", "totalSold")
-            .where("Advertisement.adv_use_cod = :adv_use_cod", {adv_use_cod: use_cod})
-            .andWhere("Advertisement.adv_sty_cod = :adv_sty_cod", {adv_sty_cod: 4})
-            .groupBy("Advertisement.adv_model_description")
-            .orderBy("\"totalSold\"", "DESC")
-            .limit(3)
-            .getRawMany()
+        const categoriesMap = {
+            adv_brand: "Marca mais vendida",
+            adv_model_description: "Modelo mais vendido",
+            adv_year_model: "Ano do modelo mais vendido"
+        }
+        const categories = ["adv_brand", "adv_model_description", "adv_year_model"]
+        const report = []
+        for (let i = 0; i < categories.length; i++) {
+            const result = await (await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
+                .select(`Advertisement.${categories[i]}`, "category")
+                .addSelect(`count(Advertisement.${categories[i]})`, "totalSold")
+                .where("Advertisement.adv_use_cod = :adv_use_cod", {adv_use_cod: use_cod})
+                .andWhere("Advertisement.adv_sty_cod = :adv_sty_cod", {adv_sty_cod: 4})
+                .groupBy(`Advertisement.${categories[i]}`)
+                .orderBy("\"totalSold\"", "DESC")
+                .limit(1)
+                .getRawMany())[0]
+            report.push({category: categoriesMap[categories[i]], result: result.category ? result.category : "Não encontrado"})
+        }
+        return report
     },
 
     getSoldByCategoryAdminReport: async function() {
         const AdvertisementRepository = await Repository.get(Repository.Advertisement)
-        return await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
-            .select("Advertisement.adv_model_description", "model")
-            .addSelect("count(Advertisement.adv_model_description)", "totalSold")
-            .andWhere("Advertisement.adv_sty_cod = :adv_sty_cod", {adv_sty_cod: 4})
-            .groupBy("Advertisement.adv_model_description")
-            .orderBy("\"totalSold\"", "DESC")
-            .limit(3)
-            .getRawMany()
+        const categoriesMap = {
+            adv_brand: "Marca mais vendida",
+            adv_model_description: "Modelo mais vendido",
+            adv_year_model: "Ano do modelo mais vendido"
+        }
+        const categories = ["adv_brand", "adv_model_description", "adv_year_model"]
+        const report = []
+        for (let i = 0; i < categories.length; i++) {
+            const result = await (await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
+                .select(`Advertisement.${categories[i]}`, "category")
+                .addSelect(`count(Advertisement.${categories[i]})`, "totalSold")
+                .where("Advertisement.adv_sty_cod = :adv_sty_cod", {adv_sty_cod: 4})
+                .groupBy(`Advertisement.${categories[i]}`)
+                .orderBy("\"totalSold\"", "DESC")
+                .limit(1)
+                .getRawMany())[0]
+            report.push({category: categoriesMap[categories[i]], result: result.category ? result.category : "Não encontrado"})
+        }
+        return report
     }
 }
