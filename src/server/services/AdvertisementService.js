@@ -235,5 +235,17 @@ module.exports = {
             .orderBy("\"totalSold\"", "DESC")
             .limit(3)
             .getRawMany()
+    },
+
+    getSoldByCategoryAdminReport: async function() {
+        const AdvertisementRepository = await Repository.get(Repository.Advertisement)
+        return await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
+            .select("Advertisement.adv_model_description", "model")
+            .addSelect("count(Advertisement.adv_model_description)", "totalSold")
+            .andWhere("Advertisement.adv_sty_cod = :adv_sty_cod", {adv_sty_cod: 4})
+            .groupBy("Advertisement.adv_model_description")
+            .orderBy("\"totalSold\"", "DESC")
+            .limit(3)
+            .getRawMany()
     }
 }
