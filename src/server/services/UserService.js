@@ -29,7 +29,7 @@ module.exports = {
                             await RepositoryUser.save({
                                 use_name: user.nome,
                                 use_is_cpf_document: user.tipoDocumento === "cpf",
-                                use_document: user.documento,
+                                use_document: user.documento.replace(/\D/g, ""),
                                 use_nickname: user.apelido,
                                 use_phone: user.telefone,
                                 use_address: user.endereco,
