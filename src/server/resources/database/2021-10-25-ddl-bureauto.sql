@@ -95,6 +95,8 @@ create table advertisement (
     adv_year_manufacture integer,
 	adv_images varchar,
 	adv_created_at timestamp with time zone default current_timestamp not null,
+	adv_stopped_at timestamp with time zone,
+	adv_total_stopped integer not null default 0,
     constraint advertisement_adv_cod_pkey primary key (adv_cod),
     constraint advertisement_adv_use_cod_fkey foreign key (adv_use_cod) references "user" (use_cod),
     constraint advertisement_adv_man_cod_fkey foreign key (adv_man_cod) references manufacturer (man_cod),
@@ -263,6 +265,25 @@ create trigger trg_update_user
 before update on "user"
 for each row
 execute procedure update_user();
+
+
+create or replace function update_advertisement()
+returns trigger as $$
+begin
+	if new.adv_sty_cod = 3 and (old.adv_sty_cod != new.adv_sty_cod or old.adv_sty_cod is null) then
+		new.adv_stopped_at := current_timestamp;
+	elsif old.adv_sty_cod = 3 and new.adv_sty_cod = 1 then
+		new.adv_total_stopped := old.adv_total_stopped + extract(epoch from current_timestamp) - extract(epoch from new.adv_stopped_at);
+		new.adv_stopped_at = null;
+	end if;
+	return new;
+end;
+$$ language plpgsql;
+create trigger trg_update_advertisement
+before insert or update on advertisement
+for each row
+execute procedure update_advertisement();
+
 
 -- ##################### ends triggers ######################## --
 
