@@ -57,6 +57,13 @@ module.exports = new EntitySchema({
             type: "timestamp with time zone",
             nullable: false,
             default: "current_timestamp"
+        },
+        adv_stopped_at: {
+            type: "timestamp with time zone"
+        },
+        adv_total_stopped: {
+            type: "integer",
+            default: 0
         }
     },
     relations: {
