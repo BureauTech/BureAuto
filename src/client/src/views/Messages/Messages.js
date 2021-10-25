@@ -15,7 +15,11 @@ export default {
             ads: [],
             chats: [],
             messages: [],
-            rules: rulesUtils
+            rules: rulesUtils,
+            messageForm: {
+                message: undefined,
+                cha_cod: undefined
+            }
         }
     },
     methods: {
@@ -31,11 +35,21 @@ export default {
             })    
             
         },
+        
         getMessages: async function(cha_cod) {
             const message = await axios.get(`/message/messages/${cha_cod}`)
-            this.messages = message.data.data
-            return message          
+            this.messages = message.data.data.map(message => {
+                this.messageForm.cha_cod = message.mes_cha_cod
+                return message  
+            })           
         },
+
+        sendMessage: async function() { 
+            console.log(JSON.stringify(this.messageForm))          
+            const {data} = await axios.post("/message/create/", this.messageForm) 
+            return data          
+        }, 
+
         getFavs: async function() {
             const favorites = await axios.get(`/favorite/favorites/${this.$store.getters.getUser.use_cod}`)
             this.ads = favorites.data.data.map(ad => {
@@ -47,6 +61,7 @@ export default {
                 return ad
             })
         },
+
         deleteFav: async function(adv_cod, index) {
             if (this.$store.getters.isAuthenticated) {
                 await axios.delete(`/favorite/${adv_cod}`)
@@ -60,6 +75,7 @@ export default {
             }
         }
     },
+
     beforeMount: function() {
         this.getUserChats()
     }

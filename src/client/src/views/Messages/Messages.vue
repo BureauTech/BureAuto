@@ -16,15 +16,6 @@
         </v-layout>
       </v-app-bar>
     </v-row>
-    <!-- <v-layout
-      v-for="(ad, index) in ads"
-      :key="ad.adv_cod"
-      cols="4"
-      row
-      justify-center
-      align-start
-      class="no-negative"
-    > -->
     <v-col>
       <v-row
         justify="start"
@@ -38,32 +29,34 @@
             align-center
             class="text-center margin-layout"
           >
-            <v-col cols="12">
-              <v-card-title>
-                <v-row
-                  no-gutters
-                  justify="end"
+            <v-card-title>
+              <v-row
+                no-gutters
+                justify="end"
+              >
+                <v-col
+                  align="left"
+                  cols="auto"
+                  v-text="chat.adv_model_description"
                 >
-                  <v-col
-                    align="left"
-                    cols="auto"
-                    v-text="chat.adv_model_description"
+                </v-col>
+                <v-col
+                  align="right"
+                  cols="2"
+                  class="mx-2"
+                >
+                  <v-icon
+                    large
+                    @click="getMessages(chat.cha_cod)"
                   >
-                  </v-col>
-                  <v-col
-                    align="right"
-                    cols="2"
-                    class="mx-2"
-                  >
-                    <v-icon
-                      large
-                      @click="getMessages(chat.cha_cod)"
-                    >
-                      mdi-eye
-                    </v-icon>
-                  </v-col>
-                </v-row>
-              </v-card-title>
+                    mdi-eye
+                  </v-icon>
+
+                </v-col>
+              </v-row>
+            </v-card-title>
+
+            <v-col cols="12">
               <v-row>
                 <v-col>
                   <v-img
@@ -72,7 +65,6 @@
                     max-height="50"
                     max-width="50"
                   />
-                  </v-card-text>
                 </v-col>
                 <v-col
                   cols="7"
@@ -83,7 +75,6 @@
                     class="breakline text-left overflow"
                     v-text="chat.last_message"
                   >
-
                   </v-card-text>
                 </v-col>
               </v-row>
@@ -115,24 +106,26 @@
                 >
                   <v-col
                     align="right"
-                    cols="auto"
+                    cols="10"
                     v-text="chat.adv_model_description + ' - '
                   + chat.adv_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })"
                   >
                     >
                   </v-col>
-                  <v-col
-                    align="right"
-                    cols="2"
-                    class="mx-2"
-                  >
-                    <v-icon
-                      large
-                      @click="viewAdvertisement(chat.cha_adv_cod)"
+                  <v-row>
+                    <v-col
+                      align="right"
+                      cols="12"
+                      class="mx-2"
                     >
-                      mdi-eye
-                    </v-icon>
-                  </v-col>
+                      <v-icon
+                        large
+                        @click="viewAdvertisement(chat.cha_adv_cod)"
+                      >
+                        mdi-eye
+                      </v-icon>
+                    </v-col>
+                  </v-row>
                 </v-row>
               </v-card-title>
               <v-row>
@@ -144,17 +137,37 @@
                   <v-row
                     class="breakline text-left overflow-ad"
                     v-for="message in messages"
-                    :key="message.mes_cod"
+                    :key="message.mes_cha_cod"
                   >
                     <v-card-text v-text="message.mes_text">
                     </v-card-text>
                   </v-row>
                 </v-col>
               </v-row>
+              <v-row>
+                <v-col cols="11">
+                  <v-textarea
+                    class="mx-2"
+                    auto-grow
+                    outlined
+                    label="Escreva sua mensagem"
+                    rows="1"
+                    row-height="15"
+                    v-model="messageForm.message"
+                  >
+                  </v-textarea>
+                </v-col>
+                <v-icon
+                  large
+                  @click="sendMessage(chat.cha_cod)"
+                >
+                  mdi-send
+                </v-icon>
+              </v-row>
             </v-col>
+
           </v-card>
         </v-col>
-        <!-- </v-layout> -->
       </v-row>
     </v-col>
   </v-container>
