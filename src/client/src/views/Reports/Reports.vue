@@ -32,7 +32,7 @@
         :content="soldAdvertisement"
       />
       <ReportCard
-        title="Top 3 anúncios vendidos por modelo"
+        :title="`Top 3 anúncios vendidos por modelo  ${is_admin ? 'na plataforma' : ''}`"
         :content="soldByModel"
       />
     </v-row>

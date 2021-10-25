@@ -108,10 +108,12 @@ export default {
         },
         getSoldByCategory: async function() {
             try {
-                const {data} = await axios.get("/advertisement/report/soldByCategory")
+                const {data} = await axios.get(`/${this.is_admin ? "administrator" : "advertisement"}/report/soldByCategory`)
                 if (data.success) {
                     if (!data.data.length) {
-                        this.soldByModel = [{text: "Você não possui nenhum veículo vendido ainda", value: ""}]
+                        this.soldByModel = [{
+                            text: `${this.is_admin ? "A plataforma" : "Você"} não possui nenhum veículo vendido ainda`, value: ""
+                        }]
                         return
                     }
                     this.soldByModel = data.data.map(report => {
