@@ -35,6 +35,10 @@
         :title="`Mais vendidos por categoria  ${is_admin ? 'na plataforma' : ''}`"
         :content="soldByModel"
       />
+      <ReportCard
+        title="Disponibilidade dos anúncios"
+        :content="time"
+      />
     </v-row>
   </v-container>
 </template>

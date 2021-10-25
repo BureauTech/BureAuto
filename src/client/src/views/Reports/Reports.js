@@ -46,6 +46,10 @@ export default {
             soldByModel: [{
                 text: "",
                 value: ""
+            }],
+            time: [{
+                text: "Tempo médio que os anúncios estão no ar: ",
+                value: ""
             }]
         }
     },
@@ -120,6 +124,16 @@ export default {
             } catch (error) {
                 this.$toasted.error("Ocorreu um erro ao buscar o relatório de vendas por categoria (modelo)")
             }
+        },
+        getTimeReport: async function() {
+            try {
+                const {data} = await axios.get("/advertisement/report/time")
+                if (data.success) {
+                    this.time[0].value = data.data
+                }
+            } catch (error) {
+                this.$toasted.error("Ocorreu um erro ao buscar o relatório de vendas por categoria (modelo)")
+            }
         }
     },
 
@@ -128,6 +142,7 @@ export default {
         this.getAdvertisementReport()
         this.getSoldAdvertisements()
         this.getSoldByCategory()
+        this.getTimeReport()
         if (this.is_admin) {
             this.getTotalAds()
             this.getAdvertisementStatusReport()
