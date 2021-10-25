@@ -23,6 +23,7 @@ module.exports = {
             .distinctOn(["Chat.cha_cod"])
             .select("Chat.cha_cod", "cha_cod")
             .addSelect("Message.mes_text", "last_message")
+            .addSelect("Chat.cha_adv_cod", "cha_adv_cod")
             .addSelect("Advertisement.adv_model_description", "adv_model_description")
             .addSelect("Advertisement.adv_value", "adv_value")
             .addSelect("Advertisement.adv_images", "adv_images")
