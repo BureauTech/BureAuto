@@ -27,6 +27,14 @@
         :title="`Engajamento dos anúncios ${is_admin ? 'na plataforma' : ''}`"
         :content="statusAdvertisement"
       />
+      <ReportCard
+        title="Relação geral de vendas dos anúncios"
+        :content="soldAdvertisement"
+      />
+      <ReportCard
+        :title="`Top 3 anúncios vendidos por modelo  ${is_admin ? 'na plataforma' : ''}`"
+        :content="soldByModel"
+      />
     </v-row>
   </v-container>
 </template>

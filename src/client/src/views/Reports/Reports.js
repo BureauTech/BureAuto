@@ -35,7 +35,18 @@ export default {
                 inactive: "excluídos",
                 active: "ativos",
                 paused: "pausados"
-            }
+            },
+            soldAdvertisement: [{
+                text: "Quantidade total de anúncios vendidos: ",
+                value: ""
+            }, {
+                text: "Porcentagem total de anúncios vendidos: ",
+                value: ""
+            }],
+            soldByModel: [{
+                text: "",
+                value: ""
+            }]
         }
     },
 
@@ -83,12 +94,46 @@ export default {
             } catch (error) {
                 this.$toasted.error("Ocorreu um erro ao buscar o relatório de status dos anúncios")
             }
+        },
+        getSoldAdvertisements: async function() {
+            try {
+                const {data} = await axios.get("/advertisement/report/sold")
+                if (data.success) {
+                    this.soldAdvertisement[0].value = data.data.sold
+                    this.soldAdvertisement[1].value = data.data.percentage
+                }
+            } catch (error) {
+                this.$toasted.error("Ocorreu um erro ao buscar o relatório de vendas")
+            }
+        },
+        getSoldByCategory: async function() {
+            try {
+                const {data} = await axios.get(`/${this.is_admin ? "administrator" : "advertisement"}/report/soldByCategory`)
+                if (data.success) {
+                    if (!data.data.length) {
+                        this.soldByModel = [{
+                            text: `${this.is_admin ? "A plataforma" : "Você"} não possui nenhum veículo vendido ainda`, value: ""
+                        }]
+                        return
+                    }
+                    this.soldByModel = data.data.map(report => {
+                        return {
+                            text: `Quantidade de vendas do modelo ${report.model}: `,
+                            value: report.totalSold
+                        }
+                    })
+                }
+            } catch (error) {
+                this.$toasted.error("Ocorreu um erro ao buscar o relatório de vendas por categoria (modelo)")
+            }
         }
     },
 
     created: function() {
         this.getFavoriteReport()
         this.getAdvertisementReport()
+        this.getSoldAdvertisements()
+        this.getSoldByCategory()
         if (this.is_admin) {
             this.getTotalAds()
             this.getAdvertisementStatusReport()

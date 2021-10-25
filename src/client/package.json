@@ -4,7 +4,7 @@
   "author": "BureauTech",
   "scripts": {
     "build": "vue-cli-service build",
-    "dev": "vue-cli-service serve --port 3001"
+    "dev": "vue-cli-service serve --port 3001 --open"
   },
   "dependencies": {
     "axios": "^0.21.3",
