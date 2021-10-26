@@ -105,7 +105,7 @@ export default {
     mounted: function() {
         this.$socket.disconnect()
         this.$socket.connect()
-        console.log(this.$refs);
+        console.log(this.$refs)
     },
 
     sockets: {
