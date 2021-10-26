@@ -157,10 +157,10 @@
                   </v-row>
                 </v-col>
               </v-row>
-              <v-row>
+              <v-row class="align-center">
                 <v-col cols="11">
                   <v-textarea
-                    class="mx-2"
+                    class="mx-2 center-icon"
                     auto-grow
                     outlined
                     label="Escreva sua mensagem"
@@ -168,17 +168,20 @@
                     row-height="15"
                     v-model="messageForm.message"
                   >
+                    <template v-slot:append-outer>
+                      <v-icon
+                        large
+                        @click="sendMessage"
+                        tabindex="-1"
+                        class="icon-style"
+                      >
+                        mdi-send
+                      </v-icon>
+                    </template>
                   </v-textarea>
                 </v-col>
-                <v-icon
-                  large
-                  @click="sendMessage"
-                >
-                  mdi-send
-                </v-icon>
               </v-row>
             </v-col>
-
           </v-card>
         </v-col>
       </v-row>
