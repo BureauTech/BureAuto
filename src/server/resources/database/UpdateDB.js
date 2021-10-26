@@ -1,35 +1,31 @@
+require("dotenv").config()
 const {Pool} = require("pg")
 const fs = require("fs")
 const path = require("path")
 
-// Instalar a biblioteca pg || npm install -save pg
-// Se atentar as configurações do DB antes de executar o script.
-// Esse script só executa para a base <bureauto> já criada.
 const config = {
-    host: "localhost",
-    user: "postgres",
-    password: "postgres",
-    database: "bureauto",
-    port: 5432
+    host: process.env.HOST_DB,
+    port: process.env.PORT_DB,
+    user: process.env.USER_DB,
+    password: process.env.PWD_DB,
+    database: process.env.DATABASE_DB
 }
 
 const pool = new Pool(config)
 const files = fs.readdirSync(__dirname).filter(file => file.includes(".sql"))
-const sqlFile = files[files.length - 1]
+const sqlFileName = files[files.length - 1]
+const sqlFile = fs.readFileSync(path.join(__dirname, sqlFileName)).toString()
 
-const sql_ddl_bureauto = fs.readFileSync(path.join(__dirname, sqlFile)).toString()
-
-pool.connect(async function(err, client, done) {
+pool.connect(function(err, client) {
     if (err) {
-        console.error("Can not connect to the DB" + err)
+        console.error("cant connect to database ", err)
     }
-
-    await client.query(sql_ddl_bureauto, function(err, result) {
+    client.query(sqlFile, function(err) {
         if(err) {
             console.error("error: ", err)
             process.exit(1)
         }
-        console.log("Success on execut ddl project.")
+        console.log("database updated successfully")
         process.exit(0)
     })
 })
