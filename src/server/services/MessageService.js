@@ -35,7 +35,7 @@ module.exports = {
                 queryBuilder.where("Advertisement.adv_use_cod = :adv_use_cod", {adv_use_cod: user_cod})
                 queryBuilder.orWhere("Chat.cha_use_cod = :cha_use_cod", {cha_use_cod: user_cod})
             }))
-            .orderBy("Message.mes_created_at", "DESC")
+            .orderBy("Message.mes_created_at", "ASC")
             .getRawMany()
         return messages
     }

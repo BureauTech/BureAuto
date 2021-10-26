@@ -37,4 +37,6 @@ app.use((req, res) => {
     res.status(404).send({error: "not found"})
 })
 
-module.exports = app
+const httpServer = require("http").Server(app)
+
+module.exports = {app, httpServer}
