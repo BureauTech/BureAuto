@@ -2,7 +2,7 @@ import Topbar from "@/components/Topbar/Topbar"
 import rulesUtils from "@/utils/rulesUtils"
 import axios from "@/axios.js"
 import config from "../../config"
-import logoBureau from "@/assets/bureauto_sem_fundo.png" 
+import logoBureau from "@/assets/bureauto_sem_fundo.png"
 
 export default {
     name: "Messages",
@@ -19,7 +19,9 @@ export default {
             messageForm: {
                 message: undefined,
                 cha_cod: undefined
-            }
+            },
+            isConnected: false,
+            scrollContainer: false
         }
     },
     methods: {
@@ -44,11 +46,21 @@ export default {
             })           
         },
 
-        sendMessage: async function() { 
-            console.log(JSON.stringify(this.messageForm))          
-            const {data} = await axios.post("/message/create/", this.messageForm) 
-            return data          
-        }, 
+        sendMessage: async function() {
+            if (this.messageForm.message) {
+                this.scrollContainer = true
+                const newMessage = await this.saveMessage(this.messageForm)
+                this.$socket.emit("sendMessage", newMessage)
+                this.messageForm.message = ""
+            }
+        },
+
+        saveMessage: async function(message) {
+            const {data} = await axios.post("/message/create/", message) 
+            if (data.success) {
+                return data.data
+            }
+        },
 
         getFavs: async function() {
             const favorites = await axios.get(`/favorite/favorites/${this.$store.getters.getUser.use_cod}`)
@@ -73,10 +85,49 @@ export default {
             if (this.$store.getters.isAuthenticated) {
                 this.$router.push(`/anuncio/${adv_cod}`)
             }
+        },
+        scrollToLastMessage: function() {
+            if (this.scrollContainer) {
+                this.$nextTick(() =>{
+                    const messageContainer = this.$refs.messageContainer[0]
+                    console.log(messageContainer)
+                    messageContainer.scrollTop = messageContainer.scrollHeight + 200
+                    this.scrollContainer = false
+                })
+            }
         }
     },
 
     beforeMount: function() {
         this.getUserChats()
+    },
+
+    mounted: function() {
+        this.$socket.disconnect()
+        this.$socket.connect()
+        console.log(this.$refs);
+    },
+
+    sockets: {
+        connect: function() {
+            this.isConnected = true
+            // connect in all chats
+            this.chats.forEach(chat => {
+                this.$socket.emit("joinRoom", chat.cha_cod)
+            })
+        },
+        disconnect: function() {
+            this.isConnected = false
+        },
+        getMessageSent: function(message) {
+            this.messages.push(message)
+            for (const chat of this.chats) {
+                if (chat.cha_cod === message.mes_cha_cod) {
+                    chat.last_message = message.mes_text
+                    break
+                }
+            }
+            this.scrollToLastMessage()
+        }
     }
 }
