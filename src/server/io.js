@@ -4,14 +4,11 @@ const io = require("socket.io")(httpServer, {cors: {origin: "*"}})
 io.on("connection", socket => {
     // join chat room
     socket.on("joinRoom", function(room) {
-        console.log("room: ", room)
         socket.join(room)
     })
 
     // message from client
     socket.on("sendMessage", function(message) {
-        console.log(message)
-        console.log(socket.rooms)
         // send message to clients in the chat
         io.to(message.mes_cha_cod).emit("getMessageSent", message)
     })
