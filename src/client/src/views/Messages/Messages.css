@@ -11,13 +11,29 @@
 }
 
 .overflow {
-    max-height: 200px;
-    overflow: 400px;
+    max-height: auto;
+    overflow: auto;
 }
 
 .overflow-chat {
-    max-height: 400px;
+    max-height: auto;
     overflow: auto;
+}
+
+.sender-color {
+    color: #ffffff;
+    border-radius: 2px;
+    background-color: #4e8cff;
+    margin: 0.1px;
+    text-align: right;
+}
+
+.receiver-color {
+    color: #222222;
+    border-radius: 2px;
+    background-color: #eaeaea;
+    margin: 1px;
+    text-align: left;
 }
 
 ::-webkit-scrollbar {

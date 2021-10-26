@@ -128,18 +128,27 @@
                   </v-row>
                 </v-row>
               </v-card-title>
-              <v-row>
+              <v-row class="breakline text-left overflow overflow-chat">
                 <v-col
                   cols="8"
                   md="12"
                   lg="12"
                 >
                   <v-row
-                    class="breakline text-left overflow-ad"
                     v-for="message in messages"
                     :key="message.mes_cha_cod"
                   >
-                    <v-card-text v-text="message.mes_text">
+                    <v-card-text
+                      v-if="message.mes_use_cod != $store.getters.getUser.use_cod"
+                      v-text="message.mes_text"
+                      class="receiver-color"
+                    >
+                    </v-card-text>
+                    <v-card-text
+                      v-else
+                      v-text="message.mes_text"
+                      class="sender-color"
+                    >
                     </v-card-text>
                   </v-row>
                 </v-col>
