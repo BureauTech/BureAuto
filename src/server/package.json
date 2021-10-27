@@ -11,7 +11,7 @@
     "dev": "nodemon index.js",
     "start": "nodemon ./index.js",
     "debug": "nodemon --debug --inspect-brk=9229 ./index.js",
-    "bd": "node ./resources/database/UpdateDB.js"
+    "db": "node ./resources/database/UpdateDB.js"
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +30,7 @@
     "pg": "^8.7.1",
     "secure-random-password": "^0.2.3",
     "sharp": "^0.29.2",
+    "socket.io": "^4.3.1",
     "typeorm": "^0.2.37"
   },
   "devDependencies": {

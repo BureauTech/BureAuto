@@ -20,7 +20,7 @@
       <v-row
         justify="start"
         v-for="chat in chats"
-        :key="chat.cha_cod"
+        :key="'chat-' + chat.cha_cod"
       >
         <v-col cols="4">
           <v-card
@@ -128,7 +128,10 @@
                   </v-row>
                 </v-row>
               </v-card-title>
-              <v-row class="breakline text-left overflow overflow-chat">
+              <v-row
+                class="breakline text-left overflow overflow-chat"
+                ref="messageContainer"
+              >
                 <v-col
                   cols="8"
                   md="12"
@@ -136,7 +139,8 @@
                 >
                   <v-row
                     v-for="message in messages"
-                    :key="message.mes_cha_cod"
+                    :key="'message-' + message.mes_cod"
+                    class="message-row"
                   >
                     <v-card-text
                       v-if="message.mes_use_cod != $store.getters.getUser.use_cod"
@@ -168,7 +172,7 @@
                 </v-col>
                 <v-icon
                   large
-                  @click="sendMessage(chat.cha_cod)"
+                  @click="sendMessage"
                 >
                   mdi-send
                 </v-icon>
