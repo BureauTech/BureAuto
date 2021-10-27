@@ -1,4 +1,5 @@
-import Topbar from "@/components/Topbar/Topbar"
+import MainChat from "@/components/MainChat/MainChat.vue"
+import ChatItem from "@/components/ChatItem/ChatItem.vue"
 import rulesUtils from "@/utils/rulesUtils"
 import axios from "@/axios.js"
 import config from "../../config"
@@ -7,21 +8,16 @@ import logoBureau from "@/assets/bureauto_sem_fundo.png"
 export default {
     name: "Messages",
     components: {
-        Topbar
+        MainChat,
+        ChatItem
     },
     data: function() {
         return {
-            favs: [],
-            ads: [],
             chats: [],
             messages: [],
             rules: rulesUtils,
-            messageForm: {
-                message: undefined,
-                cha_cod: undefined
-            },
             isConnected: false,
-            scrollContainer: false
+            advertisementInfo: {}
         }
     },
     methods: {
@@ -29,29 +25,42 @@ export default {
             const chat = await axios.get("/chat/userChats/")
             this.chats = chat.data.data.map(chat => {
                 if(!chat.adv_images) {
-                    chat.adv_images =  logoBureau
+                    chat.adv_images = logoBureau
                 } else {
                     chat.adv_images = config.SERVER_URL + chat.adv_images
                 }
                 return chat
-            })    
-            
-        },
-        
-        getMessages: async function(cha_cod) {
-            const message = await axios.get(`/message/messages/${cha_cod}`)
-            this.messages = message.data.data.map(message => {
-                this.messageForm.cha_cod = message.mes_cha_cod
-                return message  
-            })           
+            })
+            if (this.chats.length) {
+                this.getMessages(this.chats[0].cha_cod)
+                this.getAdvertisementInfo(this.chats[0])
+            }
         },
 
-        sendMessage: async function() {
-            if (this.messageForm.message) {
-                this.scrollContainer = true
-                const newMessage = await this.saveMessage(this.messageForm)
+        getAdvertisementInfo: function(chat) {
+            this.advertisementInfo = {
+                adv_images: chat.adv_images,
+                adv_model_description: chat.adv_model_description,
+                adv_value: chat.adv_value,
+                adv_cod: chat.cha_adv_cod
+            }
+        },
+
+        getMessages: async function(cha_cod) {
+            // prevent get the same messages on multiple clicks
+            if (this.messages.length && this.messages[0].mes_cha_cod === cha_cod) return
+            const message = await axios.get(`/message/messages/${cha_cod}`)
+            this.messages = message.data.data.map(message => {
+                return message  
+            })
+            this.getAdvertisementInfo(this.chats.filter(chat => chat.cha_cod === cha_cod)[0])
+        },
+
+        sendMessage: async function(currentMessage) {
+            if (currentMessage.message) {
+                this.$refs.mainChat.scrollContainer = true
+                const newMessage = await this.saveMessage(currentMessage)
                 this.$socket.emit("sendMessage", newMessage)
-                this.messageForm.message = ""
             }
         },
 
@@ -62,38 +71,9 @@ export default {
             }
         },
 
-        getFavs: async function() {
-            const favorites = await axios.get(`/favorite/favorites/${this.$store.getters.getUser.use_cod}`)
-            this.ads = favorites.data.data.map(ad => {
-                if(!ad.adv_images) {
-                    ad.adv_images =  logoBureau
-                } else {
-                    ad.adv_images = config.SERVER_URL + ad.adv_images
-                }
-                return ad
-            })
-        },
-
-        deleteFav: async function(adv_cod, index) {
-            if (this.$store.getters.isAuthenticated) {
-                await axios.delete(`/favorite/${adv_cod}`)
-                this.ads.splice(index, 1)
-            }
-        },
-
         viewAdvertisement: async function(adv_cod) {
             if (this.$store.getters.isAuthenticated) {
                 this.$router.push(`/anuncio/${adv_cod}`)
-            }
-        },
-        scrollToLastMessage: function() {
-            if (this.scrollContainer) {
-                this.$nextTick(() =>{
-                    const messageContainer = this.$refs.messageContainer[0]
-                    console.log(messageContainer)
-                    messageContainer.scrollTop = messageContainer.scrollHeight + 200
-                    this.scrollContainer = false
-                })
             }
         }
     },
@@ -105,7 +85,6 @@ export default {
     mounted: function() {
         this.$socket.disconnect()
         this.$socket.connect()
-        console.log(this.$refs)
     },
 
     sockets: {
@@ -127,7 +106,7 @@ export default {
                     break
                 }
             }
-            this.scrollToLastMessage()
+            this.$refs.mainChat.scrollToLastMessage()
         }
     }
 }
