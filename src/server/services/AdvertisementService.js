@@ -71,7 +71,7 @@ module.exports = {
     getAllAdvertisementByUser: async function(adv_use_cod) {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         return await RepositoryAdvertisement.find({
-            relations: ["Manufacturer", "StatusType"], where: {adv_use_cod: adv_use_cod, adv_sty_cod: Not(2)}
+            relations: ["Manufacturer", "StatusType"], where: {adv_use_cod: adv_use_cod, adv_sty_cod: In([1, 3])}
         })
     },
 
@@ -86,7 +86,6 @@ module.exports = {
             .where("Advertisement.adv_cod = :cod", {cod: adv_cod})
             .andWhere("Advertisement.adv_sty_cod = :adv_sty_cod", {adv_sty_cod: 1})
             .getRawOne()
-        console.log(advertisement)
         return advertisement
     },
 

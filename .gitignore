@@ -3,5 +3,5 @@
 **/temp/*
 **/dist
 **/resources/img/upload/*
-
+.history/*
 !.keep
