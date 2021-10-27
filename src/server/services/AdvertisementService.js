@@ -77,13 +77,16 @@ module.exports = {
 
     getAdvertisement: async function(adv_cod) {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
-        const advertisement = await RepositoryAdvertisement.findOne({
-            relations: ["Manufacturer", "User"], where: {adv_cod: adv_cod, adv_sty_cod: 1}
-        })
-        if (advertisement) {
-            advertisement.use_is_cpf_document = advertisement.User.use_is_cpf_document
-            delete advertisement.User
-        }
+        const advertisement = await RepositoryAdvertisement.createQueryBuilder(Repository.Advertisement)
+            .select("\"Advertisement\".*")
+            .addSelect("\"Manufacturer\".*")
+            .addSelect("(SELECT use_nickname FROM decrypt_user(Advertisement.adv_use_cod))", "use_nickname")
+            .addSelect("(SELECT use_is_cpf_document FROM decrypt_user(Advertisement.adv_use_cod))", "use_is_cpf_document")
+            .leftJoin("Advertisement.Manufacturer", "Manufacturer")
+            .where("Advertisement.adv_cod = :cod", {cod: adv_cod})
+            .andWhere("Advertisement.adv_sty_cod = :adv_sty_cod", {adv_sty_cod: 1})
+            .getRawOne()
+        console.log(advertisement)
         return advertisement
     },
 
