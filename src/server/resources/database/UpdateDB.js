@@ -4,11 +4,11 @@ const fs = require("fs")
 const path = require("path")
 
 const config = {
-    host: process.env.HOST_DB,
-    port: process.env.PORT_DB,
-    user: process.env.USER_DB,
-    password: process.env.PWD_DB,
-    database: process.env.DATABASE_DB
+    host: "localhost",
+    user: "postgres",
+    password: "postgres",
+    database: "bureauto",
+    port: 5432
 }
 
 const pool = new Pool(config)
