@@ -27,7 +27,8 @@ module.exports = {
             .addSelect("Advertisement.adv_model_description", "adv_model_description")
             .addSelect("Advertisement.adv_value", "adv_value")
             .addSelect("Advertisement.adv_images", "adv_images")
-            .addSelect("(SELECT use_name FROM decrypt_user(Message.mes_use_cod))", "use_name")
+            .addSelect("(SELECT use_nickname FROM decrypt_user(Advertisement.adv_use_cod))", "adv_use_nickname")
+            .addSelect("(SELECT use_nickname FROM decrypt_user(Chat.cha_use_cod))", "use_nickname")
             .innerJoin("Chat.Message", "Message")
             .leftJoin("Chat.Advertisement", "Advertisement")
             .leftJoin("Chat.User", "User")
@@ -41,6 +42,7 @@ module.exports = {
             .addGroupBy("Advertisement.adv_value")
             .addGroupBy("Advertisement.adv_images")
             .addGroupBy("User.use_name")
+            .addGroupBy("Advertisement.adv_use_cod")
             .orderBy({
                 "Chat.cha_cod": "DESC",
                 "Message.mes_created_at": "DESC"
