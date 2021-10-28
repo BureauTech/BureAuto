@@ -178,7 +178,5 @@ export default {
         this.incrementView()
         await this.getAdvertisement()
         await this.getFavorite()
-        await this.getUserChats()
-        await this.getMessages()
     }
 }
