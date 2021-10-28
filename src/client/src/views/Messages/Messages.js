@@ -1,87 +1,99 @@
-import MainChat from "@/components/MainChat/MainChat.vue"
-import ChatItem from "@/components/ChatItem/ChatItem.vue"
-import rulesUtils from "@/utils/rulesUtils"
+import ChatWindow from "vue-advanced-chat"
+import "vue-advanced-chat/dist/vue-advanced-chat.css"
 import axios from "@/axios.js"
 import config from "../../config"
-import logoBureau from "@/assets/bureauto_sem_fundo.png"
 
 export default {
-    name: "Messages",
+    name: "Message",
     components: {
-        MainChat,
-        ChatItem
+        ChatWindow
     },
-    data: function() {
+    data() {
         return {
-            chats: [],
+            rooms: [],
             messages: [],
-            rules: rulesUtils,
+            currentUserId: this.$store.getters.getUser.use_cod,
+            message: "",
+            messagesLoaded: false,
             isConnected: false,
-            advertisementInfo: {}
+            textMessages: {
+                ROOMS_EMPTY: "Não há conversas!",
+                ROOM_EMPTY: "Inicie uma conversa aqui!",
+                NEW_MESSAGES: "Novas mensagens",
+                MESSAGES_EMPTY: "Mensagem vazia",
+                CONVERSATION_STARTED: "Início da conversa:",
+                TYPE_MESSAGE: "Mensagem",
+                SEARCH: "Pesquisar"
+            }
         }
     },
     methods: {
         getUserChats: async function() {
             const chat = await axios.get("/chat/userChats/")
-            this.chats = chat.data.data.map(chat => {
-                if(!chat.adv_images) {
-                    chat.adv_images = logoBureau
-                } else {
-                    chat.adv_images = config.SERVER_URL + chat.adv_images
+            this.rooms = chat.data.data.map((chat) => {
+                chat = {
+                    roomId: chat.cha_cod,
+                    roomName:
+            chat.adv_model_description +
+            " - " +
+            (this.$store.getters.getUser.use_nickname === chat.use_nickname
+                ? chat.adv_use_nickname
+                : chat.use_nickname),
+                    avatar: config.SERVER_URL + chat.adv_images,
+                    lastMessage: {
+                        content: chat.last_message,
+                        senderId: chat.use_name
+                    },
+                    users: [{
+                        _id: 0,
+                        username: chat.use_name
+                    }],
+                    messages: this.messages
                 }
                 return chat
             })
-            if (this.chats.length) {
-                this.getMessages(this.chats[0].cha_cod)
-                this.getAdvertisementInfo(this.chats[0])
-            }
+            this.messagesLoaded = true
         },
 
-        getAdvertisementInfo: function(chat) {
-            this.advertisementInfo = {
-                adv_images: chat.adv_images,
-                adv_model_description: chat.adv_model_description,
-                adv_value: chat.adv_value,
-                adv_cod: chat.cha_adv_cod
-            }
-        },
+        getMessages: async function({room}) {
+            const message = await axios.get(`/message/messages/${room.roomId}`)
+            this.messages = []
+            message.data.data.map((message) => {
+                this.messages.push({
+                    _id: message.mes_cod,
+                    content: message.mes_text,
+                    senderId: message.mes_use_cod,
+                    timestamp: new Date(message.mes_created_at)
+                        .toTimeString()
+                        .slice(0, 5),
+                    disableActions: true,
+                    disableReactions: true
+                })
 
-        getMessages: async function(cha_cod) {
-            // prevent get the same messages on multiple clicks
-            if (this.messages.length && this.messages[0].mes_cha_cod === cha_cod) return
-            const message = await axios.get(`/message/messages/${cha_cod}`)
-            this.messages = message.data.data.map(message => {
-                return message  
+                return
             })
-            this.getAdvertisementInfo(this.chats.filter(chat => chat.cha_cod === cha_cod)[0])
-        },
 
-        sendMessage: async function(currentMessage) {
-            if (currentMessage.message) {
-                this.$refs.mainChat.scrollContainer = true
-                const newMessage = await this.saveMessage(currentMessage)
-                this.$socket.emit("sendMessage", newMessage)
-            }
+            this.messagesLoaded = true
         },
-
+        sendMessage: async function({content, roomId}) {
+            const newMessage = await this.saveMessage({
+                message: content,
+                cha_cod: roomId
+            })
+            this.$socket.emit("sendMessage", newMessage)
+            this.getMessages({content, roomId})
+        },
         saveMessage: async function(message) {
-            const {data} = await axios.post("/message/create/", message) 
+            const {data} = await axios.post("/message/create/", message)
             if (data.success) {
                 return data.data
             }
-        },
-
-        viewAdvertisement: async function(adv_cod) {
-            if (this.$store.getters.isAuthenticated) {
-                this.$router.push(`/anuncio/${adv_cod}`)
-            }
         }
     },
-
     beforeMount: function() {
         this.getUserChats()
+        this.messagesLoaded = true
     },
-
     mounted: function() {
         this.$socket.disconnect()
         this.$socket.connect()
@@ -90,23 +102,31 @@ export default {
     sockets: {
         connect: function() {
             this.isConnected = true
-            // connect in all chats
-            this.chats.forEach(chat => {
-                this.$socket.emit("joinRoom", chat.cha_cod)
+            this.rooms.forEach((chat) => {
+                this.$socket.emit("joinRoom", chat.roomId)
             })
         },
         disconnect: function() {
             this.isConnected = false
         },
         getMessageSent: function(message) {
+            message = {
+                _id: message.mes_cod,
+                roomId: message.mes_cha_cod,
+                content: message.mes_text,
+                senderId: message.mes_use_cod,
+                timestamp: new Date(message.mes_created_at).toTimeString().slice(0, 5),
+                disableActions: true,
+                disableReactions: true
+            }
             this.messages.push(message)
-            for (const chat of this.chats) {
-                if (chat.cha_cod === message.mes_cha_cod) {
-                    chat.last_message = message.mes_text
+
+            for (const chat of this.rooms) {
+                if (chat.roomId === message.roomId) {
+                    chat.lastMessage.content = message.content
                     break
                 }
             }
-            this.$refs.mainChat.scrollToLastMessage()
         }
     }
 }

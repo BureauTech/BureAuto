@@ -41,6 +41,7 @@ export default {
                 if (data.success && data.data && isUser) {
                     this.loading = false
                     this.advertisement = data.data
+                    this.advertisement.Manufacturer = {man_name: data.data.man_name}
 
                     if (this.advertisement.adv_sty_cod === "1") {
                         this.advertisement.adv_sty_cod = "Ativo"

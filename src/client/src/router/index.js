@@ -113,6 +113,13 @@ const routes = [{
         requiresAuth: true
     }
 }, {
+//     path: "/teste-msg",
+//     name: "TestMessage",
+//     component: TestMessage,
+//     meta: {
+//         requiresAuth: true
+//     }
+// }, {
     path: "/:catchAll(.*)", 
     redirect: {
         name: "Home"
