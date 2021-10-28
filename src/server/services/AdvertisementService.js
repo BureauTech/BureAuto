@@ -5,6 +5,7 @@ const Repository = require("../database/Repository")
 const Connection = require("../database/Connection")
 const AdvertisementUtils = require("../utils/AdvertisementUtils")
 const AdvertisementValidationService = require("./AdvertisementValidationService")
+const DateUtils = require("../utils/DateUtils")
 
 module.exports = {
 
@@ -292,24 +293,26 @@ module.exports = {
             .where("Advertisement.adv_use_cod = :adv_use_cod", {adv_use_cod: use_cod})
             .andWhere("Advertisement.adv_sty_cod in (:...adv_sty_cod)", {adv_sty_cod: [1, 3]})
             .getRawMany()
-        
+
         // user doesn't have advertisements
         if (!differences.length) {
             return "0 dia(s), 0 hora(s), 0 minuto(s), 0 segundo(s)"
         }
-
-        const totalTime = differences.reduce((acumulator, num) => acumulator += num.difference, 0)
         
+        const totalTime = differences.reduce((acumulator, num) => acumulator += num.difference, 0)
+
         const totalPausedTime = (await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
             .select("SUM(Advertisement.adv_total_stopped)", "totalPaused")
             .where("Advertisement.adv_use_cod = :adv_use_cod", {adv_use_cod: use_cod})
             .andWhere("Advertisement.adv_sty_cod in (:...adv_sty_cod)", {adv_sty_cod: [1, 3]})
             .getRawMany())[0].totalPaused
-        
+
         const advertisementQuantity  = await AdvertisementRepository.count({adv_use_cod: use_cod, adv_sty_cod: In([1, 3])})
+
         const total = totalTime.toFixed(0) - totalPausedTime
         const averageInSeconds = (total / advertisementQuantity).toFixed(0)
-        const time = (new Date(averageInSeconds * 1000).toISOString().substr(11, 8)).split(":").map(e => Number(e))
-        return `${Math.floor(total / 86400)} dia(s), ${(time[0])} hora(s), ${(time[1])} minuto(s), ${(time[2])} segundo(s)`
+        const time = DateUtils.secondsToTimeDuration(averageInSeconds)
+
+        return `${time.days} dia(s), ${time.hours} hora(s), ${time.minutes} minuto(s), ${time.seconds} segundo(s)`
     }
 }
