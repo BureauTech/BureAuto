@@ -1,4 +1,6 @@
 <template>
+  <v-container fluid class="flex-grow-1">
+
   <chat-window
     :current-user-id="currentUserId"
     :rooms="rooms"
@@ -20,10 +22,12 @@
         background: 'var(--v-bahama-lighten3)'
       }
     }"
+    height="100%"
   >
   <template v-slot:toggle-icon>
     <v-icon color="bahama">mdi-arrow-left-circle</v-icon>
   </template></chat-window>
+  </v-container>
 </template>
 
 <script src="./TestMessage.js"></script>
