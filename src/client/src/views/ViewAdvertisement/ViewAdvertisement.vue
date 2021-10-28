@@ -12,7 +12,7 @@
       >
         <div>
           <p class="text-h3 bahama--text">
-            {{advertisement.Manufacturer.man_name}}
+            {{advertisement.man_name}}
             <span
               class="font-weight-bold"
               v-text="advertisement.adv_model_description"
@@ -111,10 +111,10 @@
             />
             <div v-if="advertisement.adv_use_cod != $store.getters.getUser.use_cod">
               <beautiful-chat
-                :participants="participants"
+                :participants="[{name: advertisement.use_nickname}]"
                 :titleImageUrl="titleImageUrl"
                 :onMessageWasSent="onMessageWasSent"
-                :messageList="messageList"
+                :messageList="[{type: 'text', author: 'me', data: {text: 'wee'}}]"
                 :newMessagesCount="newMessagesCount"
                 :isOpen="isChatOpen"
                 :close="handleChat"

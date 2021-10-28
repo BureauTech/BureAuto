@@ -22,11 +22,10 @@ export default {
                 adv_year_manufacture: "",
                 adv_year_model: "",
                 adv_description: "",
-                adv_use_cod: "",
-                Manufacturer: {
-                    man_name: ""
-                }
+                adv_use_cod: ""
             },
+            chats: [],
+            messages: [],
             favorite: undefined,
             imageUrl: logoBureau,
             icons: {
@@ -47,17 +46,10 @@ export default {
                     name: "default"
                 }
             },
-            participants: [{
-                id: "advertisement.adv_description",
-                name: "Matteo"
-            }, {
-                id: "user2",
-                name: "Support"
-            }],
             // the list of all the participant of the conversation. `name` is the user name,
             // `id` is used to establish the author of a message, `imageUrl` is supposed to be the user avatar.
             titleImageUrl: "",
-            messageList: [{type: "text", author: "me", data: {text: "Say yes!"}}, {type: "text", author: "user1", data: {text: "No."}}],
+            // messageList: [{type: "text", author: "me", data: {text: "Say yes!"}}, {type: "text", author: "user1", data: {text: "No."}}],
             // the list of the messages to show, can be paginated and adjusted dynamically
             newMessagesCount: 0,
             isChatOpen: false, // to determine whether the chat window should be open or closed
@@ -186,5 +178,7 @@ export default {
         this.incrementView()
         await this.getAdvertisement()
         await this.getFavorite()
+        await this.getUserChats()
+        await this.getMessages()
     }
 }
