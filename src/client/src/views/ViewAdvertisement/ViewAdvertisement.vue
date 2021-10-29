@@ -104,36 +104,11 @@
             <Button
               block
               class="my-5"
-              v-text="isChatOpen ? 'Fechar o chat' : 'Entrar em contato'"
-              href="#"
-              @click.prevent="handleChat()"
+              v-text="'Entrar em contato'"
+              @click="createChat"
               :disabled = "advertisement.adv_use_cod == $store.getters.getUser.use_cod"
             />
-            <div v-if="advertisement.adv_use_cod != $store.getters.getUser.use_cod">
-              <beautiful-chat
-                :participants="[{name: advertisement.use_nickname}]"
-                :titleImageUrl="titleImageUrl"
-                :onMessageWasSent="onMessageWasSent"
-                :messageList="[{type: 'text', author: 'me', data: {text: 'wee'}}]"
-                :newMessagesCount="newMessagesCount"
-                :isOpen="isChatOpen"
-                :close="handleChat"
-                :icons="icons"
-                :open="handleChat"
-                :showEmoji="true"
-                :showFile="true"
-                :showEdition="true"
-                :showDeletion="true"
-                :showTypingIndicator="showTypingIndicator"
-                :showLauncher="true"
-                :showCloseButton="true"
-                :colors="colors"
-                :alwaysScrollToBottom="alwaysScrollToBottom"
-                :messageStyling="messageStyling"
-                @onType="handleOnType"
-                @edit="editMessage"
-              />
-            </div>
+
           </v-col>
         </Card>
       </v-col>
