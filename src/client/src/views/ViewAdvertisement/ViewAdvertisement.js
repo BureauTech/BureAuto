@@ -27,60 +27,7 @@ export default {
             chats: [],
             messages: [],
             favorite: undefined,
-            imageUrl: logoBureau,
-            icons: {
-                open: {
-                    img: OpenIcon,
-                    name: "default"
-                },
-                close: {
-                    img: CloseIcon,
-                    name: "default"
-                },
-                file: {
-                    img: FileIcon,
-                    name: "default"
-                },
-                closeSvg: {
-                    img: CloseIconSvg,
-                    name: "default"
-                }
-            },
-            // the list of all the participant of the conversation. `name` is the user name,
-            // `id` is used to establish the author of a message, `imageUrl` is supposed to be the user avatar.
-            titleImageUrl: "",
-            // messageList: [{type: "text", author: "me", data: {text: "Say yes!"}}, {type: "text", author: "user1", data: {text: "No."}}],
-            // the list of the messages to show, can be paginated and adjusted dynamically
-            newMessagesCount: 0,
-            isChatOpen: false, // to determine whether the chat window should be open or closed
-            showTypingIndicator: "", // when set to a value matching the participant.id it shows the typing indicator for the specific user
-            colors: {
-                header: {
-                    bg: "#4e8cff",
-                    text: "#ffffff"
-                },
-                launcher: {
-                    bg: "#4e8cff"
-                },
-                messageList: {
-                    bg: "#ffffff"
-                },
-                sentMessage: {
-                    bg: "#4e8cff",
-                    text: "#ffffff"
-                },
-                receivedMessage: {
-                    bg: "#eaeaea",
-                    text: "#222222"
-                },
-                userInput: {
-                    bg: "#f4f7f9",
-                    text: "#565867"
-                }
-            }, // specifies the color scheme for the component
-            alwaysScrollToBottom: false,
-            // when set to true always scrolls the chat to the bottom when new events are in (new message, user starts typing...)
-            messageStyling: true // enables *bold* /emph/ _underline_ and such (more info at github.com/mattezza/msgdown)
+            imageUrl: logoBureau
         }
     },
     methods: {
@@ -148,26 +95,20 @@ export default {
                 return
             }
         },
-        sendMessage(text) {
-            if (text.length > 0) {
-                this.newMessagesCount = this.isChatOpen ? this.newMessagesCount : this.newMessagesCount + 1
-                this.onMessageWasSent({author: "support", type: "text", data: {text}})
+
+        createChat: async function() {
+            const bodyAdv = {
+                adv_cod: this.$route.params.id
             }
+            const {data} = await axios.post("/chat/create", bodyAdv)
+            const body = {
+                message: "Olá, gostaria de mais informações sobre o anúncio",
+                cha_cod: data.data.cha_cod
+            }
+            await axios.post("/message/create", body)
+            this.$router.push("/mensagens")
         },
-        onMessageWasSent(message) {
-            // called when the user sends a message
-            this.messageList = [...this.messageList, message]
-        },
-        handleChat() {
-            this.isChatOpen = !this.isChatOpen
-        },
-        handleScrollToTop() {
-            // called when the user scrolls message list to top
-            // leverage pagination for loading another page of messages
-        },
-        handleOnType() {
-            console.log("Emit typing event")
-        },
+
         editMessage(message) {
             const m = this.messageList.find(m=>m.id === message.id)
             m.isEdited = true
