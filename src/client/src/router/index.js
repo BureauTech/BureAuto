@@ -16,7 +16,6 @@ import EditAdvertise from "@/views/EditAdvertise/EditAdvertise.vue"
 import EditProfile from "@/views/EditProfile/EditProfile.vue"
 import Messages from "@/views/Messages/Messages.vue"
 import Chat from "vue-beautiful-chat"
-import TestMessage from "@/views/TestMessage/TestMessage.vue"
 
 Vue.use(Chat)
 
@@ -114,13 +113,13 @@ const routes = [{
         requiresAuth: true
     }
 }, {
-    path: "/teste-msg",
-    name: "TestMessage",
-    component: TestMessage,
-    meta: {
-        requiresAuth: true
-    }
-}, {
+//     path: "/teste-msg",
+//     name: "TestMessage",
+//     component: TestMessage,
+//     meta: {
+//         requiresAuth: true
+//     }
+// }, {
     path: "/:catchAll(.*)", 
     redirect: {
         name: "Home"
