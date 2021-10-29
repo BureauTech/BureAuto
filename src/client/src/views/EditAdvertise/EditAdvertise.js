@@ -33,7 +33,7 @@ export default {
         getAdvertisement: async function() {
             try {
                 this.loading = true
-                const {data} = await axios.get(`/advertisement/${this.$route.params.id}`)
+                const {data} = await axios.get(`/advertisement/me/${this.$route.params.id}`)
                 const manufacturers = await axios.get("/manufacturer/all")
                 const isUser =
           this.$store.getters.getUser.use_cod === data.data.adv_use_cod

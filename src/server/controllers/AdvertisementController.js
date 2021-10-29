@@ -53,6 +53,17 @@ router.get("/allAdsByUser/:adv_use_cod", async(req, res) => {
     }
 })
 
+router.get("/me/:adv_cod", authenticate, async(req, res) => {
+    try {
+        const {adv_cod} = req.params
+        const advertisement = await AdvertisementService.getMyAdvertisement(adv_cod, req.user.use_cod)
+        return res.status(200).send({success: true, data: advertisement})
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
 router.get("/:adv_cod", async(req, res) => {
     try {
         const {adv_cod} = req.params

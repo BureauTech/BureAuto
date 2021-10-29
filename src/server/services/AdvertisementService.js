@@ -89,6 +89,21 @@ module.exports = {
         return advertisement
     },
 
+    getMyAdvertisement: async function(adv_cod, use_cod) {
+        const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
+        const advertisement = await RepositoryAdvertisement.createQueryBuilder(Repository.Advertisement)
+            .select("\"Advertisement\".*")
+            .addSelect("\"Manufacturer\".*")
+            .addSelect("(SELECT use_nickname FROM decrypt_user(Advertisement.adv_use_cod))", "use_nickname")
+            .addSelect("(SELECT use_is_cpf_document FROM decrypt_user(Advertisement.adv_use_cod))", "use_is_cpf_document")
+            .leftJoin("Advertisement.Manufacturer", "Manufacturer")
+            .where("Advertisement.adv_cod = :cod", {cod: adv_cod})
+            .andWhere("Advertisement.adv_sty_cod in (:...adv_sty_cod)", {adv_sty_cod: [1, 3]})
+            .andWhere("Advertisement.adv_use_cod = :adv_use_cod", {adv_use_cod: use_cod})
+            .getRawOne()
+        return advertisement
+    },
+
     editAdvertisement: async function(adv_edt) {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         RepositoryAdvertisement.update({adv_cod: adv_edt.adv_cod}, adv_edt)
