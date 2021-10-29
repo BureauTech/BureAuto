@@ -20,6 +20,6 @@ const ImageUtils = module.exports = {
             console.log(error)
         }
         fs.writeFileSync(newPath, buffer)
-        return newPath.replace("/", "\\")
+        return newPath.replaceAll("/", "\\")
     }
 }
