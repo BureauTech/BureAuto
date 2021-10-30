@@ -1,7 +1,7 @@
 const fs = require("fs")
 const sharp = require("sharp")
 
-const ImageUtils = module.exports = {
+module.exports = {
     compress: async function(file, size) {
         const newPath = file.path.split(".")[0] + ".webp"
         const {orientation} = sharp(file.path).metadata
@@ -12,7 +12,6 @@ const ImageUtils = module.exports = {
             .webp({quality: 80})
             .withMetadata({orientation})
             .toBuffer()
-        
         try {
             fs.accessSync(file.path)
             fs.unlinkSync(file.path)
@@ -20,6 +19,6 @@ const ImageUtils = module.exports = {
             console.log(error)
         }
         fs.writeFileSync(newPath, buffer)
-        return newPath.replaceAll("/", "\\")
+        return newPath.replace(/\//g, "\\")
     }
 }

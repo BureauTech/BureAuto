@@ -117,7 +117,8 @@ router.delete("/:adv_cod", authenticate, async(req, res) => {
 
 router.get("/search/:term/:filters", async(req, res) => {
     try {
-        let {term, filters} = req.params
+        const {term} = req.params
+        let {filters} = req.params
         if(typeof filters === "string") filters = JSON.parse(filters)
         let advertisements = await AdvertisementService.searchAdvertisement(term)
         if(filters.brand || filters.model || filters.yearManModel || filters.valueMin || filters.valueMax) {
