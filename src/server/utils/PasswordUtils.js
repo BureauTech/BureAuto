@@ -16,7 +16,8 @@ module.exports = {
 
     isStrongPassword: function(password) {
         // length between [8, 16], at least 1 upper case, 1 lower case, 1 number, 1 symbol
-        return password.match(/^(?=.*[A-Z])(?=.*[!@#$&*\.%])(?=.*[0-9])(?=.*[a-z]).{8,16}$/g)
+        // eslint-disable-next-line no-useless-escape
+        return password.match(/^(?=.*[A-Z])(?=.*[!@#$*\.%])(?=.*[0-9])(?=.*[a-z]).{6,16}$/g)
     }
 
 }
