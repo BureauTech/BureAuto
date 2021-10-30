@@ -15,9 +15,6 @@ import UploadAdvertisement from "@/views/UploadAdvertisement/UploadAdvertisement
 import EditAdvertise from "@/views/EditAdvertise/EditAdvertise.vue"
 import EditProfile from "@/views/EditProfile/EditProfile.vue"
 import Messages from "@/views/Messages/Messages.vue"
-import Chat from "vue-beautiful-chat"
-
-Vue.use(Chat)
 
 
 Vue.use(VueRouter)
