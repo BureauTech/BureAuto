@@ -34,6 +34,13 @@
         <v-row no-gutters>
           <p class="text-h4 bahama--text">Alterar senha</p>
         </v-row>
+        <v-row no-gutters class="pb-2">
+          <ColoredValidation text="* 1 letra maiúscula" :rule="hasUpper" />
+          <ColoredValidation text="* 1 letra minúscula" :rule="hasLower" />
+          <ColoredValidation text="* 1 número" :rule="hasNumber" />
+          <ColoredValidation text="* 1 dos símbolos: ! @ # $ * . %" :rule="hasSymbol" />
+          <ColoredValidation text="* 6 à 16 caracteres" :rule="hasMinMaxLength" />
+        </v-row>
         <v-row no-gutters>
           <Input
             placeholder="Nova senha"

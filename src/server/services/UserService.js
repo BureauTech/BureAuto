@@ -62,6 +62,8 @@ module.exports = {
     },
 
     changePassword: async function(user, password) {
+        if (!PasswordUtils.isStrongPassword(password)) return false
+
         const template = "templates/ChangePasswordTemplate.ejs"
         const data = {nome: user.use_name, senha: password}
         const RepositoryUser = await Repository.get(Repository.User)
@@ -71,6 +73,7 @@ module.exports = {
             use_is_temp_password: false
         })
         EmailService.sendEmail("BureAuto", user.use_email, "BureAuto - Senha alterada", template, data)
+        return true
     },
 
     deleteUser: async function(use_cod) {

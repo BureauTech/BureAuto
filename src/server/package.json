@@ -11,7 +11,8 @@
     "dev": "nodemon index.js",
     "start": "nodemon ./index.js",
     "debug": "nodemon --debug --inspect-brk=9229 ./index.js",
-    "db": "node ./resources/database/UpdateDB.js"
+    "db": "node ./database/UpdateDB.js",
+    "build": "npm i --production && node index.js"
   },
   "author": "",
   "license": "ISC",
