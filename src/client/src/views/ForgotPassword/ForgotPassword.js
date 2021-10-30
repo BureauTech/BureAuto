@@ -22,11 +22,21 @@ export default {
     },
     methods: {
         resetPassword: async function() {
-            if (this.$refs.forgotForm.validate()) {
-                this.loading = true
-                await axios.post("/reset-password", this.formResetPassword)
-                this.loading = false
+            this.loading = true
+            try {
+                if (this.$refs.forgotForm.validate()) {
+                    const {data} = await axios.post("/reset-password", this.formResetPassword)
+                    if (data.success) {
+                        this.$toasted.success("Confira seu e-mail para redefinir sua senha!")
+                        setTimeout(() => this.$router.push({name: "Login"}), 2000)
+                    } else {
+                        this.$toasted.error("Ocorreu um erro ao enviar o e-mail")
+                    }
+                }
+            } catch (error) {
+                this.$toasted.error("Ocorreu um erro ao enviar o e-mail")
             }
+            this.loading = false
         }
     }
 }
