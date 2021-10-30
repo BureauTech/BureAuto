@@ -430,25 +430,50 @@ insert into "user"
 values 
 	('admin', true, '93194008064', 'admin', '129000000', 
 		'Rua 1, Avenida 2, São José dos Campos-SP', 'admin@admin.com', false, 'admin', true),
-	('user', false, '38086451000166', 'user', '129000000', 
-		'Rua 1, Avenida 2, São José dos Campos-SP', 'user@user.com', false, 'user', false);
+
+	('user', false, '41348748000167', 'user', '129000001', 
+		'Rua 1, Avenida 2, São José dos Campos-SP', 'user@user.com', false, 'user', false),
+
+	('Wesley Dias', true, '34299180062', 'Wesley Dias', '129000002', 
+		'Rua 2, Avenida 3, São José dos Campos-SP', 'wes@bureauto.com', false, 'fatec', true),
+	
+	('Denis Lima', true, '84598995009', 'Denis', '129000003', 
+		'Rua 3, Avenida 1, São José dos Campos-SP', 'denis@bureauto.com', false, 'fatec', true),
+
+	('Charles Ramos', true, '47370565025', 'Charles', '129000004', 
+		'Rua 4, Avenida 2, São José dos Campos-SP', 'charles@bureauto.com', false, 'fatec', true),
+
+	('Beatriz Coutinho', true, '72531502017', 'Beatriz', '129000005', 
+		'Rua 1, Avenida 4, São José dos Campos-SP', 'beatriz@bureauto.com', false, 'fatec', true),
+
+	('Caique Nascimento', false, '57338565000109', 'Caique CS', '129000006', 
+		'Rua 7, Avenida 4, São José dos Campos-SP', 'caique@bureauto.com', false, 'fatec', true),
+
+	('Ana Clara', false, '25516803000124', 'Ana', '129000007', 
+		'Rua 6, Avenida 7, São José dos Campos-SP', 'ana@bureauto.com', false, 'fatec', true),
+
+	('Daniel Oliveira', true, '44172541097', 'Daniel Oliveira', '129000008', 
+		'Rua 9, Avenida 10, São José dos Campos-SP', 'daniel@bureauto.com', false, 'fatec', true),
+	
+	('Roberta Abreu', true, '26112052059', 'Roberta', '129000009', 
+		'Rua 10, Avenida 5, São José dos Campos-SP', 'roberta@bureauto.com', false, 'fatec', true);
+
 
 insert into advertisement
     (adv_use_cod, adv_man_cod, adv_sty_cod, adv_description, adv_brand, adv_model_description, adv_value,
     adv_favorites, adv_views, adv_year_model, adv_year_manufacture, adv_images)
 values
- (1, 5, 1, null, null, 'Q3', 135900.0, 0, 0, 2017, 2016, '/q3.jpg'),
- (1, 44, 1, null, null, 'Outlander', 100900.0, 0, 0, 2016, 2015, '/outlander.jpg'),
- (1, 63, 1, null, null, 'Jetta', 68900.0, 0, 0, 2014, 1014, '/Jetta.jpg'),
- (1, 30, 2, null, null, 'Renegade', 82900.0, 0, 0, 2016, 2016, '/renegade.jpg'),
- (1, 25, 3, null, null, 'HR-V', 99900.0, 0, 0, 2017, 2016, '/hrv.jpg'),
- (1, 26, 3, null, null, 'HB20', 61900.0, 0, 0, 2019, 2019, '/hb20.jpg'),
- (1, 14, 4, null, null, 'Journey', 67900.0, 0, 0, 2013, 2012, '/journey.jpeg'),
- (1, 31, 1, null, null, 'Sportage', 89900.0, 0, 0, 2015, 2014, '/sportage.jpg'),
- (1, 45, 4, null, null, 'Kicks', 114900.0, 0, 0, 2020, 2019, '/kicks.jpg'),
- (1, 33, 1, null, null, 'Range Rover Evoque', 174900.0, 0, 0, 2015, 2014, '/evoque.jpg'),
- (1, 42, 2, null, null, 'Gle-400', 503900.0, 0, 0, 2019, 2018, '/gle-400.jpg'),
- (1, 51, 1, null, null, '911', 1250000.0, 0, 0, 2021, 2021, '/911.jpg');
-
+ (7, 5, 1, null, null, 'Q3', 135900.0, 0, 0, 2017, 2016, '/q3.jpg'),
+ (8, 44, 1, null, null, 'Outlander', 100900.0, 0, 0, 2016, 2015, '/outlander.jpg'),
+ (6, 63, 1, null, null, 'Jetta', 68900.0, 0, 0, 2014, 1014, '/Jetta.jpg'),
+ (10, 30, 1, null, null, 'Renegade', 82900.0, 0, 0, 2016, 2016, '/renegade.jpg'),
+ (4, 25, 3, null, null, 'HR-V', 99900.0, 0, 0, 2017, 2016, '/hrv.jpg'),
+ (9, 26, 1, null, null, 'HB20', 61900.0, 0, 0, 2019, 2019, '/hb20.jpg'),
+ (10, 14, 4, null, null, 'Journey', 67900.0, 0, 0, 2013, 2012, '/journey.jpeg'),
+ (5, 31, 1, null, null, 'Sportage', 89900.0, 0, 0, 2015, 2014, '/sportage.jpg'),
+ (9, 45, 4, null, null, 'Kicks', 114900.0, 0, 0, 2020, 2019, '/kicks.jpg'),
+ (3, 33, 1, null, null, 'Range Rover Evoque', 174900.0, 0, 0, 2015, 2014, '/evoque.jpg'),
+ (3, 42, 2, null, null, 'Gle-400', 503900.0, 0, 0, 2019, 2018, '/gle-400.jpg'),
+ (4, 51, 1, null, null, '911', 1250000.0, 0, 0, 2021, 2021, '/911.jpg');
 
 -- ##################### ends queries ######################## --
