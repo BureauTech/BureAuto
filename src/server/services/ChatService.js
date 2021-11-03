@@ -19,10 +19,11 @@ module.exports = {
 
     getAllUserChats: async function(user_cod) {
         const ChatRepository = await Repository.get(Repository.Chat)
-        return await ChatRepository.createQueryBuilder(Repository.Chat)
+        const dados = await ChatRepository.createQueryBuilder(Repository.Chat)
             .distinctOn(["Chat.cha_cod"])
             .select("Chat.cha_cod", "cha_cod")
             .addSelect("Message.mes_text", "last_message")
+            .addSelect("Message.mes_created_at", "last_message_data")
             .addSelect("Chat.cha_adv_cod", "cha_adv_cod")
             .addSelect("Advertisement.adv_model_description", "adv_model_description")
             .addSelect("Advertisement.adv_value", "adv_value")
@@ -48,5 +49,9 @@ module.exports = {
                 "Message.mes_created_at": "DESC"
             })
             .getRawMany()
+        const response = dados.sort(function(a, b) {
+            return b.last_message_data - a.last_message_data
+        })
+        return response
     }
 }
