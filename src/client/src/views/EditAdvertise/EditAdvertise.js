@@ -25,7 +25,7 @@ export default {
             loading: false,
             images: null,
             brands: [],
-            status: ["Ativo", "Pausado"],
+            status: ["Ativo", "Pausado", "Vendido"],
             file: null
         }
     },
@@ -47,7 +47,9 @@ export default {
                         this.advertisement.adv_sty_cod = "Ativo"
                     } else if (this.advertisement.adv_sty_cod === "3") {
                         this.advertisement.adv_sty_cod = "Pausado"
-                    }
+                    } else {
+                        this.advertisement.adv_sty_cod = "4"
+                    } 
 
                     const brandTemp = manufacturers.data.data
                     this.brands = brandTemp
@@ -91,8 +93,10 @@ export default {
 
                 if (this.advertisement.adv_sty_cod === "Ativo") {
                     formData.set("adv_sty_cod", "1")
-                } else {
+                } else if (this.advertisement.adv_sty_cod === "Pausado") {
                     formData.set("adv_sty_cod", "3")
+                } else {
+                    formData.set("adv_sty_cod", "4")
                 }
 
                 const brandName = this.advertisement.Manufacturer.man_name
@@ -116,7 +120,6 @@ export default {
                         this.loading = false
                         this.$toasted.success("Anúncio editado com sucesso!")
                         this.$router.push("/")
-                        this.$router.push(`/anuncio/${this.advertisement.adv_cod}`)
                         window.location.reload()
                     }
                 })
