@@ -11,10 +11,10 @@ module.exports = {
 
         const ChatRepository = await Repository.get(Repository.Chat)
         const chatExists = await ChatRepository.findOne({cha_use_cod: user_cod, cha_adv_cod: adv_cod})
-        if (chatExists) return chatExists
+        if (chatExists) return {data: chatExists, newChat: false}
 
         const newChat = await ChatRepository.save({cha_use_cod: user_cod, cha_adv_cod: adv_cod})
-        return newChat
+        if (newChat) return {data: newChat, newChat: true}
     },
 
     getAllUserChats: async function(user_cod) {
