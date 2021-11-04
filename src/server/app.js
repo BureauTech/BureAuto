@@ -27,6 +27,7 @@ app.use("/administrator", authenticate, verifyAdmin, require("./controllers/Admi
 app.use("/manufacturer", authenticate, require("./controllers/ManufacturerController"))
 app.use("/chat", authenticate, require("./controllers/ChatController"))
 app.use("/message", authenticate, require("./controllers/MessageController"))
+app.use("/report", authenticate, require("./controllers/ReportController"))
 
 app.use((req, res) => {
     res.status(404).send({error: "not found"})
