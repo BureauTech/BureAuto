@@ -26,6 +26,7 @@
       }
     }"
       height="100%"
+      :room-id="roomId"
     >
       <template v-slot:toggle-icon>
         <v-icon color="bahama">mdi-arrow-left-circle</v-icon>

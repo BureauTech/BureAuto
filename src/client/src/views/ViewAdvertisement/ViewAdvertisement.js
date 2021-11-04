@@ -109,7 +109,7 @@ export default {
                 }
                 await axios.post("/message/create", body)
             } 
-            this.$router.push("/mensagens")
+            this.$router.push(`/mensagens?roomId=${chat.data.data.cha_cod}`)
         },
 
         editMessage(message) {

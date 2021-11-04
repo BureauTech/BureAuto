@@ -24,11 +24,15 @@ export default {
                 CONVERSATION_STARTED: "Início da conversa:",
                 TYPE_MESSAGE: "Mensagem",
                 SEARCH: "Pesquisar"
-            }
+            },
+            roomId: ""
         }
     },
     methods: {
         getUserChats: async function() {
+            if (this.$route.query.roomId) {
+                this.roomId = this.$route.query.roomId
+            }
             const chat = await axios.get("/chat/userChats/")
             this.rooms = chat.data.data.map((chat) => {
                 chat = {
