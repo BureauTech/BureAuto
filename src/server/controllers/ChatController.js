@@ -6,8 +6,8 @@ const ChatService = require("../services/ChatService")
 
 router.post("/create", async(req, res) => {
     try {
-        const newChat = await ChatService.createChat(req.user.use_cod, req.body.adv_cod)
-        if (newChat) return res.status(201).send({success: true, data: newChat})
+        const chat = await ChatService.createChat(req.user.use_cod, req.body.adv_cod)
+        if (chat.data) return res.status(201).send({success: true, data: chat.data, newChat: chat.newChat})
         return res.status(400).send({sucess: false, error: "this advertisement is not avaliable or it's yours"})
     } catch (error) {
         console.log(error)

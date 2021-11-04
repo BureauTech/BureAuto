@@ -100,13 +100,16 @@ export default {
             const bodyAdv = {
                 adv_cod: this.$route.params.id
             }
-            const {data} = await axios.post("/chat/create", bodyAdv)
-            const body = {
-                message: "Olá, gostaria de mais informações sobre o anúncio",
-                cha_cod: data.data.cha_cod
-            }
-            await axios.post("/message/create", body)
-            this.$router.push("/mensagens")
+            let body
+            const chat = await axios.post("/chat/create", bodyAdv)
+            if (chat.data.newChat) {
+                body = {
+                    message: "Olá, gostaria de mais informações sobre o anúncio",
+                    cha_cod: chat.data.data.cha_cod
+                }
+                await axios.post("/message/create", body)
+            } 
+            this.$router.push(`/mensagens?roomId=${chat.data.data.cha_cod}`)
         },
 
         editMessage(message) {
