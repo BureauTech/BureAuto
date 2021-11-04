@@ -81,6 +81,13 @@ export default {
                 cha_cod: roomId
             })
             this.$socket.emit("sendMessage", newMessage)
+            //Reordenar chats após envio de mensagem
+            const indexOfChatWithNewMessage = this.rooms.map(e => e.roomId).indexOf(roomId)
+            console.log(indexOfChatWithNewMessage)
+            const chatWithNewMessage = this.rooms[indexOfChatWithNewMessage]
+            console.log(chatWithNewMessage)
+            this.rooms.splice(indexOfChatWithNewMessage, 1)
+            this.rooms.splice(0, 0, chatWithNewMessage)
             this.getMessages({content, roomId})
         },
         saveMessage: async function(message) {
