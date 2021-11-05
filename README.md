@@ -50,7 +50,7 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
 
 <br/> 
 
-## Entregas propostas Sprint 2
+## Entregas propostas Sprint 3
 <div align="center">
   <img src="./doc/img/cards.png" />
 </div>
