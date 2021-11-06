@@ -1,9 +1,8 @@
 const fs = require("fs")
 const Papa = require("papaparse")
-const {Not, ILike, In} = require("typeorm")
+const {Not, ILike, In, LessThanOrEqual, MoreThanOrEqual, Between} = require("typeorm")
 const Repository = require("../database/Repository")
 const Connection = require("../database/Connection")
-const AdvertisementUtils = require("../utils/AdvertisementUtils")
 const AdvertisementValidationService = require("./AdvertisementValidationService")
 const DateUtils = require("../utils/DateUtils")
 
@@ -44,11 +43,14 @@ module.exports = {
         })
     },
 
-    getAllAdvertisement: async function() {
+    getAllAdvertisement: async function({page, items}) {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         return await RepositoryAdvertisement.find({
-            relations: ["Manufacturer", "StatusType"], where: {adv_sty_cod: 1},
-            select: ["adv_cod", "adv_model_description", "adv_value", "adv_images", "adv_year_manufacture", "adv_year_model"]
+            relations: ["Manufacturer", "StatusType"],
+            select: ["adv_cod", "adv_model_description", "adv_value", "adv_images", "adv_year_manufacture", "adv_year_model"],
+            where: {adv_sty_cod: 1},
+            skip: (page - 1) * items,
+            take: items
         })
     },
 
@@ -126,28 +128,52 @@ module.exports = {
         return await RepositoryAdvertisement.save(advertisement)
     },
 
-    searchAdvertisement: async function(term) {
+    searchAdvertisement: async function(filters) {
+        if(typeof filters === "string") filters = JSON.parse(filters)
+        const filter = await this.mountFilters(filters)
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         const advertisement = await RepositoryAdvertisement.find({
             relations: ["Manufacturer", "StatusType"],
-            where: [
-                {adv_description: ILike(`%${term}%`), adv_sty_cod: 1},
-                {adv_model_description: ILike(`%${term}%`), adv_sty_cod: 1},
-                {Manufacturer: {man_name: ILike(`%${term}%`)}} 
-            ]
+            where: filter
         })
         return advertisement
     },
 
-    filterAdvertisements: async function(advertisements, filters) {
-        advertisements = advertisements.filter(function(advertisement) {
-            return (filters.brand ? AdvertisementUtils.equalBrand(filters.brand, advertisement.Manufacturer.man_name) : true)
-                && (filters.model ? AdvertisementUtils.equalModel(filters.model, advertisement.adv_model_description) : true)
-                && (filters.yearManModel ? AdvertisementUtils.equalYearManMod(filters.yearManModel, advertisement) : true)
-                && (filters.valueMin && filters.valueMax ?
-                    AdvertisementUtils.rangeValue(filters.valueMin, filters.valueMax, advertisement.adv_value) : true)
-        })
-        return advertisements
+    getAllFilters: async function() {
+        const AdvertisementRepository = await Repository.get(Repository.Advertisement)
+        const {min, max} = await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
+            .select("MIN(Advertisement.adv_value)", "min")
+            .addSelect("MAX(Advertisement.adv_value)", "max")
+            .where("Advertisement.adv_sty_cod = :sty_cod", {sty_cod: 1})
+            .getRawOne()
+        
+        const years = (await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
+            .select("Advertisement.adv_year_manufacture", "adv_year_manufacture")
+            .addSelect("Advertisement.adv_year_model", "adv_year_model")
+            .where("Advertisement.adv_sty_cod = :sty_cod", {sty_cod: 1})
+            .groupBy("Advertisement.adv_year_manufacture")
+            .addGroupBy("Advertisement.adv_year_model")
+            .getRawMany()).map(adv => `${adv.adv_year_manufacture}-${adv.adv_year_model}`)
+
+        const models = (await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
+            .select("Advertisement.adv_model_description", "adv_model_description")
+            .where("Advertisement.adv_sty_cod = :sty_cod", {sty_cod: 1})
+            .groupBy("Advertisement.adv_model_description")
+            .getRawMany()).map(model => model.adv_model_description)
+        
+        const brands = (await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
+            .select("Manufacturer.man_name", "man_name")
+            .leftJoin("Advertisement.Manufacturer", "Manufacturer")
+            .where("Advertisement.adv_sty_cod = :sty_cod", {sty_cod: 1})
+            .groupBy("Manufacturer.man_name")
+            .getRawMany()).map(brand => brand.man_name)
+        
+        return {
+            brand: {brands: brands},
+            model: {models: models},
+            yearModel: {yearModels: years},
+            value: {min: min, max: max}
+        }
     },
 
     returnFilters: function(advertisements) {
@@ -329,5 +355,38 @@ module.exports = {
         const time = DateUtils.secondsToTimeDuration(averageInSeconds)
 
         return `${time.days} dia(s), ${time.hours} hora(s), ${time.minutes} minuto(s), ${time.seconds} segundo(s)`
+    },
+
+    mountFilters: async function(filters) {
+        let filter = {}
+        if (filters.term) {
+            filter = [
+                {adv_description: ILike(`%${filters.term}%`), adv_sty_cod: 1},
+                {adv_model_description: ILike(`%${filters.term}%`), adv_sty_cod: 1},
+                {Manufacturer: {man_name: ILike(`%${filters.term}%`)}} 
+            ]
+        }
+        if(filters.brand) {
+            filter["Manufacturer"] = {man_name: filters.brand}
+        }
+        if (filters.model) {
+            filter["adv_model_description"] = filters.model
+        } 
+        if (filters.yearManModel) {
+            const manModel = filters.yearManModel.split("-")
+            filter["adv_year_model"] = LessThanOrEqual(manModel[1])
+            filter["adv_year_manufacture"] = MoreThanOrEqual(manModel[0])
+        }
+        if (filters.valueMinMax) {
+            filter["adv_value"] = Between(filters.valueMinMax[0], filters.valueMinMax[1])
+        }
+        filter["adv_sty_cod"] = 1
+        return filter
+    },
+
+    getAdvertisementCount: async function() {
+        const AdvertisementRepository = await Repository.get(Repository.Advertisement)
+        return await AdvertisementRepository.count({adv_sty_cod: 1})
     }
 }
+

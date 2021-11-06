@@ -34,13 +34,15 @@ export default {
         getAdvertisement: async function() {
             try {
                 const {data} = await axios.get(`/advertisement/${this.$route.params.id}`)
+                console.log(data)
                 if (data.success && data.data) {
                     this.advertisement = data.data
-
+                    
                     if(this.advertisement.adv_images != null) {
                         this.imageUrl = config.SERVER_URL + this.advertisement.adv_images
                     }
                 } else {
+                    this.$toasted.error("O anúncio está indisponível")
                     this.$router.push("/")
                 }
             } catch (error) {
@@ -79,8 +81,10 @@ export default {
                 // verificar se o usuário está logado
                 if (use_cod) {
                     const adv_cod = this.$route.params.id
-                    const {data} = await axios.get(`/favorite/${adv_cod}`)
-                    this.favorite = data.data
+                    if (adv_cod) {
+                        const {data} = await axios.get(`/favorite/${adv_cod}`)
+                        this.favorite = data.data
+                    }
                 }
             } catch (error) {
                 this.$toasted.error("Ocorreu um erro ao verificar o favorito")

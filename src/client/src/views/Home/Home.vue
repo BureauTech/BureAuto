@@ -28,9 +28,42 @@
                     required
                     color="bahama"
                     placeholder="Pesquisa"
-                    v-model="termSearch"
+                    clearable
+                    v-model="filters.term"
                     @keypress.enter="searchAds"
+                    @click:clear="clearTermSearched"
                   />
+                  <v-row v-if="filters.brand || filters.model || filters.yearManModel">
+                    <v-col align-self="center">
+                      <v-chip
+                        v-if="filters.brand"
+                        class="ma-2"
+                        close
+                        @click:close="filters.brand = undefined"
+                      >
+                        {{ filters.brand }}
+                      </v-chip>
+                      <v-chip
+                        v-if="filters.model"
+                        class="ma-2"
+                        close
+                        @click:close="filters.model = undefined"
+                      >
+                        {{ filters.model }}
+                      </v-chip>
+                      <v-chip
+                        v-if="filters.yearManModel"
+                        class="ma-2"
+                        close
+                        @click:close="filters.yearManModel = undefined"
+                      >
+                       {{ filters.yearManModel }}
+                      </v-chip>
+                      <a @click="clearAll">
+                        Limpar tudo
+                      </a>
+                    </v-col>
+                  </v-row>
                   <v-expansion-panel-header class="panel-search">
                     <v-card-text
                       v-text="'Filtros '"
@@ -69,30 +102,30 @@
                     />
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <v-subheader class="pl-0">
-                      Mínimo R$ {{filters.valueMin}}
-                    </v-subheader>
                     <v-row>
-                      <v-slider
-                        name="valueMin"
-                        v-model="filters.valueMin"
-                        :max="formCategories.valueMax"
-                        :min="formCategories.valueMin"
-                      ></v-slider>
+
+                      <v-range-slider
+                        v-model="rangeValue"
+                        :max="adsMaxValue"
+                        :min="adsMinValue"
+                        hide-details
+                        class="align-center"
+                        @change="filterValueMinMax($event)"
+                      > </v-range-slider>
                     </v-row>
-                    <v-subheader class="pl-0">
-                      Máximo R$ {{filters.valueMax}}
-                    </v-subheader>
                     <v-row>
-                      <v-slider
-                        name="valueMax"
-                        v-model="filters.valueMax"
-                        :max="formCategories.valueMax"
-                        :min="formCategories.valueMin"
-                        @change="getAds"
-                        :rules="[rules.maxValue(filters.valueMin, filters.valueMax)]"
+                      <v-col
+                        style="padding: 0 0 0 0;"
+                        align="left"
                       >
-                      </v-slider>
+                        <v-chip disabled>{{"R$ "+rangeValue[0]}}</v-chip>
+                      </v-col>
+                      <v-col
+                        style="padding: 0 0 0 0;"
+                        align="right"
+                      >
+                        <v-chip disabled>{{"R$ "+rangeValue[1]}}</v-chip>
+                      </v-col>
                     </v-row>
                   </v-expansion-panel-content>
                 </v-expansion-panel>
@@ -104,6 +137,7 @@
                 min-width="100%"
                 class="btn-search"
                 @click="searchAds"
+                :disabled="!filters.term"
               >
                 Buscar
               </v-btn>
@@ -151,18 +185,21 @@
                     v-text="ad.adv_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })"
                     class="text-h5"
                   />
-                  <!-- <v-btn
-                    elevation="0"
-                    color="transparent"
-                    small
-                    @click="$router.push(`/anuncio/${ad.adv_cod}`)"
-                  >
-                    + informações
-                  </v-btn> -->
                 </v-card>
               </router-link>
             </v-col>
           </v-row>
+            <template>
+              <div class="text-left mt-4">
+                <v-pagination
+                  v-model="pagination.currentPage"
+                  :length="pagination.totalPages"
+                  @input="handlePageChange"
+                  :total-visible="6"
+                  circle
+                ></v-pagination>
+              </div>
+            </template>
         </v-col>
       </v-layout>
     </v-layout>

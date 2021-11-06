@@ -15,16 +15,12 @@ router.get("/total-advertisements", async(req, res) => {
     }
 })
 
-router.get("/all/:filters", async(req, res) => {
+router.get("/all", async(req, res) => {
     try {
-        let {filters} = req.params
-        if(typeof filters === "string") filters = JSON.parse(filters)
-        let advertisements = await AdvertisementService.getAllAdvertisement()
-        if(filters.brand || filters.model || filters.yearManModel || filters.valueMin || filters.valueMax) {
-            advertisements = await AdvertisementService.filterAdvertisements(advertisements, filters)
-        }
-        const returnFilters = await AdvertisementService.returnFilters(advertisements)
-        return res.status(200).send({success: true, data: advertisements, filters: returnFilters})
+        const advertisements = await AdvertisementService.getAllAdvertisement(req.query)
+        const filters = await AdvertisementService.getAllFilters()
+        //const returnFilters = await AdvertisementService.returnFilters(advertisements)
+        return res.status(200).send({success: true, data: advertisements, filters: filters})
     } catch (error) {
         console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
@@ -68,7 +64,8 @@ router.get("/:adv_cod", async(req, res) => {
     try {
         const {adv_cod} = req.params
         const advertisement = await AdvertisementService.getAdvertisement(adv_cod)
-        return res.status(200).send({success: true, data: advertisement})
+        if (advertisement) return res.status(200).send({success: true, data: advertisement})
+        return res.status(200).send({success: false, error: "this advertisement is unavaliable"})
     } catch (error) {
         console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
@@ -115,15 +112,10 @@ router.delete("/:adv_cod", authenticate, async(req, res) => {
     }
 })
 
-router.get("/search/:term/:filters", async(req, res) => {
+router.get("/search/:filters", async(req, res) => {
     try {
-        const {term} = req.params
-        let {filters} = req.params
-        if(typeof filters === "string") filters = JSON.parse(filters)
-        let advertisements = await AdvertisementService.searchAdvertisement(term)
-        if(filters.brand || filters.model || filters.yearManModel || filters.valueMin || filters.valueMax) {
-            advertisements = await AdvertisementService.filterAdvertisements(advertisements, filters)
-        }
+        const {filters} = req.params
+        const advertisements = await AdvertisementService.searchAdvertisement(filters)
         const returnFilter = await AdvertisementService.returnFilters(advertisements)
         return res.status(200).send({success: true, data: advertisements, filters: returnFilter})
     } catch (error) {
@@ -182,6 +174,17 @@ router.get("/report/time", authenticate, async(req, res) => {
     try {
         const report = await AdvertisementService.getTimeReport(req.user.use_cod)
         return res.status(200).send({success: true, data: report})
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
+router.get("/pagination/quantity", async(req, res) => {
+    try {
+        const quantity = await AdvertisementService.getAdvertisementCount()
+        return res.status(200).send({success: true, data: quantity})
 
     } catch (error) {
         console.log(error)
