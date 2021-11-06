@@ -57,7 +57,7 @@ export default {
             if (!this.searched) this.rangeValue = [filters.value.min, filters.value.max]
         },
         clearTermSearched: function() {
-            this.filters.term = ""
+            this.filters.term = undefined
             this.searchAds()
         },
         filterValueMinMax: function(value) {
@@ -97,7 +97,6 @@ export default {
             },
             imageConverter: imageConverterUtil,
             AdvertisementUtils: AdvertisementUtils,
-            termSearch: "",
             rangeValue: [],
             adsMinValue: undefined,
             adsMaxValue: undefined,
