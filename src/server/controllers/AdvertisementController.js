@@ -15,14 +15,9 @@ router.get("/total-advertisements", async(req, res) => {
     }
 })
 
-router.get("/all/:filters", async(req, res) => {
+router.get("/all", async(req, res) => {
     try {
-        let {filters} = req.params
-        if(typeof filters === "string") filters = JSON.parse(filters)
-        let advertisements = await AdvertisementService.getAllAdvertisement()
-        if(filters.brand || filters.model || filters.yearManModel || filters.valueMin || filters.valueMax) {
-            advertisements = await AdvertisementService.filterAdvertisements(advertisements, filters)
-        }
+        const advertisements = await AdvertisementService.getAllAdvertisement()
         const returnFilters = await AdvertisementService.returnFilters(advertisements)
         return res.status(200).send({success: true, data: advertisements, filters: returnFilters})
     } catch (error) {
@@ -104,14 +99,10 @@ router.delete("/:adv_cod", authenticate, async(req, res) => {
     }
 })
 
-router.get("/search/:term/:filters", async(req, res) => {
+router.get("/search/:filters", async(req, res) => {
     try {
-        let {term, filters} = req.params
-        if(typeof filters === "string") filters = JSON.parse(filters)
-        let advertisements = await AdvertisementService.searchAdvertisement(term)
-        if(filters.brand || filters.model || filters.yearManModel || filters.valueMin || filters.valueMax) {
-            advertisements = await AdvertisementService.filterAdvertisements(advertisements, filters)
-        }
+        const {filters} = req.params
+        const advertisements = await AdvertisementService.searchAdvertisement(filters)
         const returnFilter = await AdvertisementService.returnFilters(advertisements)
         return res.status(200).send({success: true, data: advertisements, filters: returnFilter})
     } catch (error) {

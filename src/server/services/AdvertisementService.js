@@ -1,11 +1,9 @@
 const fs = require("fs")
 const Papa = require("papaparse")
-const {Not, ILike, In} = require("typeorm")
+const {Not, ILike, In, LessThanOrEqual, MoreThanOrEqual, Between} = require("typeorm")
 const Repository = require("../database/Repository")
 const Connection = require("../database/Connection")
-const AdvertisementUtils = require("../utils/AdvertisementUtils")
 const AdvertisementValidationService = require("./AdvertisementValidationService")
-const { count } = require("console")
 
 module.exports = {
 
@@ -47,8 +45,9 @@ module.exports = {
     getAllAdvertisement: async function() {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         return await RepositoryAdvertisement.find({
-            relations: ["Manufacturer", "StatusType"], where: {adv_sty_cod: 1},
-            select: ["adv_cod", "adv_model_description", "adv_value", "adv_images", "adv_year_manufacture", "adv_year_model"]
+            relations: ["Manufacturer", "StatusType"],
+            select: ["adv_cod", "adv_model_description", "adv_value", "adv_images", "adv_year_manufacture", "adv_year_model"],
+            where: {adv_sty_cod: 1}
         })
     },
 
@@ -109,28 +108,15 @@ module.exports = {
         return await RepositoryAdvertisement.save(advertisement)
     },
 
-    searchAdvertisement: async function(term) {
+    searchAdvertisement: async function(filters) {
+        if(typeof filters === "string") filters = JSON.parse(filters)
+        const filter = await this.mountFilters(filters)
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         const advertisement = await RepositoryAdvertisement.find({
             relations: ["Manufacturer", "StatusType"],
-            where: [
-                {adv_description: ILike(`%${term}%`), adv_sty_cod: 1},
-                {adv_model_description: ILike(`%${term}%`), adv_sty_cod: 1},
-                {Manufacturer: {man_name: ILike(`%${term}%`)}} 
-            ]
+            where: filter
         })
         return advertisement
-    },
-
-    filterAdvertisements: async function(advertisements, filters) {
-        advertisements = advertisements.filter(function(advertisement) {
-            return (filters.brand ? AdvertisementUtils.equalBrand(filters.brand, advertisement.Manufacturer.man_name) : true)
-                && (filters.model ? AdvertisementUtils.equalModel(filters.model, advertisement.adv_model_description) : true)
-                && (filters.yearManModel ? AdvertisementUtils.equalYearManMod(filters.yearManModel, advertisement) : true)
-                && (filters.valueMin && filters.valueMax ?
-                    AdvertisementUtils.rangeValue(filters.valueMin, filters.valueMax, advertisement.adv_value) : true)
-        })
-        return advertisements
     },
 
     returnFilters: function(advertisements) {
@@ -294,5 +280,32 @@ module.exports = {
         const averageInSeconds = (total / advertisementQuantity).toFixed(0)
         const time = (new Date(averageInSeconds * 1000).toISOString().substr(11, 8)).split(":").map(e => Number(e))
         return `${Math.floor(total / 86400)} dia(s), ${(time[0])} hora(s), ${(time[1])} minuto(s), ${(time[2])} segundo(s)`
+    },
+
+    mountFilters: async function(filters) {
+        let filter = {adv_sty_cod: 1}
+        if(filters.brand) {
+            filter["Manufacturer"] = {man_name: filters.brand}
+        }
+        if (filters.model) {
+            filter["adv_model_description"] = filters.model
+        } 
+        if (filters.yearManModel) {
+            const manModel = filters.yearManModel.split("-")
+            filter["adv_year_model"] = LessThanOrEqual(manModel[1])
+            filter["adv_year_manufacture"] = MoreThanOrEqual(manModel[0])
+        }
+        if (filters.valueMinMax) {
+            filter["adv_value"] = Between(filters.valueMinMax[0], filters.valueMinMax[1])
+        }
+        if (filters.term) {
+            filter = [
+                {adv_description: ILike(`%${filters.term}%`), adv_sty_cod: 1},
+                {adv_model_description: ILike(`%${filters.term}%`), adv_sty_cod: 1},
+                {Manufacturer: {man_name: ILike(`%${filters.term}%`)}} 
+            ]
+        }
+        return filter
     }
 }
+

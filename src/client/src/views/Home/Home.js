@@ -19,7 +19,7 @@ export default {
     },
     methods: { 
         getAds: async function() {
-            const response = await axios.get(`/advertisement/all/${JSON.stringify(this.filters)}`)
+            const response = await axios.get("/advertisement/all")
             this.ads = response.data.data.map(ad => {
                 if(!ad.adv_images) {
                     ad.adv_images =  logoBureau
@@ -34,32 +34,43 @@ export default {
         getAdsValues: async function() {
             const response = await axios.get("/advertisement/values")
             if (!response.data.success) console.log("Não foi possível pegar valores")
-            // this.adsMinValue = response.data.data[0]
-            // this.adsMaxValue = response.data.data[1]
+            this.adsMinValue = response.data.data[0]
+            this.adsMaxValue = response.data.data[1]
         },
         searchAds: async function() {
-            if(!this.termSearch) {
-                this.getAds()
-            } else {
-                const response = await axios.get(`/advertisement/search/${this.termSearch}/${JSON.stringify(this.filters)}`)
-                this.ads = response.data.data.map(ad => {
-                    if(!ad.adv_images) {
-                        ad.adv_images =  logoBureau
-                    } else {
-                        ad.adv_images = config.SERVER_URL+ ad.adv_images
-                    }
-                    return ad
-                    
-                })
-                this.setFilters(response.data.filters)
-            }
+            const response = await axios.get(`/advertisement/search/${JSON.stringify(this.filters)}`)
+            this.ads = response.data.data.map(ad => {
+                if(!ad.adv_images) {
+                    ad.adv_images =  logoBureau
+                } else {
+                    ad.adv_images = config.SERVER_URL+ ad.adv_images
+                }
+                return ad
+                
+            })
+            this.setFilters(response.data.filters)
         },
-        setFilters: async function(filters) {
+        setFilters: function(filters) {
             this.formCategories.brand = filters.brand.brands
             this.formCategories.model = filters.model.models
             this.formCategories.yearManModel = filters.yearModel.yearModels
-            this.formCategories.valueMin = filters.value.min
-            this.formCategories.valueMax = filters.value.max
+            if (!this.searched) this.rangeValue = [filters.value.min, filters.value.max]
+        },
+        clearTermSearched: function() {
+            this.filters.term = ""
+            this.searchAds()
+        },
+        filterValueMinMax: function(value) {
+            this.filters.valueMinMax = [value[0], value[1]]
+            this.$forceUpdate()
+            this.searchAds()
+        },
+        clearAll: function() {
+            this.filters.brand = undefined
+            this.filters.model = undefined
+            this.filters.yearManModel = undefined
+            this.filters.valueMinMax = undefined
+            this.filters.term = undefined
         }
     },
     data: function() {
@@ -69,41 +80,42 @@ export default {
             formCategories: {
                 brand: [],
                 model: [],
-                yearManModel: [],
-                valueMin: undefined,
-                valueMax: undefined
+                yearManModel: []
             },
             imageConverter: imageConverterUtil,
             AdvertisementUtils: AdvertisementUtils,
             termSearch: "",
-            teste: [],
+            rangeValue: [],
             adsMinValue: undefined,
             adsMaxValue: undefined,
             filters: {
                 brand: undefined,
                 model: undefined,
                 yearManModel: undefined,
-                valueMin: undefined,
-                valueMax: undefined
-            }
+                valueMinMax: undefined,
+                term: undefined,
+                skip: 1,
+                take: 4
+            },
+            searched: undefined
         }
     },
     created: function() {
         this.getAds()
-        // this.getAdsValues()
+        this.getAdsValues()
     },
     watch: {
         "filters.brand"() {
-            if (this.formCategories.brand.length > 1) return this.getAds()
-            return
+            this.searched = true
+            this.searchAds()
         },
         "filters.model"() {
-            if(this.formCategories.model.length > 1) return this.getAds()
-            return
+            this.searched = true
+            this.searchAds()
         },
         "filters.yearManModel"() {
-            if (this.formCategories.yearManModel.length > 1) return this.getAds()
-            return
+            this.searched = true
+            this.searchAds()
         }
     }
 }
