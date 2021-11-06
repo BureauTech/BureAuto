@@ -283,7 +283,14 @@ module.exports = {
     },
 
     mountFilters: async function(filters) {
-        let filter = {adv_sty_cod: 1}
+        let filter = {}
+        if (filters.term) {
+            filter = [
+                {adv_description: ILike(`%${filters.term}%`), adv_sty_cod: 1},
+                {adv_model_description: ILike(`%${filters.term}%`), adv_sty_cod: 1},
+                {Manufacturer: {man_name: ILike(`%${filters.term}%`)}} 
+            ]
+        }
         if(filters.brand) {
             filter["Manufacturer"] = {man_name: filters.brand}
         }
@@ -298,13 +305,7 @@ module.exports = {
         if (filters.valueMinMax) {
             filter["adv_value"] = Between(filters.valueMinMax[0], filters.valueMinMax[1])
         }
-        if (filters.term) {
-            filter = [
-                {adv_description: ILike(`%${filters.term}%`), adv_sty_cod: 1},
-                {adv_model_description: ILike(`%${filters.term}%`), adv_sty_cod: 1},
-                {Manufacturer: {man_name: ILike(`%${filters.term}%`)}} 
-            ]
-        }
+        filter["adv_sty_cod"] = 1
         return filter
     }
 }
