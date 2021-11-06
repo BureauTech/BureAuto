@@ -49,6 +49,7 @@ export default {
                 
             })
             this.setFilters(response.data.filters)
+            this.setPagination(this.ads.length)
         },
         setFilters: function(filters) {
             this.formCategories.brand = filters.brand.brands
@@ -76,14 +77,17 @@ export default {
             this.$vuetify.goTo(0)
             this.getAds()
         },
-        setPagination: async function() {
+        getPagination: async function() {
             const {data} = await axios.get("advertisement/pagination/quantity")
             if (data.success) {
-                this.pagination.advertisementCount = data.data
-                this.pagination.totalPages = Math.ceil(this.pagination.advertisementCount / this.pagination.ItemsPerPage)
+                this.setPagination(data.data)
             } else {
                 this.$toasted.error("Ocorreu um erro ao criar as páginas dos anúncios")
             }
+        },
+        setPagination: function(advertisementCount) {
+            this.pagination.advertisementCount = advertisementCount
+            this.pagination.totalPages = Math.ceil(this.pagination.advertisementCount / this.pagination.ItemsPerPage)
         }
     },
     data: function() {
@@ -121,7 +125,7 @@ export default {
     created: function() {
         this.getAds()
         this.getAdsValues()
-        this.setPagination()
+        this.getPagination()
     },
     watch: {
         "filters.brand"() {
