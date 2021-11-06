@@ -185,30 +185,21 @@
                     v-text="ad.adv_value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })"
                     class="text-h5"
                   />
-                  <!-- <v-btn
-                    elevation="0"
-                    color="transparent"
-                    small
-                    @click="$router.push(`/anuncio/${ad.adv_cod}`)"
-                  >
-                    + informações
-                  </v-btn> -->
                 </v-card>
               </router-link>
             </v-col>
           </v-row>
-          <v-row>
             <template>
-              <div class="text-center">
+              <div class="text-left mt-4">
                 <v-pagination
-                  v-model="currentPage"
-                  :length="totalPages"
-                  :input="handlePageChange"
+                  v-model="pagination.currentPage"
+                  :length="pagination.totalPages"
+                  @input="handlePageChange"
+                  :total-visible="6"
                   circle
                 ></v-pagination>
               </div>
             </template>
-          </v-row>
         </v-col>
       </v-layout>
     </v-layout>

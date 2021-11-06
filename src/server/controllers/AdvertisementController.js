@@ -17,9 +17,10 @@ router.get("/total-advertisements", async(req, res) => {
 
 router.get("/all", async(req, res) => {
     try {
-        const advertisements = await AdvertisementService.getAllAdvertisement()
-        const returnFilters = await AdvertisementService.returnFilters(advertisements)
-        return res.status(200).send({success: true, data: advertisements, filters: returnFilters})
+        const advertisements = await AdvertisementService.getAllAdvertisement(req.query)
+        const filters = await AdvertisementService.getAllFilters()
+        //const returnFilters = await AdvertisementService.returnFilters(advertisements)
+        return res.status(200).send({success: true, data: advertisements, filters: filters})
     } catch (error) {
         console.log(error)
         return res.status(500).send({success: false, error: "an error occurred while processing the request"})
@@ -161,6 +162,17 @@ router.get("/report/time", authenticate, async(req, res) => {
     try {
         const report = await AdvertisementService.getTimeReport(req.user.use_cod)
         return res.status(200).send({success: true, data: report})
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).send({success: false, error: "an error occurred while processing the request"})
+    }
+})
+
+router.get("/pagination/quantity", async(req, res) => {
+    try {
+        const quantity = await AdvertisementService.getAdvertisementCount()
+        return res.status(200).send({success: true, data: quantity})
 
     } catch (error) {
         console.log(error)

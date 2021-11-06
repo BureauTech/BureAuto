@@ -42,12 +42,14 @@ module.exports = {
         })
     },
 
-    getAllAdvertisement: async function() {
+    getAllAdvertisement: async function({page, items}) {
         const RepositoryAdvertisement= await Repository.get(Repository.Advertisement)
         return await RepositoryAdvertisement.find({
             relations: ["Manufacturer", "StatusType"],
             select: ["adv_cod", "adv_model_description", "adv_value", "adv_images", "adv_year_manufacture", "adv_year_model"],
-            where: {adv_sty_cod: 1}
+            where: {adv_sty_cod: 1},
+            skip: (page - 1) * items,
+            take: items
         })
     },
 
@@ -117,6 +119,43 @@ module.exports = {
             where: filter
         })
         return advertisement
+    },
+
+    getAllFilters: async function() {
+        const AdvertisementRepository = await Repository.get(Repository.Advertisement)
+        const {min, max} = await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
+            .select("MIN(Advertisement.adv_value)", "min")
+            .addSelect("MAX(Advertisement.adv_value)", "max")
+            .where("Advertisement.adv_sty_cod = :sty_cod", {sty_cod: 1})
+            .getRawOne()
+        
+        const years = (await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
+            .select("Advertisement.adv_year_manufacture", "adv_year_manufacture")
+            .addSelect("Advertisement.adv_year_model", "adv_year_model")
+            .where("Advertisement.adv_sty_cod = :sty_cod", {sty_cod: 1})
+            .groupBy("Advertisement.adv_year_manufacture")
+            .addGroupBy("Advertisement.adv_year_model")
+            .getRawMany()).map(adv => `${adv.adv_year_manufacture}-${adv.adv_year_model}`)
+
+        const models = (await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
+            .select("Advertisement.adv_model_description", "adv_model_description")
+            .where("Advertisement.adv_sty_cod = :sty_cod", {sty_cod: 1})
+            .groupBy("Advertisement.adv_model_description")
+            .getRawMany()).map(model => model.adv_model_description)
+        
+        const brands = (await AdvertisementRepository.createQueryBuilder(Repository.Advertisement)
+            .select("Manufacturer.man_name", "man_name")
+            .leftJoin("Advertisement.Manufacturer", "Manufacturer")
+            .where("Advertisement.adv_sty_cod = :sty_cod", {sty_cod: 1})
+            .groupBy("Manufacturer.man_name")
+            .getRawMany()).map(brand => brand.man_name)
+        
+        return {
+            brand: {brands: brands},
+            model: {models: models},
+            yearModel: {yearModels: years},
+            value: {min: min, max: max}
+        }
     },
 
     returnFilters: function(advertisements) {
@@ -306,6 +345,11 @@ module.exports = {
             ]
         }
         return filter
+    },
+
+    getAdvertisementCount: async function() {
+        const AdvertisementRepository = await Repository.get(Repository.Advertisement)
+        return await AdvertisementRepository.count({adv_sty_cod: 1})
     }
 }
 

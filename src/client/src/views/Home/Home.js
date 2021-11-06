@@ -19,8 +19,8 @@ export default {
     },
     methods: { 
         getAds: async function() {
-            const response = await axios.get("/advertisement/all")
-            this.ads = response.data.data.map(ad => {
+            const {data} = await axios.get(`/advertisement/all?page=${this.pagination.currentPage}&items=${this.pagination.ItemsPerPage}`)
+            this.ads = data.data.map(ad => {
                 if(!ad.adv_images) {
                     ad.adv_images =  logoBureau
                 } else {
@@ -29,7 +29,7 @@ export default {
                 return ad
                 
             })
-            this.setFilters(response.data.filters)
+            this.setFilters(data.filters)
         },
         getAdsValues: async function() {
             const response = await axios.get("/advertisement/values")
@@ -71,6 +71,19 @@ export default {
             this.filters.yearManModel = undefined
             this.filters.valueMinMax = undefined
             this.filters.term = undefined
+        },
+        handlePageChange: function() {
+            this.$vuetify.goTo(0)
+            this.getAds()
+        },
+        setPagination: async function() {
+            const {data} = await axios.get("advertisement/pagination/quantity")
+            if (data.success) {
+                this.pagination.advertisementCount = data.data
+                this.pagination.totalPages = Math.ceil(this.pagination.advertisementCount / this.pagination.ItemsPerPage)
+            } else {
+                this.$toasted.error("Ocorreu um erro ao criar as páginas dos anúncios")
+            }
         }
     },
     data: function() {
@@ -97,12 +110,19 @@ export default {
                 skip: 1,
                 take: 4
             },
-            searched: undefined
+            searched: undefined,
+            pagination: {
+                currentPage: 1,
+                totalPages: 1,
+                advertisementCount: 1,
+                ItemsPerPage: 9
+            }
         }
     },
     created: function() {
         this.getAds()
         this.getAdsValues()
+        this.setPagination()
     },
     watch: {
         "filters.brand"() {
