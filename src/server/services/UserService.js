@@ -29,7 +29,7 @@ module.exports = {
                             await RepositoryUser.save({
                                 use_name: user.nome,
                                 use_is_cpf_document: user.tipoDocumento === "cpf",
-                                use_document: user.documento,
+                                use_document: user.documento.replace(/\D/g, ""),
                                 use_nickname: user.apelido,
                                 use_phone: user.telefone,
                                 use_address: user.endereco,
@@ -62,6 +62,8 @@ module.exports = {
     },
 
     changePassword: async function(user, password) {
+        if (!PasswordUtils.isStrongPassword(password)) return false
+
         const template = "templates/ChangePasswordTemplate.ejs"
         const data = {nome: user.use_name, senha: password}
         const RepositoryUser = await Repository.get(Repository.User)
@@ -71,6 +73,7 @@ module.exports = {
             use_is_temp_password: false
         })
         EmailService.sendEmail("BureAuto", user.use_email, "BureAuto - Senha alterada", template, data)
+        return true
     },
 
     deleteUser: async function(use_cod) {

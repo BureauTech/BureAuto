@@ -4,14 +4,18 @@
   "author": "BureauTech",
   "scripts": {
     "build": "vue-cli-service build",
-    "dev": "vue-cli-service serve --port 3001"
+    "dev": "vue-cli-service serve --port 3001 --open"
   },
   "dependencies": {
     "axios": "^0.21.3",
     "core-js": "^3.6.5",
     "file-saver": "^2.0.5",
+    "pg": "^8.7.1",
+    "socket.io-client": "^4.3.2",
     "vue": "^2.6.14",
+    "vue-advanced-chat": "^1.2.2",
     "vue-router": "^3.2.0",
+    "vue-socket.io": "^3.0.10",
     "vue-toasted": "^1.1.28",
     "vuetify": "^2.4.0",
     "vuex": "^3.6.2"

@@ -26,8 +26,15 @@
 
 .mousehover:hover {
     background-color: rgb(247, 241, 241);
+    text-shadow: 0px 0px 2px #fff,0px 0px 2px #fff,0px 0px 2px #fff,0px 0px 2px #fff,0px 0px 2px #fff;
+    color: var(--v-bahama-darken2);
 }
 
 .hover-card:hover {
     box-shadow: 0px 0px 41px 5px rgba(0,0,0,0.7);
+}
+
+.text-shadow {
+    text-shadow: 0px 0px 2px var(--v-bahama-darken2),0px 0px 2px var(--v-bahama-darken2),0px 0px 2px var(--v-bahama-darken2),0px 0px 2px var(--v-bahama-darken2),0px 0px 2px var(--v-bahama-darken2);
+    color: white;
 }

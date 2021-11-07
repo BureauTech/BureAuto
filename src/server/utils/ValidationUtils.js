@@ -49,7 +49,7 @@ const ValidationUtils = module.exports = {
             return {type: "desconhecido", valid: false}
         }
         
-        const treatedValue = documentString.replace(/[-*&/.]/g, "")
+        const treatedValue = documentString.replace(/\D/g, "")
 
         if (treatedValue.length == 11) {
             return {type: "cpf", valid: ValidationUtils.validCpf(treatedValue)}

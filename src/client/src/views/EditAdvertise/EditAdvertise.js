@@ -25,7 +25,7 @@ export default {
             loading: false,
             images: null,
             brands: [],
-            status: ["Ativo", "Pausado"],
+            status: ["Ativo", "Pausado", "Vendido"],
             file: null
         }
     },
@@ -33,7 +33,7 @@ export default {
         getAdvertisement: async function() {
             try {
                 this.loading = true
-                const {data} = await axios.get(`/advertisement/${this.$route.params.id}`)
+                const {data} = await axios.get(`/advertisement/me/${this.$route.params.id}`)
                 const manufacturers = await axios.get("/manufacturer/all")
                 const isUser =
           this.$store.getters.getUser.use_cod === data.data.adv_use_cod
@@ -41,12 +41,15 @@ export default {
                 if (data.success && data.data && isUser) {
                     this.loading = false
                     this.advertisement = data.data
+                    this.advertisement.Manufacturer = {man_name: data.data.man_name}
 
                     if (this.advertisement.adv_sty_cod === "1") {
                         this.advertisement.adv_sty_cod = "Ativo"
                     } else if (this.advertisement.adv_sty_cod === "3") {
                         this.advertisement.adv_sty_cod = "Pausado"
-                    }
+                    } else {
+                        this.advertisement.adv_sty_cod = "4"
+                    } 
 
                     const brandTemp = manufacturers.data.data
                     this.brands = brandTemp
@@ -90,8 +93,10 @@ export default {
 
                 if (this.advertisement.adv_sty_cod === "Ativo") {
                     formData.set("adv_sty_cod", "1")
-                } else {
+                } else if (this.advertisement.adv_sty_cod === "Pausado") {
                     formData.set("adv_sty_cod", "3")
+                } else {
+                    formData.set("adv_sty_cod", "4")
                 }
 
                 const brandName = this.advertisement.Manufacturer.man_name
@@ -115,7 +120,6 @@ export default {
                         this.loading = false
                         this.$toasted.success("Anúncio editado com sucesso!")
                         this.$router.push("/")
-                        this.$router.push(`/anuncio/${this.advertisement.adv_cod}`)
                         window.location.reload()
                     }
                 })

@@ -32,7 +32,9 @@ router.post("/change", authenticate, async(req, res) => {
     try {
         const form = req.body
 
-        await UserService.changePassword(req.user, form.newPassword)
+        if (!await UserService.changePassword(req.user, form.newPassword)) {
+            return res.status(400).send({success: false, message: "Your password is not valid"})
+        }
         req.user.use_is_temp_password = false
         delete req.user.iat
         delete req.user.exp

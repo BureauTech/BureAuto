@@ -14,7 +14,7 @@ import UploadUser from "@/views/UploadUser/UploadUser.vue"
 import UploadAdvertisement from "@/views/UploadAdvertisement/UploadAdvertisement.vue"
 import EditAdvertise from "@/views/EditAdvertise/EditAdvertise.vue"
 import EditProfile from "@/views/EditProfile/EditProfile.vue"
-
+import Messages from "@/views/Messages/Messages.vue"
 
 
 Vue.use(VueRouter)
@@ -96,6 +96,13 @@ const routes = [{
         requiresAuth: true
     }
 }, {
+    path: "/mensagens",
+    name: "Messages",
+    component: Messages,
+    meta: {
+        requiresAuth: true
+    }
+}, {
     path: "/editar-anuncio/:id",
     name: "EditAdvertise",
     component: EditAdvertise,
@@ -103,6 +110,13 @@ const routes = [{
         requiresAuth: true
     }
 }, {
+//     path: "/teste-msg",
+//     name: "TestMessage",
+//     component: TestMessage,
+//     meta: {
+//         requiresAuth: true
+//     }
+// }, {
     path: "/:catchAll(.*)", 
     redirect: {
         name: "Home"

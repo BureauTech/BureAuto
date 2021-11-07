@@ -1,6 +1,8 @@
-const app = require("./app")
+require("./services/IoServices")
+
+const {httpServer} = require("./app")
 const port = process.env.PORT || 3000
 
-app.listen(port, function() {
+httpServer.listen(port, function() {
     console.log("Running on port", port)
 })

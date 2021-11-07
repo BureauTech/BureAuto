@@ -26,30 +26,32 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
 
 ## Aplicação 
 
-- Gif com a aplicação em execução
+- Gif com a aplicação em execução (Versão para computador e aplicativo mobile)
 <div align="center">
-  <img src="./doc/gif/entrega-sprint-2.gif" />
+  <img src="./doc/gif/entrega-sprint-3.gif" />
 </div>
 
 <br>
 
+Clique aqui para acesso ao repositório do [BureAuto Mobile](https://github.com/BureauTech/BureAutoMobile)
 
 # Entregas
 
 - [Sprint 1](https://github.com/BureauTech/BureAuto/releases/tag/1.0.0) entrega realizada em 19/09/2021.
 - [Sprint 2](https://github.com/BureauTech/BureAuto/releases/tag/1.1.0) entrega realizada em 10/10/2021.
+- [Sprint 3](https://github.com/BureauTech/BureAuto/releases/tag/1.2.0) entrega realizada em 07/11/2021.
 
 ## Visão geral do projeto
 <div align="center">
   <img src="./doc/img/funcionalidades_projeto.png" />
 </div>
 <div align="center">
-  <img src="./doc/img/abordagem_spritns.png" />
+  <img src="./doc/img/abordagem_sprints.png" />
 </div>
 
 <br/> 
 
-## Entregas propostas Sprint 2
+## Entregas propostas Sprint 3
 <div align="center">
   <img src="./doc/img/cards.png" />
 </div>
@@ -79,7 +81,7 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
 ## Burndown
 
 <div align="center">
-  <img src="./doc/img/burndown2.png" />
+  <img src="./doc/img/burndown3.png" />
 </div>
 <br/> 
 
@@ -118,7 +120,11 @@ npm run dev
 
 Ficará disponível em [localhost:3000](http://localhost/3000)
 
-1. Execute no seu SGBD, o script SQL disponível na pasta [***src/server/resources***](/src/server/resources/). Caso não queira executar o script SQL, execute o script `UpdateDB.js` diretamente pelo seu terminal.
+1. Para utilização da aplicação com o banco de dados já estruturado, usuários e anúncios cadastrados como template, execute:
+
+```
+npm run db
+```
 
 ## Cliente
 

@@ -1,6 +1,6 @@
 const fs = require("fs")
 const path = require("path")
-const app = require("../app")
+const {app} = require("../app")
 const port = process.env.TEST_PORT || 3333
 
 const contructorMain = (function() {

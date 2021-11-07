@@ -97,7 +97,7 @@
             cols="12"
             sm="5"
           >
-            <p class="bahama--text font-weight-medium pt-2">Ano fabricção</p>
+            <p class="bahama--text font-weight-medium pt-2">Ano fabricação</p>
             <v-text-field
               type="number"
               outlined

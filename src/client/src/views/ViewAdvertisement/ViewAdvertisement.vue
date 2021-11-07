@@ -12,7 +12,7 @@
       >
         <div>
           <p class="text-h3 bahama--text">
-            {{advertisement.Manufacturer.man_name}}
+            {{advertisement.man_name}}
             <span
               class="font-weight-bold"
               v-text="advertisement.adv_model_description"
@@ -71,7 +71,7 @@
                 <p class="text-subtitle-1 bahama--text ma-0 text-left">ano</p>
                 <p
                   class="text-h5 bahama--text font-weight-medium text-left"
-                  v-text="`${advertisement.adv_year_manufacture} / ${advertisement.adv_year_model}`"
+                  v-text="`${advertisement.adv_year_manufacture} - ${advertisement.adv_year_model}`"
                 >
 
                 </p>
@@ -96,6 +96,7 @@
               block
               class="my-5"
               @click="updateFavorite"
+              :disabled = "advertisement.adv_use_cod == $store.getters.getUser.use_cod"
             >
               <v-icon left>mdi-star</v-icon>
               {{favorite ? 'Desfavoritar' : 'Favoritar'}}
@@ -104,7 +105,10 @@
               block
               class="my-5"
               v-text="'Entrar em contato'"
-            ></Button>
+              @click="createChat"
+              :disabled = "advertisement.adv_use_cod == $store.getters.getUser.use_cod"
+            />
+
           </v-col>
         </Card>
       </v-col>
