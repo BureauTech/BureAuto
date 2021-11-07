@@ -26,13 +26,14 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
 
 ## Aplicação 
 
-- Gif com a aplicação em execução
+- Gif com a aplicação em execução (Versão para computador e aplicativo mobile)
 <div align="center">
-  <img src="./doc/gif/entrega-sprint-2.gif" />
+  <img src="./doc/gif/entrega-sprint-3.gif" />
 </div>
 
 <br>
 
+Clique aqui para acesso ao repositório do [BureAuto Mobile](https://github.com/BureauTech/BureAutoMobile)
 
 # Entregas
 
