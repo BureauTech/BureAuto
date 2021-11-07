@@ -81,7 +81,7 @@ Clique aqui para acesso ao repositório do [BureAuto Mobile](https://github.com/
 ## Burndown
 
 <div align="center">
-  <img src="./doc/img/burndown2.png" />
+  <img src="./doc/img/burndown3.png" />
 </div>
 <br/> 
 
