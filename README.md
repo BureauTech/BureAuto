@@ -45,7 +45,7 @@ Desenvolvido pela [BureauTech](https://github.com/BureauTech).
   <img src="./doc/img/funcionalidades_projeto.png" />
 </div>
 <div align="center">
-  <img src="./doc/img/abordagem_spritns.png" />
+  <img src="./doc/img/abordagem_sprints.png" />
 </div>
 
 <br/> 
@@ -119,7 +119,11 @@ npm run dev
 
 Ficará disponível em [localhost:3000](http://localhost/3000)
 
-1. Execute no seu SGBD, o script SQL disponível na pasta [***src/server/resources***](/src/server/resources/). Caso não queira executar o script SQL, execute o script `UpdateDB.js` diretamente pelo seu terminal.
+1. Para utilização da aplicação com o banco de dados já estruturado, usuários e anúncios cadastrados como template, execute:
+
+```
+npm run db
+```
 
 ## Cliente
 
