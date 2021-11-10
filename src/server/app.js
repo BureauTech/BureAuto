@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser")
 
 const app = express()
 
-app.use(cors({credentials: true, origin: "http://localhost:3001"}))
+app.use(cors({credentials: true, origin: "https://localhost:3001"}))
 app.use(cookieParser())
 app.use(express.json({limit: "50mb"}))
 app.use("/image", require("./controllers/ImageController"))
