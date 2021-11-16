@@ -24,11 +24,43 @@
         <tr>
             <td>
                 <p style="padding: 15px 0 10px 0;">
-                    Olá, <strong>
-                        <%= use_name %>
-                    </strong>!!<br><br>
+                    Olá, <strong><%= use_name %></strong>!!<br><br>
                     Você solicitou o envio de relatórios de performance por e-mail, anexamos aqui pra você, tá? 😉<br><br>
                 <p>
+            </td>
+        <tr>
+            <td>
+                <h3>Engajamento dos anúncios favoritos</h3>
+                <p>Porcentagem de anúncios favoritados: <%= favorites %></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>Relação geral de vendas dos anúncios</h3>
+                <p>Quantidade total de anúncios vendidos: <%= adsSold.sold %></p>
+                <p>Porcentagem total de anúncios vendidos: <%= adsSold.percentage %></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>Engajamento dos anúncios</h3>
+                <p>Nº de visualizações total: <%= adsReport.totalViews %></p>
+                <p>Nº de pessoas que entraram em contato: <%= adsReport.totalContacts %></p>
+                <p>Nº de visualizações a cada 1 contato: <%= adsReport.report %></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>Mais vendidos por categoria</h3>
+                <p>Marca mais vendida: <%= adsSoldByCategory[0].result %></p>
+                <p>Modelo mais vendido: <%= adsSoldByCategory[1].result %></p>
+                <p>Ano do modelo mais vendido: <%= adsSoldByCategory[2].result %></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h3>Disponibilidade dos anúncios</h3>
+                <p>Tempo médio que os anúncios estão no ar: <%= adsTimeReport %></p>
             </td>
         </tr>
         <tr>
