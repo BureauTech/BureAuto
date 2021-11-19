@@ -166,6 +166,7 @@
                   rounded="xl"
                   hover
                   class="hover-card"
+                  height="100%"
                 >
                   <v-img
                     :src="ad.adv_images"
