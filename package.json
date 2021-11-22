@@ -6,8 +6,8 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node ./index.js",
-    "db": "node ./database/UpdateDB.js"
+    "start": "node index.js",
+    "db": "node database/UpdateDB.js"
   },
   "author": "",
   "license": "ISC",
