@@ -1,5 +1,5 @@
-const typeorm = require(typeorm)
-const Entities = require('./Entities')
+const typeorm = require("typeorm")
+const Entities = require("./Entities")
 
 const Connection = typeorm.createConnection({
     type: process.env.TYPE_DB,
