@@ -29,7 +29,7 @@ const setCookie = function(e, o, i) {
         n.setTime(n.getTime() + 24 * i * 60 * 60 * 1e3),
         t = "; expires=" + n.toUTCString()
     }
-    document.cookie = e + "=" + (o || "") + t + "; path=/"
+    document.cookie = e + "=" + (o || "") + t + "; path=/; secure; samesite=None" 
 }
 
 const getCookie = function(e) {
