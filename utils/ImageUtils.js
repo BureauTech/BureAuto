@@ -3,7 +3,7 @@ const sharp = require("sharp")
 
 module.exports = {
     compress: async function(file, size) {
-        const newPath = file.path.split(".")[0] + ".webp"
+        const newPath = file.path.split(".")[0] + ".png"
         const {orientation} = sharp(file.path).metadata
         const buffer = await sharp(file.path)
             .resize(size)
