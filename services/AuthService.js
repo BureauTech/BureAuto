@@ -19,7 +19,7 @@ const AuthService = module.exports = {
 
     generateToken: function(user, res) {
         const token = jwt.sign(user, AuthService.secretKey, {expiresIn: AuthService.expiresIn})
-        res.cookie(AuthService.cookieName, token, {httpOnly: true, maxAge: AuthService.expiresIn * 1000, secure: true, path: "/", domain: "bureauto.herokuapp.com"})
+        res.cookie(AuthService.cookieName, token, {httpOnly: true, maxAge: AuthService.expiresIn * 1000, secure: true, path: "/", domain: "bureauto-backend.herokuapp.com"})
     },
 
     verifyAdmin: async function(req, res, next) {
