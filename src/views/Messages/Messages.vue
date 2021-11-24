@@ -25,7 +25,7 @@
         background: 'var(--v-bahama-lighten3)'
       }
     }"
-      height="90vh"
+      height="85vh"
       :room-id="roomId"
     >
       <template v-slot:toggle-icon>
