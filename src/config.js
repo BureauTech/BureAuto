@@ -1,4 +1,4 @@
 export default {
-    SERVER_URL: "http://localhost:3000",
-    CLIENT_URL: "http://localhost:3001"
+    SERVER_URL: "https://bureauto-backend.herokuapp.com",
+    CLIENT_URL: "https://bureauto.herokuapp.com"
 }
