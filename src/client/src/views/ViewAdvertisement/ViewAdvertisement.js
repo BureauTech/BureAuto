@@ -3,10 +3,6 @@ import Button from "@/components/Button/Button.vue"
 import axios from "@/axios.js"
 import logoBureau from "@/assets/bureauto_sem_fundo.png" 
 import config from "../../config"
-import CloseIcon from "@/assets/close-icon.png"
-import OpenIcon from "@/assets/logo-no-bg.svg"
-import FileIcon from "@/assets/file.svg"
-import CloseIconSvg from "@/assets/close.svg"
 
 export default {
     name: "ViewAdvertisement",

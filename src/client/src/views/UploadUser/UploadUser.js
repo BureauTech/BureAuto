@@ -40,7 +40,7 @@ export default {
                 const formData = new FormData()
                 formData.append("csvFile", this.csvFile)
                 try {
-                    const {data} = await axios.post("http://localhost:3000/user/register", formData, {
+                    const {data} = await axios.post("/user/register", formData, {
                         headers: {
                             "Content-Type": "multipart/form-data"
                         }
