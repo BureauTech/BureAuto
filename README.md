@@ -40,7 +40,7 @@ Clique aqui para acesso ao repositório do [BureAuto Mobile](https://github.com/
 - [Sprint 1](https://github.com/BureauTech/BureAuto/releases/tag/1.0.0) entrega realizada em 19/09/2021.
 - [Sprint 2](https://github.com/BureauTech/BureAuto/releases/tag/1.1.0) entrega realizada em 10/10/2021.
 - [Sprint 3](https://github.com/BureauTech/BureAuto/releases/tag/1.2.0) entrega realizada em 07/11/2021.
-
+- [Sprint 4](https://github.com/BureauTech/BureAuto/releases/tag/1.3.0) entrega realizada em 28/11/2021.
 ## Visão geral do projeto
 <div align="center">
   <img src="./doc/img/funcionalidades_projeto.png" />
@@ -51,17 +51,11 @@ Clique aqui para acesso ao repositório do [BureAuto Mobile](https://github.com/
 
 <br/> 
 
-## Entregas propostas Sprint 3
+## Entregas propostas Sprint 4
 <div align="center">
   <img src="./doc/img/cards.png" />
 </div>
-<div align="center">
-  <img src="./doc/img/cards2.png" />
-</div>
-<div align="center">
-  <img src="./doc/img/cards3.png" />
-</div>
-<br/> 
+
 
 ## Modelagem de Dados
 - Modelo Conceitual 
