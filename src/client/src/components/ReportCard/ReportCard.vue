@@ -8,6 +8,7 @@
     <v-card
       min-width="100%"
       rounded="xl"
+      v-bind="$attrs"
     >
       <v-card-title>
         <h3 v-text="title" class="bk-word"></h3>

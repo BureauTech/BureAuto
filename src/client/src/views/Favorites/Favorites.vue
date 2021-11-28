@@ -16,15 +16,6 @@
         </v-layout>
       </v-app-bar>
     </v-row>
-    <!-- <v-layout
-      v-for="(ad, index) in ads"
-      :key="ad.adv_cod"
-      cols="4"
-      row
-      justify-center
-      align-start
-      class="no-negative"
-    > -->
     <v-row
       justify="center"
       justify-lg="start"
@@ -91,8 +82,8 @@
               <v-img
                 :src="ad.adv_images"
                 alt="Logo da BureAuto"
-                max-height="400"
-                max-width="400"
+                height="200px"
+                width="400px"
               />
             </v-card-text>
           </v-col>
@@ -110,7 +101,6 @@
         </v-col>
       </v-card>
         </v-col>
-    <!-- </v-layout> -->
     </v-row>
   </v-container>
 </template>
