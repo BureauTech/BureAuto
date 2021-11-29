@@ -88,6 +88,10 @@ Clique aqui para acesso ao repositório do [BureAuto Mobile](https://github.com/
 
 - [Documentação BureAuto](./doc/artefatos/documentacao_BureAuto.pdf)
 
+- [Documento de Implantação](./doc/artefatos/Documento_Implantação_BureAuto.pdf)
+
+- [Documentação do Backend](./doc/artefatos/Documentação_Backend_BureAuto.pdf)
+
 # Como executar localmente
 
 Para executar a aplicação completa localmente, siga as intruções a seguir:
