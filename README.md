@@ -11,7 +11,6 @@ Disponível em https://bureauto.herokuapp.com/
 </div>
 
 # Sumário
-
    * [Sobre](#bureauto)
    * [Sumário](#sumário)
    * [Entregas](#entregas)
